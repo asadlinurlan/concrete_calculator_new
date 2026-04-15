@@ -1,0 +1,95 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+.header__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 18px 8px;
+  border-top: 2px solid #f0a500;
+  background-color: #333;
+  color: #f0a500;
+}
+
+.header-title__logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  height: 100%;
+}
+
+.header-title__logo img {
+  max-height: 100%;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.nav__title {
+  margin-right: 14px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.nav-list_title {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list_title svg {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+.nav-list_title li {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-list_title p {
+  margin: 0;
+  padding-right: 10px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-list_title a {
+  text-decoration: none;
+  color: white;
+  font-size: 23px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-list_title a:hover {
+  color: #ffbf00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header__title {
+    flex-direction: column;
+    align-items: center;
+    height: auto; /* Let the height adjust for smaller screens */
+  }
+
+  .nav-list_title {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-list_title li {
+    margin-bottom: 10px;
+  }
+
+  .header-title__logo {
+    margin-bottom: 10px;
+  }
+}
