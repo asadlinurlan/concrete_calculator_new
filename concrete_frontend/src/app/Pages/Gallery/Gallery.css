@@ -1,0 +1,82 @@
+.gallery-section { background: var(--bg-base); }
+
+.page-hero-gallery {
+  min-height: 50vh;
+  background-image:
+    linear-gradient(rgba(13, 17, 23, 0.72), rgba(13, 17, 23, 0.72)),
+    url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-hero-gallery .page-hero-overlay { position: absolute; inset: 0; }
+.page-hero-gallery .hero-content-center { position: relative; z-index: 1; text-align: center; }
+.page-hero-gallery .page-title-center {
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.page-subtitle-center { color: var(--on-dark-muted); font-size: 18px; margin-top: 12px; }
+
+.gallery-content { padding: var(--sp-8) 0 var(--sp-9); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.gallery-item {
+  position: relative;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-card);
+}
+/* Make every 5th item span two columns for visual rhythm */
+.gallery-item:nth-child(5) { grid-column: span 2; aspect-ratio: 8 / 3; }
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--t-med);
+}
+.gallery-item:hover img { transform: scale(1.08); }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  background: linear-gradient(to top, rgba(13, 17, 23, 0.85), rgba(13, 17, 23, 0.1));
+  opacity: 0;
+  transition: opacity var(--t-med);
+}
+.gallery-item:hover .gallery-overlay,
+.gallery-item:focus-visible .gallery-overlay { opacity: 1; }
+.gallery-overlay svg { color: var(--amber-400); }
+.gallery-caption { font-size: 14px; font-weight: 600; padding: 0 12px; text-align: center; }
+
+@media (max-width: 1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:nth-child(5) { grid-column: span 2; aspect-ratio: 16 / 6; }
+}
+@media (max-width: 460px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:nth-child(5) { grid-column: span 1; aspect-ratio: 4 / 3; }
+}

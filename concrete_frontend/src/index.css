@@ -1,0 +1,22 @@
+/* Base reset — design tokens & typography live in App.css */
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Custom scrollbar — soft light look */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #eef2f8; }
+::-webkit-scrollbar-thumb { background: #c7d0e0; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #5b8def; }
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #5b8def;
+  outline-offset: 2px;
+}

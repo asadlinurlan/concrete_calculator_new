@@ -1,0 +1,268 @@
+/* ============================================================
+   NOVKHANI BETON — Industrial Design System
+   Headings: Space Grotesk (geometric sans)
+   Body:     Inter (readable sans)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ---- Dark scale: kept for hero banners & footer (over imagery) ---- */
+  --graphite-900: #0d1117;
+  --graphite-800: #12161f;
+  --graphite-700: #1a1f2b;
+  --graphite-600: #232a38;
+  --graphite-500: #2e3647;
+  --graphite-400: #3a4456;
+
+  /* ---- Soft pastel accents (light theme) ---- */
+  --steel-500: #5b8def;      /* soft steel blue */
+  --steel-600: #3f70d6;
+  --steel-400: #8fb4f2;
+  --steel-glow: rgba(91, 141, 239, 0.22);
+
+  --amber-500: #f0b252;      /* soft amber */
+  --amber-600: #e09a35;
+  --amber-400: #f7c878;
+  --amber-glow: rgba(240, 178, 82, 0.28);
+
+  /* ---- Semantic tokens (LIGHT THEME) ---- */
+  --primary-color: var(--steel-500);
+  --primary-dark: var(--steel-600);
+  --primary-light: var(--steel-400);
+  --accent-color: var(--amber-500);
+  --accent-dark: var(--amber-600);
+
+  --bg-base: #f5f7fb;        /* soft off-white page background */
+  --bg-raised: #ffffff;      /* raised section surface */
+  --bg-card: #ffffff;        /* cards */
+  --bg-inset: #eef2f8;       /* sunken areas / inputs */
+  --border-color: #e3e8f2;   /* soft light border */
+
+  /* --text-light = primary readable text (dark on light bg); name kept for compatibility */
+  --text-light: #232b38;
+  --text-muted: #66728a;
+  --text-dark: #1a1f2b;
+  --on-dark: #f4f6fb;        /* text that sits over dark hero imagery */
+  --on-dark-muted: rgba(244, 246, 251, 0.82);
+
+  --success: #2faf6a;
+  --danger: #ef4444;
+
+  /* ---- Typography scale ---- */
+  --font-head: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* ---- Spacing scale (8px base) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* ---- Radius ---- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (soft, light theme) ---- */
+  --sh-sm: 0 1px 2px rgba(23, 33, 56, 0.06);
+  --sh-md: 0 6px 18px rgba(23, 33, 56, 0.08);
+  --sh-lg: 0 16px 42px rgba(23, 33, 56, 0.12);
+  --sh-glow: 0 8px 26px var(--steel-glow);
+  --sh-amber: 0 8px 26px var(--amber-glow);
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 0.18s var(--ease);
+  --t-med: 0.32s var(--ease);
+
+  /* legacy aliases kept so older component CSS keeps working */
+  --secondary-color: var(--graphite-700);
+  --dark-bg: var(--graphite-800);
+  --text-gray: var(--text-muted);
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-base);
+  color: var(--text-light);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+a { color: inherit; }
+
+.App {
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Unified premium components
+   ============================================================ */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 14px 28px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast), border-color var(--t-fast);
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(0) scale(0.98); }
+
+.btn-primary {
+  background: var(--steel-500);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--steel-600);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-glow);
+}
+
+.btn-accent {
+  background: var(--amber-500);
+  color: var(--graphite-900);
+}
+.btn-accent:hover {
+  background: var(--amber-600);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-amber);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-light);
+  border-color: var(--graphite-500);
+}
+.btn-ghost:hover {
+  border-color: var(--steel-500);
+  color: var(--steel-400);
+  transform: translateY(-2px);
+}
+
+.btn-lg { padding: 17px 38px; font-size: 16px; }
+
+/* legacy button alias */
+.btn-primary-custom {
+  background: var(--steel-500);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--t-med);
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary-custom:hover {
+  background: var(--steel-600);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-glow);
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+}
+
+/* Section layout */
+.section {
+  padding: var(--sp-9) 0;
+}
+
+.section-subtitle {
+  color: var(--amber-500);
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: var(--sp-4);
+}
+
+.section-title {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: var(--sp-5);
+  color: var(--text-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* Screen-reader-only (visually hidden, accessible) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Scroll-reveal animation utility (IntersectionObserver-driven)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
