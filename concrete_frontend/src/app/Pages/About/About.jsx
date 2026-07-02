@@ -25,15 +25,15 @@ const About = ({ fullPage }) => {
             <div className="about-image-container reveal">
               <div className="about-image main-image"></div>
               <div className="experience-badge">
-                <span className="badge-number">25+</span>
+                <span className="badge-number">8+</span>
                 <span className="badge-text">İllik Təcrübə</span>
               </div>
             </div>
             <div className="about-text reveal">
-              <span className="section-subtitle">ABOUT US</span>
-              <h2 className="section-title about-title">Premier Concrete Solutions for Every Project</h2>
+              <span className="section-subtitle">Haqqımızda</span>
+              <h2 className="section-title about-title">Hər Layihə üçün Premium Beton Həlləri</h2>
               <p className="about-description">
-                Novkhani Beton olaraq 25 ildən çox təcrübəmizlə yüksək keyfiyyətli beton 
+                Novkhani Beton olaraq 8 ildən çox təcrübəmizlə yüksək keyfiyyətli beton 
                 məhsulları və müstəsna müştəri xidməti göstərməklə tanınırıq.
               </p>
               <p className="about-description">

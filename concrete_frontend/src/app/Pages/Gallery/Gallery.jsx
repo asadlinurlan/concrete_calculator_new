@@ -4,17 +4,23 @@ import 'react-image-lightbox/style.css';
 import { ZoomIn } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import './Gallery.css';
+import img1 from '../img/beatriz-novaes-1-Rf38Y1QHk-unsplash.jpg';
+import img2 from '../img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
+import img3 from '../img/d-c-rnqRdfYyywM-unsplash.jpg';
+import img4 from '../img/mostafa-meraji-Vs4eK-qQwDA-unsplash.jpg';
+import img5 from '../img/the-jd-darshan-solanki-fPySdxQ1kFg-unsplash.jpg';
+import img6 from '../img/samuel-cruz-m7JngCMSQvc-unsplash.jpg';
+import img7 from '../img/ravigopal-kesari-gKVPRBa7Td8-unsplash.jpg';
+import img8 from '../img/jesse-orrico-P6IqUKhatuM-unsplash.jpg';
 
-// Project gallery — swap these URLs with your own plant/project photos later.
 const IMAGES = [
-  { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80', title: 'Hazır beton istehsalı' },
-  { src: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80', title: 'Beton nasoslama' },
-  { src: 'https://images.unsplash.com/photo-1590496793929-36417d3117de?auto=format&fit=crop&w=1200&q=80', title: 'Tikinti sahəsi' },
-  { src: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80', title: 'İnfrastruktur layihəsi' },
-  { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80', title: 'Sənaye tikintisi' },
-  { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80', title: 'Monolit konstruksiya' },
-  { src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80', title: 'Mühəndis komandası' },
-  { src: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80', title: 'Tamamlanmış obyekt' },
+  { src: img1, title: 'Mikser vasitəsilə beton tökümü' },
+  { src: img2, title: 'Tikinti sahəsi' },
+  { src: img3, title: 'Hazır beton' },
+  { src: img4, title: 'Layihə prosesi' },
+  { src: img5, title: 'Tikinti sahəsi' },
+  { src: img6, title: 'Beton döşəmə' },
+  { src: img7, title: 'Hündür mərtəbələrə beton tökümü' },
 ];
 
 const Gallery = () => {

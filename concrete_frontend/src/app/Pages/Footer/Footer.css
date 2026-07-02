@@ -16,10 +16,17 @@
 
 .footer-logo {
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
   margin-bottom: 20px;
+}
+
+.footer-logo-svg {
+  height: 72px;
+  width: auto;
+  display: block;
+  filter: invert(1);
+  opacity: 0.9;
 }
 
 .footer-logo .logo-icon {

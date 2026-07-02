@@ -24,45 +24,67 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 48px;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding-top: 14px;
+  padding-bottom: 14px;
   gap: 24px;
 }
 
+.logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: auto;
+  overflow: hidden;
+}
+
 /* When scrolled, header background turns light — switch text to dark */
-.header.scrolled .logo-text { color: var(--text-light); }
 .header.scrolled .nav-link { color: var(--text-muted); }
 .header.scrolled .nav-link:hover,
 .header.scrolled .nav-link.active { color: var(--text-light); }
 .header.scrolled .hamburger { color: var(--text-light); border-color: var(--border-color); background: rgba(0,0,0,0.03); }
 
-.logo {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* Logo SVG — visible by default, collapses on scroll */
+.logo-svg {
+  display: block;
+  height: 120px;
+  width: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: height 0.35s ease, opacity 0.25s ease, transform 0.3s ease;
+  filter: invert(1);
+}
+.logo:hover .logo-svg { opacity: 0.85; }
+.header.scrolled .logo-svg {
+  height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  transition: transform var(--t-med);
-}
-.logo:hover .logo-icon { transform: rotate(8deg) scale(1.05); }
-.logo-icon svg { width: 100%; height: 100%; }
-
-.logo-text {
+/* Wordmark text — hidden by default, appears on scroll */
+.logo-wordmark {
   font-family: var(--font-head);
-  font-size: 23px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   color: #fff;
-  letter-spacing: 3px;
+  white-space: nowrap;
+  display: block;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.35s ease 0.1s, opacity 0.3s ease 0.15s;
+}
+.header.scrolled .logo-wordmark {
+  height: 36px;
+  opacity: 1;
+  color: var(--text-light);
 }
 
 .nav-menu {
   display: flex;
-  gap: 28px;
+  gap: 40px;
   align-items: center;
 }
 

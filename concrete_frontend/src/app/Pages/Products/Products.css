@@ -4,7 +4,7 @@
   min-height: 52vh;
   background-image:
     linear-gradient(rgba(13, 17, 23, 0.72), rgba(13, 17, 23, 0.72)),
-    url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    url('../img/markus-kammermann-4YbgiADkpYE-unsplash.jpg');
   background-size: cover;
   background-position: center;
   position: relative;

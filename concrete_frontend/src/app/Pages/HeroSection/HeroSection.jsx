@@ -9,11 +9,11 @@ const HeroSection = () => {
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="container">
-          <span className="hero-eyebrow reveal">1999-cu ildən etibarlı tərəfdaş</span>
           <h1 className="hero-title reveal">
             Möhkəm Təməllər,<br />
             <span className="hero-accent">Premium Beton</span> Həlləri
           </h1>
+          <span className="hero-eyebrow reveal">2018-ci ildən etibarlı tərəfdaş</span>
           <p className="hero-desc reveal">
             Novxanı Beton — Bakı və Abşeron üzrə yüksək keyfiyyətli hazır beton,
             nasoslama və laboratoriya xidmətləri. Layihənizi peşəkar kalkulyatorumuzla
@@ -33,7 +33,7 @@ const HeroSection = () => {
           <ul className="hero-badges reveal">
             <li><ShieldCheck size={20} aria-hidden="true" /> Sertifikatlı keyfiyyət</li>
             <li><Truck size={20} aria-hidden="true" /> Vaxtında çatdırılma</li>
-            <li><Award size={20} aria-hidden="true" /> 25+ il təcrübə</li>
+            <li><Award size={20} aria-hidden="true" /> 8+ il təcrübə</li>
           </ul>
         </div>
       </div>

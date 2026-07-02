@@ -51,17 +51,11 @@ const Footer = () => {
           <div className="footer-grid">
             <div className="footer-about">
               <Link to="/" className="footer-logo">
-                <div className="logo-icon">
-                  <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M25 5L45 15V35L25 45L5 35V15L25 5Z" stroke="var(--primary-color)" strokeWidth="2" fill="none"/>
-                    <path d="M25 15L35 20V30L25 35L15 30V20L25 15Z" stroke="var(--primary-color)" strokeWidth="2" fill="none"/>
-                  </svg>
-                </div>
-                <span className="logo-text">NOVKHANI</span>
+                <img src="/NOVKHANI.svg" alt="Novkhani Beton" className="footer-logo-svg" />
               </Link>
               <p className="footer-description">
                 Yüksək keyfiyyətli beton həlləri ilə yaşayış, kommersiya və sənaye 
-                layihələri üçün etibarlı tərəfdaşınız. 1999-cu ildən bəri möhkəm 
+                layihələri üçün etibarlı tərəfdaşınız. 2018-ci ildən bəri möhkəm 
                 təməllər qururuq.
               </p>
               <div className="footer-social">
@@ -101,7 +95,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon">{icons.phone}</span>
-                  <span>+994 50 123 45 67</span>
+                  <span>+994 50 620 95 84</span>
                 </li>
                 <li>
                   <span className="contact-icon">{icons.email}</span>
@@ -109,7 +103,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon">{icons.clock}</span>
-                  <span>B.e - Şənbə: 08:00 - 18:00</span>
+                  <span>B.e - B 7/24 fəaliyyətdəyik</span>
                 </li>
               </ul>
             </div>

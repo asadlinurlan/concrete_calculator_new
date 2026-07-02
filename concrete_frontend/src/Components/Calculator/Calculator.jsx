@@ -82,6 +82,7 @@ function computeGeometry(tab, unit, v) {
 const Calculator = () => {
   const [activeTab, setActiveTab] = useState('slab');
   const [activeToolTab, setActiveToolTab] = useState('calculator');
+  const [mode, setMode] = useState('simple');
   const [unit, setUnit] = useState('metric');
 
   // Dimension state (kept flat so existing inputs/CSS are unchanged)
@@ -454,7 +455,7 @@ const Calculator = () => {
       <div className="calculator-hero">
         <div className="calculator-hero-overlay"></div>
         <div className="container">
-          <h1>Beton Kalkulyatoru Pro</h1>
+          <h1>Beton Kalkulyatoru</h1>
           <p>Layihəniz üçün beton, armatur, qəlib və xərc hesablaması</p>
         </div>
       </div>
@@ -472,6 +473,22 @@ const Calculator = () => {
 
           {activeToolTab === 'calculator' ? (
             <div className="calculator-wrapper">
+              <div className="mode-switcher">
+                <button className={`mode-btn ${mode === 'simple' ? 'active' : ''}`} onClick={() => setMode('simple')}>
+                  <span className="mode-btn-icon">{icons.calculator}</span>
+                  <span className="mode-btn-text">
+                    <span className="mode-btn-title">Sadə</span>
+                    <span className="mode-btn-desc">Yalnız qiymət nəticəsi</span>
+                  </span>
+                </button>
+                <button className={`mode-btn ${mode === 'pro' ? 'active' : ''}`} onClick={() => setMode('pro')}>
+                  <span className="mode-btn-icon">{icons.chart}</span>
+                  <span className="mode-btn-text">
+                    <span className="mode-btn-title">Pro</span>
+                    <span className="mode-btn-desc">Ətraflı hesablama</span>
+                  </span>
+                </button>
+              </div>
               <div className="unit-toggle">
                 <button className={unit === 'metric' ? 'active' : ''} onClick={() => setUnit('metric')}>Metrik (m, sm)</button>
                 <button className={unit === 'imperial' ? 'active' : ''} onClick={() => setUnit('imperial')}>İmperial (ft, in)</button>
@@ -499,72 +516,88 @@ const Calculator = () => {
                   </select>
                 </div>
 
-                <div className="advanced-options">
-                  <h4>Əlavə Seçimlər</h4>
-
-                  <div className="option-group">
-                    <label className="checkbox-label">
-                      <input type="checkbox" checked={rebarEnabled} onChange={(e) => setRebarEnabled(e.target.checked)} />
-                      <span className="option-icon">{icons.rebar}</span>
-                      Armatur hesabla
-                    </label>
-                    {rebarEnabled && (
-                      <div className="option-details">
-                        <div className="option-row">
-                          <label>Diametr (mm)</label>
-                          <select value={rebarDiameter} onChange={(e) => setRebarDiameter(parseInt(e.target.value))}>
-                            {rebarDiameters.map((d) => <option key={d} value={d}>Ø{d}</option>)}
-                          </select>
-                        </div>
-                        <div className="option-row">
-                          <label>Aralıq (mm)</label>
-                          <input type="number" value={rebarSpacing} onChange={(e) => setRebarSpacing(parseInt(e.target.value) || 150)} min="50" max="400" />
-                        </div>
+                {mode === 'simple' ? (
+                  <div className="advanced-options">
+                    <h4>Qiymət Məlumatları</h4>
+                    <div className="option-group pricing-options">
+                      <div className="option-row">
+                        <label>Material itkisi (%)</label>
+                        <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
                       </div>
-                    )}
-                  </div>
-
-                  <div className="option-group">
-                    <label className="checkbox-label">
-                      <input type="checkbox" checked={meshEnabled} onChange={(e) => setMeshEnabled(e.target.checked)} />
-                      <span className="option-icon">{icons.mesh}</span>
-                      Tor (mesh) hesabla
-                    </label>
-                    {meshEnabled && (
-                      <div className="option-details">
-                        <div className="option-row">
-                          <label>Tor növü</label>
-                          <select value={meshType} onChange={(e) => setMeshType(e.target.value)}>
-                            {meshTypes.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
-                          </select>
-                        </div>
+                      <div className="option-row">
+                        <label><span className="option-icon">{icons.price}</span> Qiymət (AZN/m³)</label>
+                        <input type="number" value={pricePerM3} onChange={(e) => setPricePerM3(parseFloat(e.target.value) || 0)} min="0" />
                       </div>
-                    )}
+                    </div>
                   </div>
+                ) : (
+                  <div className="advanced-options">
+                    <h4>Əlavə Seçimlər</h4>
 
-                  <div className="option-group">
-                    <label className="checkbox-label">
-                      <input type="checkbox" checked={includeFormwork} onChange={(e) => setIncludeFormwork(e.target.checked)} />
-                      <span className="option-icon">{icons.formwork}</span>
-                      Qəlib (formwork) hesabla
-                    </label>
-                  </div>
+                    <div className="option-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" checked={rebarEnabled} onChange={(e) => setRebarEnabled(e.target.checked)} />
+                        <span className="option-icon">{icons.rebar}</span>
+                        Armatur hesabla
+                      </label>
+                      {rebarEnabled && (
+                        <div className="option-details">
+                          <div className="option-row">
+                            <label>Diametr (mm)</label>
+                            <select value={rebarDiameter} onChange={(e) => setRebarDiameter(parseInt(e.target.value))}>
+                              {rebarDiameters.map((d) => <option key={d} value={d}>Ø{d}</option>)}
+                            </select>
+                          </div>
+                          <div className="option-row">
+                            <label>Aralıq (mm)</label>
+                            <input type="number" value={rebarSpacing} onChange={(e) => setRebarSpacing(parseInt(e.target.value) || 150)} min="50" max="400" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="option-group pricing-options">
-                    <div className="option-row">
-                      <label>Material itkisi (%)</label>
-                      <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
+                    <div className="option-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" checked={meshEnabled} onChange={(e) => setMeshEnabled(e.target.checked)} />
+                        <span className="option-icon">{icons.mesh}</span>
+                        Tor (mesh) hesabla
+                      </label>
+                      {meshEnabled && (
+                        <div className="option-details">
+                          <div className="option-row">
+                            <label>Tor növü</label>
+                            <select value={meshType} onChange={(e) => setMeshType(e.target.value)}>
+                              {meshTypes.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
+                            </select>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    <div className="option-row">
-                      <label><span className="option-icon">{icons.price}</span> Qiymət (AZN/m³)</label>
-                      <input type="number" value={pricePerM3} onChange={(e) => setPricePerM3(parseFloat(e.target.value) || 0)} min="0" />
+
+                    <div className="option-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" checked={includeFormwork} onChange={(e) => setIncludeFormwork(e.target.checked)} />
+                        <span className="option-icon">{icons.formwork}</span>
+                        Qəlib (formwork) hesabla
+                      </label>
                     </div>
-                    <div className="option-row">
-                      <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
-                      <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
+
+                    <div className="option-group pricing-options">
+                      <div className="option-row">
+                        <label>Material itkisi (%)</label>
+                        <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
+                      </div>
+                      <div className="option-row">
+                        <label><span className="option-icon">{icons.price}</span> Qiymət (AZN/m³)</label>
+                        <input type="number" value={pricePerM3} onChange={(e) => setPricePerM3(parseFloat(e.target.value) || 0)} min="0" />
+                      </div>
+                      <div className="option-row">
+                        <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
+                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 <div className="form-actions">
                   <button className="btn-calculate" onClick={scrollToResults}>Nəticələrə bax</button>
@@ -582,166 +615,175 @@ const Calculator = () => {
                   <div className="calculator-results">
                     <div className="results-live-badge">● Canlı hesablama</div>
 
-                    {/* Price-first summary — the main thing most people want */}
-                    <div className="result-summary">
-                      <div className="summary-primary">
-                        <span className="summary-label">Təxmini Ümumi Xərc</span>
-                        <span className="summary-value">{results.totalCost} <small>AZN</small></span>
-                        <span className="summary-sub">{concreteGrade} · {results.volumeM3s} m³ · {pricePerM3} AZN/m³ beton</span>
-                      </div>
-                      <div className="summary-stats">
-                        <div className="summary-stat"><span className="ss-value">{results.volumeM3s}</span><span className="ss-label">m³ beton</span></div>
-                        <div className="summary-stat"><span className="ss-value">{results.trucksNeeded}</span><span className="ss-label">mikser</span></div>
-                        <div className="summary-stat"><span className="ss-value">{results.bags50kg}</span><span className="ss-label">50kq kisə</span></div>
-                      </div>
-                    </div>
-
-                    <h3><span className="section-title-icon">{icons.chart}</span> Həcm Nəticələri</h3>
-                    <div className="results-grid">
-                      <div className="result-card primary">
-                        <div className="result-icon">{icons.cube}</div>
-                        <div className="result-info">
-                          <span className="result-value">{results.volumeM3s}</span>
-                          <span className="result-label">Kub metr (m³){results.waste > 0 ? ` · +${results.waste}% itki daxil` : ''}</span>
+                    {mode === 'simple' ? (
+                      /* ── SIMPLE MODE: cost only ── */
+                      <div className="simple-result">
+                        <div className="simple-cost-card">
+                          <span className="simple-cost-label">Təxmini Ümumi Xərc</span>
+                          <span className="simple-cost-value">{results.totalCost}<small> AZN</small></span>
+                          <span className="simple-cost-sub">{concreteGrade} · {results.volumeM3s} m³ · {pricePerM3} AZN/m³ beton</span>
+                        </div>
+                        <div className="results-note">
+                          <span className="note-icon">{icons.warning}</span>
+                          <span><strong>Qeyd:</strong> Bu hesablamalar təxmini dəyərlərdir. Dəqiq qiymət üçün bizimlə əlaqə saxlayın.</span>
                         </div>
                       </div>
-                      <div className="result-card">
-                        <div className="result-icon">{icons.triangle}</div>
-                        <div className="result-info">
-                          <span className="result-value">{results.volumeYd3}</span>
-                          <span className="result-label">Kub yard (yd³)</span>
-                        </div>
-                      </div>
-                      <div className="result-card">
-                        <div className="result-icon">{icons.ruler}</div>
-                        <div className="result-info">
-                          <span className="result-value">{results.volumeFt3}</span>
-                          <span className="result-label">Kub fut (ft³)</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <h4><span className="section-title-icon">{icons.weight}</span> Beton Çəkisi</h4>
-                    <div className="weight-grid">
-                      <div className="weight-item"><span className="weight-value">{results.concreteWeight}</span><span className="weight-label">kq</span></div>
-                      <div className="weight-item"><span className="weight-value">{results.concreteWeightTons}</span><span className="weight-label">ton</span></div>
-                      <div className="weight-item"><span className="weight-value">{results.concreteWeightLbs}</span><span className="weight-label">lbs</span></div>
-                    </div>
-
-                    <h4><span className="section-title-icon">{icons.bricks}</span> Lazım Olan Materiallar <span className="grade-pill">{concreteGrade} · {results.ratio}</span></h4>
-                    <div className="materials-grid">
-                      <div className="material-item"><span className="material-name">Sement ({concreteGrade})</span><span className="material-value">{results.cement} kq</span></div>
-                      <div className="material-item"><span className="material-name">Qum</span><span className="material-value">{results.sand} m³ (~{results.sandKg} kq)</span></div>
-                      <div className="material-item"><span className="material-name">Çınqıl</span><span className="material-value">{results.gravel} m³ (~{results.gravelKg} kq)</span></div>
-                      <div className="material-item"><span className="material-name">Su</span><span className="material-value">{results.water} litr</span></div>
-                    </div>
-
-                    {/* Material breakdown bar chart */}
-                    <div className="breakdown">
-                      <div className="breakdown-bar" role="img" aria-label="Material payları">
-                        {results.breakdown.map((m) => (
-                          <span key={m.key} className="breakdown-seg" style={{ width: `${m.pct}%`, background: m.color }} title={`${m.label}: ${m.pct.toFixed(1)}%`} />
-                        ))}
-                      </div>
-                      <div className="breakdown-legend">
-                        {results.breakdown.map((m) => (
-                          <span key={m.key} className="legend-item">
-                            <span className="legend-dot" style={{ background: m.color }} />
-                            {m.label} <strong>{m.pct.toFixed(1)}%</strong>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <h4><span className="section-title-icon">{icons.bag}</span> Kisə Hesablaması</h4>
-                    <div className="bags-section">
-                      <div className="bags-group">
-                        <h5>Metrik</h5>
-                        <div className="bags-grid">
-                          <div className="bag-item"><span className="bag-size">50 kq</span><span className="bag-count">{results.bags50kg} ədəd</span></div>
-                          <div className="bag-item"><span className="bag-size">40 kq</span><span className="bag-count">{results.bags40kg} ədəd</span></div>
-                          <div className="bag-item"><span className="bag-size">25 kq</span><span className="bag-count">{results.bags25kg} ədəd</span></div>
-                        </div>
-                      </div>
-                      <div className="bags-group">
-                        <h5>İmperial</h5>
-                        <div className="bags-grid">
-                          <div className="bag-item"><span className="bag-size">80 lb</span><span className="bag-count">{results.bags80lb} ədəd</span></div>
-                          <div className="bag-item"><span className="bag-size">60 lb</span><span className="bag-count">{results.bags60lb} ədəd</span></div>
-                          <div className="bag-item"><span className="bag-size">40 lb</span><span className="bag-count">{results.bags40lb} ədəd</span></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {results.rebarEnabled && (
+                    ) : (
+                      /* ── PRO MODE: full detail, no concrete weight ── */
                       <>
-                        <h4><span className="section-title-icon">{icons.rebar}</span> Armatur Hesablaması</h4>
-                        <div className="rebar-results">
-                          <div className="rebar-item"><span className="rebar-label">Diametr</span><span className="rebar-value">Ø{results.rebarDiameter} mm</span></div>
-                          <div className="rebar-item"><span className="rebar-label">Aralıq</span><span className="rebar-value">{results.rebarSpacing} mm</span></div>
-                          <div className="rebar-item"><span className="rebar-label">Çubuq sayı</span><span className="rebar-value">{results.rebarCount} ədəd</span></div>
-                          <div className="rebar-item"><span className="rebar-label">Ümumi uzunluq</span><span className="rebar-value">{results.rebarLength} m</span></div>
-                          <div className="rebar-item highlight"><span className="rebar-label">Ümumi çəki</span><span className="rebar-value">{results.rebarWeight} kq</span></div>
-                        </div>
-                      </>
-                    )}
-
-                    {results.meshEnabled && (
-                      <>
-                        <h4><span className="section-title-icon">{icons.mesh}</span> Tor (Mesh) Hesablaması</h4>
-                        <div className="mesh-results">
-                          <div className="mesh-item"><span className="mesh-label">Tor növü</span><span className="mesh-value">{results.meshType}</span></div>
-                          <div className="mesh-item"><span className="mesh-label">Sahə</span><span className="mesh-value">{results.meshArea} m²</span></div>
-                          <div className="mesh-item"><span className="mesh-label">Vərəq sayı</span><span className="mesh-value">{results.meshSheets} ədəd</span></div>
-                          <div className="mesh-item highlight"><span className="mesh-label">Ümumi çəki</span><span className="mesh-value">{results.meshWeight} kq</span></div>
-                        </div>
-                      </>
-                    )}
-
-                    {results.includeFormwork && (
-                      <>
-                        <h4><span className="section-title-icon">{icons.formwork}</span> Qəlib (Formwork)</h4>
-                        <div className="formwork-results">
-                          <div className="formwork-item"><span className="formwork-label">Qəlib sahəsi</span><span className="formwork-value">{results.formworkArea} m²</span></div>
-                          <div className="formwork-item"><span className="formwork-label">Faner vərəqi (1.2×2.4m)</span><span className="formwork-value">{results.formworkSheets} ədəd</span></div>
-                          <div className="formwork-item highlight"><span className="formwork-label">Təxmini qəlib xərci</span><span className="formwork-value">{results.formworkCost} AZN</span></div>
-                        </div>
-                      </>
-                    )}
-
-                    <h4><span className="section-title-icon">{icons.truck}</span> Mikser Planlaşdırması</h4>
-                    <div className="truck-results">
-                      <div className="truck-visual">
-                        {[...Array(Math.min(results.trucksNeeded, 6))].map((_, i) => (
-                          <div key={i} className={`truck-icon ${i === results.trucksNeeded - 1 ? 'partial' : ''}`}>
-                            {icons.truck}
-                            <span className="truck-load">{i === results.trucksNeeded - 1 ? results.lastTruckLoad : results.truckCapacity} m³</span>
+                        <div className="result-summary">
+                          <div className="summary-primary">
+                            <span className="summary-label">Təxmini Ümumi Xərc</span>
+                            <span className="summary-value">{results.totalCost} <small>AZN</small></span>
+                            <span className="summary-sub">{concreteGrade} · {results.volumeM3s} m³ · {pricePerM3} AZN/m³ beton</span>
                           </div>
-                        ))}
-                        {results.trucksNeeded > 6 && <span className="truck-more">+{results.trucksNeeded - 6} daha</span>}
-                      </div>
-                      <div className="truck-info">
-                        <p><strong>{results.trucksNeeded}</strong> mikser tələb olunur</p>
-                        <p>Mikser tutumu: <strong>{results.truckCapacity} m³</strong></p>
-                        {results.trucksNeeded > 1 && <p>Son mikser yükü: <strong>{results.lastTruckLoad} m³</strong></p>}
-                      </div>
-                    </div>
+                          <div className="summary-stats">
+                            <div className="summary-stat"><span className="ss-value">{results.volumeM3s}</span><span className="ss-label">m³ beton</span></div>
+                            <div className="summary-stat"><span className="ss-value">{results.trucksNeeded}</span><span className="ss-label">mikser</span></div>
+                            <div className="summary-stat"><span className="ss-value">{results.bags50kg}</span><span className="ss-label">50kq kisə</span></div>
+                          </div>
+                        </div>
 
-                    <h4><span className="section-title-icon">{icons.price}</span> Xərc Hesablaması</h4>
-                    <div className="cost-breakdown">
-                      <div className="cost-item"><span className="cost-label">Material xərci</span><span className="cost-value">{results.materialCost} AZN</span></div>
-                      {results.rebarEnabled && <div className="cost-item"><span className="cost-label">Armatur xərci</span><span className="cost-value">{results.rebarCost} AZN</span></div>}
-                      {results.meshEnabled && <div className="cost-item"><span className="cost-label">Tor xərci</span><span className="cost-value">{results.meshCost} AZN</span></div>}
-                      {results.includeFormwork && <div className="cost-item"><span className="cost-label">Qəlib xərci</span><span className="cost-value">{results.formworkCost} AZN</span></div>}
-                      <div className="cost-item"><span className="cost-label">İşçilik xərci</span><span className="cost-value">{results.laborCost} AZN</span></div>
-                      <div className="cost-item"><span className="cost-label">Nəqliyyat xərci</span><span className="cost-value">{results.transportCost} AZN</span></div>
-                      <div className="cost-item total"><span className="cost-label">Ümumi Xərc</span><span className="cost-value">{results.totalCost} AZN</span></div>
-                    </div>
+                        <h3><span className="section-title-icon">{icons.chart}</span> Həcm Nəticələri</h3>
+                        <div className="results-grid">
+                          <div className="result-card primary">
+                            <div className="result-icon">{icons.cube}</div>
+                            <div className="result-info">
+                              <span className="result-value">{results.volumeM3s}</span>
+                              <span className="result-label">Kub metr (m³){results.waste > 0 ? ` · +${results.waste}% itki daxil` : ''}</span>
+                            </div>
+                          </div>
+                          <div className="result-card">
+                            <div className="result-icon">{icons.triangle}</div>
+                            <div className="result-info">
+                              <span className="result-value">{results.volumeYd3}</span>
+                              <span className="result-label">Kub yard (yd³)</span>
+                            </div>
+                          </div>
+                          <div className="result-card">
+                            <div className="result-icon">{icons.ruler}</div>
+                            <div className="result-info">
+                              <span className="result-value">{results.volumeFt3}</span>
+                              <span className="result-label">Kub fut (ft³)</span>
+                            </div>
+                          </div>
+                        </div>
 
-                    <div className="results-note">
-                      <span className="note-icon">{icons.warning}</span>
-                      <span><strong>Qeyd:</strong> Bu hesablamalar təxmini dəyərlərdir (qarışıq nisbəti markaya görə nominal götürülüb). Dəqiq layihə üçün bizimlə əlaqə saxlayın.</span>
-                    </div>
+                        <h4><span className="section-title-icon">{icons.bricks}</span> Lazım Olan Materiallar <span className="grade-pill">{concreteGrade} · {results.ratio}</span></h4>
+                        <div className="materials-grid">
+                          <div className="material-item"><span className="material-name">Sement ({concreteGrade})</span><span className="material-value">{results.cement} kq</span></div>
+                          <div className="material-item"><span className="material-name">Qum</span><span className="material-value">{results.sand} m³ (~{results.sandKg} kq)</span></div>
+                          <div className="material-item"><span className="material-name">Çınqıl</span><span className="material-value">{results.gravel} m³ (~{results.gravelKg} kq)</span></div>
+                          <div className="material-item"><span className="material-name">Su</span><span className="material-value">{results.water} litr</span></div>
+                        </div>
+
+                        <div className="breakdown">
+                          <div className="breakdown-bar" role="img" aria-label="Material payları">
+                            {results.breakdown.map((m) => (
+                              <span key={m.key} className="breakdown-seg" style={{ width: `${m.pct}%`, background: m.color }} title={`${m.label}: ${m.pct.toFixed(1)}%`} />
+                            ))}
+                          </div>
+                          <div className="breakdown-legend">
+                            {results.breakdown.map((m) => (
+                              <span key={m.key} className="legend-item">
+                                <span className="legend-dot" style={{ background: m.color }} />
+                                {m.label} <strong>{m.pct.toFixed(1)}%</strong>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <h4><span className="section-title-icon">{icons.bag}</span> Kisə Hesablaması</h4>
+                        <div className="bags-section">
+                          <div className="bags-group">
+                            <h5>Metrik</h5>
+                            <div className="bags-grid">
+                              <div className="bag-item"><span className="bag-size">50 kq</span><span className="bag-count">{results.bags50kg} ədəd</span></div>
+                              <div className="bag-item"><span className="bag-size">40 kq</span><span className="bag-count">{results.bags40kg} ədəd</span></div>
+                              <div className="bag-item"><span className="bag-size">25 kq</span><span className="bag-count">{results.bags25kg} ədəd</span></div>
+                            </div>
+                          </div>
+                          <div className="bags-group">
+                            <h5>İmperial</h5>
+                            <div className="bags-grid">
+                              <div className="bag-item"><span className="bag-size">80 lb</span><span className="bag-count">{results.bags80lb} ədəd</span></div>
+                              <div className="bag-item"><span className="bag-size">60 lb</span><span className="bag-count">{results.bags60lb} ədəd</span></div>
+                              <div className="bag-item"><span className="bag-size">40 lb</span><span className="bag-count">{results.bags40lb} ədəd</span></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {results.rebarEnabled && (
+                          <>
+                            <h4><span className="section-title-icon">{icons.rebar}</span> Armatur Hesablaması</h4>
+                            <div className="rebar-results">
+                              <div className="rebar-item"><span className="rebar-label">Diametr</span><span className="rebar-value">Ø{results.rebarDiameter} mm</span></div>
+                              <div className="rebar-item"><span className="rebar-label">Aralıq</span><span className="rebar-value">{results.rebarSpacing} mm</span></div>
+                              <div className="rebar-item"><span className="rebar-label">Çubuq sayı</span><span className="rebar-value">{results.rebarCount} ədəd</span></div>
+                              <div className="rebar-item"><span className="rebar-label">Ümumi uzunluq</span><span className="rebar-value">{results.rebarLength} m</span></div>
+                              <div className="rebar-item highlight"><span className="rebar-label">Ümumi çəki</span><span className="rebar-value">{results.rebarWeight} kq</span></div>
+                            </div>
+                          </>
+                        )}
+
+                        {results.meshEnabled && (
+                          <>
+                            <h4><span className="section-title-icon">{icons.mesh}</span> Tor (Mesh) Hesablaması</h4>
+                            <div className="mesh-results">
+                              <div className="mesh-item"><span className="mesh-label">Tor növü</span><span className="mesh-value">{results.meshType}</span></div>
+                              <div className="mesh-item"><span className="mesh-label">Sahə</span><span className="mesh-value">{results.meshArea} m²</span></div>
+                              <div className="mesh-item"><span className="mesh-label">Vərəq sayı</span><span className="mesh-value">{results.meshSheets} ədəd</span></div>
+                              <div className="mesh-item highlight"><span className="mesh-label">Ümumi çəki</span><span className="mesh-value">{results.meshWeight} kq</span></div>
+                            </div>
+                          </>
+                        )}
+
+                        {results.includeFormwork && (
+                          <>
+                            <h4><span className="section-title-icon">{icons.formwork}</span> Qəlib (Formwork)</h4>
+                            <div className="formwork-results">
+                              <div className="formwork-item"><span className="formwork-label">Qəlib sahəsi</span><span className="formwork-value">{results.formworkArea} m²</span></div>
+                              <div className="formwork-item"><span className="formwork-label">Faner vərəqi (1.2×2.4m)</span><span className="formwork-value">{results.formworkSheets} ədəd</span></div>
+                              <div className="formwork-item highlight"><span className="formwork-label">Təxmini qəlib xərci</span><span className="formwork-value">{results.formworkCost} AZN</span></div>
+                            </div>
+                          </>
+                        )}
+
+                        <h4><span className="section-title-icon">{icons.truck}</span> Mikser Planlaşdırması</h4>
+                        <div className="truck-results">
+                          <div className="truck-visual">
+                            {[...Array(Math.min(results.trucksNeeded, 6))].map((_, i) => (
+                              <div key={i} className={`truck-icon ${i === results.trucksNeeded - 1 ? 'partial' : ''}`}>
+                                {icons.truck}
+                                <span className="truck-load">{i === results.trucksNeeded - 1 ? results.lastTruckLoad : results.truckCapacity} m³</span>
+                              </div>
+                            ))}
+                            {results.trucksNeeded > 6 && <span className="truck-more">+{results.trucksNeeded - 6} daha</span>}
+                          </div>
+                          <div className="truck-info">
+                            <p><strong>{results.trucksNeeded}</strong> mikser tələb olunur</p>
+                            <p>Mikser tutumu: <strong>{results.truckCapacity} m³</strong></p>
+                            {results.trucksNeeded > 1 && <p>Son mikser yükü: <strong>{results.lastTruckLoad} m³</strong></p>}
+                          </div>
+                        </div>
+
+                        <h4><span className="section-title-icon">{icons.price}</span> Xərc Hesablaması</h4>
+                        <div className="cost-breakdown">
+                          <div className="cost-item"><span className="cost-label">Material xərci</span><span className="cost-value">{results.materialCost} AZN</span></div>
+                          {results.rebarEnabled && <div className="cost-item"><span className="cost-label">Armatur xərci</span><span className="cost-value">{results.rebarCost} AZN</span></div>}
+                          {results.meshEnabled && <div className="cost-item"><span className="cost-label">Tor xərci</span><span className="cost-value">{results.meshCost} AZN</span></div>}
+                          {results.includeFormwork && <div className="cost-item"><span className="cost-label">Qəlib xərci</span><span className="cost-value">{results.formworkCost} AZN</span></div>}
+                          <div className="cost-item"><span className="cost-label">İşçilik xərci</span><span className="cost-value">{results.laborCost} AZN</span></div>
+                          <div className="cost-item"><span className="cost-label">Nəqliyyat xərci</span><span className="cost-value">{results.transportCost} AZN</span></div>
+                          <div className="cost-item total"><span className="cost-label">Ümumi Xərc</span><span className="cost-value">{results.totalCost} AZN</span></div>
+                        </div>
+
+                        <div className="results-note">
+                          <span className="note-icon">{icons.warning}</span>
+                          <span><strong>Qeyd:</strong> Bu hesablamalar təxmini dəyərlərdir (qarışıq nisbəti markaya görə nominal götürülüb). Dəqiq layihə üçün bizimlə əlaqə saxlayın.</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>

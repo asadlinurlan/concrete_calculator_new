@@ -31,15 +31,10 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="navbar" aria-label="Əsas naviqasiya">
-        <div className="navbar-container">
+        <div className="navbar-container container">
           <Link to="/" className="logo" aria-label="Novkhani Beton ana səhifə">
-            <div className="logo-icon" aria-hidden="true">
-              <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25 5L45 15V35L25 45L5 35V15L25 5Z" stroke="var(--steel-500)" strokeWidth="2" fill="none" />
-                <path d="M25 15L35 20V30L25 35L15 30V20L25 15Z" stroke="var(--amber-500)" strokeWidth="2" fill="none" />
-              </svg>
-            </div>
-            <span className="logo-text">NOVKHANI</span>
+            <img src="/NOVKHANI.svg" alt="Novkhani Beton" className="logo-svg" />
+            <span className="logo-wordmark" aria-hidden="true">NOVKHANI</span>
           </Link>
 
           <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>

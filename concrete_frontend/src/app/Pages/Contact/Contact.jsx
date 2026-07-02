@@ -22,7 +22,7 @@ const Contact = ({ fullPage }) => {
     { Icon: MapPin, title: 'Ünvan', value: 'Novxanı, Bakı, Azərbaycan', href: 'https://maps.app.goo.gl/uKEuWDVuWqoAccEZA' },
     { Icon: Phone, title: 'Telefon', value: '+994 50 620 95 84', href: 'tel:+994506209584' },
     { Icon: Mail, title: 'Email', value: 'info@novkhanibeton.az', href: 'mailto:info@novkhanibeton.az' },
-    { Icon: Clock, title: 'İş Saatları', value: 'B.e - Şənbə: 08:00 - 18:00' },
+    { Icon: Clock, title: 'İş Saatları', value: 'B.e - B 7/24 fəaliyyətdəyik' },
   ];
 
   return (

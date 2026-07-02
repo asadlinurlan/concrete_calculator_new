@@ -11,16 +11,16 @@ function Slider() {
   // Captions for each slide
   const captions = [
     {
-      title: "State-of-the-art Technology",
-      description: "Our plant uses cutting-edge technology to ensure high-quality concrete production for every project.",
+      title: "Müasir Texnologiya",
+      description: "Zavodumuz hər layihə üçün yüksək keyfiyyətli beton istehsalını təmin etmək üçün qabaqcıl texnologiyadan istifadə edir.",
     },
     {
-      title: "High-Quality Concrete",
-      description: "We provide durable, reliable concrete for various construction needs, ensuring top-tier quality every time.",
+      title: "Yüksək Keyfiyyətli Beton",
+      description: "Müxtəlif tikinti ehtiyacları üçün davamlı, etibarlı beton təmin edirik — hər dəfə ən yüksək keyfiyyəti zəmanət veririk.",
     },
     {
-      title: "Industry Leading Solutions",
-      description: "With years of expertise, we offer concrete solutions that set industry standards and exceed expectations.",
+      title: "Sənayedə Lider Həllər",
+      description: "İllərin təcrübəsi ilə sənaye standartlarını müəyyən edən və gözləntiləri aşan beton həlləri təklif edirik.",
     }
   ];
 
@@ -55,7 +55,7 @@ function Slider() {
       <div className="custom-caption-outside">
         <h3>{captions[index].title}</h3>
         <p>{captions[index].description}</p>
-        <a href="#our-solutions" className="cta-btn-outside">Learn More</a>
+        <a href="#our-solutions" className="cta-btn-outside">Ətraflı</a>
       </div>
     </div>
   );
