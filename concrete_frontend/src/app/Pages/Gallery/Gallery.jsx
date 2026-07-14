@@ -1,7 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
-import { ZoomIn } from 'lucide-react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import './Gallery.css';
 import img1 from '../img/beatriz-novaes-1-Rf38Y1QHk-unsplash.jpg';
@@ -11,11 +9,10 @@ import img4 from '../img/mostafa-meraji-Vs4eK-qQwDA-unsplash.jpg';
 import img5 from '../img/the-jd-darshan-solanki-fPySdxQ1kFg-unsplash.jpg';
 import img6 from '../img/samuel-cruz-m7JngCMSQvc-unsplash.jpg';
 import img7 from '../img/ravigopal-kesari-gKVPRBa7Td8-unsplash.jpg';
-import img8 from '../img/jesse-orrico-P6IqUKhatuM-unsplash.jpg';
 
 const IMAGES = [
   { src: img1, title: 'Mikser vasitəsilə beton tökümü' },
-  { src: img2, title: 'Tikinti sahəsi' },
+  { src: img2, title: 'Yük maşınları üçün parkinq' },
   { src: img3, title: 'Hazır beton' },
   { src: img4, title: 'Layihə prosesi' },
   { src: img5, title: 'Tikinti sahəsi' },
@@ -29,8 +26,31 @@ const Gallery = () => {
   const isOpen = index !== null;
 
   const close = useCallback(() => setIndex(null), []);
-  const movePrev = useCallback(() => setIndex((i) => (i + IMAGES.length - 1) % IMAGES.length), []);
-  const moveNext = useCallback(() => setIndex((i) => (i + 1) % IMAGES.length), []);
+  const movePrev = useCallback(
+    () => setIndex((i) => (i + IMAGES.length - 1) % IMAGES.length),
+    []
+  );
+  const moveNext = useCallback(
+    () => setIndex((i) => (i + 1) % IMAGES.length),
+    []
+  );
+
+  // Keyboard navigation + body scroll lock while the lightbox is open
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') movePrev();
+      else if (e.key === 'ArrowRight') moveNext();
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen, close, movePrev, moveNext]);
 
   return (
     <section className="gallery-section">
@@ -65,15 +85,42 @@ const Gallery = () => {
       </div>
 
       {isOpen && (
-        <Lightbox
-          mainSrc={IMAGES[index].src}
-          nextSrc={IMAGES[(index + 1) % IMAGES.length].src}
-          prevSrc={IMAGES[(index + IMAGES.length - 1) % IMAGES.length].src}
-          imageTitle={IMAGES[index].title}
-          onCloseRequest={close}
-          onMovePrevRequest={movePrev}
-          onMoveNextRequest={moveNext}
-        />
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={IMAGES[index].title}
+          onClick={close}
+        >
+          <button className="lightbox-close" onClick={close} aria-label="Bağla">
+            <X size={30} aria-hidden="true" />
+          </button>
+
+          <button
+            className="lightbox-nav lightbox-prev"
+            onClick={(e) => { e.stopPropagation(); movePrev(); }}
+            aria-label="Əvvəlki"
+          >
+            <ChevronLeft size={40} aria-hidden="true" />
+          </button>
+
+          <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
+            <img
+              className="lightbox-image"
+              src={IMAGES[index].src}
+              alt={IMAGES[index].title}
+            />
+            <figcaption className="lightbox-caption">{IMAGES[index].title}</figcaption>
+          </figure>
+
+          <button
+            className="lightbox-nav lightbox-next"
+            onClick={(e) => { e.stopPropagation(); moveNext(); }}
+            aria-label="Növbəti"
+          >
+            <ChevronRight size={40} aria-hidden="true" />
+          </button>
+        </div>
       )}
     </section>
   );

@@ -2,26 +2,39 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import './Services.css';
+import service1 from '../img/service-1.png';
+import service2 from '../img/service-2.webp';
+import service3 from '../img/service-3.jpg';
+import tereziHome from '../img/service-terezi-home.jpg';
 
-const services = [
-  {
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-    title: 'Hazır Beton',
-    description: 'Tikinti sahənizə vaxtında çatdırılan yüksək keyfiyyətli hazır beton.',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-    title: 'Beton Nasoslaması',
-    description: 'Çətin əlçatan ərazilər və hündürmərtəbəli binalar üçün peşəkar nasos xidmətləri.',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1590496793929-36417d3117de?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-    title: 'Kommersiya Tikintisi',
-    description: 'Kommersiya və sənaye binaları üçün geniş miqyaslı beton həlləri.',
-  },
-];
+const hazirBeton = {
+  image: service1,
+  title: 'Hazır Beton',
+  description: 'Tikinti sahənizə vaxtında çatdırılan yüksək keyfiyyətli hazır beton.',
+};
+const betonNasoslama = {
+  image: service2,
+  title: 'Beton Nasoslaması',
+  description: 'Çətin əlçatan ərazilər və hündürmərtəbəli binalar üçün peşəkar nasos xidmətləri.',
+};
+const kommersiya = {
+  image: service3,
+  title: 'Kommersiya Tikintisi',
+  description: 'Kommersiya və sənaye binaları üçün geniş miqyaslı beton həlləri.',
+};
+const terezi = {
+  title: 'Tərəzi Xidməti',
+  description: 'Avtomobil körpü tərəzisi ilə yüklərin dəqiq və sürətli çəki ölçümü xidməti.',
+};
 
 const Services = ({ fullPage }) => {
+  // Ana səhifə: 3 kart (Kommersiya əvəzinə Tərəzi).
+  // /services səhifəsi: 4 kart (hamısı).
+  const tereziCard = { ...terezi, image: tereziHome };
+  const services = fullPage
+    ? [hazirBeton, betonNasoslama, kommersiya, tereziCard]
+    : [hazirBeton, betonNasoslama, tereziCard];
+
   return (
     <section className={`services-section ${fullPage ? 'full-page' : ''}`}>
       {fullPage && (

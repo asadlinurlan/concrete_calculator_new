@@ -38,7 +38,7 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 28px;
 }
 
@@ -101,11 +101,19 @@
 }
 .service-link-arrow:hover { background: var(--amber-500); color: var(--graphite-900); transform: scale(1.1); }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .services-section { padding: var(--sp-8) 0; }
-  .services-grid { grid-template-columns: 1fr; }
-  .page-hero-services { min-height: 46vh; }
+  .services-grid { grid-template-columns: 1fr; gap: 18px; }
+  .page-hero-services { min-height: 42vh; }
+  .service-image { height: 210px; }
+  .service-info { padding: 20px; }
+  .service-info p { padding-right: 56px; }
+  .service-link-arrow { width: 48px; height: 48px; }
+}
+@media (max-width: 400px) {
+  .service-image { height: 190px; }
+  .service-info h3 { font-size: 18px; }
 }

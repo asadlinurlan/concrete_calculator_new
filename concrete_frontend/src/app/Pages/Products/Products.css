@@ -102,19 +102,68 @@
   min-height: 44px;
 }
 
+/* Trust line under the section title */
+.products-trust {
+  max-width: 620px;
+  margin: 14px auto 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Collapsible technical details — deep numbers stay opt-in */
+.product-tech {
+  margin-bottom: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  background: var(--bg-inset);
+  overflow: hidden;
+}
+.product-tech summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color var(--t-fast);
+}
+.product-tech summary::-webkit-details-marker { display: none; }
+.product-tech summary::after {
+  content: '+';
+  margin-left: auto;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1;
+}
+.product-tech[open] summary::after { content: '−'; }
+.product-tech summary:hover { color: var(--text-light); }
+.product-tech-body { padding: 0 14px 14px; }
+.tech-disclaimer {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 .product-mix {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 14px;
-  background: var(--bg-inset);
+  background: var(--bg-card);
   border-radius: var(--r-sm);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .mix-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); }
 .mix-value { font-family: var(--font-head); font-weight: 600; color: var(--amber-400); letter-spacing: 0.5px; }
 
-.product-stats { list-style: none; margin: 0 0 20px; padding: 0; }
+.product-stats { list-style: none; margin: 0; padding: 0; }
 .product-stats li {
   display: flex;
   justify-content: space-between;
@@ -153,4 +202,17 @@
 }
 
 @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .products-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .page-hero-products { min-height: 40vh; }
+  .products-content { padding: var(--sp-8) 0; }
+  .products-grid { gap: 16px; }
+  .product-card { padding: 22px 18px; }
+  .product-tech summary { min-height: 46px; }
+  .product-cta { min-height: 48px; }
+  .product-use { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .products-grid { grid-template-columns: 1fr; gap: 14px; }
+  .grade-id { font-size: 26px; }
+  .products-trust { font-size: 13.5px; }
+}

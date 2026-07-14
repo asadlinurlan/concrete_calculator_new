@@ -134,44 +134,75 @@
 .hamburger:hover { border-color: var(--steel-500); }
 
 @media (max-width: 1024px) {
-  .hamburger { display: flex; }
+  .hamburger { display: flex; width: 46px; height: 46px; }
 
+  /* Smaller logo on touch devices — keeps the fixed header compact */
+  .logo-svg { height: 64px; }
+  .logo-wordmark { font-size: 18px; letter-spacing: 3px; }
+  .header.scrolled .logo-wordmark { height: 30px; }
+
+  /* Menu is anchored to the header's bottom edge, so it is always
+     positioned correctly no matter how tall the header/logo is. */
   .nav-menu {
-    position: fixed;
-    top: 78px;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
     background: var(--bg-raised);
     border-bottom: 1px solid var(--border-color);
     flex-direction: column;
     align-items: stretch;
-    padding: 20px 28px 28px;
+    padding: 12px 20px 24px;
     gap: 0;
-    transform: translateY(-150%);
-    transition: transform var(--t-med);
+    max-height: calc(100vh - 110px);
+    max-height: calc(100dvh - 110px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(-130%);
+    visibility: hidden;
+    transition: transform var(--t-med), visibility var(--t-med);
     box-shadow: var(--sh-lg);
   }
-  .nav-menu.active { transform: translateY(0); }
+  .nav-menu.active { transform: translateY(0); visibility: visible; }
 
+  /* ≥48px touch rows */
   .nav-link,
   .header.scrolled .nav-link {
     color: var(--text-light);
-    padding: 16px 0;
+    padding: 15px 4px;
     width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid var(--border-color);
     font-size: 16px;
   }
   .nav-link::after { display: none; }
 
   .nav-cta {
-    margin: 18px 0 0;
+    margin: 16px 0 0;
     justify-content: center;
     width: 100%;
+    min-height: 50px;
   }
+
+  /* The header itself needs a positioning context for the menu */
+  .header { will-change: auto; }
 }
 
 @media (max-width: 768px) {
-  .navbar-container { padding: 14px 20px; }
-  .logo-text { font-size: 20px; }
-  .logo-icon { width: 36px; height: 36px; }
+  .navbar-container { padding-top: 10px; padding-bottom: 10px; gap: 14px; }
+
+  /* Old/weak phones: solid background instead of expensive blur */
+  .header.scrolled {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .logo-svg { height: 54px; }
+  .logo-wordmark { font-size: 16px; letter-spacing: 2px; }
+  .header.scrolled .logo-wordmark { height: 26px; }
 }

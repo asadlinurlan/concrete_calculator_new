@@ -149,5 +149,16 @@
   .experience-badge { right: 16px; }
 }
 @media (max-width: 768px) {
-  .about-features { grid-template-columns: 1fr; }
+  .about-features { grid-template-columns: 1fr; gap: 12px; }
+  .about-content { padding: var(--sp-8) 0; }
+  .about-grid { gap: 44px; }
+  .btn-explore { width: 100%; justify-content: center; min-height: 50px; }
+}
+@media (max-width: 560px) {
+  .page-hero-about { min-height: 40vh; }
+  .about-image-container { height: 280px; }
+  .experience-badge { right: 12px; bottom: 14px; padding: 14px 18px; }
+  .badge-number { font-size: 28px; }
+  .badge-text { font-size: 11px; }
+  .about-description { font-size: 15px; }
 }

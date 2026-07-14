@@ -150,7 +150,15 @@
 }
 
 @media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+  .footer-main { padding: 48px 0 40px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .footer-logo-svg { height: 60px; }
+
+  /* ≥44px touch targets for links & social icons */
+  .social-link { width: 46px; height: 46px; }
+  .footer-links li { margin-bottom: 4px; }
+  .footer-links a { display: inline-block; padding: 8px 0; min-height: 40px; }
+  .footer-contact li { margin-bottom: 12px; align-items: flex-start; }
+  .footer-contact .contact-icon { margin-top: 2px; }
+  .footer-bottom { padding: 20px 0 calc(20px + env(safe-area-inset-bottom, 0px)); }
 }

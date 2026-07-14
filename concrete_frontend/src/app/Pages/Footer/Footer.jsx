@@ -51,7 +51,7 @@ const Footer = () => {
           <div className="footer-grid">
             <div className="footer-about">
               <Link to="/" className="footer-logo">
-                <img src="/NOVKHANI.svg" alt="Novkhani Beton" className="footer-logo-svg" />
+                <img src="/NOVKHANI.svg" alt="Novxani Beton" className="footer-logo-svg" />
               </Link>
               <p className="footer-description">
                 Yüksək keyfiyyətli beton həlləri ilə yaşayış, kommersiya və sənaye 
@@ -99,7 +99,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon">{icons.email}</span>
-                  <span>info@novkhanibeton.az</span>
+                  <span>info@novxanibeton.az</span>
                 </li>
                 <li>
                   <span className="contact-icon">{icons.clock}</span>
@@ -112,7 +112,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="container">
-          <p>© 2026 Novkhani Beton. Bütün hüquqlar qorunur.</p>
+          <p>© 2026 Novxanı Beton. Bütün hüquqlar qorunur.</p>
         </div>
       </div>
     </footer>

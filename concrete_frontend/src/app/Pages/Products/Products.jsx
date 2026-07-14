@@ -23,6 +23,10 @@ const Products = () => {
           <div className="section-head reveal">
             <span className="section-subtitle">Məhsul kataloqu</span>
             <h2 className="section-title">Standart Beton Markalarımız</h2>
+            <p className="products-trust">
+              M100–M450 markaları GOST 26633 tələblərinə uyğun istehsal olunur və
+              28 günlük möhkəmlik sınağından keçirilir.
+            </p>
           </div>
 
           <div className="products-grid">
@@ -48,17 +52,28 @@ const Products = () => {
                   <h3 className="product-name">{grade.name}</h3>
                   <p className="product-use">{grade.use}</p>
 
-                  <div className="product-mix">
-                    <span className="mix-label"><Layers size={15} aria-hidden="true" /> Qarışıq (S:Q:Ç)</span>
-                    <span className="mix-value">{ratioLabel(grade)}</span>
-                  </div>
-
-                  <ul className="product-stats">
-                    <li><span>Sement</span><strong>{Math.round(m.cementKg)} kq/m³</strong></li>
-                    <li><span>Qum</span><strong>{m.sandVol.toFixed(2)} m³/m³</strong></li>
-                    <li><span>Çınqıl</span><strong>{m.gravelVol.toFixed(2)} m³/m³</strong></li>
-                    <li><span>Su</span><strong>{Math.round(m.waterL)} L/m³</strong></li>
-                  </ul>
+                  <details className="product-tech">
+                    <summary>
+                      <Layers size={15} aria-hidden="true" />
+                      Texniki məlumat
+                    </summary>
+                    <div className="product-tech-body">
+                      <div className="product-mix">
+                        <span className="mix-label">Qarışıq (S:Q:Ç)</span>
+                        <span className="mix-value">{ratioLabel(grade)}</span>
+                      </div>
+                      <ul className="product-stats">
+                        <li><span>Sement</span><strong>{Math.round(m.cementKg)} kq/m³</strong></li>
+                        <li><span>Qum</span><strong>{m.sandVol.toFixed(2)} m³/m³</strong></li>
+                        <li><span>Çınqıl</span><strong>{m.gravelVol.toFixed(2)} m³/m³</strong></li>
+                        <li><span>Su</span><strong>{Math.round(m.waterL)} L/m³</strong></li>
+                      </ul>
+                      <p className="tech-disclaimer">
+                        Nominal qarışıq əsasında təxmini planlaşdırma dəyərləri.
+                        Yekun qarışıq dizaynı layihəyə uyğun laboratoriyada təyin olunur.
+                      </p>
+                    </div>
+                  </details>
 
                   <Link to="/calculator" className="product-cta">
                     <Calculator size={16} aria-hidden="true" />
@@ -71,8 +86,9 @@ const Products = () => {
           </div>
 
           <p className="products-note">
-            * Göstərilən material miqdarları nominal qarışıq əsasında təxmini dəyərlərdir.
-            Struktur işlər üçün rəsmi qarışıq dizaynı (mix design) tələb olunur.
+            * "Texniki məlumat" bölməsindəki miqdarlar nominal qarışıq əsasında təxmini
+            planlaşdırma dəyərləridir — hər layihənin yekun qarışıq dizaynı (mix design)
+            laboratoriya nəzarəti ilə hazırlanır. Qiymət təklifi üçün bizimlə əlaqə saxlayın.
           </p>
         </div>
       </div>

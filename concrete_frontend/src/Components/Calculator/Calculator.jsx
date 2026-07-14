@@ -130,7 +130,9 @@ const Calculator = () => {
   const [rebarDiameter, setRebarDiameter] = useState(12);
   const [meshEnabled, setMeshEnabled] = useState(false);
   const [meshType, setMeshType] = useState('6x6');
-  const [pricePerM3, setPricePerM3] = useState(85);
+  // Optional, user-supplied price — empty by default so the site itself
+  // publishes no pricing. Filled in only if the visitor knows a price.
+  const [userPrice, setUserPrice] = useState('');
   const [includeFormwork, setIncludeFormwork] = useState(true);
   const [truckCapacity, setTruckCapacity] = useState(8);
 
@@ -228,18 +230,13 @@ const Calculator = () => {
     }
 
     const formworkSheets = includeFormwork ? Math.ceil(formworkArea / 2.88) : 0;
-    const formworkCost = formworkArea * 15;
 
     const trucksNeeded = Math.ceil(volumeM3 / truckCapacity);
     const lastTruckLoad = volumeM3 % truckCapacity || truckCapacity;
 
-    const materialCost = volumeM3 * pricePerM3;
-    const rebarCost = rebarWeight * 1.2;
-    const meshCost = meshWeight * 1.5;
-    const laborCost = volumeM3 * 25;
-    const transportCost = trucksNeeded * 50;
-    const totalCost = materialCost + (rebarEnabled ? rebarCost : 0) + (meshEnabled ? meshCost : 0) +
-      (includeFormwork ? formworkCost : 0) + laborCost + transportCost;
+    // Cost estimate only when the visitor typed their own price
+    const priceNum = parseFloat(userPrice);
+    const estCost = priceNum > 0 ? volumeM3 * priceNum : null;
 
     return {
       rawVol, volumeM3, waste: wastePct, ratio: ratioLabel(grade), gradeStrength: grade.strength, gradeClass: grade.bClass,
@@ -250,14 +247,13 @@ const Calculator = () => {
       bags50kg, bags40kg, bags25kg, bags80lb, bags60lb, bags40lb,
       rebarEnabled, rebarLength: rebarLength.toFixed(1), rebarWeight: rebarWeight.toFixed(1), rebarCount, rebarDiameter, rebarSpacing,
       meshEnabled, meshArea: meshArea.toFixed(2), meshWeight: meshWeight.toFixed(1), meshSheets, meshType,
-      includeFormwork, formworkArea: formworkArea.toFixed(2), formworkSheets, formworkCost: formworkCost.toFixed(2),
+      includeFormwork, formworkArea: formworkArea.toFixed(2), formworkSheets,
       trucksNeeded, truckCapacity, lastTruckLoad: lastTruckLoad.toFixed(2),
-      materialCost: materialCost.toFixed(2), rebarCost: rebarCost.toFixed(2), meshCost: meshCost.toFixed(2),
-      laborCost: laborCost.toFixed(2), transportCost: transportCost.toFixed(2), totalCost: totalCost.toFixed(2),
+      estCost: estCost !== null ? estCost.toFixed(0) : null, userPriceNum: priceNum,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, unit, concreteGrade, wastePct, rebarEnabled, rebarSpacing, rebarDiameter,
-      meshEnabled, meshType, pricePerM3, includeFormwork, truckCapacity,
+      meshEnabled, meshType, userPrice, includeFormwork, truckCapacity,
       slabLength, slabWidth, slabDepth, slabQuantity,
       columnDiameter, columnHeight, columnQuantity,
       stairsRun, stairsRise, stairsWidth, stairsPlatformDepth, stairsStepCount,
@@ -315,7 +311,31 @@ const Calculator = () => {
     convert: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>),
     calculator: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M14 10h2M8 14h2M14 14h2M8 18h8"/></svg>),
     bag: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>),
+    whatsapp: (<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>),
   };
+
+  // WhatsApp price-quote link — the calculated volume/grade is pre-filled so
+  // every enquiry arrives as a ready lead. No prices are shown on the site.
+  const waLink = results
+    ? `https://wa.me/994503260343?text=${encodeURIComponent(
+        `Salam! Saytın kalkulyatorunda hesablama apardım:\n• Marka: ${concreteGrade} (${results.gradeClass})\n• Həcm: ${results.volumeM3s} m³\n• Mikser: ${results.trucksNeeded} ədəd\nZəhmət olmasa qiymət təklifi göndərəsiniz.`
+      )}`
+    : '';
+
+  const quoteCta = results && (
+    <div className="quote-cta">
+      <div className="quote-cta-text">
+        <strong>Bu layihə üçün dəqiq qiymət lazımdır?</strong>
+        <span>Hesablamanız hazırdır — bir kliklə bizə göndərin, qısa zamanda təklif verək.</span>
+      </div>
+      <div className="quote-cta-actions">
+        <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+          {icons.whatsapp} WhatsApp ilə qiymət al
+        </a>
+        <a href="tel:+994506209584" className="btn-call">Zəng et</a>
+      </div>
+    </div>
+  );
 
   const tabs = [
     { id: 'slab', name: 'Plitə', icon: icons.slab },
@@ -456,7 +476,7 @@ const Calculator = () => {
         <div className="calculator-hero-overlay"></div>
         <div className="container">
           <h1>Beton Kalkulyatoru</h1>
-          <p>Layihəniz üçün beton, armatur, qəlib və xərc hesablaması</p>
+          <p>Layihəniz üçün beton həcmi, material, armatur və mikser hesablaması — pulsuz</p>
         </div>
       </div>
 
@@ -478,14 +498,14 @@ const Calculator = () => {
                   <span className="mode-btn-icon">{icons.calculator}</span>
                   <span className="mode-btn-text">
                     <span className="mode-btn-title">Sadə</span>
-                    <span className="mode-btn-desc">Yalnız qiymət nəticəsi</span>
+                    <span className="mode-btn-desc">Həcm, mikser və kisə sayı</span>
                   </span>
                 </button>
                 <button className={`mode-btn ${mode === 'pro' ? 'active' : ''}`} onClick={() => setMode('pro')}>
                   <span className="mode-btn-icon">{icons.chart}</span>
                   <span className="mode-btn-text">
                     <span className="mode-btn-title">Pro</span>
-                    <span className="mode-btn-desc">Ətraflı hesablama</span>
+                    <span className="mode-btn-desc">Ətraflı material hesablaması</span>
                   </span>
                 </button>
               </div>
@@ -516,17 +536,43 @@ const Calculator = () => {
                   </select>
                 </div>
 
+                <div className="price-input-card">
+                  <div className="price-input-head">
+                    <span className="price-input-icon">{icons.price}</span>
+                    <div className="price-input-titles">
+                      <h4>Qiymətlə hesabla <span className="optional-tag">istəyə bağlı</span></h4>
+                      <p>Bildiyiniz beton qiymətini yazın — təxmini xərci dərhal göstərək.</p>
+                    </div>
+                  </div>
+                  <div className="price-input-row">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      min="0"
+                      value={userPrice}
+                      onChange={(e) => setUserPrice(e.target.value)}
+                      placeholder="0"
+                      aria-label="Beton qiyməti (AZN/m³)"
+                    />
+                    <span className="price-unit">AZN / m³</span>
+                  </div>
+                </div>
+
                 {mode === 'simple' ? (
                   <div className="advanced-options">
-                    <h4>Qiymət Məlumatları</h4>
+                    <h4>Hesablama Parametrləri</h4>
                     <div className="option-group pricing-options">
                       <div className="option-row">
                         <label>Material itkisi (%)</label>
                         <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
                       </div>
+                      <p className="option-hint">
+                        Tökülmə, nasos və mikserdə qalan qalıq, səthin qeyri-bərabərliyi üçün ehtiyat payı.
+                        Tövsiyə: 5–10%.
+                      </p>
                       <div className="option-row">
-                        <label><span className="option-icon">{icons.price}</span> Qiymət (AZN/m³)</label>
-                        <input type="number" value={pricePerM3} onChange={(e) => setPricePerM3(parseFloat(e.target.value) || 0)} min="0" />
+                        <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
+                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
                       </div>
                     </div>
                   </div>
@@ -587,10 +633,10 @@ const Calculator = () => {
                         <label>Material itkisi (%)</label>
                         <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
                       </div>
-                      <div className="option-row">
-                        <label><span className="option-icon">{icons.price}</span> Qiymət (AZN/m³)</label>
-                        <input type="number" value={pricePerM3} onChange={(e) => setPricePerM3(parseFloat(e.target.value) || 0)} min="0" />
-                      </div>
+                      <p className="option-hint">
+                        Tökülmə, nasos və mikserdə qalan qalıq, səthin qeyri-bərabərliyi üçün ehtiyat payı.
+                        Tövsiyə: 5–10%.
+                      </p>
                       <div className="option-row">
                         <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
                         <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
@@ -616,16 +662,29 @@ const Calculator = () => {
                     <div className="results-live-badge">● Canlı hesablama</div>
 
                     {mode === 'simple' ? (
-                      /* ── SIMPLE MODE: cost only ── */
+                      /* ── SIMPLE MODE: quick volume answer ── */
                       <div className="simple-result">
                         <div className="simple-cost-card">
-                          <span className="simple-cost-label">Təxmini Ümumi Xərc</span>
-                          <span className="simple-cost-value">{results.totalCost}<small> AZN</small></span>
-                          <span className="simple-cost-sub">{concreteGrade} · {results.volumeM3s} m³ · {pricePerM3} AZN/m³ beton</span>
+                          <span className="simple-cost-label">Lazımi Beton Həcmi</span>
+                          <span className="simple-cost-value">{results.volumeM3s}<small> m³</small></span>
+                          <span className="simple-cost-sub">{concreteGrade} ({results.gradeClass}){results.waste > 0 ? ` · +${results.waste}% itki daxil` : ''}</span>
                         </div>
+                        {results.estCost && (
+                          <div className="user-cost-card">
+                            <span className="user-cost-label">Təxmini Beton Xərci</span>
+                            <span className="user-cost-value">{results.estCost}<small> AZN</small></span>
+                            <span className="user-cost-sub">{results.volumeM3s} m³ × {results.userPriceNum} AZN/m³ — daxil etdiyiniz qiymətlə</span>
+                          </div>
+                        )}
+                        <div className="summary-stats simple-stats">
+                          <div className="summary-stat"><span className="ss-value">{results.trucksNeeded}</span><span className="ss-label">mikser</span></div>
+                          <div className="summary-stat"><span className="ss-value">{results.bags50kg}</span><span className="ss-label">50kq kisə</span></div>
+                          <div className="summary-stat"><span className="ss-value">{results.concreteWeightTons}</span><span className="ss-label">ton</span></div>
+                        </div>
+                        {quoteCta}
                         <div className="results-note">
                           <span className="note-icon">{icons.warning}</span>
-                          <span><strong>Qeyd:</strong> Bu hesablamalar təxmini dəyərlərdir. Dəqiq qiymət üçün bizimlə əlaqə saxlayın.</span>
+                          <span><strong>Qeyd:</strong> Nəticələr planlaşdırma üçün təxmini dəyərlərdir. Dəqiq hesablama və qiymət üçün bizimlə əlaqə saxlayın.</span>
                         </div>
                       </div>
                     ) : (
@@ -633,16 +692,24 @@ const Calculator = () => {
                       <>
                         <div className="result-summary">
                           <div className="summary-primary">
-                            <span className="summary-label">Təxmini Ümumi Xərc</span>
-                            <span className="summary-value">{results.totalCost} <small>AZN</small></span>
-                            <span className="summary-sub">{concreteGrade} · {results.volumeM3s} m³ · {pricePerM3} AZN/m³ beton</span>
+                            <span className="summary-label">Lazımi Beton Həcmi</span>
+                            <span className="summary-value">{results.volumeM3s} <small>m³</small></span>
+                            <span className="summary-sub">{concreteGrade} ({results.gradeClass}) · qarışıq {results.ratio}</span>
                           </div>
                           <div className="summary-stats">
-                            <div className="summary-stat"><span className="ss-value">{results.volumeM3s}</span><span className="ss-label">m³ beton</span></div>
+                            <div className="summary-stat"><span className="ss-value">{results.concreteWeightTons}</span><span className="ss-label">ton</span></div>
                             <div className="summary-stat"><span className="ss-value">{results.trucksNeeded}</span><span className="ss-label">mikser</span></div>
                             <div className="summary-stat"><span className="ss-value">{results.bags50kg}</span><span className="ss-label">50kq kisə</span></div>
                           </div>
                         </div>
+
+                        {results.estCost && (
+                          <div className="user-cost-card">
+                            <span className="user-cost-label">Təxmini Beton Xərci</span>
+                            <span className="user-cost-value">{results.estCost}<small> AZN</small></span>
+                            <span className="user-cost-sub">{results.volumeM3s} m³ × {results.userPriceNum} AZN/m³ — daxil etdiyiniz qiymətlə</span>
+                          </div>
+                        )}
 
                         <h3><span className="section-title-icon">{icons.chart}</span> Həcm Nəticələri</h3>
                         <div className="results-grid">
@@ -743,8 +810,7 @@ const Calculator = () => {
                             <h4><span className="section-title-icon">{icons.formwork}</span> Qəlib (Formwork)</h4>
                             <div className="formwork-results">
                               <div className="formwork-item"><span className="formwork-label">Qəlib sahəsi</span><span className="formwork-value">{results.formworkArea} m²</span></div>
-                              <div className="formwork-item"><span className="formwork-label">Faner vərəqi (1.2×2.4m)</span><span className="formwork-value">{results.formworkSheets} ədəd</span></div>
-                              <div className="formwork-item highlight"><span className="formwork-label">Təxmini qəlib xərci</span><span className="formwork-value">{results.formworkCost} AZN</span></div>
+                              <div className="formwork-item highlight"><span className="formwork-label">Faner vərəqi (1.2×2.4m)</span><span className="formwork-value">{results.formworkSheets} ədəd</span></div>
                             </div>
                           </>
                         )}
@@ -767,20 +833,11 @@ const Calculator = () => {
                           </div>
                         </div>
 
-                        <h4><span className="section-title-icon">{icons.price}</span> Xərc Hesablaması</h4>
-                        <div className="cost-breakdown">
-                          <div className="cost-item"><span className="cost-label">Material xərci</span><span className="cost-value">{results.materialCost} AZN</span></div>
-                          {results.rebarEnabled && <div className="cost-item"><span className="cost-label">Armatur xərci</span><span className="cost-value">{results.rebarCost} AZN</span></div>}
-                          {results.meshEnabled && <div className="cost-item"><span className="cost-label">Tor xərci</span><span className="cost-value">{results.meshCost} AZN</span></div>}
-                          {results.includeFormwork && <div className="cost-item"><span className="cost-label">Qəlib xərci</span><span className="cost-value">{results.formworkCost} AZN</span></div>}
-                          <div className="cost-item"><span className="cost-label">İşçilik xərci</span><span className="cost-value">{results.laborCost} AZN</span></div>
-                          <div className="cost-item"><span className="cost-label">Nəqliyyat xərci</span><span className="cost-value">{results.transportCost} AZN</span></div>
-                          <div className="cost-item total"><span className="cost-label">Ümumi Xərc</span><span className="cost-value">{results.totalCost} AZN</span></div>
-                        </div>
+                        {quoteCta}
 
                         <div className="results-note">
                           <span className="note-icon">{icons.warning}</span>
-                          <span><strong>Qeyd:</strong> Bu hesablamalar təxmini dəyərlərdir (qarışıq nisbəti markaya görə nominal götürülüb). Dəqiq layihə üçün bizimlə əlaqə saxlayın.</span>
+                          <span><strong>Qeyd:</strong> Bu hesablamalar planlaşdırma üçün təxmini dəyərlərdir (qarışıq nisbəti markaya görə nominal götürülüb). Dəqiq hesablama və qiymət təklifi üçün bizimlə əlaqə saxlayın.</span>
                         </div>
                       </>
                     )}
@@ -829,7 +886,7 @@ const Calculator = () => {
             <div className="info-card">
               <h4><span className="info-title-icon">{icons.building}</span> Beton Markası</h4>
               <ul>
-                {CONCRETE_GRADES.slice(0, 6).map((g) => (
+                {CONCRETE_GRADES.map((g) => (
                   <li key={g.id}><strong>{g.id}:</strong> {g.use}</li>
                 ))}
               </ul>

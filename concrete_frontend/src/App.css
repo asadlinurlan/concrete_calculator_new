@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVKHANI BETON — Industrial Design System
+   NOVXANI BETON — Industrial Design System
    Headings: Space Grotesk (geometric sans)
    Body:     Inter (readable sans)
    ============================================================ */
@@ -265,4 +265,53 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   RESPONSIVE & TOUCH FOUNDATION
+   Breakpoints used across the site: 1200 / 1024 / 768 / 560 / 400
+   ============================================================ */
+
+html { overflow-x: hidden; }
+
+/* Media elements never cause horizontal overflow */
+img, video, iframe { max-width: 100%; }
+
+/* Kill the legacy 300ms tap delay + gray tap flash (old Android/iOS) */
+a, button, input, select, textarea, summary, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Finger-friendly hit areas on touch devices (WCAG: ≥44px) */
+@media (pointer: coarse) {
+  button, .btn, summary, select { min-height: 44px; }
+  input[type="checkbox"], input[type="radio"] { width: 22px; height: 22px; }
+}
+
+/* Sticky-hover fix: no floating/hover transforms where there is no mouse */
+@media (hover: none) {
+  .btn:hover, .btn-primary-custom:hover, .btn-explore:hover, .btn-submit:hover,
+  .feature-card:hover, .service-card-img:hover, .product-card:hover,
+  .social-link:hover, .service-link-arrow:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Tablet & below: tighter but symmetric section rhythm */
+@media (max-width: 768px) {
+  .section { padding: var(--sp-8) 0; }
+  .container { padding: 0 var(--sp-4); }
+
+  /* iOS Safari auto-zooms focused inputs below 16px — prevent it */
+  input, select, textarea { font-size: 16px !important; }
+}
+
+/* Small phones: keep everything readable and un-cramped */
+@media (max-width: 400px) {
+  .container { padding: 0 14px; }
+  .btn { white-space: normal; text-align: center; }
+  .btn-lg { padding: 15px 24px; font-size: 15px; }
+  .section-subtitle { letter-spacing: 2px; font-size: 12.5px; }
 }

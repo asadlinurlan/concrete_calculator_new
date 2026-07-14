@@ -32,9 +32,9 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="navbar" aria-label="Əsas naviqasiya">
         <div className="navbar-container container">
-          <Link to="/" className="logo" aria-label="Novkhani Beton ana səhifə">
-            <img src="/NOVKHANI.svg" alt="Novkhani Beton" className="logo-svg" />
-            <span className="logo-wordmark" aria-hidden="true">NOVKHANI</span>
+          <Link to="/" className="logo" aria-label="Novxanı Beton ana səhifə">
+            <img src="/NOVKHANI.svg" alt="Novxanı Beton" className="logo-svg" />
+            <span className="logo-wordmark" aria-hidden="true">NOVXANI</span>
           </Link>
 
           <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>

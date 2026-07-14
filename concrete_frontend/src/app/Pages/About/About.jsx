@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './About.css';
+import aboutImage from '../img/workers-construction-site.jpg';
 
 const About = ({ fullPage }) => {
   const CheckIcon = () => (
@@ -23,7 +24,10 @@ const About = ({ fullPage }) => {
         <div className="container">
           <div className="about-grid">
             <div className="about-image-container reveal">
-              <div className="about-image main-image"></div>
+              <div
+                className="about-image main-image"
+                style={{ backgroundImage: `url(${aboutImage})` }}
+              ></div>
               <div className="experience-badge">
                 <span className="badge-number">8+</span>
                 <span className="badge-text">İllik Təcrübə</span>
@@ -33,7 +37,7 @@ const About = ({ fullPage }) => {
               <span className="section-subtitle">Haqqımızda</span>
               <h2 className="section-title about-title">Hər Layihə üçün Premium Beton Həlləri</h2>
               <p className="about-description">
-                Novkhani Beton olaraq 8 ildən çox təcrübəmizlə yüksək keyfiyyətli beton 
+                Novxani Beton olaraq 8 ildən çox təcrübəmizlə yüksək keyfiyyətli beton 
                 məhsulları və müstəsna müştəri xidməti göstərməklə tanınırıq.
               </p>
               <p className="about-description">
