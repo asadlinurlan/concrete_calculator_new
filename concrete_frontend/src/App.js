@@ -13,6 +13,7 @@ import Footer from "./app/Pages/Footer/Footer";
 import Calculator from "./Components/Calculator/Calculator";
 import Products from "./app/Pages/Products/Products";
 import Gallery from "./app/Pages/Gallery/Gallery";
+import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
 // Scrolls to top on navigation and (re)wires scroll-reveal for the new page.
 function RouteManager() {
@@ -54,6 +55,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <ScrollTop />
       </div>
     </Router>
   );

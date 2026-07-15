@@ -208,7 +208,7 @@
   .products-grid { gap: 16px; }
   .product-card { padding: 22px 18px; }
   .product-tech summary { min-height: 46px; }
-  .product-cta { min-height: 48px; }
+  .product-cta { min-height: 48px; font-size: 13px; }
   .product-use { min-height: 0; }
 }
 @media (max-width: 560px) {

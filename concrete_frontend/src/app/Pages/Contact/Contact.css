@@ -162,7 +162,7 @@
   .contact-form-container { padding: 24px 18px; }
   .contact-content { padding: var(--sp-8) 0; }
   .page-hero-contact { min-height: 42vh; }
-  .btn-submit { min-height: 52px; }
+  .btn-submit { min-height: 52px; font-size: 14.5px; }
   .contact-info-list { gap: 16px; }
   .contact-map iframe { height: 200px; }
 }

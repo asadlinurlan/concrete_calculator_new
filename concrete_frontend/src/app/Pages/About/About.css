@@ -152,7 +152,7 @@
   .about-features { grid-template-columns: 1fr; gap: 12px; }
   .about-content { padding: var(--sp-8) 0; }
   .about-grid { gap: 44px; }
-  .btn-explore { width: 100%; justify-content: center; min-height: 50px; }
+  .btn-explore { width: 100%; justify-content: center; min-height: 50px; font-size: 14px; }
 }
 @media (max-width: 560px) {
   .page-hero-about { min-height: 40vh; }

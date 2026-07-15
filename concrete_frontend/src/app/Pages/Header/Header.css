@@ -64,9 +64,9 @@
 /* Wordmark text — hidden by default, appears on scroll */
 .logo-wordmark {
   font-family: var(--font-head);
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: 4px;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 5px;
   text-transform: uppercase;
   color: #fff;
   white-space: nowrap;
@@ -77,7 +77,7 @@
   transition: height 0.35s ease 0.1s, opacity 0.3s ease 0.15s;
 }
 .header.scrolled .logo-wordmark {
-  height: 36px;
+  height: 42px;
   opacity: 1;
   color: var(--text-light);
 }
@@ -119,6 +119,8 @@
   font-size: 14px !important;
 }
 
+.menu-close-btn { display: none; }
+
 .hamburger {
   display: none;
   align-items: center;
@@ -134,57 +136,102 @@
 .hamburger:hover { border-color: var(--steel-500); }
 
 @media (max-width: 1024px) {
-  .hamburger { display: flex; width: 46px; height: 46px; }
+  .hamburger { display: flex; width: 46px; height: 46px; transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast); }
 
-  /* Smaller logo on touch devices — keeps the fixed header compact */
-  .logo-svg { height: 64px; }
-  .logo-wordmark { font-size: 18px; letter-spacing: 3px; }
-  .header.scrolled .logo-wordmark { height: 30px; }
+  /* When the menu is open, the hamburger turns amber — clear state feedback */
+  .hamburger[aria-expanded="true"],
+  .header.scrolled .hamburger[aria-expanded="true"] {
+    background: var(--amber-500);
+    border-color: var(--amber-500);
+    color: var(--graphite-900);
+  }
 
-  /* Menu is anchored to the header's bottom edge, so it is always
-     positioned correctly no matter how tall the header/logo is. */
+  /* Bigger logo on touch devices */
+  .logo-svg { height: 78px; }
+  .logo-wordmark { font-size: 23px; letter-spacing: 4px; }
+  .header.scrolled .logo-wordmark { height: 36px; }
+
+  /* Navbar (logo + hamburger) stays above the full-screen menu */
+  .navbar { position: relative; z-index: 2; }
+
+  /* Full-screen frosted-glass menu that opens from the very top of the
+     screen; the navbar (logo + close button) stays visible above it. */
   .nav-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-raised);
-    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1;
+    background: rgba(13, 17, 23, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: none;
+    border-radius: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 12px 20px 24px;
-    gap: 0;
-    max-height: calc(100vh - 110px);
-    max-height: calc(100dvh - 110px);
+    padding: 112px 22px 24px;
+    gap: 2px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    transform: translateY(-130%);
+    transform: translateY(-100%);
+    opacity: 0;
     visibility: hidden;
-    transition: transform var(--t-med), visibility var(--t-med);
-    box-shadow: var(--sh-lg);
+    transition: transform var(--t-med), opacity var(--t-med), visibility var(--t-med);
   }
-  .nav-menu.active { transform: translateY(0); visibility: visible; }
+  /* Old phones without backdrop-filter get a near-solid dark panel
+     so the text always stays readable */
+  @supports not (backdrop-filter: blur(1px)) {
+    .nav-menu { background: rgba(13, 17, 23, 0.96); }
+  }
+  .nav-menu.active { transform: translateY(0); opacity: 1; visibility: visible; }
 
-  /* ≥48px touch rows */
+  /* Light text over the dark glass, ≥50px touch rows, amber active state */
   .nav-link,
   .header.scrolled .nav-link {
-    color: var(--text-light);
-    padding: 15px 4px;
+    color: rgba(244, 246, 251, 0.92);
+    padding: 11px 16px;
     width: 100%;
-    min-height: 48px;
+    min-height: 46px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: none;
+    border-radius: var(--r-md);
     font-size: 16px;
+    font-weight: 500;
+  }
+  .nav-link:active { background: rgba(255, 255, 255, 0.07); }
+  .nav-link.active,
+  .header.scrolled .nav-link.active {
+    background: rgba(240, 178, 82, 0.16);
+    color: var(--amber-400);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--amber-500);
   }
   .nav-link::after { display: none; }
 
-  .nav-cta {
-    margin: 16px 0 0;
+  /* No CTA inside the mobile menu — page links + close button only */
+  .nav-cta { display: none; }
+
+  /* Explicit close button — for users who opened the menu but don't
+     want to navigate anywhere */
+  .menu-close-btn {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
     width: 100%;
-    min-height: 50px;
+    min-height: 46px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--r-md);
+    color: rgba(244, 246, 251, 0.9);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--t-fast);
   }
+  .menu-close-btn:active { background: rgba(255, 255, 255, 0.12); }
 
   /* The header itself needs a positioning context for the menu */
   .header { will-change: auto; }
@@ -202,7 +249,12 @@
 }
 
 @media (max-width: 560px) {
-  .logo-svg { height: 54px; }
-  .logo-wordmark { font-size: 16px; letter-spacing: 2px; }
-  .header.scrolled .logo-wordmark { height: 26px; }
+  .logo-svg { height: 66px; }
+  .logo-wordmark { font-size: 20px; letter-spacing: 3px; }
+  .header.scrolled .logo-wordmark { height: 32px; }
+  /* Small phones: everything fits on screen with no scrolling */
+  .nav-menu { padding: 98px 18px 18px; }
+  .nav-link,
+  .header.scrolled .nav-link { min-height: 42px; padding: 9px 14px; font-size: 15px; }
+  .menu-close-btn { min-height: 42px; margin-top: 8px; }
 }

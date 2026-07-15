@@ -269,7 +269,7 @@
 .info-phone:hover { background: var(--steel-600); }
 
 @media (max-width: 768px) {
-  .calculator-hero { padding: 100px 0 40px; }
+  .calculator-hero { padding: 128px 0 40px; }
   .tool-tabs { flex-direction: column; }
   .calculator-tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
   .tab-btn { white-space: nowrap; }
@@ -599,7 +599,11 @@
 
   /* Full-width stacked action buttons */
   .form-actions { flex-direction: column; }
-  .btn-calculate, .btn-reset { width: 100%; min-height: 52px; }
+  .btn-calculate, .btn-reset { width: 100%; min-height: 52px; font-size: 14px; }
+  .btn-whatsapp, .btn-call { font-size: 13.5px; }
+  .tool-tab { font-size: 14px; }
+  .mode-btn-title { font-size: 13px; }
+  .info-phone { font-size: 12.5px; }
 
   /* Symmetric, tighter paddings */
   .calculator-form { padding: 20px 16px; }
@@ -628,5 +632,5 @@
   .grade-pill { font-size: 11px; }
   .results-grid { gap: 10px; }
   .result-card { padding: 14px; }
-  .calculator-hero { padding: 92px 0 36px; }
+  .calculator-hero { padding: 116px 0 36px; }
 }

@@ -304,8 +304,30 @@ a, button, input, select, textarea, summary, [role="button"] {
   .section { padding: var(--sp-8) 0; }
   .container { padding: 0 var(--sp-4); }
 
+  /* Slightly smaller button text on mobile */
+  .btn { font-size: 14px; }
+  .btn-lg { font-size: 15px; padding: 15px 30px; }
+  .btn-primary-custom { font-size: 13px; }
+
   /* iOS Safari auto-zooms focused inputs below 16px — prevent it */
   input, select, textarea { font-size: 16px !important; }
+}
+
+/* Page heroes (Products/Gallery/About/Contact/Services): keep the centered
+   title clear of the fixed header + logo on touch devices */
+@media (max-width: 1024px) {
+  .page-hero-products,
+  .page-hero-gallery,
+  .page-hero-about,
+  .page-hero-contact,
+  .page-hero-services {
+    padding-top: 128px;
+    padding-bottom: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .page-title-center { font-size: clamp(26px, 7.5vw, 38px) !important; letter-spacing: 0.5px !important; }
+  .page-subtitle-center { font-size: 15px !important; margin-top: 8px !important; }
 }
 
 /* Small phones: keep everything readable and un-cramped */

@@ -1,0 +1,40 @@
+/* Floating back-to-top circle — matches the site's amber accent system */
+.scroll-top {
+  position: fixed;
+  right: calc(18px + env(safe-area-inset-right, 0px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 900; /* above content, below the fixed header (1000) */
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: var(--amber-500);
+  color: var(--graphite-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sh-amber);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.9);
+  transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med), background-color var(--t-fast);
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.scroll-top:hover { background: var(--amber-600); }
+.scroll-top:active { transform: scale(0.92); }
+
+@media (max-width: 560px) {
+  .scroll-top {
+    width: 44px;
+    height: 44px;
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+}

@@ -28,6 +28,14 @@ const Header = () => {
   // Close mobile menu on route change
   useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
 
+  // Lock page scroll while the full-screen mobile menu is open
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [isMenuOpen]);
+
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="navbar" aria-label="Əsas naviqasiya">
@@ -51,6 +59,14 @@ const Header = () => {
               <Phone size={18} aria-hidden="true" />
               Qiymət Sorğusu
             </Link>
+            <button
+              className="menu-close-btn"
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Menyunu bağla"
+            >
+              <X size={18} aria-hidden="true" />
+              Menyunu bağla
+            </button>
           </div>
 
           <button

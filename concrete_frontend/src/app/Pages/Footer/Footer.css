@@ -150,15 +150,37 @@
 }
 
 @media (max-width: 768px) {
-  .footer-main { padding: 48px 0 40px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
-  .footer-logo-svg { height: 60px; }
+  .footer-main { padding: 40px 0 32px; }
 
-  /* ≥44px touch targets for links & social icons */
-  .social-link { width: 46px; height: 46px; }
-  .footer-links li { margin-bottom: 4px; }
-  .footer-links a { display: inline-block; padding: 8px 0; min-height: 40px; }
-  .footer-contact li { margin-bottom: 12px; align-items: flex-start; }
+  /* Two link columns sit side-by-side; about & contact span full width.
+     Keeps the mobile footer short instead of one endless column. */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .footer-about { grid-column: 1 / -1; }
+  .footer-contact { grid-column: 1 / -1; }
+
+  .footer-logo-svg { height: 64px; }
+  .footer-description { font-size: 13px; line-height: 1.7; margin-bottom: 18px; }
+
+  /* Compact headings — small caps instead of big titles */
+  .footer-links h3,
+  .footer-contact h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 12px;
+  }
+
+  /* Smaller link text, still ≥40px touch height */
+  .footer-links li { margin-bottom: 2px; }
+  .footer-links a { display: inline-block; padding: 8px 0; min-height: 38px; font-size: 13px; }
+
+  .footer-contact li { margin-bottom: 8px; align-items: flex-start; font-size: 13px; }
   .footer-contact .contact-icon { margin-top: 2px; }
-  .footer-bottom { padding: 20px 0 calc(20px + env(safe-area-inset-bottom, 0px)); }
+  .contact-icon svg { width: 15px; height: 15px; }
+
+  .social-link { width: 44px; height: 44px; }
+
+  .footer-bottom { padding: 16px 0 calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .footer-bottom p { font-size: 12px; }
 }
