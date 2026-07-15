@@ -14,6 +14,9 @@ import './Calculator.css';
 function computeGeometry(tab, unit, v) {
   const toMeters = (val) => (unit === 'metric' ? parseFloat(val) / 100 : parseFloat(val) * 0.0254); // cm/in
   const toLen = (val) => (unit === 'metric' ? parseFloat(val) : parseFloat(val) * 0.3048); // m/ft
+  // Quantity fields hold raw strings so the user can clear them while typing;
+  // an empty/invalid value counts as 1.
+  const qty = (val) => Math.max(1, parseInt(val, 10) || 1);
 
   let volumeM3 = 0;
   let surfaceArea = 0;
@@ -22,23 +25,23 @@ function computeGeometry(tab, unit, v) {
   switch (tab) {
     case 'slab': {
       const L = toLen(v.slabLength), W = toLen(v.slabWidth), D = toMeters(v.slabDepth);
-      volumeM3 = L * W * D * v.slabQuantity;
-      surfaceArea = L * W * v.slabQuantity;
-      formworkArea = 2 * (L + W) * D * v.slabQuantity;
+      volumeM3 = L * W * D * qty(v.slabQuantity);
+      surfaceArea = L * W * qty(v.slabQuantity);
+      formworkArea = 2 * (L + W) * D * qty(v.slabQuantity);
       break;
     }
     case 'footing': {
       const L = toLen(v.footingLength), W = toLen(v.footingWidth), D = toMeters(v.footingDepth);
-      volumeM3 = L * W * D * v.footingQuantity;
-      surfaceArea = L * W * v.footingQuantity;
-      formworkArea = 2 * (L + W) * D * v.footingQuantity;
+      volumeM3 = L * W * D * qty(v.footingQuantity);
+      surfaceArea = L * W * qty(v.footingQuantity);
+      formworkArea = 2 * (L + W) * D * qty(v.footingQuantity);
       break;
     }
     case 'column': {
       const r = toMeters(v.columnDiameter) / 2, H = toLen(v.columnHeight);
-      volumeM3 = Math.PI * r * r * H * v.columnQuantity;
-      surfaceArea = Math.PI * r * r * v.columnQuantity;
-      formworkArea = 2 * Math.PI * r * H * v.columnQuantity;
+      volumeM3 = Math.PI * r * r * H * qty(v.columnQuantity);
+      surfaceArea = Math.PI * r * r * qty(v.columnQuantity);
+      formworkArea = 2 * Math.PI * r * H * qty(v.columnQuantity);
       break;
     }
     case 'wall': {
@@ -58,9 +61,9 @@ function computeGeometry(tab, unit, v) {
     }
     case 'curb': {
       const L = toLen(v.curbLength), W = toMeters(v.curbWidth), H = toMeters(v.curbHeight), F = toMeters(v.curbFlagDepth);
-      volumeM3 = (L * W * H + L * W * F) * v.curbQuantity;
-      surfaceArea = L * W * v.curbQuantity;
-      formworkArea = (2 * H * L + 2 * W * L) * v.curbQuantity;
+      volumeM3 = (L * W * H + L * W * F) * qty(v.curbQuantity);
+      surfaceArea = L * W * qty(v.curbQuantity);
+      formworkArea = (2 * H * L + 2 * W * L) * qty(v.curbQuantity);
       break;
     }
     case 'tube': {
@@ -165,12 +168,37 @@ const Calculator = () => {
     tubeOuterLength, tubeOuterWidth, tubeInnerLength, tubeInnerWidth, tubeDepth,
   };
 
+  // ---- Simple ↔ Pro isolation ----
+  // Each mode keeps its own independent dimensions/results. Switching modes
+  // stashes the current form and restores the other mode's last state
+  // (empty on its first visit), so calculations never leak across modes.
+  const [otherModeDims, setOtherModeDims] = useState(null);
+
+  const applyDims = (d) => {
+    setActiveTab(d.activeTab || 'slab');
+    setSlabLength(d.slabLength ?? ''); setSlabWidth(d.slabWidth ?? ''); setSlabDepth(d.slabDepth ?? ''); setSlabQuantity(d.slabQuantity ?? 1);
+    setColumnDiameter(d.columnDiameter ?? ''); setColumnHeight(d.columnHeight ?? ''); setColumnQuantity(d.columnQuantity ?? 1);
+    setStairsRun(d.stairsRun ?? ''); setStairsRise(d.stairsRise ?? ''); setStairsWidth(d.stairsWidth ?? ''); setStairsPlatformDepth(d.stairsPlatformDepth ?? ''); setStairsStepCount(d.stairsStepCount ?? '');
+    setCurbLength(d.curbLength ?? ''); setCurbWidth(d.curbWidth ?? ''); setCurbHeight(d.curbHeight ?? ''); setCurbFlagDepth(d.curbFlagDepth ?? ''); setCurbQuantity(d.curbQuantity ?? 1);
+    setWallLength(d.wallLength ?? ''); setWallHeight(d.wallHeight ?? ''); setWallThickness(d.wallThickness ?? '');
+    setFootingLength(d.footingLength ?? ''); setFootingWidth(d.footingWidth ?? ''); setFootingDepth(d.footingDepth ?? ''); setFootingQuantity(d.footingQuantity ?? 1);
+    setTubeOuterLength(d.tubeOuterLength ?? ''); setTubeOuterWidth(d.tubeOuterWidth ?? ''); setTubeInnerLength(d.tubeInnerLength ?? ''); setTubeInnerWidth(d.tubeInnerWidth ?? ''); setTubeDepth(d.tubeDepth ?? '');
+  };
+
+  const switchMode = (next) => {
+    if (next === mode) return;
+    setOtherModeDims({ activeTab, ...dims });
+    applyDims(otherModeDims || {});
+    setMode(next);
+  };
+
   // ---- Real-time results (recompute whenever any input changes) ----
   const results = useMemo(() => {
     const { volumeM3: rawVol, surfaceArea, formworkArea } = computeGeometry(activeTab, unit, dims);
     if (rawVol <= 0) return null;
 
-    const waste = 1 + (Math.max(0, wastePct) / 100);
+    const wasteNum = Math.max(0, parseFloat(wastePct) || 0);
+    const waste = 1 + wasteNum / 100;
     const volumeM3 = rawVol * waste; // apply waste allowance to ordered volume
 
     const grade = getGrade(concreteGrade);
@@ -210,8 +238,9 @@ const Calculator = () => {
 
     // Rebar
     let rebarLength = 0, rebarWeight = 0, rebarCount = 0;
+    const spacingMm = parseInt(rebarSpacing, 10) || 150;
     if (rebarEnabled && surfaceArea > 0) {
-      const spacingM = rebarSpacing / 1000;
+      const spacingM = spacingMm / 1000;
       const side = Math.sqrt(surfaceArea);
       const barsPerDir = Math.ceil(side / spacingM) + 1;
       rebarCount = barsPerDir * 2;
@@ -231,24 +260,26 @@ const Calculator = () => {
 
     const formworkSheets = includeFormwork ? Math.ceil(formworkArea / 2.88) : 0;
 
-    const trucksNeeded = Math.ceil(volumeM3 / truckCapacity);
-    const lastTruckLoad = volumeM3 % truckCapacity || truckCapacity;
+    const capNum = parseFloat(truckCapacity);
+    const cap = capNum > 0 ? capNum : 8;
+    const trucksNeeded = Math.ceil(volumeM3 / cap);
+    const lastTruckLoad = volumeM3 % cap || cap;
 
     // Cost estimate only when the visitor typed their own price
     const priceNum = parseFloat(userPrice);
     const estCost = priceNum > 0 ? volumeM3 * priceNum : null;
 
     return {
-      rawVol, volumeM3, waste: wastePct, ratio: ratioLabel(grade), gradeStrength: grade.strength, gradeClass: grade.bClass,
+      rawVol, volumeM3, waste: wasteNum, ratio: ratioLabel(grade), gradeStrength: grade.strength, gradeClass: grade.bClass,
       volumeM3s: volumeM3.toFixed(2), volumeYd3: volumeYd3.toFixed(2), volumeFt3: volumeFt3.toFixed(2), volumeL: volumeL.toFixed(0),
       concreteWeight: concreteWeight.toFixed(0), concreteWeightTons: concreteWeightTons.toFixed(2), concreteWeightLbs: concreteWeightLbs.toFixed(0),
       cement: cement.toFixed(0), sand: sandVol.toFixed(2), sandKg: sandKg.toFixed(0), gravel: gravelVol.toFixed(2), gravelKg: gravelKg.toFixed(0), water: water.toFixed(0),
       breakdown,
       bags50kg, bags40kg, bags25kg, bags80lb, bags60lb, bags40lb,
-      rebarEnabled, rebarLength: rebarLength.toFixed(1), rebarWeight: rebarWeight.toFixed(1), rebarCount, rebarDiameter, rebarSpacing,
+      rebarEnabled, rebarLength: rebarLength.toFixed(1), rebarWeight: rebarWeight.toFixed(1), rebarCount, rebarDiameter, rebarSpacing: spacingMm,
       meshEnabled, meshArea: meshArea.toFixed(2), meshWeight: meshWeight.toFixed(1), meshSheets, meshType,
       includeFormwork, formworkArea: formworkArea.toFixed(2), formworkSheets,
-      trucksNeeded, truckCapacity, lastTruckLoad: lastTruckLoad.toFixed(2),
+      trucksNeeded, truckCapacity: cap, lastTruckLoad: lastTruckLoad.toFixed(2),
       estCost: estCost !== null ? estCost.toFixed(0) : null, userPriceNum: priceNum,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -322,6 +353,39 @@ const Calculator = () => {
       )}`
     : '';
 
+  // One self-contained "price in → cost out" box shown INSIDE the results,
+  // so the input form stays clean (dimensions → grade → results).
+  const priceTool = results && (
+    <div className="price-input-card price-inline">
+      <div className="price-input-head">
+        <span className="price-input-icon">{icons.price}</span>
+        <div className="price-input-titles">
+          <h4>Xərci hesabla <span className="optional-tag">istəyə bağlı</span></h4>
+          <p>{concreteGrade} markası üçün bildiyiniz qiyməti yazın — ümumi xərc dərhal görünsün.</p>
+        </div>
+      </div>
+      <div className="price-input-row">
+        <input
+          type="number"
+          inputMode="decimal"
+          min="0"
+          value={userPrice}
+          onChange={(e) => setUserPrice(e.target.value)}
+          placeholder="0"
+          aria-label="Beton qiyməti (AZN/m³)"
+        />
+        <span className="price-unit">AZN / m³</span>
+      </div>
+      {results.estCost && (
+        <div className="user-cost-card">
+          <span className="user-cost-label">Təxmini Beton Xərci</span>
+          <span className="user-cost-value">{results.estCost}<small> AZN</small></span>
+          <span className="user-cost-sub">{results.volumeM3s} m³ × {results.userPriceNum} AZN/m³ — daxil etdiyiniz qiymətlə</span>
+        </div>
+      )}
+    </div>
+  );
+
   const quoteCta = results && (
     <div className="quote-cta">
       <div className="quote-cta-text">
@@ -376,7 +440,7 @@ const Calculator = () => {
             </div>
             <div className="form-row">
               <div className="form-group"><label>Qalınlıq ({depthUnit})</label>{num(slabDepth, setSlabDepth)}</div>
-              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={slabQuantity} onChange={(e) => setSlabQuantity(parseInt(e.target.value) || 1)} /></div>
+              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={slabQuantity} onChange={(e) => setSlabQuantity(e.target.value)} /></div>
             </div>
           </>
         );
@@ -389,7 +453,7 @@ const Calculator = () => {
             </div>
             <div className="form-row">
               <div className="form-group"><label>Dərinlik ({depthUnit})</label>{num(footingDepth, setFootingDepth)}</div>
-              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={footingQuantity} onChange={(e) => setFootingQuantity(parseInt(e.target.value) || 1)} /></div>
+              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={footingQuantity} onChange={(e) => setFootingQuantity(e.target.value)} /></div>
             </div>
           </>
         );
@@ -401,7 +465,7 @@ const Calculator = () => {
               <div className="form-group"><label>Hündürlük ({lengthUnit})</label>{num(columnHeight, setColumnHeight)}</div>
             </div>
             <div className="form-row">
-              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={columnQuantity} onChange={(e) => setColumnQuantity(parseInt(e.target.value) || 1)} /></div>
+              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={columnQuantity} onChange={(e) => setColumnQuantity(e.target.value)} /></div>
             </div>
           </>
         );
@@ -445,7 +509,7 @@ const Calculator = () => {
               <div className="form-group"><label>Bayraq dərinliyi ({depthUnit})</label>{num(curbFlagDepth, setCurbFlagDepth)}</div>
             </div>
             <div className="form-row">
-              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={curbQuantity} onChange={(e) => setCurbQuantity(parseInt(e.target.value) || 1)} /></div>
+              <div className="form-group"><label>Sayı</label><input type="number" min="1" value={curbQuantity} onChange={(e) => setCurbQuantity(e.target.value)} /></div>
             </div>
           </>
         );
@@ -494,14 +558,14 @@ const Calculator = () => {
           {activeToolTab === 'calculator' ? (
             <div className="calculator-wrapper">
               <div className="mode-switcher">
-                <button className={`mode-btn ${mode === 'simple' ? 'active' : ''}`} onClick={() => setMode('simple')}>
+                <button className={`mode-btn ${mode === 'simple' ? 'active' : ''}`} onClick={() => switchMode('simple')}>
                   <span className="mode-btn-icon">{icons.calculator}</span>
                   <span className="mode-btn-text">
                     <span className="mode-btn-title">Sadə</span>
                     <span className="mode-btn-desc">Həcm, mikser və kisə sayı</span>
                   </span>
                 </button>
-                <button className={`mode-btn ${mode === 'pro' ? 'active' : ''}`} onClick={() => setMode('pro')}>
+                <button className={`mode-btn ${mode === 'pro' ? 'active' : ''}`} onClick={() => switchMode('pro')}>
                   <span className="mode-btn-icon">{icons.chart}</span>
                   <span className="mode-btn-text">
                     <span className="mode-btn-title">Pro</span>
@@ -536,35 +600,13 @@ const Calculator = () => {
                   </select>
                 </div>
 
-                <div className="price-input-card">
-                  <div className="price-input-head">
-                    <span className="price-input-icon">{icons.price}</span>
-                    <div className="price-input-titles">
-                      <h4>Qiymətlə hesabla <span className="optional-tag">istəyə bağlı</span></h4>
-                      <p>Bildiyiniz beton qiymətini yazın — təxmini xərci dərhal göstərək.</p>
-                    </div>
-                  </div>
-                  <div className="price-input-row">
-                    <input
-                      type="number"
-                      inputMode="decimal"
-                      min="0"
-                      value={userPrice}
-                      onChange={(e) => setUserPrice(e.target.value)}
-                      placeholder="0"
-                      aria-label="Beton qiyməti (AZN/m³)"
-                    />
-                    <span className="price-unit">AZN / m³</span>
-                  </div>
-                </div>
-
                 {mode === 'simple' ? (
                   <div className="advanced-options">
                     <h4>Hesablama Parametrləri</h4>
                     <div className="option-group pricing-options">
                       <div className="option-row">
                         <label>Material itkisi (%)</label>
-                        <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
+                        <input type="number" value={wastePct} onChange={(e) => setWastePct(e.target.value)} min="0" max="30" />
                       </div>
                       <p className="option-hint">
                         Tökülmə, nasos və mikserdə qalan qalıq, səthin qeyri-bərabərliyi üçün ehtiyat payı.
@@ -572,7 +614,7 @@ const Calculator = () => {
                       </p>
                       <div className="option-row">
                         <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
-                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
+                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(e.target.value)} min="1" max="15" />
                       </div>
                     </div>
                   </div>
@@ -596,7 +638,7 @@ const Calculator = () => {
                           </div>
                           <div className="option-row">
                             <label>Aralıq (mm)</label>
-                            <input type="number" value={rebarSpacing} onChange={(e) => setRebarSpacing(parseInt(e.target.value) || 150)} min="50" max="400" />
+                            <input type="number" value={rebarSpacing} onChange={(e) => setRebarSpacing(e.target.value)} min="50" max="400" />
                           </div>
                         </div>
                       )}
@@ -631,7 +673,7 @@ const Calculator = () => {
                     <div className="option-group pricing-options">
                       <div className="option-row">
                         <label>Material itkisi (%)</label>
-                        <input type="number" value={wastePct} onChange={(e) => setWastePct(parseFloat(e.target.value) || 0)} min="0" max="30" />
+                        <input type="number" value={wastePct} onChange={(e) => setWastePct(e.target.value)} min="0" max="30" />
                       </div>
                       <p className="option-hint">
                         Tökülmə, nasos və mikserdə qalan qalıq, səthin qeyri-bərabərliyi üçün ehtiyat payı.
@@ -639,7 +681,7 @@ const Calculator = () => {
                       </p>
                       <div className="option-row">
                         <label><span className="option-icon">{icons.truck}</span> Mikser tutumu (m³)</label>
-                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(parseFloat(e.target.value) || 8)} min="1" max="15" />
+                        <input type="number" value={truckCapacity} onChange={(e) => setTruckCapacity(e.target.value)} min="1" max="15" />
                       </div>
                     </div>
                   </div>
@@ -669,18 +711,12 @@ const Calculator = () => {
                           <span className="simple-cost-value">{results.volumeM3s}<small> m³</small></span>
                           <span className="simple-cost-sub">{concreteGrade} ({results.gradeClass}){results.waste > 0 ? ` · +${results.waste}% itki daxil` : ''}</span>
                         </div>
-                        {results.estCost && (
-                          <div className="user-cost-card">
-                            <span className="user-cost-label">Təxmini Beton Xərci</span>
-                            <span className="user-cost-value">{results.estCost}<small> AZN</small></span>
-                            <span className="user-cost-sub">{results.volumeM3s} m³ × {results.userPriceNum} AZN/m³ — daxil etdiyiniz qiymətlə</span>
-                          </div>
-                        )}
                         <div className="summary-stats simple-stats">
                           <div className="summary-stat"><span className="ss-value">{results.trucksNeeded}</span><span className="ss-label">mikser</span></div>
                           <div className="summary-stat"><span className="ss-value">{results.bags50kg}</span><span className="ss-label">50kq kisə</span></div>
                           <div className="summary-stat"><span className="ss-value">{results.concreteWeightTons}</span><span className="ss-label">ton</span></div>
                         </div>
+                        {priceTool}
                         {quoteCta}
                         <div className="results-note">
                           <span className="note-icon">{icons.warning}</span>
@@ -703,13 +739,7 @@ const Calculator = () => {
                           </div>
                         </div>
 
-                        {results.estCost && (
-                          <div className="user-cost-card">
-                            <span className="user-cost-label">Təxmini Beton Xərci</span>
-                            <span className="user-cost-value">{results.estCost}<small> AZN</small></span>
-                            <span className="user-cost-sub">{results.volumeM3s} m³ × {results.userPriceNum} AZN/m³ — daxil etdiyiniz qiymətlə</span>
-                          </div>
-                        )}
+                        {priceTool}
 
                         <h3><span className="section-title-icon">{icons.chart}</span> Həcm Nəticələri</h3>
                         <div className="results-grid">

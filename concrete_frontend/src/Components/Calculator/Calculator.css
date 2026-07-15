@@ -532,6 +532,11 @@
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
 }
 
+/* Inline variant: the price tool lives inside the results panel */
+.calculator-results .price-inline { margin: 20px 0 26px; }
+.simple-result .price-inline { margin-bottom: 0; }
+.price-inline .user-cost-card { margin: 16px 0 0; padding: 22px 20px; }
+
 /* ── Prominent estimated-cost result card ── */
 .user-cost-card {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px;
