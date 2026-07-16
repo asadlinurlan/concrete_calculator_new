@@ -1,0 +1,110 @@
+/* ============================================================
+   Build-time prerender: renders every route of the SPA to static
+   HTML inside build/, so crawlers and social bots receive full
+   content + per-route meta without executing JavaScript.
+
+   Runs as `postbuild`. Designed to be CI-safe: any failure exits
+   non-zero and the npm script falls back to the plain SPA build
+   (deploy still succeeds, just without prerendered HTML).
+   ============================================================ */
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer');
+
+const BUILD = path.resolve(__dirname, '..', 'build');
+const PORT = 4173;
+
+const ROUTES = [
+  '/',
+  '/products',
+  '/services',
+  '/calculator',
+  '/gallery',
+  '/about',
+  '/contact',
+  '/hazir-beton-satisi',
+  '/beton-catdirilmasi',
+  '/beton-nasoslama',
+  '/terezi-xidmeti',
+  '/beton-qiymetleri',
+];
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.txt': 'text/plain',
+  '.xml': 'application/xml',
+  '.map': 'application/json',
+  '.woff2': 'font/woff2',
+};
+
+// Minimal static file server with SPA fallback (no extra deps).
+function createServer() {
+  return http.createServer((req, res) => {
+    const urlPath = decodeURIComponent(req.url.split('?')[0]);
+    let filePath = path.join(BUILD, urlPath);
+    if (!filePath.startsWith(BUILD)) { res.writeHead(403); res.end(); return; }
+    if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+      filePath = path.join(BUILD, 'index.html');
+    }
+    const ext = path.extname(filePath).toLowerCase();
+    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    fs.createReadStream(filePath).pipe(res);
+  });
+}
+
+(async () => {
+  const server = createServer();
+  await new Promise((resolve) => server.listen(PORT, resolve));
+
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
+  });
+
+  // Render everything into memory first, write to disk at the end —
+  // otherwise overwriting index.html mid-run would poison SPA fallback.
+  const results = [];
+  for (const route of ROUTES) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1366, height: 900 });
+    await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+    await new Promise((r) => setTimeout(r, 400)); // let helmet/observers settle
+    // Static paint must be fully visible: force all scroll-reveal elements
+    // shown, otherwise below-the-fold content is opacity:0 until JS loads.
+    await page.evaluate(() => {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+    });
+    const html = await page.content();
+    await page.close();
+    if (!html.includes('id="root"')) throw new Error(`Empty render for ${route}`);
+    results.push({ route, html });
+    console.log(`  ✓ prerendered ${route} (${(html.length / 1024).toFixed(0)} KB)`);
+  }
+
+  await browser.close();
+  server.close();
+
+  for (const { route, html } of results) {
+    const outFile = route === '/'
+      ? path.join(BUILD, 'index.html')
+      : path.join(BUILD, route.slice(1), 'index.html');
+    fs.mkdirSync(path.dirname(outFile), { recursive: true });
+    fs.writeFileSync(outFile, html);
+  }
+
+  console.log(`Prerender complete: ${results.length} routes → static HTML.`);
+  process.exit(0);
+})().catch((e) => {
+  console.error('Prerender failed:', e.message);
+  process.exit(1);
+});

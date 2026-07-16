@@ -1,11 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calculator, ArrowRight, ShieldCheck, Truck, Award } from 'lucide-react';
+import heroImage from '../img/concrete.jpeg';
 import './HeroSection.css';
 
 const HeroSection = () => {
   return (
     <section className="hero-section">
+      {/* Real <img> (not CSS background): indexable by Google Images and
+          prioritized as the LCP element for faster first paint. */}
+      <img
+        className="hero-bg-img"
+        src={heroImage}
+        alt="Bakıda tikinti sahəsində hazır betonun tökülməsi — Novxanı Beton"
+        width="1920"
+        height="1280"
+        fetchpriority="high"
+      />
+      <div className="hero-shade" aria-hidden="true"></div>
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="container">

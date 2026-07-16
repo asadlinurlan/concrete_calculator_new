@@ -63,11 +63,16 @@
 
 .service-image {
   height: 230px;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+}
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform var(--t-med);
 }
-.service-card-img:hover .service-image { transform: scale(1.05); }
+.service-card-img:hover .service-image img { transform: scale(1.05); }
 
 .service-image { flex-shrink: 0; }
 

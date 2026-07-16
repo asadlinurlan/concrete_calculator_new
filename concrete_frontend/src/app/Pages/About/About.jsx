@@ -28,10 +28,14 @@ const About = ({ fullPage }) => {
           {fullPage && <Breadcrumbs current="Haqqımızda" />}
           <div className="about-grid">
             <div className="about-image-container reveal">
-              <div
+              <img
                 className="about-image main-image"
-                style={{ backgroundImage: `url(${aboutImage})` }}
-              ></div>
+                src={aboutImage}
+                alt="Novxanı Beton işçisi tikinti sahəsində beton səthini hamarlayır"
+                width="800"
+                height="533"
+                loading="lazy"
+              />
               <div className="experience-badge">
                 <span className="badge-number">8+</span>
                 <span className="badge-text">İllik Təcrübə</span>

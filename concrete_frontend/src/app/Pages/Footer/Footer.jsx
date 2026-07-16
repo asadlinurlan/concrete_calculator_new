@@ -79,11 +79,11 @@ const Footer = () => {
             <div className="footer-links">
               <h3>Xidmətlər</h3>
               <ul>
-                <li><Link to="/services">Hazır Beton</Link></li>
-                <li><Link to="/services">Yaşayış Layihələri</Link></li>
-                <li><Link to="/services">Kommersiya Tikintisi</Link></li>
-                <li><Link to="/services">Beton Nasoslaması</Link></li>
-                <li><Link to="/services">İnfrastruktur</Link></li>
+                <li><Link to="/hazir-beton-satisi">Hazır Beton Satışı</Link></li>
+                <li><Link to="/beton-catdirilmasi">Beton Çatdırılması</Link></li>
+                <li><Link to="/beton-nasoslama">Beton Nasoslama</Link></li>
+                <li><Link to="/terezi-xidmeti">Tərəzi Xidməti</Link></li>
+                <li><Link to="/beton-qiymetleri">Beton Qiymətləri</Link></li>
               </ul>
             </div>
             <div className="footer-contact">

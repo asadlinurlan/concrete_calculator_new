@@ -14,6 +14,8 @@ import Calculator from "./Components/Calculator/Calculator";
 import Products from "./app/Pages/Products/Products";
 import Gallery from "./app/Pages/Gallery/Gallery";
 import NotFound from "./app/Pages/NotFound/NotFound";
+import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
+import { SERVICE_PAGES } from "./data/servicePages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
@@ -55,6 +57,9 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About fullPage />} />
             <Route path="/contact" element={<Contact fullPage />} />
+            {SERVICE_PAGES.map((p) => (
+              <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
+            ))}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

@@ -1,0 +1,273 @@
+/* ============================================================
+   Service landing page template — consistent with the design system
+   ============================================================ */
+.sd-page { background: var(--bg-base); }
+
+/* ── Hero ── */
+.sd-hero {
+  position: relative;
+  min-height: 52vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 150px 0 56px;
+}
+.sd-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sd-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 17, 23, 0.72) 0%, rgba(13, 17, 23, 0.55) 55%, rgba(13, 17, 23, 0.82) 100%);
+}
+.sd-hero-content { position: relative; z-index: 1; }
+.sd-title {
+  font-size: clamp(30px, 5.5vw, 52px);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.sd-tagline {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--on-dark-muted);
+  max-width: 64ch;
+  margin-bottom: 26px;
+}
+.sd-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.sd-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+.sd-ghost:hover { border-color: #fff; color: #fff; background: rgba(255, 255, 255, 0.08); }
+
+/* ── Body layout ── */
+.sd-body { padding: var(--sp-7) 0 var(--sp-8); }
+.sd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 44px;
+  align-items: start;
+}
+.sd-main { min-width: 0; }
+.sd-section { margin-bottom: var(--sp-7); }
+.sd-section:last-child { margin-bottom: 0; }
+
+.sd-text {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.sd-text:last-child { margin-bottom: 0; }
+
+.sd-h2 {
+  font-size: clamp(21px, 3vw, 27px);
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 22px;
+}
+
+/* ── Benefits ── */
+.sd-benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.sd-benefit {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  padding: 18px;
+}
+.sd-benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: var(--r-sm);
+  background: rgba(240, 178, 82, 0.14);
+  color: var(--amber-600);
+}
+.sd-benefit h3 { font-size: 15.5px; font-weight: 600; color: var(--text-light); margin-bottom: 5px; }
+.sd-benefit p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+/* ── Grade chips ── */
+.sd-grades { display: flex; flex-wrap: wrap; gap: 10px; }
+.sd-grade-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: border-color var(--t-fast), transform var(--t-fast);
+}
+.sd-grade-chip:hover { border-color: var(--amber-500); transform: translateY(-2px); }
+.sd-grade-chip strong { font-family: var(--font-head); font-size: 16px; color: var(--text-light); }
+.sd-grade-chip span { font-size: 11.5px; color: var(--text-muted); }
+.sd-grades-note { margin-top: 14px; font-size: 13.5px; color: var(--text-muted); }
+.sd-grades-note a { color: var(--steel-600); text-decoration: none; font-weight: 600; }
+.sd-grades-note a:hover { text-decoration: underline; }
+
+/* ── Steps ── */
+.sd-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.sd-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  padding: 18px;
+}
+.sd-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--steel-500);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+}
+.sd-step h3 { font-size: 15.5px; font-weight: 600; color: var(--text-light); margin-bottom: 4px; }
+.sd-step p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+/* ── FAQ ── */
+.sd-faq { display: flex; flex-direction: column; gap: 10px; }
+.sd-faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.sd-faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  user-select: none;
+  transition: color var(--t-fast);
+}
+.sd-faq-item summary::-webkit-details-marker { display: none; }
+.sd-faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.sd-faq-item[open] summary::after { content: '−'; }
+.sd-faq-item summary:hover { color: var(--steel-600); }
+.sd-faq-item p {
+  padding: 0 18px 16px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* ── Aside ── */
+.sd-aside { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 110px; }
+.sd-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  padding: 22px;
+}
+.sd-card h3 { font-size: 16px; font-weight: 700; color: var(--text-light); margin-bottom: 14px; }
+.sd-contact-card ul { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.sd-contact-card li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--text-muted); }
+.sd-contact-card li svg { color: var(--steel-500); flex-shrink: 0; }
+.sd-contact-card a { color: var(--text-light); text-decoration: none; font-weight: 500; }
+.sd-contact-card a:hover { color: var(--steel-600); }
+.sd-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 13px;
+  background: #25d366;
+  color: #fff;
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color var(--t-fast), transform var(--t-fast);
+}
+.sd-wa-btn:hover { background: #1fb958; transform: translateY(-2px); }
+
+.sd-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.sd-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 8px;
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--t-fast), background-color var(--t-fast);
+}
+.sd-links a:hover { color: var(--steel-600); background: var(--bg-inset); }
+.sd-links svg { color: var(--amber-500); flex-shrink: 0; }
+
+.sd-calc-card { text-align: center; }
+.sd-calc-card svg { color: var(--amber-500); margin-bottom: 10px; }
+.sd-calc-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+.sd-calc-btn { width: 100%; }
+
+/* ── Bottom CTA band ── */
+.sd-cta-band {
+  background: linear-gradient(135deg, var(--graphite-900) 0%, var(--graphite-700) 100%);
+  padding: 52px 0;
+}
+.sd-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.sd-cta-inner h2 { color: #fff; font-size: clamp(21px, 3vw, 28px); margin-bottom: 8px; }
+.sd-cta-inner p { color: var(--on-dark-muted); font-size: 15px; margin: 0; }
+.sd-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sd-grid { grid-template-columns: 1fr; gap: 36px; }
+  .sd-aside { position: static; }
+  .sd-hero { padding: 132px 0 44px; min-height: 44vh; }
+}
+@media (max-width: 768px) {
+  .sd-benefits { grid-template-columns: 1fr; }
+  .sd-body { padding: var(--sp-6) 0 var(--sp-7); }
+  .sd-section { margin-bottom: var(--sp-6); }
+  .sd-cta-inner { flex-direction: column; align-items: stretch; text-align: center; }
+  .sd-cta-actions { flex-direction: column; }
+  .sd-hero-actions .btn { flex: 1 1 100%; }
+}
+@media (max-width: 400px) {
+  .sd-card { padding: 18px 16px; }
+  .sd-benefit, .sd-step { padding: 15px; }
+}

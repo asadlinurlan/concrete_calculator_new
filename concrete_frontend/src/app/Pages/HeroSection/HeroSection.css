@@ -3,11 +3,24 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-image:
-    linear-gradient(120deg, rgba(13, 17, 23, 0.92) 0%, rgba(13, 17, 23, 0.55) 60%, rgba(13, 17, 23, 0.35) 100%),
-    url('../img/concrete.jpeg');
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+  background: var(--graphite-900);
+}
+
+/* Hero photo as a real <img> (SEO + LCP priority) with the same
+   gradient treatment layered above it */
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(13, 17, 23, 0.92) 0%, rgba(13, 17, 23, 0.55) 60%, rgba(13, 17, 23, 0.35) 100%);
+  pointer-events: none;
 }
 
 .hero-overlay {

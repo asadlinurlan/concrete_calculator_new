@@ -7,8 +7,8 @@ import { SITE_URL, PAGES } from '../../seo/seoConfig';
  * plus BreadcrumbList structured data on sub-pages.
  * Overrides the static defaults in public/index.html when the app renders.
  */
-const Seo = ({ page }) => {
-  const cfg = PAGES[page] || PAGES.home;
+const Seo = ({ page, custom }) => {
+  const cfg = custom || PAGES[page] || PAGES.home;
   const url = SITE_URL + cfg.path;
 
   const breadcrumbLd = cfg.crumb && {

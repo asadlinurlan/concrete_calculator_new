@@ -11,22 +11,30 @@ import tereziHome from '../img/service-terezi-home.jpg';
 
 const hazirBeton = {
   image: service1,
+  alt: 'Tikinti sahəsində hazır betonun tökülməsi — Novxanı Beton',
   title: 'Hazır Beton',
   description: 'Tikinti sahənizə vaxtında çatdırılan yüksək keyfiyyətli hazır beton.',
+  to: '/hazir-beton-satisi',
 };
 const betonNasoslama = {
   image: service2,
+  alt: 'Beton nasosu tikinti meydançasında beton vurur',
   title: 'Beton Nasoslaması',
   description: 'Çətin əlçatan ərazilər və hündürmərtəbəli binalar üçün peşəkar nasos xidmətləri.',
+  to: '/beton-nasoslama',
 };
 const kommersiya = {
   image: service3,
+  alt: 'Çoxmərtəbəli kommersiya binasının tikintisi',
   title: 'Kommersiya Tikintisi',
   description: 'Kommersiya və sənaye binaları üçün geniş miqyaslı beton həlləri.',
+  to: '/contact',
 };
 const terezi = {
+  alt: 'Mikser avtomobil körpü tərəzisində çəkilir',
   title: 'Tərəzi Xidməti',
   description: 'Avtomobil körpü tərəzisi ilə yüklərin dəqiq və sürətli çəki ölçümü xidməti.',
+  to: '/terezi-xidmeti',
 };
 
 const Services = ({ fullPage }) => {
@@ -62,16 +70,13 @@ const Services = ({ fullPage }) => {
                 className="service-card-img reveal"
                 style={{ transitionDelay: `${index * 0.08}s` }}
               >
-                <div
-                  className="service-image"
-                  style={{ backgroundImage: `url(${service.image})` }}
-                  role="img"
-                  aria-label={service.title}
-                ></div>
+                <div className="service-image">
+                  <img src={service.image} alt={service.alt} width="600" height="400" loading="lazy" />
+                </div>
                 <div className="service-info">
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
-                  <Link to="/contact" className="service-link-arrow" aria-label={`${service.title} — ətraflı`}>
+                  <Link to={service.to} className="service-link-arrow" aria-label={`${service.title} — ətraflı`}>
                     <ArrowRight size={20} />
                   </Link>
                 </div>
