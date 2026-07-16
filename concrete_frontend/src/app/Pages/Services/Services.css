@@ -49,6 +49,10 @@
   overflow: hidden;
   box-shadow: var(--sh-md);
   transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+  /* Equal-height cards: info area stretches to the card bottom, so the
+     arrow button sits at the exact same spot on every card */
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card-img:hover {
@@ -65,9 +69,14 @@
 }
 .service-card-img:hover .service-image { transform: scale(1.05); }
 
+.service-image { flex-shrink: 0; }
+
 .service-info {
   padding: 24px;
   position: relative;
+  flex: 1;
+  /* Reserve space so long descriptions never slide under the arrow */
+  padding-bottom: 76px;
 }
 
 .service-info h3 {
@@ -82,7 +91,6 @@
   color: var(--text-muted);
   line-height: 1.7;
   margin: 0;
-  padding-right: 48px;
 }
 
 .service-link-arrow {
@@ -109,8 +117,7 @@
   .services-grid { grid-template-columns: 1fr; gap: 18px; }
   .page-hero-services { min-height: 42vh; }
   .service-image { height: 210px; }
-  .service-info { padding: 20px; }
-  .service-info p { padding-right: 56px; }
+  .service-info { padding: 20px 20px 72px; }
   .service-link-arrow { width: 48px; height: 48px; }
 }
 @media (max-width: 400px) {

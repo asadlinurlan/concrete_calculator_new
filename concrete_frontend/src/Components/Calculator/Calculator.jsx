@@ -9,11 +9,10 @@ import {
 import './Calculator.css';
 
 /* Volume + surface + formwork area for a given shape, all in SI (metres / m³).
-   Depth-type inputs are entered in cm (metric) or inches (imperial);
-   length-type inputs in m (metric) or ft (imperial). */
-function computeGeometry(tab, unit, v) {
-  const toMeters = (val) => (unit === 'metric' ? parseFloat(val) / 100 : parseFloat(val) * 0.0254); // cm/in
-  const toLen = (val) => (unit === 'metric' ? parseFloat(val) : parseFloat(val) * 0.3048); // m/ft
+   Depth-type inputs are entered in sm (cm), length-type inputs in m. */
+function computeGeometry(tab, v) {
+  const toMeters = (val) => parseFloat(val) / 100; // sm → m
+  const toLen = (val) => parseFloat(val); // m
   // Quantity fields hold raw strings so the user can clear them while typing;
   // an empty/invalid value counts as 1.
   const qty = (val) => Math.max(1, parseInt(val, 10) || 1);
@@ -86,7 +85,6 @@ const Calculator = () => {
   const [activeTab, setActiveTab] = useState('slab');
   const [activeToolTab, setActiveToolTab] = useState('calculator');
   const [mode, setMode] = useState('simple');
-  const [unit, setUnit] = useState('metric');
 
   // Dimension state (kept flat so existing inputs/CSS are unchanged)
   const [slabLength, setSlabLength] = useState('');
@@ -142,7 +140,7 @@ const Calculator = () => {
   // Unit converter
   const [converterValue, setConverterValue] = useState('');
   const [converterFrom, setConverterFrom] = useState('m3');
-  const [converterTo, setConverterTo] = useState('ft3');
+  const [converterTo, setConverterTo] = useState('l');
 
   const rebarDiameters = [8, 10, 12, 14, 16, 20, 25, 32];
   const meshTypes = [
@@ -152,10 +150,7 @@ const Calculator = () => {
   ];
   const unitConversions = {
     m3: { name: 'Kub metr (m³)', factor: 1 },
-    ft3: { name: 'Kub fut (ft³)', factor: 35.3147 },
-    yd3: { name: 'Kub yard (yd³)', factor: 1.30795 },
     l: { name: 'Litr (L)', factor: 1000 },
-    gal: { name: 'Gallon (gal)', factor: 264.172 },
   };
 
   const dims = {
@@ -194,7 +189,7 @@ const Calculator = () => {
 
   // ---- Real-time results (recompute whenever any input changes) ----
   const results = useMemo(() => {
-    const { volumeM3: rawVol, surfaceArea, formworkArea } = computeGeometry(activeTab, unit, dims);
+    const { volumeM3: rawVol, surfaceArea, formworkArea } = computeGeometry(activeTab, dims);
     if (rawVol <= 0) return null;
 
     const wasteNum = Math.max(0, parseFloat(wastePct) || 0);
@@ -214,17 +209,11 @@ const Calculator = () => {
     const bags50kg = Math.ceil(cement / 50);
     const bags40kg = Math.ceil(cement / 40);
     const bags25kg = Math.ceil(cement / 25);
-    const bags80lb = Math.ceil(cement / 36.29);
-    const bags60lb = Math.ceil(cement / 27.22);
-    const bags40lb = Math.ceil(cement / 18.14);
 
-    const volumeYd3 = volumeM3 * 1.30795;
-    const volumeFt3 = volumeM3 * 35.3147;
     const volumeL = volumeM3 * 1000;
 
     const concreteWeight = volumeM3 * DENSITY.concrete; // kg
     const concreteWeightTons = concreteWeight / 1000;
-    const concreteWeightLbs = concreteWeight * 2.20462;
 
     // Material mass breakdown (for the chart)
     const breakdownTotal = cement + sandKg + gravelKg + water;
@@ -271,11 +260,11 @@ const Calculator = () => {
 
     return {
       rawVol, volumeM3, waste: wasteNum, ratio: ratioLabel(grade), gradeStrength: grade.strength, gradeClass: grade.bClass,
-      volumeM3s: volumeM3.toFixed(2), volumeYd3: volumeYd3.toFixed(2), volumeFt3: volumeFt3.toFixed(2), volumeL: volumeL.toFixed(0),
-      concreteWeight: concreteWeight.toFixed(0), concreteWeightTons: concreteWeightTons.toFixed(2), concreteWeightLbs: concreteWeightLbs.toFixed(0),
+      volumeM3s: volumeM3.toFixed(2), volumeL: volumeL.toFixed(0),
+      concreteWeight: concreteWeight.toFixed(0), concreteWeightTons: concreteWeightTons.toFixed(2),
       cement: cement.toFixed(0), sand: sandVol.toFixed(2), sandKg: sandKg.toFixed(0), gravel: gravelVol.toFixed(2), gravelKg: gravelKg.toFixed(0), water: water.toFixed(0),
       breakdown,
-      bags50kg, bags40kg, bags25kg, bags80lb, bags60lb, bags40lb,
+      bags50kg, bags40kg, bags25kg,
       rebarEnabled, rebarLength: rebarLength.toFixed(1), rebarWeight: rebarWeight.toFixed(1), rebarCount, rebarDiameter, rebarSpacing: spacingMm,
       meshEnabled, meshArea: meshArea.toFixed(2), meshWeight: meshWeight.toFixed(1), meshSheets, meshType,
       includeFormwork, formworkArea: formworkArea.toFixed(2), formworkSheets,
@@ -283,7 +272,7 @@ const Calculator = () => {
       estCost: estCost !== null ? estCost.toFixed(0) : null, userPriceNum: priceNum,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, unit, concreteGrade, wastePct, rebarEnabled, rebarSpacing, rebarDiameter,
+  }, [activeTab, concreteGrade, wastePct, rebarEnabled, rebarSpacing, rebarDiameter,
       meshEnabled, meshType, userPrice, includeFormwork, truckCapacity,
       slabLength, slabWidth, slabDepth, slabQuantity,
       columnDiameter, columnHeight, columnQuantity,
@@ -428,8 +417,8 @@ const Calculator = () => {
   );
 
   const renderFormFields = () => {
-    const lengthUnit = unit === 'metric' ? 'm' : 'ft';
-    const depthUnit = unit === 'metric' ? 'sm' : 'in';
+    const lengthUnit = 'm';
+    const depthUnit = 'sm';
     switch (activeTab) {
       case 'slab':
         return (
@@ -573,11 +562,6 @@ const Calculator = () => {
                   </span>
                 </button>
               </div>
-              <div className="unit-toggle">
-                <button className={unit === 'metric' ? 'active' : ''} onClick={() => setUnit('metric')}>Metrik (m, sm)</button>
-                <button className={unit === 'imperial' ? 'active' : ''} onClick={() => setUnit('imperial')}>İmperial (ft, in)</button>
-              </div>
-
               <div className="calculator-tabs">
                 {tabs.map((tab) => (
                   <button key={tab.id} className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`} onClick={() => setActiveTab(tab.id)}>
@@ -588,10 +572,7 @@ const Calculator = () => {
               </div>
 
               <div className="calculator-form">
-                <h3>Ölçüləri daxil edin</h3>
-                {renderFormFields()}
-
-                <div className="form-section">
+                <div className="form-section grade-first">
                   <h4>Beton Markası</h4>
                   <select value={concreteGrade} onChange={(e) => setConcreteGrade(e.target.value)} className="form-select">
                     {CONCRETE_GRADES.map((g) => (
@@ -599,6 +580,9 @@ const Calculator = () => {
                     ))}
                   </select>
                 </div>
+
+                <h3>Ölçüləri daxil edin</h3>
+                {renderFormFields()}
 
                 {mode === 'simple' ? (
                   <div className="advanced-options">
@@ -751,17 +735,17 @@ const Calculator = () => {
                             </div>
                           </div>
                           <div className="result-card">
-                            <div className="result-icon">{icons.triangle}</div>
+                            <div className="result-icon">{icons.ruler}</div>
                             <div className="result-info">
-                              <span className="result-value">{results.volumeYd3}</span>
-                              <span className="result-label">Kub yard (yd³)</span>
+                              <span className="result-value">{results.volumeL}</span>
+                              <span className="result-label">Litr (L)</span>
                             </div>
                           </div>
                           <div className="result-card">
-                            <div className="result-icon">{icons.ruler}</div>
+                            <div className="result-icon">{icons.weight}</div>
                             <div className="result-info">
-                              <span className="result-value">{results.volumeFt3}</span>
-                              <span className="result-label">Kub fut (ft³)</span>
+                              <span className="result-value">{results.concreteWeightTons}</span>
+                              <span className="result-label">Çəki (ton)</span>
                             </div>
                           </div>
                         </div>
@@ -793,19 +777,11 @@ const Calculator = () => {
                         <h4><span className="section-title-icon">{icons.bag}</span> Kisə Hesablaması</h4>
                         <div className="bags-section">
                           <div className="bags-group">
-                            <h5>Metrik</h5>
+                            <h5>Sement kisələri</h5>
                             <div className="bags-grid">
                               <div className="bag-item"><span className="bag-size">50 kq</span><span className="bag-count">{results.bags50kg} ədəd</span></div>
                               <div className="bag-item"><span className="bag-size">40 kq</span><span className="bag-count">{results.bags40kg} ədəd</span></div>
                               <div className="bag-item"><span className="bag-size">25 kq</span><span className="bag-count">{results.bags25kg} ədəd</span></div>
-                            </div>
-                          </div>
-                          <div className="bags-group">
-                            <h5>İmperial</h5>
-                            <div className="bags-grid">
-                              <div className="bag-item"><span className="bag-size">80 lb</span><span className="bag-count">{results.bags80lb} ədəd</span></div>
-                              <div className="bag-item"><span className="bag-size">60 lb</span><span className="bag-count">{results.bags60lb} ədəd</span></div>
-                              <div className="bag-item"><span className="bag-size">40 lb</span><span className="bag-count">{results.bags40lb} ədəd</span></div>
                             </div>
                           </div>
                         </div>
