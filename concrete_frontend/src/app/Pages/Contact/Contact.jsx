@@ -21,18 +21,20 @@ const Contact = ({ fullPage }) => {
     if (botField) return; // spam bot filled the hidden field — silently drop
     setStatus('sending');
     try {
+      // FormData (not JSON) → a CORS "simple request", so no preflight — this
+      // is Web3Forms' officially supported method and avoids the 403/CORS block.
+      const fd = new FormData();
+      fd.append('access_key', WEB3FORMS_ACCESS_KEY);
+      fd.append('subject', 'Yeni əlaqə mesajı — novxanibeton.az');
+      fd.append('from_name', 'Novxanı Beton sayt');
+      fd.append('name', formData.fullName);
+      fd.append('email', formData.email);
+      fd.append('phone', formData.phone);
+      fd.append('message', formData.message);
+
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: 'Yeni əlaqə mesajı — novxanibeton.az',
-          from_name: 'Novxanı Beton sayt',
-          name: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-        }),
+        body: fd,
       });
       const data = await res.json();
       if (data.success) {
