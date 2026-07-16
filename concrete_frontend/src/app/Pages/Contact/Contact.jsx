@@ -145,8 +145,22 @@ const Contact = ({ fullPage }) => {
                 </button>
                 {status === 'sent' && (
                   <div className="form-success" role="status">
-                    <CheckCircle2 size={20} aria-hidden="true" />
-                    Mesajınız göndərildi! Tezliklə sizinlə əlaqə saxlayacağıq.
+                    <CheckCircle2 size={22} aria-hidden="true" />
+                    <div className="form-success-body">
+                      <strong>Təşəkkürlər, mesajınız göndərildi!</strong>
+                      <span>Komandamız ən qısa zamanda (adətən iş günü ərzində) sizinlə əlaqə saxlayacaq. Təcili haldırsa, birbaşa yaza və ya zəng edə bilərsiniz:</span>
+                      <div className="form-success-actions">
+                        <a
+                          href="https://wa.me/994503260343"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="fs-wa"
+                        >
+                          WhatsApp
+                        </a>
+                        <a href="tel:+994506209584" className="fs-call">Zəng et</a>
+                      </div>
+                    </div>
                   </div>
                 )}
                 {status === 'error' && (
