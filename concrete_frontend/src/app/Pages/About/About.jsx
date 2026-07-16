@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Seo from '../../../Components/Seo/Seo';
+import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './About.css';
 import aboutImage from '../img/workers-construction-site.jpg';
 
@@ -12,6 +14,7 @@ const About = ({ fullPage }) => {
 
   return (
     <section className={`about-section ${fullPage ? 'full-page' : ''}`}>
+      {fullPage && <Seo page="about" />}
       {fullPage && (
         <div className="page-hero-about">
           <div className="page-hero-overlay"></div>
@@ -22,6 +25,7 @@ const About = ({ fullPage }) => {
       )}
       <div className="about-content">
         <div className="container">
+          {fullPage && <Breadcrumbs current="Haqqımızda" />}
           <div className="about-grid">
             <div className="about-image-container reveal">
               <div
@@ -50,7 +54,7 @@ const About = ({ fullPage }) => {
                 <div className="about-feature"><span className="check"><CheckIcon /></span> Ekspert Məsləhəti</div>
                 <div className="about-feature"><span className="check"><CheckIcon /></span> Rəqabətqabiliyyətli Qiymətlər</div>
               </div>
-              <Link to="/contact" className="btn-explore">Daha Ətraflı</Link>
+              <Link to="/contact" className="btn-explore">Layihəniz üçün bizimlə əlaqə saxlayın</Link>
             </div>
           </div>
         </div>

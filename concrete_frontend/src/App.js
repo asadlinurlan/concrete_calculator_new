@@ -14,6 +14,7 @@ import Calculator from "./Components/Calculator/Calculator";
 import Products from "./app/Pages/Products/Products";
 import Gallery from "./app/Pages/Gallery/Gallery";
 import NotFound from "./app/Pages/NotFound/NotFound";
+import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
 // Scrolls to top on navigation and (re)wires scroll-reveal for the new page.
@@ -29,6 +30,7 @@ function RouteManager() {
 function HomePage() {
   return (
     <>
+      <Seo page="home" />
       <HeroSection />
       <Features />
       <About />

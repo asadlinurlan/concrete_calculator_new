@@ -6,6 +6,8 @@ import {
   ratioLabel,
   DENSITY,
 } from '../../data/concreteGrades';
+import Seo from '../Seo/Seo';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import './Calculator.css';
 
 /* Volume + surface + formwork area for a given shape, all in SI (metres / m³).
@@ -525,6 +527,7 @@ const Calculator = () => {
 
   return (
     <div className="calculator-page">
+      <Seo page="calculator" />
       <div className="calculator-hero">
         <div className="calculator-hero-overlay"></div>
         <div className="container">
@@ -535,6 +538,7 @@ const Calculator = () => {
 
       <div className="calculator-content">
         <div className="container">
+          <Breadcrumbs current="Kalkulyator" />
           <div className="tool-tabs">
             {toolTabs.map((tab) => (
               <button key={tab.id} className={`tool-tab ${activeToolTab === tab.id ? 'active' : ''}`} onClick={() => setActiveToolTab(tab.id)}>

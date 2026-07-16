@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import Seo from '../../../Components/Seo/Seo';
+import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './Services.css';
 import service1 from '../img/service-1.png';
 import service2 from '../img/service-2.webp';
@@ -37,6 +39,7 @@ const Services = ({ fullPage }) => {
 
   return (
     <section className={`services-section ${fullPage ? 'full-page' : ''}`}>
+      {fullPage && <Seo page="services" />}
       {fullPage && (
         <div className="page-hero-services">
           <div className="page-hero-overlay"></div>
@@ -47,6 +50,7 @@ const Services = ({ fullPage }) => {
       )}
       <div className="services-content">
         <div className="container">
+          {fullPage && <Breadcrumbs current="Xidmətlər" />}
           <div className="section-head reveal">
             <span className="section-subtitle">Nə təklif edirik</span>
             <h2 className="section-title">Peşəkar Beton Xidmətləri</h2>

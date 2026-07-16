@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
+import Seo from '../../../Components/Seo/Seo';
+import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './Gallery.css';
 import img1 from '../img/beatriz-novaes-1-Rf38Y1QHk-unsplash.jpg';
 import img2 from '../img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
@@ -54,6 +56,7 @@ const Gallery = () => {
 
   return (
     <section className="gallery-section">
+      <Seo page="gallery" />
       <div className="page-hero-gallery">
         <div className="page-hero-overlay"></div>
         <div className="hero-content-center">
@@ -64,6 +67,7 @@ const Gallery = () => {
 
       <div className="gallery-content">
         <div className="container">
+          <Breadcrumbs current="Qalereya" />
           <div className="gallery-grid">
             {IMAGES.map((img, i) => (
               <button

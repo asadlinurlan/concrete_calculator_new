@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Calculator } from 'lucide-react';
+import Seo from '../../../Components/Seo/Seo';
 import './NotFound.css';
 
 const NotFound = () => (
   <section className="notfound">
+    <Seo page="notFound" />
     <div className="container notfound-inner">
       <span className="notfound-code">404</span>
       <h1 className="notfound-title">Səhifə tapılmadı</h1>

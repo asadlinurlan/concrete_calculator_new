@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
+import Seo from '../../../Components/Seo/Seo';
+import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './Contact.css';
 
 // Web3Forms access key — get a free one in ~1 min at https://web3forms.com
@@ -57,6 +59,7 @@ const Contact = ({ fullPage }) => {
 
   return (
     <section className={`contact-section ${fullPage ? 'full-page' : ''}`}>
+      {fullPage && <Seo page="contact" />}
       {fullPage && (
         <div className="page-hero-contact">
           <div className="page-hero-overlay"></div>
@@ -67,6 +70,7 @@ const Contact = ({ fullPage }) => {
       )}
       <div className="contact-content">
         <div className="container">
+          {fullPage && <Breadcrumbs current="Əlaqə" />}
           <div className="contact-grid">
             <div className="contact-info-side reveal">
               <h2 className="contact-main-title">Bizimlə Əlaqə</h2>

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Gauge, Layers, ArrowRight, Calculator } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import { CONCRETE_GRADES, materialsPerM3, ratioLabel } from '../../../data/concreteGrades';
+import Seo from '../../../Components/Seo/Seo';
+import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './Products.css';
 
 const Products = () => {
@@ -10,6 +12,7 @@ const Products = () => {
 
   return (
     <section className="products-section">
+      <Seo page="products" />
       <div className="page-hero-products">
         <div className="page-hero-overlay"></div>
         <div className="hero-content-center">
@@ -20,6 +23,7 @@ const Products = () => {
 
       <div className="products-content">
         <div className="container">
+          <Breadcrumbs current="Beton Markaları" />
           <div className="section-head reveal">
             <span className="section-subtitle">Məhsul kataloqu</span>
             <h2 className="section-title">Standart Beton Markalarımız</h2>
