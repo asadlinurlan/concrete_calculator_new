@@ -95,9 +95,12 @@ function createServer() {
   server.close();
 
   for (const { route, html } of results) {
+    // Flat files ("products.html", not "products/index.html"): static hosts
+    // (Cloudflare Pages / Netlify) then serve /products directly with 200 —
+    // no 308 trailing-slash redirect, so URLs match the canonical exactly.
     const outFile = route === '/'
       ? path.join(BUILD, 'index.html')
-      : path.join(BUILD, route.slice(1), 'index.html');
+      : path.join(BUILD, `${route.slice(1)}.html`);
     fs.mkdirSync(path.dirname(outFile), { recursive: true });
     fs.writeFileSync(outFile, html);
   }
