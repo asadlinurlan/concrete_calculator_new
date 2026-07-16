@@ -13,6 +13,7 @@ import Footer from "./app/Pages/Footer/Footer";
 import Calculator from "./Components/Calculator/Calculator";
 import Products from "./app/Pages/Products/Products";
 import Gallery from "./app/Pages/Gallery/Gallery";
+import NotFound from "./app/Pages/NotFound/NotFound";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
 // Scrolls to top on navigation and (re)wires scroll-reveal for the new page.
@@ -52,6 +53,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/about" element={<About fullPage />} />
             <Route path="/contact" element={<Contact fullPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

@@ -2,20 +2,48 @@ import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import './Contact.css';
 
+// Web3Forms access key — get a free one in ~1 min at https://web3forms.com
+// (enter info@novxanibeton.az, the key is emailed instantly). Paste it below.
+const WEB3FORMS_ACCESS_KEY = 'e1ffd016-dd39-419f-aa5c-382ee00c412d';
+
 const Contact = ({ fullPage }) => {
   const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [botField, setBotField] = useState(''); // honeypot — real users leave it empty
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (sent) setSent(false);
+    if (status === 'sent' || status === 'error') setStatus('idle');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // NOTE: front-end demo only — wire this to a real endpoint/email service later.
-    setSent(true);
-    setFormData({ fullName: '', email: '', phone: '', message: '' });
+    if (botField) return; // spam bot filled the hidden field — silently drop
+    setStatus('sending');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: 'Yeni əlaqə mesajı — novxanibeton.az',
+          from_name: 'Novxanı Beton sayt',
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus('sent');
+        setFormData({ fullName: '', email: '', phone: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   const contactItems = [
@@ -81,6 +109,17 @@ const Contact = ({ fullPage }) => {
 
             <div className="contact-form-container reveal">
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
+                {/* Honeypot: hidden from users, bots tend to fill it */}
+                <input
+                  type="text"
+                  name="botcheck"
+                  className="sr-only"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={botField}
+                  onChange={(e) => setBotField(e.target.value)}
+                  aria-hidden="true"
+                />
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="fullName" className="sr-only">Ad Soyad</label>
@@ -99,11 +138,18 @@ const Contact = ({ fullPage }) => {
                   <label htmlFor="message" className="sr-only">Mesajınız</label>
                   <textarea id="message" name="message" placeholder="Mesajınız" rows="5" value={formData.message} onChange={handleChange} required></textarea>
                 </div>
-                <button type="submit" className="btn-submit">Göndər</button>
-                {sent && (
+                <button type="submit" className="btn-submit" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Göndərilir…' : 'Göndər'}
+                </button>
+                {status === 'sent' && (
                   <div className="form-success" role="status">
                     <CheckCircle2 size={20} aria-hidden="true" />
                     Mesajınız göndərildi! Tezliklə sizinlə əlaqə saxlayacağıq.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="form-error" role="alert">
+                    Mesaj göndərilmədi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa +994 50 620 95 84 ilə əlaqə saxlayın.
                   </div>
                 )}
               </form>
