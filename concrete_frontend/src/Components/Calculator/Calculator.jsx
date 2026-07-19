@@ -8,7 +8,28 @@ import {
 } from '../../data/concreteGrades';
 import Seo from '../Seo/Seo';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Faq from '../Faq/Faq';
+import CtaBand from '../CtaBand/CtaBand';
 import './Calculator.css';
+
+const CALC_FAQS = [
+  {
+    q: 'Kalkulyator nəyi hesablayır?',
+    a: 'Seçdiyiniz forma və ölçülərə əsasən lazımi beton həcmini (m³), təxmini sement, qum və çınqıl miqdarını, armatur ehtiyacını və mikser sayını hesablayır. Vahid çevirici ilə m³-ü digər ölçü vahidlərinə də çevirə bilərsiniz.',
+  },
+  {
+    q: '1 m³ beton neçə tondur?',
+    a: 'Adi armaturlu beton təxminən 2,4 ton/m³-dür. Kalkulyator çəkini avtomatik hesablayır — nəticədə həm həcmi, həm də təxmini çəkini görürsünüz.',
+  },
+  {
+    q: 'Bir mikserdə nə qədər beton gəlir?',
+    a: 'Standart mikserlərin tutumu adətən 7–10 m³ aralığındadır. Kalkulyator layihəniz üçün lazımi mikser sayını avtomatik təklif edir.',
+  },
+  {
+    q: 'Nəticələr nə dərəcədə dəqiqdir?',
+    a: 'Hesablamalar nominal qarışıq əsasında təxmini planlaşdırma dəyərləridir və layihələndirmə üçün etibarlı istinad rolunu oynayır. Konstruktiv işlərdə yekun qarışıq dizaynı laboratoriya nəzarəti ilə dəqiqləşdirilir — bunun üçün bizimlə əlaqə saxlaya bilərsiniz.',
+  },
+];
 
 /* Volume + surface + formwork area for a given shape, all in SI (metres / m³).
    Depth-type inputs are entered in sm (cm), length-type inputs in m. */
@@ -911,8 +932,16 @@ const Calculator = () => {
               <p>Novxanı Beton olaraq bütün Bakı və Abşeron ərazisində çatdırılma xidməti təklif edirik.</p>
             </div>
           </div>
+
+          <Faq items={CALC_FAQS} subtitle="Hesablama haqqında" />
         </div>
       </div>
+
+      <CtaBand
+        title="Hesabladınız? İndi qiymət təklifi alın"
+        text="Hesabladığınız həcmi və ünvanı göndərin — marka və çatdırılmaya uyğun fərdi təklif hazırlayaq."
+        whatsappText="Salam! Kalkulyatorla hesabladığım beton həcmi üçün qiymət təklifi almaq istəyirəm."
+      />
     </div>
   );
 };

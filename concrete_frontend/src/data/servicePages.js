@@ -69,6 +69,7 @@ export const SERVICE_PAGES = [
       { to: '/products', label: 'Beton markalarına bax (M100–M450)' },
       { to: '/beton-catdirilmasi', label: 'Beton çatdırılması haqqında' },
       { to: '/beton-qiymetleri', label: 'Qiymət necə formalaşır?' },
+      { to: '/tikinti-materiallari', label: 'Qum, atsep və şeben satışı' },
     ],
     whatsappText: 'Salam! Hazır beton sifarişi üçün qiymət təklifi almaq istəyirəm.',
   },

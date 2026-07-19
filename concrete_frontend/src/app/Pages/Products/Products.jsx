@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Gauge, Layers, ArrowRight, Calculator } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import { CONCRETE_GRADES, materialsPerM3, ratioLabel } from '../../../data/concreteGrades';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
+import Faq from '../../../Components/Faq/Faq';
+import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Products.css';
+
+const PRODUCT_FAQS = [
+  {
+    q: 'M və B hərfləri nə deməkdir?',
+    a: 'M — betonun möhkəmlik markasıdır (kqq/sm² ilə), B — möhkəmlik sinfidir (MPa ilə). Məsələn, M300 markası B22.5 sinfinə uyğundur və 22.5 MPa möhkəmlik göstəricisinə malikdir. Hər kartda hər iki göstərici qeyd olunub.',
+  },
+  {
+    q: 'Layihəm üçün hansı markanı seçməliyəm?',
+    a: 'Marka konstruksiyanın yükündən asılıdır: hamarlama və altlıq üçün M100–M150, döşəmə və ümumi işlər üçün M200, zolaq təməl və daşıyıcı divar üçün M250, monolit təməl, plitə və sütunlar üçün M300, çoxmərtəbəli karkas üçün M350 və yuxarı. Əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
+  },
+  {
+    q: 'Betonun keyfiyyətinə necə zəmanət verilir?',
+    a: 'Bütün markalar GOST 26633 tələblərinə uyğun, laboratoriya nəzarəti altında istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir.',
+  },
+  {
+    q: 'Texniki məlumatdakı miqdarlar nə dərəcədə dəqiqdir?',
+    a: 'Kartlardakı sement, qum, çınqıl və su miqdarları nominal qarışıq əsasında təxmini planlaşdırma dəyərləridir. Hər layihənin yekun qarışıq dizaynı laboratoriyada, layihə tələblərinə uyğun təyin olunur.',
+  },
+];
 
 const Products = () => {
   useScrollReveal();
+  // Exclusive accordion: at most one card's "Texniki məlumat" is open —
+  // opening a grade closes the previously open one.
+  const [openTech, setOpenTech] = useState(null);
 
   return (
     <section className="products-section">
@@ -56,8 +80,15 @@ const Products = () => {
                   <h3 className="product-name">{grade.name}</h3>
                   <p className="product-use">{grade.use}</p>
 
-                  <details className="product-tech">
-                    <summary>
+                  <details className="product-tech" open={openTech === grade.id}>
+                    <summary
+                      onClick={(e) => {
+                        // Native <details> toggling is suppressed — React state is
+                        // the single source of truth, so only one stays open.
+                        e.preventDefault();
+                        setOpenTech((cur) => (cur === grade.id ? null : grade.id));
+                      }}
+                    >
                       <Layers size={15} aria-hidden="true" />
                       Texniki məlumat
                     </summary>
@@ -94,8 +125,16 @@ const Products = () => {
             planlaşdırma dəyərləridir — hər layihənin yekun qarışıq dizaynı (mix design)
             laboratoriya nəzarəti ilə hazırlanır. Qiymət təklifi üçün bizimlə əlaqə saxlayın.
           </p>
+
+          <Faq items={PRODUCT_FAQS} subtitle="Marka seçimi" />
         </div>
       </div>
+
+      <CtaBand
+        title="Doğru markanı birlikdə seçək"
+        text="Layihənizi yazın — marka seçimində pulsuz məsləhət və fərdi qiymət təklifi alın."
+        whatsappText="Salam! Beton markası seçimi və qiymət təklifi üçün məlumat almaq istəyirəm."
+      />
     </section>
   );
 };

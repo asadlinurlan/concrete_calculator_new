@@ -89,25 +89,52 @@
 }
 .contact-map iframe { width: 100%; height: 220px; border: 0; filter: grayscale(0.3) contrast(1.05); }
 
+/* Form card — same visual language as the materials quote form
+   (.mt-form-card): rounded card, centered heading, labelled fields */
 .contact-form-container {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 44px;
-  border-radius: var(--r-lg);
-  box-shadow: var(--sh-md);
+  padding: 40px;
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+}
+
+.contact-form-head { text-align: center; margin-bottom: 26px; }
+.contact-form-head h3 {
+  font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+.contact-form-head p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 46ch;
+  margin: 0 auto;
 }
 
 .contact-form { width: 100%; }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
-.contact-form .form-group { margin-bottom: 18px; }
+.contact-form .form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.contact-form .form-group label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-light);
+}
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 15px 18px;
-  font-size: 15px;
+  padding: 12px 14px;
+  font-size: 14.5px;
   font-family: var(--font-body);
   border: 1px solid var(--border-color);
   border-radius: var(--r-sm);
@@ -119,11 +146,15 @@
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--steel-500);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px var(--steel-glow);
 }
 .contact-form input::placeholder,
-.contact-form textarea::placeholder { color: #98a2b5; }
+.contact-form textarea::placeholder { color: var(--text-muted); opacity: 0.75; }
+.contact-form input[aria-invalid='true'],
+.contact-form textarea[aria-invalid='true'] { border-color: var(--danger); }
 .contact-form textarea { resize: vertical; min-height: 130px; }
+
+.form-err { font-size: 12.5px; color: var(--danger); font-weight: 500; }
 
 .btn-submit {
   width: 100%;

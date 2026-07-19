@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calculator, ArrowRight, ShieldCheck, Truck, Award } from 'lucide-react';
+import { Calculator, ArrowRight, ShieldCheck, Truck, Award, Layers } from 'lucide-react';
 import heroImage from '../img/concrete.jpeg';
 import './HeroSection.css';
 
@@ -22,28 +22,33 @@ const HeroSection = () => {
       <div className="hero-content">
         <div className="container">
           <h1 className="hero-title reveal">
-            Möhkəm Təməllər,<br />
-            <span className="hero-accent">Premium Beton</span> Həlləri
+            Beton və Tikinti Materiallarının<br />
+            <span className="hero-accent">Etibarlı Ünvanı</span>
           </h1>
           <span className="hero-eyebrow reveal">2018-ci ildən etibarlı tərəfdaş</span>
           <p className="hero-desc reveal">
-            Novxanı Beton — Bakı və Abşeron üzrə yüksək keyfiyyətli hazır beton,
-            nasoslama və laboratoriya xidmətləri. Layihənizi peşəkar kalkulyatorumuzla
-            dəqiq planlaşdırın.
+            Keyfiyyətli hazır beton, qum, atsep və şeben satışı — fərdi və korporativ
+            müştərilər üçün operativ çatdırılma və sərfəli təkliflər. Layihənizi
+            peşəkar kalkulyatorumuzla dəqiq planlaşdırın.
           </p>
           <div className="hero-actions reveal">
             <Link to="/calculator" className="btn btn-accent btn-lg">
               <Calculator size={20} aria-hidden="true" />
               Kalkulyatordan İstifadə Et
             </Link>
+            <Link to="/tikinti-materiallari" className="btn btn-ghost btn-lg">
+              Materialları nəzərdən keçir
+              <ArrowRight size={20} aria-hidden="true" />
+            </Link>
             <Link to="/contact" className="btn btn-ghost btn-lg">
-              Qiymət Sorğusu
+              Qiymət təklifi al
               <ArrowRight size={20} aria-hidden="true" />
             </Link>
           </div>
 
           <ul className="hero-badges reveal">
             <li><ShieldCheck size={20} aria-hidden="true" /> Sertifikatlı keyfiyyət</li>
+            <li><Layers size={20} aria-hidden="true" /> Qum, atsep və şeben satışı</li>
             <li><Truck size={20} aria-hidden="true" /> Vaxtında çatdırılma</li>
             <li><Award size={20} aria-hidden="true" /> 8+ il təcrübə</li>
           </ul>

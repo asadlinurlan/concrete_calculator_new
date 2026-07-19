@@ -70,6 +70,7 @@ const Footer = () => {
                 <li><Link to="/">Ana Səhifə</Link></li>
                 <li><Link to="/products">Məhsullar</Link></li>
                 <li><Link to="/services">Xidmətlər</Link></li>
+                <li><Link to="/tikinti-materiallari">Tikinti Materialları</Link></li>
                 <li><Link to="/calculator">Kalkulyator</Link></li>
                 <li><Link to="/gallery">Qalereya</Link></li>
                 <li><Link to="/about">Haqqımızda</Link></li>
@@ -84,6 +85,8 @@ const Footer = () => {
                 <li><Link to="/beton-nasoslama">Beton Nasoslama</Link></li>
                 <li><Link to="/terezi-xidmeti">Tərəzi Xidməti</Link></li>
                 <li><Link to="/beton-qiymetleri">Beton Qiymətləri</Link></li>
+                <li><Link to="/tikinti-materiallari">Qum, Atsep və Şeben Satışı</Link></li>
+                <li><Link to="/tikinti-materiallari#topdan-satis">Topdan Material Təchizatı</Link></li>
               </ul>
             </div>
             <div className="footer-contact">

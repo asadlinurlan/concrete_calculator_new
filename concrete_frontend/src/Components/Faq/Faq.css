@@ -1,0 +1,50 @@
+/* Reusable FAQ accordion — mirrors .mt-faq / .sd-faq */
+.faq-section { padding: var(--sp-7) 0; }
+
+.faq-title {
+  font-size: clamp(24px, 3.6vw, 34px);
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: var(--sp-6);
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; }
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  user-select: none;
+  transition: color var(--t-fast);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item summary:hover { color: var(--steel-600); }
+.faq-item p {
+  padding: 0 18px 16px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+}

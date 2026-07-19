@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: '/', label: 'Ana Səhifə' },
   { to: '/products', label: 'Məhsullar' },
   { to: '/services', label: 'Xidmətlər' },
+  { to: '/tikinti-materiallari', label: 'Materiallar' },
   { to: '/calculator', label: 'Kalkulyator' },
   { to: '/gallery', label: 'Qalereya' },
   { to: '/about', label: 'Haqqımızda' },

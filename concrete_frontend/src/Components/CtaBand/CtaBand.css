@@ -1,0 +1,22 @@
+/* Reusable bottom CTA band — mirrors .mt-cta-band / .sd-cta-band */
+.cta-band {
+  background: linear-gradient(135deg, var(--graphite-900) 0%, var(--graphite-700) 100%);
+  padding: 52px 0;
+}
+.cta-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.cta-band-inner h2 { color: #fff; font-size: clamp(21px, 3vw, 28px); margin-bottom: 8px; }
+.cta-band-inner p { color: var(--on-dark-muted); font-size: 15px; margin: 0; }
+.cta-band-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-band-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
+.cta-band-ghost:hover { border-color: #fff; color: #fff; background: rgba(255, 255, 255, 0.08); }
+
+@media (max-width: 768px) {
+  .cta-band-inner { flex-direction: column; align-items: stretch; text-align: center; }
+  .cta-band-actions { flex-direction: column; }
+}

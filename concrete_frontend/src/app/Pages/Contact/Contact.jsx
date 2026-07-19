@@ -10,17 +10,44 @@ const WEB3FORMS_ACCESS_KEY = 'e1ffd016-dd39-419f-aa5c-382ee00c412d';
 
 const Contact = ({ fullPage }) => {
   const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', message: '' });
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [botField, setBotField] = useState(''); // honeypot — real users leave it empty
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors((er) => ({ ...er, [e.target.name]: undefined }));
     if (status === 'sent' || status === 'error') setStatus('idle');
+  };
+
+  // Essential fields are required: name, phone, email and message
+  const validate = () => {
+    const er = {};
+    if (!formData.fullName.trim()) er.fullName = 'Ad və soyadınızı yazın';
+    if (!formData.phone.trim()) {
+      er.phone = 'Telefon nömrənizi yazın';
+    } else if (!/^[+()\d\s-]{9,20}$/.test(formData.phone.trim())) {
+      er.phone = 'Telefon nömrəsini düzgün formatda yazın';
+    }
+    if (!formData.email.trim()) {
+      er.email = 'Email ünvanınızı yazın';
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
+      er.email = 'Email ünvanını düzgün formatda yazın';
+    }
+    if (!formData.message.trim()) er.message = 'Mesajınızı yazın';
+    return er;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (botField) return; // spam bot filled the hidden field — silently drop
+    const er = validate();
+    if (Object.keys(er).length > 0) {
+      setErrors(er);
+      const el = document.getElementById(Object.keys(er)[0]);
+      if (el) el.focus();
+      return;
+    }
     setStatus('sending');
     try {
       // FormData (not JSON) → a CORS "simple request", so no preflight — this
@@ -114,6 +141,13 @@ const Contact = ({ fullPage }) => {
             </div>
 
             <div className="contact-form-container reveal">
+              <div className="contact-form-head">
+                <h3>Mesaj göndərin</h3>
+                <p>
+                  Məlumatları doldurun — komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.
+                  Sorğu pulsuzdur və heç bir öhdəlik yaratmır.
+                </p>
+              </div>
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
                 {/* Honeypot: hidden from users, bots tend to fill it */}
                 <input
@@ -128,21 +162,68 @@ const Contact = ({ fullPage }) => {
                 />
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="fullName" className="sr-only">Ad Soyad</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Ad Soyad" value={formData.fullName} onChange={handleChange} required />
+                    <label htmlFor="fullName">Ad və soyad *</label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      autoComplete="name"
+                      placeholder="Məs.: Elvin Məmmədov"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      aria-invalid={!!errors.fullName}
+                      aria-describedby={errors.fullName ? 'fullName-err' : undefined}
+                      required
+                    />
+                    {errors.fullName && <span className="form-err" id="fullName-err" role="alert">{errors.fullName}</span>}
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email" className="sr-only">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                    <label htmlFor="phone">Telefon nömrəsi *</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      autoComplete="tel"
+                      placeholder="+994 XX XXX XX XX"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={errors.phone ? 'phone-err' : undefined}
+                      required
+                    />
+                    {errors.phone && <span className="form-err" id="phone-err" role="alert">{errors.phone}</span>}
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone" className="sr-only">Telefon</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Telefon" value={formData.phone} onChange={handleChange} />
+                  <label htmlFor="email">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    placeholder="ornek@gmail.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'email-err' : undefined}
+                    required
+                  />
+                  {errors.email && <span className="form-err" id="email-err" role="alert">{errors.email}</span>}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message" className="sr-only">Mesajınız</label>
-                  <textarea id="message" name="message" placeholder="Mesajınız" rows="5" value={formData.message} onChange={handleChange} required></textarea>
+                  <label htmlFor="message">Mesajınız *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Layihəniz və ya sifarişinizlə bağlı məlumat yazın"
+                    rows="5"
+                    value={formData.message}
+                    onChange={handleChange}
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? 'message-err' : undefined}
+                    required
+                  ></textarea>
+                  {errors.message && <span className="form-err" id="message-err" role="alert">{errors.message}</span>}
                 </div>
                 <button type="submit" className="btn-submit" disabled={status === 'sending'}>
                   {status === 'sending' ? 'Göndərilir…' : 'Göndər'}

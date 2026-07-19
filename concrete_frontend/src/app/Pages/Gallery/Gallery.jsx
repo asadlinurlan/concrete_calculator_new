@@ -3,6 +3,7 @@ import { ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
+import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Gallery.css';
 import img1 from '../img/beatriz-novaes-1-Rf38Y1QHk-unsplash.jpg';
 import img2 from '../img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
@@ -87,6 +88,12 @@ const Gallery = () => {
           </div>
         </div>
       </div>
+
+      <CtaBand
+        title="Layihənizi birlikdə həyata keçirək"
+        text="Gördüyünüz işlər kimi — layihəniz üçün beton və tikinti materiallarını bir ünvandan alın."
+        whatsappText="Salam! Layihəm üçün qiymət təklifi almaq istəyirəm."
+      />
 
       {isOpen && (
         <div

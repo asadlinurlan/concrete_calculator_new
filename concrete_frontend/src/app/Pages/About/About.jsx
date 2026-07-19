@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
+import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './About.css';
 import aboutImage from '../img/workers-construction-site.jpg';
 
@@ -63,6 +64,14 @@ const About = ({ fullPage }) => {
           </div>
         </div>
       </div>
+
+      {fullPage && (
+        <CtaBand
+          title="2018-ci ildən etibarlı tərəfdaşınız"
+          text="Beton və tikinti materialları bir ünvandan — layihəniz üçün fərdi qiymət təklifi alın."
+          whatsappText="Salam! Layihəm üçün qiymət təklifi almaq istəyirəm."
+        />
+      )}
     </section>
   );
 };

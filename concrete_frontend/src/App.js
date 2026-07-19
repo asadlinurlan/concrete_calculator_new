@@ -15,6 +15,8 @@ import Products from "./app/Pages/Products/Products";
 import Gallery from "./app/Pages/Gallery/Gallery";
 import NotFound from "./app/Pages/NotFound/NotFound";
 import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
+import Materials from "./app/Pages/Materials/Materials";
+import MaterialsHome from "./app/Pages/Materials/MaterialsHome";
 import { SERVICE_PAGES } from "./data/servicePages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
@@ -37,6 +39,7 @@ function HomePage() {
       <Features />
       <About />
       <Services />
+      <MaterialsHome />
       <Contact />
     </>
   );
@@ -55,6 +58,7 @@ function App() {
             <Route path="/services" element={<Services fullPage />} />
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/tikinti-materiallari" element={<Materials />} />
             <Route path="/about" element={<About fullPage />} />
             <Route path="/contact" element={<Contact fullPage />} />
             {SERVICE_PAGES.map((p) => (

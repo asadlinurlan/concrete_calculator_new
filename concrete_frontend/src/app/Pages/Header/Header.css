@@ -36,6 +36,7 @@
   justify-content: center;
   margin-right: auto;
   overflow: hidden;
+  flex-shrink: 0; /* the wordmark must never be squeezed/clipped by the nav */
 }
 
 /* When scrolled, header background turns light — switch text to dark */
@@ -64,9 +65,9 @@
 /* Wordmark text — hidden by default, appears on scroll */
 .logo-wordmark {
   font-family: var(--font-head);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 500;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   color: #fff;
   white-space: nowrap;
@@ -84,7 +85,7 @@
 
 .nav-menu {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -96,6 +97,8 @@
   transition: color var(--t-fast);
   position: relative;
   padding: 6px 0;
+  white-space: nowrap; /* "Ana Səhifə" and others must never wrap to two lines */
+  flex-shrink: 0;
 }
 
 .nav-link::after {
@@ -117,6 +120,25 @@
   margin-left: 8px;
   padding: 11px 20px !important;
   font-size: 14px !important;
+  flex-shrink: 0; /* keep "Qiymət Sorğusu" on one line */
+}
+
+/* 8 links + CTA need tighter spacing on narrower desktops.
+   The wordmark scales down with them so "NOVXANI" always fits whole.
+   (Must come AFTER the base .nav-link/.nav-cta rules to win the cascade.) */
+@media (min-width: 1025px) and (max-width: 1320px) {
+  .nav-menu { gap: 17px; }
+  .nav-link { font-size: 14px; }
+  .logo-wordmark { font-size: 22px; letter-spacing: 3px; }
+  .header.scrolled .logo-wordmark { height: 36px; }
+}
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .nav-menu { gap: 12px; }
+  .nav-link { font-size: 13.5px; }
+  .nav-cta { padding: 10px 14px !important; font-size: 13px !important; margin-left: 2px; }
+  .navbar-container { gap: 12px; }
+  .logo-wordmark { font-size: 19px; letter-spacing: 2px; }
+  .header.scrolled .logo-wordmark { height: 32px; }
 }
 
 .menu-close-btn { display: none; }

@@ -24,6 +24,13 @@ export const PAGES = {
       'Hazır beton çatdırılması, beton nasoslama və avtomobil körpü tərəzisi xidmətləri. Bakı və Abşeron üzrə peşəkar, vaxtında beton həlləri.',
     crumb: 'Xidmətlər',
   },
+  materials: {
+    path: '/tikinti-materiallari',
+    title: 'Qum, Atsep və Şeben Satışı | NOVXANI BETON',
+    description:
+      'NOVXANI BETON fərdi şəxslər, tikinti şirkətləri və beton zavodları üçün qum, atsep və şeben satışı, topdan sifariş və operativ çatdırılma xidməti təklif edir.',
+    crumb: 'Tikinti Materialları',
+  },
   calculator: {
     path: '/calculator',
     title: 'Beton Kalkulyatoru — Kubmetr və Material Hesabla | NOVXANI BETON',

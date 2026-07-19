@@ -13,7 +13,7 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 
 const BUILD = path.resolve(__dirname, '..', 'build');
-const PORT = 4173;
+const PORT = Number(process.env.PRERENDER_PORT) || 4173;
 
 const ROUTES = [
   '/',
@@ -23,6 +23,7 @@ const ROUTES = [
   '/gallery',
   '/about',
   '/contact',
+  '/tikinti-materiallari',
   '/hazir-beton-satisi',
   '/beton-catdirilmasi',
   '/beton-nasoslama',
@@ -73,19 +74,44 @@ function createServer() {
 
   // Render everything into memory first, write to disk at the end —
   // otherwise overwriting index.html mid-run would poison SPA fallback.
+  async function renderRoute(route, { blockExternal = false } = {}) {
+    const page = await browser.newPage();
+    try {
+      await page.setViewport({ width: 1366, height: 900 });
+      if (blockExternal) {
+        // Retry mode: skip external resources (fonts/analytics/maps) that can
+        // hang networkidle0 on a flaky network. They are purely visual — the
+        // rendered DOM and meta tags are identical without them.
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+          if (new URL(req.url()).hostname === 'localhost') req.continue();
+          else req.abort();
+        });
+      }
+      await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
+      await new Promise((r) => setTimeout(r, 400)); // let helmet/observers settle
+      // Static paint must be fully visible: force all scroll-reveal elements
+      // shown, otherwise below-the-fold content is opacity:0 until JS loads.
+      await page.evaluate(() => {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      });
+      return await page.content();
+    } finally {
+      await page.close();
+    }
+  }
+
   const results = [];
   for (const route of ROUTES) {
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1366, height: 900 });
-    await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
-    await new Promise((r) => setTimeout(r, 400)); // let helmet/observers settle
-    // Static paint must be fully visible: force all scroll-reveal elements
-    // shown, otherwise below-the-fold content is opacity:0 until JS loads.
-    await page.evaluate(() => {
-      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
-    });
-    const html = await page.content();
-    await page.close();
+    let html;
+    try {
+      html = await renderRoute(route);
+    } catch (e) {
+      // Slow external resources (fonts/CDN) occasionally trip networkidle0 —
+      // retry with external requests blocked; local-only render can't hang.
+      console.log(`  ⟳ retrying ${route} without external resources (${e.message})`);
+      html = await renderRoute(route, { blockExternal: true });
+    }
     if (!html.includes('id="root"')) throw new Error(`Empty render for ${route}`);
     results.push({ route, html });
     console.log(`  ✓ prerendered ${route} (${(html.length / 1024).toFixed(0)} KB)`);

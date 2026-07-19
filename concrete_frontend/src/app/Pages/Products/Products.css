@@ -35,6 +35,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  /* Opening one card's tech details must not stretch its row neighbours —
+     each card keeps its own height */
+  align-items: start;
 }
 
 .product-card {

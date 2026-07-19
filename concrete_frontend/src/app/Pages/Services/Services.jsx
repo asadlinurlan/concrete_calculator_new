@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
+import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Services.css';
 import service1 from '../img/service-1.png';
 import service2 from '../img/service-2.webp';
@@ -85,6 +86,14 @@ const Services = ({ fullPage }) => {
           </div>
         </div>
       </div>
+
+      {fullPage && (
+        <CtaBand
+          title="Xidmətlərimizlə maraqlanırsınız?"
+          text="Layihənizə uyğun xidməti seçin — sizə fərdi qiymət təklifi hazırlayaq."
+          whatsappText="Salam! Xidmətləriniz haqqında məlumat və qiymət təklifi almaq istəyirəm."
+        />
+      )}
     </section>
   );
 };

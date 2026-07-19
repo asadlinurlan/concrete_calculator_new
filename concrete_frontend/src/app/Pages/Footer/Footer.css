@@ -183,4 +183,8 @@
 
   .footer-bottom { padding: 16px 0 calc(16px + env(safe-area-inset-bottom, 0px)); }
   .footer-bottom p { font-size: 12px; }
+
+  /* Pages with a bottom sticky contact bar (body.has-sticky-cta, e.g.
+     /tikinti-materiallari) — keep the © row visible above the bar */
+  body.has-sticky-cta .footer { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }
