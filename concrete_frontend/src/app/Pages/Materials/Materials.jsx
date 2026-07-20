@@ -15,6 +15,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
+import WhatsAppButton from '../../../Components/WhatsAppButton/WhatsAppButton';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import Seo from '../../../Components/Seo/Seo';
 import { SITE_URL, PAGES } from '../../../seo/seoConfig';
@@ -183,15 +184,7 @@ const Materials = () => {
               Qiymət təklifi al
               <ArrowRight size={18} aria-hidden="true" />
             </a>
-            <a
-              href={waLink(WA_DEFAULT)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-ghost mt-ghost"
-            >
-              <MessageCircle size={18} aria-hidden="true" />
-              WhatsApp ilə sifariş et
-            </a>
+            <WhatsAppButton text={WA_DEFAULT} label="WhatsApp ilə sifariş et" />
           </div>
         </div>
       </div>
@@ -278,15 +271,7 @@ const Materials = () => {
                   Topdan satış təklifi al
                   <ArrowRight size={18} aria-hidden="true" />
                 </a>
-                <a
-                  href={waLink(WA_B2B)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost mt-ghost"
-                >
-                  <Phone size={18} aria-hidden="true" />
-                  Bizimlə əlaqə saxla
-                </a>
+                <WhatsAppButton text={WA_B2B} label="WhatsApp ilə əlaqə saxla" />
               </div>
             </div>
             <div className="mt-b2b-media reveal">
@@ -386,14 +371,7 @@ const Materials = () => {
               <p>Həcmi və ünvanı yazın — qalanını biz edək. Beton və materiallar bir ünvandan.</p>
             </div>
             <div className="mt-cta-actions">
-              <a
-                href={waLink(WA_DEFAULT)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-accent"
-              >
-                WhatsApp ilə qiymət al
-              </a>
+              <WhatsAppButton text={WA_DEFAULT} />
               <a href="tel:+994506209584" className="btn btn-ghost mt-ghost">
                 <Phone size={18} aria-hidden="true" />
                 Zəng et

@@ -178,6 +178,31 @@ a { color: inherit; }
   transform: translateY(-2px);
 }
 
+/* WhatsApp — ONE unified style site-wide (see Components/WhatsAppButton):
+   transparent ghost + MessageCircle icon. Default sits on dark surfaces
+   (heroes, CTA bands); --light adapts to white cards and forms. */
+.btn-wa {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.btn-wa:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+.btn-wa--light {
+  color: var(--text-light);
+  border-color: var(--graphite-400);
+}
+.btn-wa--light:hover {
+  border-color: var(--graphite-900);
+  color: var(--text-light);
+  background: rgba(13, 17, 23, 0.05);
+}
+.btn-wa--block { width: 100%; }
+
 .btn-lg { padding: 17px 38px; font-size: 16px; }
 
 /* legacy button alias */

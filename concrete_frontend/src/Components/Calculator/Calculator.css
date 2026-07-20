@@ -454,9 +454,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: linear-gradient(135deg, rgba(37, 211, 102, 0.07) 0%, rgba(59, 130, 246, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(91, 141, 239, 0.07) 0%, rgba(91, 141, 239, 0.03) 100%);
   border: 1px solid var(--border-color);
-  border-left: 4px solid #25d366;
+  border-left: 4px solid var(--steel-500);
   border-radius: var(--r-md);
   padding: 18px 20px;
   margin-top: 22px;
@@ -465,21 +465,7 @@
 .quote-cta-text strong { font-size: 15px; color: var(--text-light); }
 .quote-cta-text span { font-size: 13px; color: var(--text-muted); }
 .quote-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: #25d366;
-  color: #fff;
-  border-radius: var(--r-sm);
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
-}
-.btn-whatsapp:hover { background: #1fb958; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
-.btn-whatsapp svg { width: 18px; height: 18px; flex-shrink: 0; }
+/* WhatsApp button uses the unified global .btn-wa--light style */
 .btn-call {
   display: inline-flex;
   align-items: center;

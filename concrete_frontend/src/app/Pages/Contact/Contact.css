@@ -199,8 +199,16 @@
   transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast);
 }
 .form-success-actions a:active { transform: scale(0.97); }
-.fs-wa { background: #25d366; color: #fff; }
-.fs-wa:hover { background: #1fb958; }
+/* WhatsApp — unified transparent style (no green), icon + border */
+.fs-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--graphite-400);
+  color: var(--text-light);
+}
+.fs-wa:hover { border-color: var(--graphite-900); background: rgba(13, 17, 23, 0.05); }
 .fs-call { border: 1px solid var(--border-color); color: var(--text-light); }
 .fs-call:hover { border-color: var(--steel-500); color: var(--steel-600); }
 .form-error {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Phone, ArrowRight, CheckCircle2, MapPin, Mail, Clock, Calculator } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
+import WhatsAppButton from '../../../Components/WhatsAppButton/WhatsAppButton';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import Seo from '../../../Components/Seo/Seo';
 import { SITE_URL } from '../../../seo/seoConfig';
@@ -169,9 +170,7 @@ const ServiceDetail = ({ page }) => {
                   <li><MapPin size={16} aria-hidden="true" /> Novxanı, Bakı, Azərbaycan</li>
                   <li><Clock size={16} aria-hidden="true" /> 7/24 fəaliyyətdəyik</li>
                 </ul>
-                <a href={waLink} target="_blank" rel="noopener noreferrer" className="sd-wa-btn">
-                  WhatsApp ilə yaz
-                </a>
+                <WhatsAppButton text={page.whatsappText} label="WhatsApp ilə yaz" onLight block className="sd-wa-btn" />
               </div>
 
               <div className="sd-card reveal">
@@ -209,9 +208,7 @@ const ServiceDetail = ({ page }) => {
             <p>Pulsuz və öhdəliksiz — həcmi və ünvanı yazın, qalanını biz edək.</p>
           </div>
           <div className="sd-cta-actions">
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
-              WhatsApp ilə qiymət al
-            </a>
+            <WhatsAppButton text={page.whatsappText} />
             <a href="tel:+994506209584" className="btn btn-ghost sd-ghost">
               <Phone size={18} aria-hidden="true" />
               Zəng et

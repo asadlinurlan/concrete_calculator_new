@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import './Contact.css';
@@ -241,6 +241,7 @@ const Contact = ({ fullPage }) => {
                           rel="noopener noreferrer"
                           className="fs-wa"
                         >
+                          <MessageCircle size={15} aria-hidden="true" />
                           WhatsApp
                         </a>
                         <a href="tel:+994506209584" className="fs-call">Zəng et</a>

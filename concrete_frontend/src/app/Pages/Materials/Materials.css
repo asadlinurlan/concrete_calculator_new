@@ -110,16 +110,6 @@
 }
 
 .mt-product-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-.mt-wa-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #127a3d; /* 5.4:1 on the white card — AA for 14px text */
-  text-decoration: none;
-}
-.mt-wa-link:hover { text-decoration: underline; }
 .mt-detail-link {
   display: inline-flex;
   align-items: center;
@@ -435,7 +425,8 @@
   color: var(--text-light);
   text-decoration: none;
 }
-.mt-sticky-wa { background: #25d366; border-color: #25d366; color: var(--graphite-900); /* dark on green — AA contrast */ }
+/* WhatsApp — unified transparent style (site-wide, no green) */
+.mt-sticky-wa { background: transparent; border-color: var(--graphite-400); color: var(--text-light); }
 .mt-sticky-quote { background: var(--amber-500); border-color: var(--amber-500); color: var(--graphite-900); }
 
 /* ── Responsive ── */
