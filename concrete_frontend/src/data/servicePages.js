@@ -13,6 +13,9 @@ import imgCatdirilma from '../app/Pages/img/claus-grunstaudl-1_DvZyR3dRk-unsplas
 import imgNasoslama from '../app/Pages/img/service-2.webp';
 import imgTerezi from '../app/Pages/img/service-terezi-home.jpg';
 import imgQiymet from '../app/Pages/img/d-c-rnqRdfYyywM-unsplash.jpg';
+import imgLab from '../app/Pages/img/concrete.jpeg';
+import imgUsage from '../app/Pages/img/workers-construction-site.jpg';
+import imgB2b from '../app/Pages/img/materials-b2b.webp';
 
 export const SERVICE_PAGES = [
   {
@@ -69,7 +72,8 @@ export const SERVICE_PAGES = [
       { to: '/products', label: 'Beton markalarına bax (M100–M450)' },
       { to: '/beton-catdirilmasi', label: 'Beton çatdırılması haqqında' },
       { to: '/beton-qiymetleri', label: 'Qiymət necə formalaşır?' },
-      { to: '/tikinti-materiallari', label: 'Qum, atsep və şeben satışı' },
+      { to: '/betonun-istifade-saheleri', label: 'Hansı iş üçün hansı marka?' },
+      { to: '/topdan-beton-satisi', label: 'Tikinti şirkətləri üçün topdan satış' },
     ],
     whatsappText: 'Salam! Hazır beton sifarişi üçün qiymət təklifi almaq istəyirəm.',
   },
@@ -291,9 +295,184 @@ export const SERVICE_PAGES = [
       { to: '/calculator', label: 'Beton miqdarını hesabla' },
       { to: '/products', label: 'Beton markalarına bax' },
       { to: '/hazir-beton-satisi', label: 'Hazır beton satışı haqqında' },
+      { to: '/faq', label: 'Tez-tez verilən suallar' },
       { to: '/contact', label: 'Birbaşa əlaqə saxla' },
     ],
     whatsappText: 'Salam! Layihəm üçün beton qiymət təklifi almaq istəyirəm.',
+  },
+
+  {
+    slug: '/beton-laboratoriyasi',
+    seo: {
+      title: 'Beton Laboratoriyası — Keyfiyyət Nəzarəti və Sınaqlar | NOVXANI BETON',
+      description:
+        'Betonun keyfiyyəti necə yoxlanılır: laboratoriya nəzarəti, 28 günlük kub sınağı və GOST 26633 üzrə istehsal. Novxanı Beton zavodunda hər partiya sınaqdan keçirilir.',
+    },
+    crumb: 'Beton Laboratoriyası',
+    h1: 'Beton Laboratoriyası və Keyfiyyət Nəzarəti',
+    tagline: 'Hər partiya laboratoriya nəzarəti ilə istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir',
+    hero: { image: imgLab, alt: 'Laboratoriya nəzarətli beton qarışığı yaxın planda' },
+    intro: [
+      'Betonun keyfiyyəti gözlə görünmür — o, yalnız laboratoriya sınağı ilə təsdiqlənir. Novxanı Beton zavodunda istehsal GOST 26633 tələblərinə uyğun aparılır: qarışığın resepti laboratoriyada təyin olunur, hər partiya istehsal zamanı yoxlanılır və nümunələr 28 günlük kub sınağından keçirilir.',
+      'Bu nəzarət sizin üçün konkret zəmanət deməkdir: sifariş etdiyiniz marka (məsələn, M300 / B22.5) real olaraq həmin möhkəmliyi verir. Layihə tələb etdikdə sınaq nəticələri sənədlə təqdim olunur — tikinti nəzarəti və texniki sənədləşmə üçün.',
+    ],
+    benefitsTitle: 'Keyfiyyət necə təmin olunur',
+    benefits: [
+      { title: 'GOST 26633 üzrə istehsal', text: 'Bütün markalar standartın tələblərinə uyğun hazırlanır.' },
+      { title: '28 günlük kub sınağı', text: 'Nümunə kublar standart müddətdə möhkəmliyə yoxlanılır.' },
+      { title: 'Partiya nəzarəti', text: 'Hər istehsal partiyası buraxılışdan əvvəl yoxlanılır.' },
+      { title: 'Layihəyə uyğun resept', text: 'Yekun qarışıq dizaynı laboratoriyada, layihə tələbinə görə təyin olunur.' },
+    ],
+    stepsTitle: 'Sınaq prosesi necə gedir',
+    steps: [
+      { title: 'Resept və istehsal', text: 'Marka üçün qarışıq resepti laboratoriyada müəyyən olunur, istehsal ona uyğun aparılır.' },
+      { title: 'Nümunə götürülməsi', text: 'İstehsal zamanı partiyadan nümunə kublar hazırlanır.' },
+      { title: 'Möhkəmlik sınağı', text: 'Kublar 28 günlük standart müddətdə sınaqdan keçirilir.' },
+      { title: 'Sənədləşdirmə', text: 'Nəticələr qeydə alınır və tələb olunduqda sifarişçiyə təqdim olunur.' },
+    ],
+    faqs: [
+      {
+        q: 'Betonun keyfiyyəti necə yoxlanılır?',
+        a: 'Standart üsul kub sınağıdır: istehsal zamanı götürülən nümunə kublar 28 gün saxlanılır və press altında möhkəmliyə yoxlanılır. Nəticə markanın (məsələn, M300 üçün 22.5 MPa) təmin olunduğunu təsdiqləyir.',
+      },
+      {
+        q: 'Beton neçə günə bərkiyir?',
+        a: 'Beton töküldükdən sonra ilk günlərdə sürətlə möhkəmlənir və 28-ci gündə layihə möhkəmliyinin standart göstəricisinə çatır — buna görə sınaqlar məhz 28 günlük aparılır. Hava şəraiti prosesin sürətinə təsir edir.',
+      },
+      {
+        q: 'Sınaq nəticələrini sənədlə ala bilərəmmi?',
+        a: 'Bəli, layihə və tikinti nəzarəti tələb etdikdə partiya üzrə sınaq nəticələri sənədlə təqdim olunur.',
+      },
+      {
+        q: 'Hazır beton yaxşıdır, yoxsa yerində qarışdırılan?',
+        a: 'Zavod betonunda resept laboratoriyada təyin olunur, dozalama avtomatik aparılır və hər partiya yoxlanılır — yerində əl ilə qarışdırmada isə nisbətlər gözəyarı olur və möhkəmlik nəzarətsiz qalır. Konstruktiv işlərdə zavod betonu etibarlı seçimdir.',
+      },
+    ],
+    related: [
+      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı' },
+      { to: '/products', label: 'Beton markaları (M100–M450)' },
+      { to: '/betonun-istifade-saheleri', label: 'Betonun istifadə sahələri' },
+      { to: '/faq', label: 'Tez-tez verilən suallar' },
+    ],
+    whatsappText: 'Salam! Betonun keyfiyyət nəzarəti və sınaq sənədləri haqqında məlumat almaq istəyirəm.',
+  },
+
+  {
+    slug: '/betonun-istifade-saheleri',
+    seo: {
+      title: 'Betonun İstifadə Sahələri — Fundament, Döşəmə, Həyət, Yol | NOVXANI BETON',
+      description:
+        'Hansı iş üçün hansı beton lazımdır: fundament, döşəmə, həyət betonlaması, yol, qaraj, hovuz və monolit işlər üzrə marka tövsiyələri (M100–M450). Pulsuz məsləhət və fərdi qiymət.',
+    },
+    crumb: 'Betonun İstifadə Sahələri',
+    h1: 'Betonun İstifadə Sahələri',
+    tagline: 'Fundamentdən hovuza qədər — hər iş üçün doğru beton markasının seçimi',
+    hero: { image: imgUsage, alt: 'Tikinti sahəsində beton tökmə işləri' },
+    intro: [
+      'Müştərilərimiz çox vaxt marka ilə deyil, gördükləri işlə müraciət edirlər: “həyətə beton tökəcəyəm”, “fundament üçün beton lazımdır”, “qaraj döşəməsi tökülməlidir”. Bu səhifədə ən çox rast gəlinən istifadə sahələrini və hər biri üçün tövsiyə olunan markanı bir yerdə topladıq.',
+      'Ümumi qayda sadədir: yük artdıqca marka da artır. Hazırlıq qatları üçün M100 kifayətdirsə, monolit təməl M300, çoxmərtəbəli karkas isə M350 tələb edir. Aşağıdakı bölmələr ilkin istiqamət üçündür — dəqiq seçimi layihəniz və ya pulsuz məsləhətimizlə dəqiqləşdirin.',
+    ],
+    benefitsTitle: 'İşə görə marka tövsiyələri',
+    benefits: [
+      { title: 'Fundament və özül — M250–M300', text: 'Zolaq təməl üçün M250, monolit plitə təməl üçün M300 standart seçimdir.' },
+      { title: 'Döşəmə və qaraj — M200', text: 'Ev, qaraj və anbar döşəmələri üçün möhkəmlik-qiymət balansı.' },
+      { title: 'Həyət betonlaması — M150–M200', text: 'Piyada sahələrə M150, avtomobil keçən sahələrə M200.' },
+      { title: 'Yol və meydança — M200–M300', text: 'Yükdən asılı olaraq: yüngül örtüklər M200, ağır texnika M300.' },
+      { title: 'Sütun və örtük — M300–M350', text: 'Monolit karkas elementləri və mərtəbəarası plitələr.' },
+      { title: 'Hovuz — M300', text: 'Sıx strukturlu qarışıq su qurğuları üçün üstünlükdür.' },
+      { title: 'Pilləkən və səki — M150–M200', text: 'Yükə görə seçim; bordür yatağı üçün M100–M150.' },
+      { title: 'Körpü və xüsusi işlər — M400–M450', text: 'İnfrastruktur və xüsusi mühəndis konstruksiyaları.' },
+    ],
+    showGrades: true,
+    stepsTitle: 'Doğru markanı 3 addıma seçin',
+    steps: [
+      { title: 'İşi müəyyənləşdirin', text: 'Nə tökəcəksiniz: təməl, döşəmə, həyət, sütun, hovuz?' },
+      { title: 'Həcmi hesablayın', text: 'Beton kalkulyatoru ölçülərə görə m³-ü və mikser sayını verir.' },
+      { title: 'Təsdiq və sifariş', text: 'Seçiminizi bizimlə dəqiqləşdirin — marka üzrə pulsuz məsləhət və fərdi qiymət alın.' },
+    ],
+    faqs: [
+      {
+        q: 'Fundament üçün hansı beton markası lazımdır?',
+        a: 'Yüngül 1–2 mərtəbəli evlərin zolaq təməli üçün adətən M250, monolit plitə təməl və 2+ mərtəbə üçün M300 tövsiyə olunur. Zəif qruntda və böyük yüklərdə layihə üzrə daha yüksək marka tələb oluna bilər.',
+      },
+      {
+        q: 'Həyətə beton tökmək üçün hansı marka və qalınlıq lazımdır?',
+        a: 'Piyada sahələr üçün M150 (8–10 sm), minik avtomobili keçən sahələr üçün M200 (10–15 sm) standart tövsiyədir. Sahəni kalkulyatora yazın — lazımi m³ dərhal hesablanacaq.',
+      },
+      {
+        q: '100 kvadrat sahəyə neçə kub beton gedir?',
+        a: 'Bu, qalınlıqdan asılıdır: 10 sm qalınlıqda 100 m² üçün 10 m³, 15 sm-də 15 m³, 20 sm-də 20 m³ beton lazımdır. Dəqiq hesablama üçün beton kalkulyatorumuzdan istifadə edin.',
+      },
+      {
+        q: 'Qışda və ya yağışda beton tökmək olar?',
+        a: 'Soyuq və yağışlı havada tökmə mümkündür, lakin əlavə tədbirlər tələb edir (səthin qorunması, müvafiq qarışıq). Tökmə tarixini planlaşdırarkən bizimlə məsləhətləşin — hava şəraitinə uyğun tövsiyə verək.',
+      },
+    ],
+    related: [
+      { to: '/products', label: 'Bütün beton markaları' },
+      { to: '/calculator', label: 'Beton kalkulyatoru' },
+      { to: '/m300-beton', label: 'M300 beton — təməl və plitə' },
+      { to: '/m200-beton', label: 'M200 beton — döşəmə və həyət' },
+      { to: '/beton-qiymetleri', label: 'Beton qiymətləri' },
+    ],
+    whatsappText: 'Salam! Görəcəyim iş üçün hansı beton markasının uyğun olduğunu öyrənmək istəyirəm.',
+  },
+
+  {
+    slug: '/topdan-beton-satisi',
+    seo: {
+      title: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün Təchizat | NOVXANI BETON',
+      description:
+        'Tikinti şirkətləri və podratçılar üçün topdan beton satışı: davamlı təchizat qrafiki, fasiləsiz mikser axını, müqavilə əsaslı əməkdaşlıq. Bakı və Abşeron üzrə. Kommersiya təklifi alın.',
+    },
+    crumb: 'Topdan Beton Satışı',
+    h1: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün',
+    tagline: 'Böyük layihələr üçün davamlı, qrafikli beton təchizatı — müqavilə əsaslı əməkdaşlıq',
+    hero: { image: imgB2b, alt: 'Böyük tikinti layihəsi üçün material təchizatı' },
+    intro: [
+      'Böyük layihədə beton təchizatı bir maşın sifarişindən fərqli məsələdir: tökmə qrafiki, fasiləsiz mikser axını, sabit keyfiyyət və proqnozlaşdırıla bilən şərtlər tələb olunur. Novxanı Beton tikinti şirkətləri, podratçılar və layihə qrupları ilə məhz bu formatda işləyir.',
+      'Layihənin ümumi həcminə və müddətinə uyğun kommersiya təklifi hazırlayırıq: razılaşdırılmış qrafik üzrə gündəlik təchizat, gecə tökmələri daxil 7/24 iş rejimi, nasos xidməti və hər partiya üzrə laboratoriya nəzarəti. Zavodumuz Novxanıda yerləşir — Abşeron zonasındakı obyektlərə logistika xüsusilə operativdir.',
+    ],
+    benefitsTitle: 'B2B əməkdaşlığın üstünlükləri',
+    benefits: [
+      { title: 'Davamlı təchizat', text: 'Layihə boyu razılaşdırılmış qrafik üzrə gündəlik beton axını.' },
+      { title: 'Həcmə görə şərtlər', text: 'Böyük və davamlı sifarişlər üçün xüsusi kommersiya şərtləri.' },
+      { title: 'Sabit keyfiyyət', text: 'Hər partiya laboratoriya nəzarətindən keçir, sənədləşdirilir.' },
+      { title: 'Tam xidmət paketi', text: 'Beton + çatdırılma + nasos + tərəzi bir təchizatçıdan.' },
+    ],
+    stepsTitle: 'Əməkdaşlıq necə başlayır',
+    steps: [
+      { title: 'Layihə məlumatı', text: 'Ümumi həcm, markalar, obyektin yeri və tökmə qrafiki barədə məlumat verirsiniz.' },
+      { title: 'Kommersiya təklifi', text: 'Həcmə və müddətə uyğun şərtlərlə təklif hazırlanır.' },
+      { title: 'Müqavilə və qrafik', text: 'Şərtlər razılaşdırılır, təchizat qrafiki təsdiqlənir.' },
+      { title: 'Davamlı təchizat', text: 'Beton qrafik üzrə, fasiləsiz axınla obyektə çatdırılır.' },
+    ],
+    faqs: [
+      {
+        q: 'Hansı həcmdən topdan şərtlər tətbiq olunur?',
+        a: 'Sabit hədd yoxdur — şərtlər layihənin ümumi həcminə və müddətinə görə müəyyən olunur. Layihə məlumatını göndərin, konkret təklif hazırlayaq.',
+      },
+      {
+        q: 'Tender və layihə sənədləri üçün məlumat verirsinizmi?',
+        a: 'Bəli, tələb olunduqda markalar üzrə texniki məlumat və sınaq nəticələri sənədlə təqdim olunur.',
+      },
+      {
+        q: 'Eyni gündə bir neçə obyektə təchizat mümkündürmü?',
+        a: 'Bəli, qrafiklər əvvəlcədən razılaşdırılmaqla paralel obyektlərə təchizat planlaşdırılır.',
+      },
+      {
+        q: 'Materialları (qum, atsep, şeben) da topdan alaq bilərikmi?',
+        a: 'Bəli, beton zavodları və tikinti şirkətləri üçün qum, atsep və şeben üzrə davamlı topdan təchizat da təşkil edirik — ayrıca və ya betonla birlikdə.',
+      },
+    ],
+    related: [
+      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı' },
+      { to: '/beton-catdirilmasi', label: 'Çatdırılma və qrafik' },
+      { to: '/beton-laboratoriyasi', label: 'Keyfiyyət nəzarəti' },
+      { to: '/tikinti-materiallari', label: 'Topdan material təchizatı' },
+      { to: '/contact', label: 'Kommersiya təklifi üçün əlaqə' },
+    ],
+    whatsappText: 'Salam! Layihəmiz üçün topdan beton təchizatı üzrə kommersiya təklifi almaq istəyirəm.',
   },
 ];
 

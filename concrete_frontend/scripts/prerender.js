@@ -32,6 +32,18 @@ const ROUTES = [
   '/beton-nasoslama',
   '/terezi-xidmeti',
   '/beton-qiymetleri',
+  '/beton-laboratoriyasi',
+  '/betonun-istifade-saheleri',
+  '/topdan-beton-satisi',
+  '/faq',
+  '/m100-beton',
+  '/m150-beton',
+  '/m200-beton',
+  '/m250-beton',
+  '/m300-beton',
+  '/m350-beton',
+  '/m400-beton',
+  '/m450-beton',
 ];
 
 const MIME = {

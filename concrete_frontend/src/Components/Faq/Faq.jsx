@@ -7,10 +7,12 @@ import './Faq.css';
  * service-detail pages, plus FAQPage JSON-LD for rich results.
  * items: [{ q, a }]
  */
-const Faq = ({ items, subtitle = 'Suallarınız var?', title = 'Tez-tez verilən suallar' }) => {
+// withLd=false lets a page render several grouped <Faq/> lists while
+// emitting a single combined FAQPage JSON-LD itself (one per page).
+const Faq = ({ items, subtitle = 'Suallarınız var?', title = 'Tez-tez verilən suallar', withLd = true }) => {
   if (!items || items.length === 0) return null;
 
-  const faqLd = {
+  const faqLd = withLd && {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: items.map((f) => ({
@@ -22,9 +24,11 @@ const Faq = ({ items, subtitle = 'Suallarınız var?', title = 'Tez-tez verilən
 
   return (
     <section className="faq-section reveal" aria-label={title}>
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
-      </Helmet>
+      {faqLd && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
+        </Helmet>
+      )}
       <div className="section-head">
         <span className="section-subtitle">{subtitle}</span>
         <h2 className="faq-title">{title}</h2>

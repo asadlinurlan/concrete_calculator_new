@@ -12,6 +12,19 @@
 - [Beton Markaları](https://novxanibeton.az/products): M100–M450 markaları, möhkəmlik sinifləri (B7.5–B35), MPa göstəriciləri və istifadə sahələri
 - [Beton Kalkulyatoru](https://novxanibeton.az/calculator): layihə üçün beton həcmi (m³), material və mikser sayı hesablaması — pulsuz onlayn alət
 - [Xidmətlər](https://novxanibeton.az/services): bütün xidmətlərin icmalı
+- [Betonun İstifadə Sahələri](https://novxanibeton.az/betonun-istifade-saheleri): iş növünə görə marka tövsiyələri — fundament, döşəmə, həyət, yol, hovuz və s.
+- [Tez-tez Verilən Suallar](https://novxanibeton.az/faq): sifariş, marka seçimi, hesablama, keyfiyyət və materiallar üzrə sual-cavab
+
+## Beton markaları (ayrıca səhifələr)
+
+- [M100 Beton](https://novxanibeton.az/m100-beton): B7.5 — altlıq, hamarlama qatı, hazırlıq işləri
+- [M150 Beton](https://novxanibeton.az/m150-beton): B10 — səki, bordür, yüngül döşəmə
+- [M200 Beton](https://novxanibeton.az/m200-beton): B15 — döşəmə, qaraj, həyət betonlaması
+- [M250 Beton](https://novxanibeton.az/m250-beton): B20 — zolaq təməl, daşıyıcı divar
+- [M300 Beton](https://novxanibeton.az/m300-beton): B22.5 — monolit təməl, plitə, sütun (ən çox sifariş olunan konstruktiv marka)
+- [M350 Beton](https://novxanibeton.az/m350-beton): B25 — çoxmərtəbəli karkas, yüksək yüklü örtüklər
+- [M400 Beton](https://novxanibeton.az/m400-beton): B30 — körpü, hidrotexniki qurğular
+- [M450 Beton](https://novxanibeton.az/m450-beton): B35 — xüsusi mühəndis konstruksiyaları
 
 ## Xidmətlər
 
@@ -20,6 +33,8 @@
 - [Beton Nasoslama](https://novxanibeton.az/beton-nasoslama): hündürmərtəbəli binalar və çətin əlçatan sahələr üçün nasos xidməti
 - [Tərəzi Xidməti](https://novxanibeton.az/terezi-xidmeti): avtomobil körpü tərəzisi ilə yük maşınlarının dəqiq, sənədli çəkilməsi — kənar şirkətlər üçün də açıqdır
 - [Beton Qiymətləri](https://novxanibeton.az/beton-qiymetleri): qiymətə təsir edən amillər (marka, həcm, məsafə, nasos) və fərdi təklif proseduru
+- [Beton Laboratoriyası](https://novxanibeton.az/beton-laboratoriyasi): keyfiyyət nəzarəti — GOST 26633, 28 günlük kub sınağı, partiya yoxlaması və sənədləşdirmə
+- [Topdan Beton Satışı](https://novxanibeton.az/topdan-beton-satisi): tikinti şirkətləri və podratçılar üçün müqavilə əsaslı, qrafikli davamlı beton təchizatı
 
 ## Tikinti materialları
 

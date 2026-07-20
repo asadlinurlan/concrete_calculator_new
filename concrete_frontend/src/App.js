@@ -17,8 +17,10 @@ import NotFound from "./app/Pages/NotFound/NotFound";
 import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
 import Materials from "./app/Pages/Materials/Materials";
 import MaterialsHome from "./app/Pages/Materials/MaterialsHome";
+import FaqPage from "./app/Pages/FaqPage/FaqPage";
 import { SERVICE_PAGES } from "./data/servicePages";
 import { MATERIAL_PAGES } from "./data/materialPages";
+import { GRADE_PAGES } from "./data/gradePages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
@@ -68,6 +70,10 @@ function App() {
             {MATERIAL_PAGES.map((p) => (
               <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
             ))}
+            {GRADE_PAGES.map((p) => (
+              <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
+            ))}
+            <Route path="/faq" element={<FaqPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

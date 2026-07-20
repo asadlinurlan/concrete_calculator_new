@@ -73,6 +73,8 @@ const Footer = () => {
                 <li><Link to="/tikinti-materiallari">Tikinti Materialları</Link></li>
                 <li><Link to="/calculator">Kalkulyator</Link></li>
                 <li><Link to="/gallery">Qalereya</Link></li>
+                <li><Link to="/betonun-istifade-saheleri">İstifadə Sahələri</Link></li>
+                <li><Link to="/faq">Tez-tez Verilən Suallar</Link></li>
                 <li><Link to="/about">Haqqımızda</Link></li>
                 <li><Link to="/contact">Əlaqə</Link></li>
               </ul>
@@ -85,8 +87,22 @@ const Footer = () => {
                 <li><Link to="/beton-nasoslama">Beton Nasoslama</Link></li>
                 <li><Link to="/terezi-xidmeti">Tərəzi Xidməti</Link></li>
                 <li><Link to="/beton-qiymetleri">Beton Qiymətləri</Link></li>
+                <li><Link to="/beton-laboratoriyasi">Beton Laboratoriyası</Link></li>
+                <li><Link to="/topdan-beton-satisi">Topdan Beton Satışı</Link></li>
                 <li><Link to="/tikinti-materiallari">Qum, Atsep və Şeben Satışı</Link></li>
-                <li><Link to="/tikinti-materiallari#topdan-satis">Topdan Material Təchizatı</Link></li>
+              </ul>
+            </div>
+            <div className="footer-links">
+              <h3>Beton Markaları</h3>
+              <ul>
+                <li><Link to="/m100-beton">M100 Beton</Link></li>
+                <li><Link to="/m150-beton">M150 Beton</Link></li>
+                <li><Link to="/m200-beton">M200 Beton</Link></li>
+                <li><Link to="/m250-beton">M250 Beton</Link></li>
+                <li><Link to="/m300-beton">M300 Beton</Link></li>
+                <li><Link to="/m350-beton">M350 Beton</Link></li>
+                <li><Link to="/m400-beton">M400 Beton</Link></li>
+                <li><Link to="/m450-beton">M450 Beton</Link></li>
               </ul>
             </div>
             <div className="footer-contact">

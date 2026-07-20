@@ -48,7 +48,7 @@ const ServiceDetail = ({ page }) => {
 
   return (
     <div className="sd-page">
-      <Seo custom={{ path: page.slug, title: page.seo.title, description: page.seo.description, crumb: page.crumb }} />
+      <Seo custom={{ path: page.slug, title: page.seo.title, description: page.seo.description, crumb: page.crumb, parentCrumb: page.parentCrumb }} />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(faqLd)}</script>
         <script type="application/ld+json">{JSON.stringify(serviceLd)}</script>
@@ -77,7 +77,7 @@ const ServiceDetail = ({ page }) => {
       {/* Body */}
       <div className="sd-body">
         <div className="container">
-          <Breadcrumbs current={page.crumb} />
+          <Breadcrumbs current={page.crumb} parent={page.parentCrumb} />
 
           <div className="sd-grid">
             <main className="sd-main">
@@ -110,7 +110,13 @@ const ServiceDetail = ({ page }) => {
                   <h2 className="sd-h2">İstehsal etdiyimiz markalar</h2>
                   <div className="sd-grades">
                     {CONCRETE_GRADES.map((g) => (
-                      <Link to="/products" className="sd-grade-chip" key={g.id} title={g.use}>
+                      <Link
+                        to={`/${g.id.toLowerCase()}-beton`}
+                        className={`sd-grade-chip ${page.currentGrade === g.id ? 'is-current' : ''}`}
+                        key={g.id}
+                        title={g.use}
+                        aria-current={page.currentGrade === g.id ? 'page' : undefined}
+                      >
                         <strong>{g.id}</strong>
                         <span>{g.name}</span>
                       </Link>

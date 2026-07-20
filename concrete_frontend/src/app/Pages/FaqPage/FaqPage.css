@@ -1,0 +1,28 @@
+/* Central FAQ page — reuses shared .faq-section styles from Faq.css. */
+.faqpage-section { padding-top: 110px; }
+.faqpage-content { padding-bottom: 60px; }
+.faqpage-lead {
+  max-width: 720px;
+  margin: 14px auto 0;
+  color: var(--text-muted);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.faqpage-section .faq-section { margin-top: 8px; }
+
+.faqpage-calc {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 42px;
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-md);
+}
+.faqpage-calc svg { color: var(--amber-500); flex-shrink: 0; }
+.faqpage-calc div { flex: 1; min-width: 220px; }
+.faqpage-calc h2 { font-size: 18px; margin: 0 0 4px; }
+.faqpage-calc p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.faqpage-calc .btn { display: inline-flex; align-items: center; gap: 8px; }

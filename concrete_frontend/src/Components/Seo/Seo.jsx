@@ -11,13 +11,20 @@ const Seo = ({ page, custom }) => {
   const cfg = custom || PAGES[page] || PAGES.home;
   const url = SITE_URL + cfg.path;
 
-  const breadcrumbLd = cfg.crumb && {
+  // Optional 3-level trail: cfg.parentCrumb = { to, label } inserts an
+  // intermediate level (e.g. Ana Səhifə → Beton Markaları → M300 Beton).
+  const crumbItems = cfg.crumb && [
+    { '@type': 'ListItem', position: 1, name: 'Ana Səhifə', item: `${SITE_URL}/` },
+    ...(cfg.parentCrumb
+      ? [{ '@type': 'ListItem', position: 2, name: cfg.parentCrumb.label, item: SITE_URL + cfg.parentCrumb.to }]
+      : []),
+    { '@type': 'ListItem', position: cfg.parentCrumb ? 3 : 2, name: cfg.crumb, item: url },
+  ];
+
+  const breadcrumbLd = crumbItems && {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Ana Səhifə', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: cfg.crumb, item: url },
-    ],
+    itemListElement: crumbItems,
   };
 
   return (
