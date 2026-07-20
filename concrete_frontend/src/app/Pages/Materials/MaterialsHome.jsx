@@ -40,8 +40,8 @@ const MaterialsHome = () => {
                   <span>Pərakəndə</span>
                   <span><Truck size={13} aria-hidden="true" /> Çatdırılma</span>
                 </div>
-                <Link to={`/tikinti-materiallari#${m.id}`} className="btn btn-primary mh-card-btn">
-                  {m.cta}
+                <Link to={`/${m.id}-satisi`} className="btn btn-primary mh-card-btn">
+                  {m.name} satışı
                   <ArrowRight size={16} aria-hidden="true" />
                 </Link>
               </div>

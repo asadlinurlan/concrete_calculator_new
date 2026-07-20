@@ -18,6 +18,7 @@ import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
 import Materials from "./app/Pages/Materials/Materials";
 import MaterialsHome from "./app/Pages/Materials/MaterialsHome";
 import { SERVICE_PAGES } from "./data/servicePages";
+import { MATERIAL_PAGES } from "./data/materialPages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 
@@ -62,6 +63,9 @@ function App() {
             <Route path="/about" element={<About fullPage />} />
             <Route path="/contact" element={<Contact fullPage />} />
             {SERVICE_PAGES.map((p) => (
+              <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
+            ))}
+            {MATERIAL_PAGES.map((p) => (
               <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
             ))}
             <Route path="*" element={<NotFound />} />

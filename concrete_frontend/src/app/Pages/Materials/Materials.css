@@ -120,6 +120,16 @@
   text-decoration: none;
 }
 .mt-wa-link:hover { text-decoration: underline; }
+.mt-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--steel-600);
+  text-decoration: none;
+}
+.mt-detail-link:hover { text-decoration: underline; }
 
 /* ── B2B band ── */
 .mt-b2b {

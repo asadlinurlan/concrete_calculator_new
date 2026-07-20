@@ -243,15 +243,10 @@ const Materials = () => {
                       {m.cta}
                       <ArrowRight size={16} aria-hidden="true" />
                     </a>
-                    <a
-                      href={waLink(m.whatsappText)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-wa-link"
-                    >
-                      <MessageCircle size={16} aria-hidden="true" />
-                      WhatsApp ilə soruş
-                    </a>
+                    <Link to={`/${m.id}-satisi`} className="mt-detail-link">
+                      {m.name} satışı haqqında ətraflı
+                      <ArrowRight size={16} aria-hidden="true" />
+                    </Link>
                   </div>
                 </div>
               </article>
