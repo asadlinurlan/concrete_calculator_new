@@ -37,7 +37,7 @@ const HeroSection = () => {
               Kalkulyatordan İstifadə Et
             </Link>
             <Link to="/tikinti-materiallari" className="btn btn-ghost btn-lg">
-              Materialları nəzərdən keçir
+              Qum, Atsep, Şeben Sifariş Et
               <ArrowRight size={20} aria-hidden="true" />
             </Link>
             <Link to="/contact" className="btn btn-ghost btn-lg">
