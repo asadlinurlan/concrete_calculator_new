@@ -132,7 +132,11 @@ const Products = () => {
                 <article
                   key={grade.id}
                   id={`grade-${grade.id}`}
-                  className={`product-card reveal ${recommended === grade.id ? 'is-recommended' : ''}`}
+                  // Highlight via data-attribute, NOT className: the scroll-reveal
+                  // observer adds `is-visible` imperatively, and a React className
+                  // update would wipe it — hiding the card (opacity: 0) for good.
+                  className="product-card reveal"
+                  data-recommended={recommended === grade.id ? 'true' : undefined}
                   style={{ transitionDelay: `${(index % 4) * 0.07}s` }}
                 >
                   {recommended === grade.id && <span className="recommended-badge">Tövsiyə olunur</span>}
