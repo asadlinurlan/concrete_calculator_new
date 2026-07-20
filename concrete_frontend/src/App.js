@@ -23,6 +23,8 @@ import { MATERIAL_PAGES } from "./data/materialPages";
 import { GRADE_PAGES } from "./data/gradePages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
+import WhatsAppFab from "./Components/WhatsAppFab/WhatsAppFab";
+import StickyContactBar from "./Components/StickyContactBar/StickyContactBar";
 
 // Scrolls to top on navigation and (re)wires scroll-reveal for the new page.
 function RouteManager() {
@@ -79,6 +81,8 @@ function App() {
         </main>
         <Footer />
         <ScrollTop />
+        <WhatsAppFab />
+        <StickyContactBar />
       </div>
     </Router>
   );

@@ -395,40 +395,6 @@
 .mt-cta-inner p { color: var(--on-dark-muted); font-size: 15px; margin: 0; }
 .mt-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* ── Mobile sticky contact bar ── */
-.mt-sticky {
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 950; /* below the fixed header (1000), above content */
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid var(--border-color);
-  padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
-  gap: 8px;
-}
-.mt-sticky-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-height: 44px;
-  border-radius: var(--r-sm);
-  background: var(--bg-inset);
-  border: 1px solid var(--border-color);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--text-light);
-  text-decoration: none;
-}
-/* WhatsApp — unified transparent style (site-wide, no green) */
-.mt-sticky-wa { background: transparent; border-color: var(--graphite-400); color: var(--text-light); }
-.mt-sticky-quote { background: var(--amber-500); border-color: var(--amber-500); color: var(--graphite-900); }
-
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .mt-hero { padding: 132px 0 44px; min-height: 44vh; }
@@ -464,14 +430,10 @@
   .mt-why-card h3 { font-size: 14px; }
   .mt-why-card p { font-size: 12.5px; }
 
-  /* Sticky bar appears on phones; leave room for it above the footer */
-  .mt-sticky { display: flex; }
+  /* The site-wide sticky contact bar overlays the bottom on phones —
+     give the closing CTA band breathing room above it */
   .mt-page { padding-bottom: 0; }
   .mt-cta-band { padding-bottom: 72px; }
-  /* …and keep the footer's last line (copyright) clear of the bar too */
-  body.has-sticky-cta .footer-bottom {
-    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
-  }
 }
 
 @media (max-width: 560px) {
@@ -484,7 +446,6 @@
 @media (max-width: 400px) {
   .mt-product-info { padding: 20px 16px; }
   .mt-form-card { padding: 22px 14px; }
-  .mt-sticky-btn { font-size: 12.5px; gap: 4px; }
 }
 
 /* Ultra-narrow phones only: trust cards back to one column */

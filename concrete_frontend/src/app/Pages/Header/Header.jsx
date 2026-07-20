@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Menu, X, MessageCircle } from 'lucide-react';
-import { waHref } from '../../../Components/WhatsAppButton/WhatsAppButton';
+import { Phone, Menu, X } from 'lucide-react';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -40,26 +39,6 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      {/* Slim contact strip — instantly visible phone & WhatsApp at page top;
-          collapses away on scroll to keep the header minimal. */}
-      <div className="topbar" aria-hidden={isScrolled}>
-        <div className="container topbar-inner">
-          <a href="tel:+994506209584" className="topbar-item" tabIndex={isScrolled ? -1 : 0}>
-            <Phone size={13} aria-hidden="true" />
-            +994 50 620 95 84
-          </a>
-          <a
-            href={waHref('Salam! Qiymət təklifi almaq istəyirəm.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="topbar-item"
-            tabIndex={isScrolled ? -1 : 0}
-          >
-            <MessageCircle size={13} aria-hidden="true" />
-            WhatsApp
-          </a>
-        </div>
-      </div>
       <nav className="navbar" aria-label="Əsas naviqasiya">
         <div className="navbar-container container">
           <Link to="/" className="logo" aria-label="Novxanı Beton ana səhifə">
@@ -77,10 +56,12 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/contact" className="nav-cta btn btn-accent">
-              <Phone size={18} aria-hidden="true" />
-              Qiymət Sorğusu
-            </Link>
+            {/* Click-to-call: number on wide screens, icon-only on tighter
+                desktops; hidden in the mobile menu (sticky bar covers it) */}
+            <a href="tel:+994506209584" className="nav-phone" aria-label="Zəng et: +994 50 620 95 84">
+              <Phone size={15} aria-hidden="true" />
+              <span className="nav-phone-num">+994 50 620 95 84</span>
+            </a>
             <button
               className="menu-close-btn"
               onClick={() => setIsMenuOpen(false)}

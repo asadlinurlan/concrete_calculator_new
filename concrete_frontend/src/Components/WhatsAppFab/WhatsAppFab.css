@@ -1,0 +1,30 @@
+/* Floating WhatsApp button — graphite→amber gradient squircle,
+   bottom-left (bottom-right belongs to the scroll-top button). */
+.wa-fab {
+  position: fixed;
+  left: calc(18px + env(safe-area-inset-left, 0px));
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 900;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #12161f 0%, #232a38 45%, #b97e2a 130%);
+  border: 1px solid rgba(240, 178, 82, 0.4);
+  color: var(--amber-400);
+  box-shadow: 0 8px 24px rgba(13, 17, 23, 0.35);
+  transition: transform var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+}
+.wa-fab:hover {
+  transform: translateY(-3px);
+  color: #ffe3b3;
+  box-shadow: 0 12px 30px rgba(13, 17, 23, 0.45);
+}
+.wa-fab:active { transform: scale(0.94); }
+
+/* Phones: the sticky contact bar already offers WhatsApp */
+@media (max-width: 768px) {
+  .wa-fab { display: none; }
+}

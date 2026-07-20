@@ -12,7 +12,6 @@ import {
   Layers,
   Clock,
   BadgeCheck,
-  MessageCircle,
 } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import WhatsAppButton from '../../../Components/WhatsAppButton/WhatsAppButton';
@@ -25,8 +24,6 @@ import heroImg from '../img/materials-hero.webp';
 import b2bImg from '../img/materials-b2b.webp';
 import './Materials.css';
 
-const WA_NUMBER = '994503260343';
-const waLink = (text) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 const WA_DEFAULT = 'Salam! Qum, atsep və ya şeben sifarişi üçün qiymət təklifi almaq istəyirəm.';
 const WA_B2B =
   'Salam! Şirkətimiz üçün davamlı material təchizatı (qum, atsep, şeben) üzrə topdan satış təklifi almaq istəyirəm.';
@@ -102,12 +99,6 @@ const Materials = () => {
       return () => clearTimeout(t);
     }
   }, [hash]);
-
-  // Keep the floating scroll-top button clear of the mobile sticky CTA bar
-  useEffect(() => {
-    document.body.classList.add('has-sticky-cta');
-    return () => document.body.classList.remove('has-sticky-cta');
-  }, []);
 
   const cfg = PAGES.materials;
   const pageUrl = SITE_URL + cfg.path;
@@ -381,25 +372,6 @@ const Materials = () => {
         </div>
       </div>
 
-      {/* ── Mobile sticky contact bar ── */}
-      <div className="mt-sticky" role="navigation" aria-label="Sürətli əlaqə">
-        <a href="tel:+994506209584" className="mt-sticky-btn">
-          <Phone size={17} aria-hidden="true" />
-          Zəng et
-        </a>
-        <a
-          href={waLink(WA_DEFAULT)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-sticky-btn mt-sticky-wa"
-        >
-          <MessageCircle size={17} aria-hidden="true" />
-          WhatsApp
-        </a>
-        <a href="#teklif" className="mt-sticky-btn mt-sticky-quote">
-          Qiymət al
-        </a>
-      </div>
     </div>
   );
 };
