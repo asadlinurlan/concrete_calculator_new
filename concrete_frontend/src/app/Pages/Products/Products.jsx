@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Gauge, Layers, ArrowRight, Calculator } from 'lucide-react';
+import { Gauge, Layers, ArrowRight, Calculator, RotateCcw } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import { CONCRETE_GRADES, materialsPerM3, ratioLabel } from '../../../data/concreteGrades';
 import Seo from '../../../Components/Seo/Seo';
@@ -42,9 +42,17 @@ const PRODUCT_FAQS = [
 
 const Products = () => {
   useScrollReveal();
-  // Exclusive accordion: at most one card's "Texniki məlumat" is open —
-  // opening a grade closes the previously open one.
-  const [openTech, setOpenTech] = useState(null);
+  // Two-sided cards: "Texniki məlumat" flips a card to its technical
+  // back face (fixed size — no accordion growth / layout shift).
+  // Each card flips independently.
+  const [flipped, setFlipped] = useState(() => new Set());
+  const toggleFlip = (id) =>
+    setFlipped((cur) => {
+      const next = new Set(cur);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   // "Nə tökürsünüz?" helper: highlighted/recommended grade card.
   const [recommended, setRecommended] = useState(null);
 
@@ -140,37 +148,50 @@ const Products = () => {
                   style={{ transitionDelay: `${(index % 4) * 0.07}s` }}
                 >
                   {recommended === grade.id && <span className="recommended-badge">Tövsiyə olunur</span>}
-                  <div className="product-card-head">
-                    <div className="product-grade">
-                      <span className="grade-id">{grade.id}</span>
-                      <span className="grade-class">{grade.bClass}</span>
-                    </div>
-                    <div className="product-strength" title="Möhkəmlik">
-                      <Gauge size={18} aria-hidden="true" />
-                      {grade.strength} MPa
-                    </div>
-                  </div>
+                  <div className={`card-flip ${flipped.has(grade.id) ? 'is-flipped' : ''}`}>
+                    {/* ── Front face ── */}
+                    <div className="card-face card-front" aria-hidden={flipped.has(grade.id)}>
+                      <div className="product-card-head">
+                        <div className="product-grade">
+                          <span className="grade-id">{grade.id}</span>
+                          <span className="grade-class">{grade.bClass}</span>
+                        </div>
+                        <div className="product-strength" title="Möhkəmlik">
+                          <Gauge size={18} aria-hidden="true" />
+                          {grade.strength} MPa
+                        </div>
+                      </div>
 
-                  <h3 className="product-name">{grade.name}</h3>
-                  <p className="product-use">{grade.use}</p>
-                  <Link to={`/${grade.id.toLowerCase()}-beton`} className="product-more">
-                    {grade.id} beton haqqında ətraflı
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </Link>
+                      <h3 className="product-name">{grade.name}</h3>
+                      <p className="product-use">{grade.use}</p>
+                      <Link to={`/${grade.id.toLowerCase()}-beton`} className="product-more">
+                        {grade.id} beton haqqında ətraflı
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </Link>
 
-                  <details className="product-tech" open={openTech === grade.id}>
-                    <summary
-                      onClick={(e) => {
-                        // Native <details> toggling is suppressed — React state is
-                        // the single source of truth, so only one stays open.
-                        e.preventDefault();
-                        setOpenTech((cur) => (cur === grade.id ? null : grade.id));
-                      }}
-                    >
-                      <Layers size={15} aria-hidden="true" />
-                      Texniki məlumat
-                    </summary>
-                    <div className="product-tech-body">
+                      <button type="button" className="flip-btn" onClick={() => toggleFlip(grade.id)}>
+                        <Layers size={15} aria-hidden="true" />
+                        Texniki məlumat
+                        <RotateCcw size={14} aria-hidden="true" className="flip-btn-hint" />
+                      </button>
+
+                      <Link to={`/calculator?grade=${grade.id}`} className="product-cta">
+                        <Calculator size={16} aria-hidden="true" />
+                        Bu marka ilə hesabla
+                        <ArrowRight size={16} aria-hidden="true" />
+                      </Link>
+                    </div>
+
+                    {/* ── Back face (technical data) ── */}
+                    <div className="card-face card-back" aria-hidden={!flipped.has(grade.id)}>
+                      <div className="product-card-head">
+                        <div className="product-grade">
+                          <span className="grade-id">{grade.id}</span>
+                          <span className="grade-class">{grade.bClass}</span>
+                        </div>
+                        <span className="back-face-label">Texniki məlumat</span>
+                      </div>
+
                       <div className="product-mix">
                         <span className="mix-label">Qarışıq (S:Q:Ç)</span>
                         <span className="mix-value">{ratioLabel(grade)}</span>
@@ -182,17 +203,16 @@ const Products = () => {
                         <li><span>Su</span><strong>{Math.round(m.waterL)} L/m³</strong></li>
                       </ul>
                       <p className="tech-disclaimer">
-                        Nominal qarışıq əsasında təxmini planlaşdırma dəyərləri.
-                        Yekun qarışıq dizaynı layihəyə uyğun laboratoriyada təyin olunur.
+                        Nominal qarışıq əsasında təxmini planlaşdırma dəyərləri. Yekun qarışıq
+                        dizaynı layihəyə uyğun laboratoriyada təyin olunur.
                       </p>
-                    </div>
-                  </details>
 
-                  <Link to={`/calculator?grade=${grade.id}`} className="product-cta">
-                    <Calculator size={16} aria-hidden="true" />
-                    Bu marka ilə hesabla
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </Link>
+                      <button type="button" className="flip-btn flip-btn--return" onClick={() => toggleFlip(grade.id)}>
+                        <RotateCcw size={15} aria-hidden="true" />
+                        Geri qayıt
+                      </button>
+                    </div>
+                  </div>
                 </article>
               );
             })}

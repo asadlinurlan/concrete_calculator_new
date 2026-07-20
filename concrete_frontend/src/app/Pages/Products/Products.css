@@ -139,6 +139,7 @@
   padding: 26px;
   display: flex;
   flex-direction: column;
+  perspective: 1400px; /* depth for the .card-flip 3D turn */
   transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med);
 }
 /* Highlighted by the use-case helper (data-attr — see Products.jsx note) */
@@ -237,38 +238,74 @@
 }
 
 /* Collapsible technical details — deep numbers stay opt-in */
-.product-tech {
-  margin-bottom: 18px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-sm);
-  background: var(--bg-inset);
-  overflow: hidden;
+/* ── Two-sided card flip ("Texniki məlumat" shows the back face) ──
+   Faces are stacked in the same grid cell, so the card's height is the
+   max of both faces — flipping never changes the card size or shifts
+   the grid. Reduced-motion users get an instant swap (global rule). */
+.card-flip {
+  flex: 1;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.55s var(--ease);
 }
-.product-tech summary {
+.card-flip.is-flipped { transform: rotateY(180deg); }
+.card-face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-back { transform: rotateY(180deg); }
+/* Hide the turned-away face for keyboard/AT users and clicks; the delay
+   keeps it painted until the card is halfway through the turn. */
+.card-flip:not(.is-flipped) .card-back,
+.card-flip.is-flipped .card-front {
+  visibility: hidden;
+  transition: visibility 0s 0.28s;
+  pointer-events: none;
+}
+
+.flip-btn {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  margin-bottom: 18px;
   padding: 11px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  background: var(--bg-inset);
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
-  list-style: none;
-  user-select: none;
-  transition: color var(--t-fast);
+  transition: color var(--t-fast), border-color var(--t-fast);
 }
-.product-tech summary::-webkit-details-marker { display: none; }
-.product-tech summary::after {
-  content: '+';
-  margin-left: auto;
-  font-size: 17px;
+.flip-btn:hover { color: var(--text-light); border-color: var(--steel-400); }
+.flip-btn-hint { margin-left: auto; opacity: 0.55; }
+.flip-btn--return { margin-top: auto; margin-bottom: 0; justify-content: center; }
+/* Group the front controls at the card bottom — free space stays in the
+   middle, buttons align across cards of different text lengths. */
+.card-front .flip-btn { margin-top: auto; }
+.card-front .product-cta { margin-top: 0; }
+
+.back-face-label {
+  align-self: center;
+  max-width: 55%;
+  text-align: right;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
-  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--amber-600);
 }
-.product-tech[open] summary::after { content: '−'; }
-.product-tech summary:hover { color: var(--text-light); }
-.product-tech-body { padding: 0 14px 14px; }
+/* Denser back face so it stays close to the front face's height */
+.card-back .product-card-head { margin-bottom: 12px; }
+.card-back .product-stats li { padding: 7px 0; font-size: 13.5px; }
+.card-back .tech-disclaimer { margin: 10px 0 14px; font-size: 11px; }
 .tech-disclaimer {
   margin: 12px 0 0;
   font-size: 11.5px;
@@ -281,12 +318,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 14px;
-  background: var(--bg-card);
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
   border-radius: var(--r-sm);
   margin-bottom: 12px;
 }
 .mix-label { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-muted); }
-.mix-value { font-family: var(--font-head); font-weight: 600; color: var(--amber-400); letter-spacing: 0.5px; }
+.mix-value { font-family: var(--font-head); font-weight: 600; color: var(--amber-600); letter-spacing: 0.5px; }
 
 .product-stats { list-style: none; margin: 0; padding: 0; }
 .product-stats li {
@@ -332,7 +370,7 @@
   .products-content { padding: var(--sp-8) 0; }
   .products-grid { gap: 16px; }
   .product-card { padding: 22px 18px; }
-  .product-tech summary { min-height: 46px; }
+  .flip-btn { min-height: 46px; }
   .product-cta { min-height: 48px; font-size: 13px; }
   .product-use { min-height: 0; }
 }
