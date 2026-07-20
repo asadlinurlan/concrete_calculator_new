@@ -48,14 +48,10 @@ const Products = () => {
   // "Nə tökürsünüz?" helper: highlighted/recommended grade card.
   const [recommended, setRecommended] = useState(null);
 
+  // Toggle: clicking the active chip deselects it. No auto-scroll —
+  // the answer appears inline right under the chips, the page never jumps.
   const recommend = (grade) => {
-    setRecommended(grade);
-    // Scroll the recommended card into view (respect reduced motion).
-    const el = document.getElementById(`grade-${grade}`);
-    if (el) {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
-    }
+    setRecommended((cur) => (cur === grade ? null : grade));
   };
 
   const recommendedGrade = CONCRETE_GRADES.find((g) => g.id === recommended);
@@ -83,15 +79,18 @@ const Products = () => {
             </p>
           </div>
 
-          {/* Use-case → grade helper for non-expert customers */}
+          {/* Use-case → grade helper for non-expert customers.
+              Chips toggle (second click deselects); the recommendation is
+              shown inline in a result card — the page never scroll-jumps. */}
           <div className="grade-helper reveal">
-            <span className="grade-helper-q">Nə tökürsünüz?</span>
+            <span className="grade-helper-q">Nə tökürsünüz? — iş növünü seçin, uyğun markanı göstərək</span>
             <div className="grade-helper-chips" role="group" aria-label="İş növünə görə marka seçimi">
               {USE_CASES.map((u) => (
                 <button
                   key={u.label}
                   type="button"
                   className={`grade-chip ${recommended === u.grade ? 'active' : ''}`}
+                  aria-pressed={recommended === u.grade}
                   onClick={() => recommend(u.grade)}
                 >
                   {u.label}
@@ -99,10 +98,30 @@ const Products = () => {
               ))}
             </div>
             {recommendedGrade && (
-              <p className="grade-helper-result" role="status">
-                Sizə uyğun marka: <strong>{recommendedGrade.id}</strong> ({recommendedGrade.bClass}) — {recommendedGrade.use}.{' '}
-                <Link to={`/calculator?grade=${recommendedGrade.id}`}>Bu marka ilə hesabla →</Link>
-              </p>
+              <div className="grade-helper-result" role="status">
+                <div className="ghr-info">
+                  <span className="ghr-badge">
+                    {recommendedGrade.id} · {recommendedGrade.bClass}
+                  </span>
+                  <p>
+                    <strong>{recommendedGrade.name}</strong> — {recommendedGrade.use}. Möhkəmlik:{' '}
+                    {recommendedGrade.strength} MPa.
+                  </p>
+                </div>
+                <div className="ghr-actions">
+                  <Link to={`/calculator?grade=${recommendedGrade.id}`} className="btn btn-primary ghr-btn">
+                    <Calculator size={15} aria-hidden="true" />
+                    Bu marka ilə hesabla
+                  </Link>
+                  <Link to={`/${recommendedGrade.id.toLowerCase()}-beton`} className="ghr-link">
+                    {recommendedGrade.id} haqqında ətraflı
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </Link>
+                  <button type="button" className="ghr-clear" onClick={() => setRecommended(null)}>
+                    Seçimi sıfırla
+                  </button>
+                </div>
+              </div>
             )}
           </div>
 
@@ -130,6 +149,10 @@ const Products = () => {
 
                   <h3 className="product-name">{grade.name}</h3>
                   <p className="product-use">{grade.use}</p>
+                  <Link to={`/${grade.id.toLowerCase()}-beton`} className="product-more">
+                    {grade.id} beton haqqında ətraflı
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </Link>
 
                   <details className="product-tech" open={openTech === grade.id}>
                     <summary

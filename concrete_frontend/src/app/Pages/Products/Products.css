@@ -75,15 +75,61 @@
   color: var(--graphite-900);
   font-weight: 600;
 }
+/* Inline recommendation card — appears under the chips, no page jump */
 .grade-helper-result {
   margin: 16px 0 0;
+  padding: 16px 18px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--amber-500);
+  border-radius: var(--r-md);
   font-size: 14.5px;
   color: var(--text-muted);
   line-height: 1.6;
 }
 .grade-helper-result strong { color: var(--text-light); font-family: var(--font-head); }
-.grade-helper-result a { color: var(--steel-600); text-decoration: none; font-weight: 600; white-space: nowrap; }
-.grade-helper-result a:hover { text-decoration: underline; }
+.ghr-info { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.ghr-info p { margin: 0; flex: 1; min-width: 200px; }
+.ghr-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--amber-500);
+  color: var(--graphite-900);
+  border-radius: var(--r-pill);
+  font-family: var(--font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ghr-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.ghr-btn { padding: 10px 18px; font-size: 13.5px; gap: 7px; }
+.ghr-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--steel-600);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.ghr-link:hover { text-decoration: underline; }
+.ghr-clear {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 6px 0;
+}
+.ghr-clear:hover { color: var(--text-light); }
 
 .product-card {
   position: relative;
@@ -164,9 +210,22 @@
   font-size: 13.5px;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   min-height: 44px;
 }
+
+/* Link from a grade card to its dedicated landing page */
+.product-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--steel-600);
+  text-decoration: none;
+}
+.product-more:hover { text-decoration: underline; }
 
 /* Trust line under the section title */
 .products-trust {

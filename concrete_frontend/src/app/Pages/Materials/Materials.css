@@ -454,6 +454,7 @@
 
 @media (max-width: 768px) {
   .mt-body { padding-top: var(--sp-6); }
+  .mt-hero { padding: 120px 0 40px; min-height: 0; }
   .mt-hero-actions .btn { flex: 1 1 100%; }
   .mt-product-info { padding: 22px 20px; }
   .mt-uses { grid-template-columns: 1fr; }
@@ -465,14 +466,37 @@
   .mt-cta-inner { flex-direction: column; align-items: stretch; text-align: center; }
   .mt-cta-actions { flex-direction: column; }
 
+  /* Compact 2-col trust grid — keeps the long page shorter on phones */
+  .mt-why-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mt-why-card { padding: 14px; }
+  .mt-why-icon { width: 36px; height: 36px; margin-bottom: 10px; }
+  .mt-why-card h3 { font-size: 14px; }
+  .mt-why-card p { font-size: 12.5px; }
+
   /* Sticky bar appears on phones; leave room for it above the footer */
   .mt-sticky { display: flex; }
   .mt-page { padding-bottom: 0; }
   .mt-cta-band { padding-bottom: 72px; }
+  /* …and keep the footer's last line (copyright) clear of the bar too */
+  body.has-sticky-cta .footer-bottom {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 560px) {
+  /* Comfortable full-width tap targets inside product cards */
+  .mt-product-actions { align-items: stretch; flex-direction: column; gap: 12px; }
+  .mt-product-actions .btn { width: 100%; }
+  .mt-product-actions .mt-detail-link { justify-content: center; min-height: 40px; }
 }
 
 @media (max-width: 400px) {
   .mt-product-info { padding: 20px 16px; }
   .mt-form-card { padding: 22px 14px; }
   .mt-sticky-btn { font-size: 12.5px; gap: 4px; }
+}
+
+/* Ultra-narrow phones only: trust cards back to one column */
+@media (max-width: 360px) {
+  .mt-why-grid { grid-template-columns: 1fr; }
 }
