@@ -207,13 +207,24 @@
   color: var(--text-light);
   margin-bottom: 6px;
 }
-.product-use {
+/* Use-area checklist on the card front */
+.product-uses {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.product-uses li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   font-size: 13.5px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 10px;
-  min-height: 44px;
+  line-height: 1.5;
 }
+.product-uses svg { color: var(--success); flex-shrink: 0; margin-top: 3px; }
 
 /* Link from a grade card to its dedicated landing page */
 .product-more {
@@ -287,8 +298,11 @@
 .flip-btn:hover { color: var(--text-light); border-color: var(--steel-400); }
 .flip-btn-hint { margin-left: auto; opacity: 0.55; }
 .flip-btn--return { margin-top: auto; margin-bottom: 0; justify-content: center; }
-/* Group the front controls at the card bottom — free space stays in the
-   middle, buttons align across cards of different text lengths. */
+/* Front controls sit at the card bottom; the two auto margins SPLIT the
+   leftover space into two small gaps (after the checklist and after the
+   "ətraflı" link) instead of one large hole — cards read as evenly filled
+   while every face keeps the same fixed height. */
+.card-front .product-more { margin-top: auto; }
 .card-front .flip-btn { margin-top: auto; }
 .card-front .product-cta { margin-top: 0; }
 
@@ -303,9 +317,10 @@
   color: var(--amber-600);
 }
 /* Denser back face so it stays close to the front face's height */
-.card-back .product-card-head { margin-bottom: 12px; }
-.card-back .product-stats li { padding: 7px 0; font-size: 13.5px; }
-.card-back .tech-disclaimer { margin: 10px 0 14px; font-size: 11px; }
+.card-back .product-card-head { margin-bottom: 10px; }
+.card-back .product-mix { padding: 10px 12px; margin-bottom: 10px; }
+.card-back .product-stats li { padding: 6px 0; font-size: 13.5px; }
+.card-back .tech-disclaimer { margin: 10px 0 12px; font-size: 11px; }
 .tech-disclaimer {
   margin: 12px 0 0;
   font-size: 11.5px;
@@ -372,7 +387,6 @@
   .product-card { padding: 22px 18px; }
   .flip-btn { min-height: 46px; }
   .product-cta { min-height: 48px; font-size: 13px; }
-  .product-use { min-height: 0; }
 }
 @media (max-width: 560px) {
   .products-grid { grid-template-columns: 1fr; gap: 14px; }

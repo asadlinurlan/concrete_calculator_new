@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, MessageCircle } from 'lucide-react';
+import { waHref } from '../../../Components/WhatsAppButton/WhatsAppButton';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -39,6 +40,26 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+      {/* Slim contact strip — instantly visible phone & WhatsApp at page top;
+          collapses away on scroll to keep the header minimal. */}
+      <div className="topbar" aria-hidden={isScrolled}>
+        <div className="container topbar-inner">
+          <a href="tel:+994506209584" className="topbar-item" tabIndex={isScrolled ? -1 : 0}>
+            <Phone size={13} aria-hidden="true" />
+            +994 50 620 95 84
+          </a>
+          <a
+            href={waHref('Salam! Qiymət təklifi almaq istəyirəm.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="topbar-item"
+            tabIndex={isScrolled ? -1 : 0}
+          >
+            <MessageCircle size={13} aria-hidden="true" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
       <nav className="navbar" aria-label="Əsas naviqasiya">
         <div className="navbar-container container">
           <Link to="/" className="logo" aria-label="Novxanı Beton ana səhifə">

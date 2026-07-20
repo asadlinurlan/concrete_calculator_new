@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Gauge, Layers, ArrowRight, Calculator, RotateCcw } from 'lucide-react';
+import { Gauge, Layers, ArrowRight, Calculator, RotateCcw, CheckCircle2 } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import { CONCRETE_GRADES, materialsPerM3, ratioLabel } from '../../../data/concreteGrades';
 import Seo from '../../../Components/Seo/Seo';
@@ -163,7 +163,16 @@ const Products = () => {
                       </div>
 
                       <h3 className="product-name">{grade.name}</h3>
-                      <p className="product-use">{grade.use}</p>
+                      {/* Use areas as a checklist — fills the face without
+                          growing it past the technical back face's height */}
+                      <ul className="product-uses">
+                        {grade.use.split(', ').map((u) => (
+                          <li key={u}>
+                            <CheckCircle2 size={14} aria-hidden="true" />
+                            {u.charAt(0).toUpperCase() + u.slice(1)}
+                          </li>
+                        ))}
+                      </ul>
                       <Link to={`/${grade.id.toLowerCase()}-beton`} className="product-more">
                         {grade.id} beton haqqında ətraflı
                         <ArrowRight size={14} aria-hidden="true" />
