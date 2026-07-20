@@ -97,10 +97,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* Rubber-band/overscroll: stop bounce where supported… */
-  overscroll-behavior: none;
-  /* …and where it still happens (older iOS Safari), the revealed canvas
-     is dark like the header/hero and footer — never a white flash. */
+  /* Overscroll/rubber-band reveals the canvas behind the page: keep it
+     dark like the header/hero and footer so it never flashes white.
+     (No overscroll-behavior here — it can block touchpad scrolling.) */
   background-color: var(--graphite-900);
 }
 
@@ -109,7 +108,6 @@ body {
   background-color: var(--bg-base);
   color: var(--text-light);
   overflow-x: hidden;
-  overscroll-behavior: none;
   line-height: 1.6;
 }
 
