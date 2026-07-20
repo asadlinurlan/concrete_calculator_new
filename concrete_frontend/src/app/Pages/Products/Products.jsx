@@ -9,6 +9,18 @@ import Faq from '../../../Components/Faq/Faq';
 import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Products.css';
 
+// "Nə tökürsünüz?" → tövsiyə olunan marka. Hər iş növü bir markaya bağlanır.
+const USE_CASES = [
+  { label: 'Hamarlama / altlıq', grade: 'M100' },
+  { label: 'Səki / bordür', grade: 'M150' },
+  { label: 'Döşəmə / ümumi tikinti', grade: 'M200' },
+  { label: 'Zolaq təməl / divar', grade: 'M250' },
+  { label: 'Monolit təməl / plitə / sütun', grade: 'M300' },
+  { label: 'Çoxmərtəbəli karkas', grade: 'M350' },
+  { label: 'Körpü / yüksək yük', grade: 'M400' },
+  { label: 'Xüsusi konstruksiya', grade: 'M450' },
+];
+
 const PRODUCT_FAQS = [
   {
     q: 'M və B hərfləri nə deməkdir?',
@@ -33,6 +45,20 @@ const Products = () => {
   // Exclusive accordion: at most one card's "Texniki məlumat" is open —
   // opening a grade closes the previously open one.
   const [openTech, setOpenTech] = useState(null);
+  // "Nə tökürsünüz?" helper: highlighted/recommended grade card.
+  const [recommended, setRecommended] = useState(null);
+
+  const recommend = (grade) => {
+    setRecommended(grade);
+    // Scroll the recommended card into view (respect reduced motion).
+    const el = document.getElementById(`grade-${grade}`);
+    if (el) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    }
+  };
+
+  const recommendedGrade = CONCRETE_GRADES.find((g) => g.id === recommended);
 
   return (
     <section className="products-section">
@@ -57,15 +83,40 @@ const Products = () => {
             </p>
           </div>
 
+          {/* Use-case → grade helper for non-expert customers */}
+          <div className="grade-helper reveal">
+            <span className="grade-helper-q">Nə tökürsünüz?</span>
+            <div className="grade-helper-chips" role="group" aria-label="İş növünə görə marka seçimi">
+              {USE_CASES.map((u) => (
+                <button
+                  key={u.label}
+                  type="button"
+                  className={`grade-chip ${recommended === u.grade ? 'active' : ''}`}
+                  onClick={() => recommend(u.grade)}
+                >
+                  {u.label}
+                </button>
+              ))}
+            </div>
+            {recommendedGrade && (
+              <p className="grade-helper-result" role="status">
+                Sizə uyğun marka: <strong>{recommendedGrade.id}</strong> ({recommendedGrade.bClass}) — {recommendedGrade.use}.{' '}
+                <Link to={`/calculator?grade=${recommendedGrade.id}`}>Bu marka ilə hesabla →</Link>
+              </p>
+            )}
+          </div>
+
           <div className="products-grid">
             {CONCRETE_GRADES.map((grade, index) => {
               const m = materialsPerM3(grade);
               return (
                 <article
                   key={grade.id}
-                  className="product-card reveal"
+                  id={`grade-${grade.id}`}
+                  className={`product-card reveal ${recommended === grade.id ? 'is-recommended' : ''}`}
                   style={{ transitionDelay: `${(index % 4) * 0.07}s` }}
                 >
+                  {recommended === grade.id && <span className="recommended-badge">Tövsiyə olunur</span>}
                   <div className="product-card-head">
                     <div className="product-grade">
                       <span className="grade-id">{grade.id}</span>
@@ -110,7 +161,7 @@ const Products = () => {
                     </div>
                   </details>
 
-                  <Link to="/calculator" className="product-cta">
+                  <Link to={`/calculator?grade=${grade.id}`} className="product-cta">
                     <Calculator size={16} aria-hidden="true" />
                     Bu marka ilə hesabla
                     <ArrowRight size={16} aria-hidden="true" />

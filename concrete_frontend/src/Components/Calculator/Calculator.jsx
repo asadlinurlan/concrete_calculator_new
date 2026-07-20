@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   CONCRETE_GRADES,
   getGrade,
@@ -146,8 +147,12 @@ const Calculator = () => {
   const [tubeInnerWidth, setTubeInnerWidth] = useState('');
   const [tubeDepth, setTubeDepth] = useState('');
 
-  // Advanced options
-  const [concreteGrade, setConcreteGrade] = useState('M300');
+  // Advanced options — preselect grade from ?grade=Mxxx (e.g. Products page CTA)
+  const [searchParams] = useSearchParams();
+  const gradeParam = searchParams.get('grade');
+  const [concreteGrade, setConcreteGrade] = useState(
+    CONCRETE_GRADES.some((g) => g.id === gradeParam) ? gradeParam : 'M300'
+  );
   const [wastePct, setWastePct] = useState(5); // material waste allowance %
   const [rebarEnabled, setRebarEnabled] = useState(true);
   const [rebarSpacing, setRebarSpacing] = useState(150);

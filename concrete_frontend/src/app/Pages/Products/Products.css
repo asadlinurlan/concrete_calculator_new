@@ -40,7 +40,53 @@
   align-items: start;
 }
 
+/* ── "Nə tökürsünüz?" → marka bələdçisi ── */
+.grade-helper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+.grade-helper-q {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+.grade-helper-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+.grade-chip {
+  border: 1px solid var(--border-color);
+  background: var(--bg-inset);
+  color: var(--text-light);
+  border-radius: var(--r-pill);
+  padding: 9px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--t-fast), background-color var(--t-fast), color var(--t-fast);
+}
+.grade-chip:hover { border-color: var(--steel-500); color: var(--steel-600); }
+.grade-chip.active {
+  background: var(--amber-500);
+  border-color: var(--amber-500);
+  color: var(--graphite-900);
+  font-weight: 600;
+}
+.grade-helper-result {
+  margin: 16px 0 0;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.grade-helper-result strong { color: var(--text-light); font-family: var(--font-head); }
+.grade-helper-result a { color: var(--steel-600); text-decoration: none; font-weight: 600; white-space: nowrap; }
+.grade-helper-result a:hover { text-decoration: underline; }
+
 .product-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--r-lg);
@@ -48,6 +94,23 @@
   display: flex;
   flex-direction: column;
   transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med);
+}
+/* Highlighted by the use-case helper */
+.product-card.is-recommended {
+  border-color: var(--amber-500);
+  box-shadow: 0 0 0 3px var(--amber-glow);
+}
+.recommended-badge {
+  position: absolute;
+  top: -11px;
+  left: 22px;
+  background: var(--amber-500);
+  color: var(--graphite-900);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  letter-spacing: 0.3px;
 }
 .product-card:hover {
   transform: translateY(-6px);
