@@ -1,27 +1,22 @@
 {
   "short_name": "Novxanı Beton",
-  "name": "Novxanı Beton — Peşəkar Beton Həlləri",
+  "name": "NOVXANI BETON",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "48x48 32x32 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "branding/novxani-beton-favicon-v2-192.png",
-      "type": "image/png",
+      "src": "/branding/novxani-beton-favicon-v2-192.png",
       "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "branding/novxani-beton-favicon-v2-512.png",
-      "type": "image/png",
+      "src": "/branding/novxani-beton-favicon-v2-512.png",
       "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#12161f",
-  "background_color": "#f5f7fb"
+  "theme_color": "#111722",
+  "background_color": "#111722"
 }
