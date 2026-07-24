@@ -108,10 +108,16 @@ function createServer() {
       });
       await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
       await new Promise((r) => setTimeout(r, 400)); // let helmet/observers settle
-      // Static paint must be fully visible: force all scroll-reveal elements
-      // shown, otherwise below-the-fold content is opacity:0 until JS loads.
       await page.evaluate(() => {
+        // Static paint must be fully visible: force all scroll-reveal elements
+        // shown, otherwise below-the-fold content is opacity:0 until JS loads.
         document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+        // Remove the GTM/GA <script> the inline loader injected at runtime, so the
+        // saved HTML keeps ONLY the inline snippet — otherwise gtm.js would load
+        // twice for real users (the snippet re-injects it on the client).
+        document
+          .querySelectorAll('script[src*="googletagmanager.com"], script[src*="google-analytics.com"]')
+          .forEach((s) => s.remove());
       });
       return await page.content();
     } finally {

@@ -385,7 +385,7 @@ const Calculator = () => {
   // WhatsApp price-quote link — the calculated volume/grade is pre-filled so
   // every enquiry arrives as a ready lead. No prices are shown on the site.
   const waLink = results
-    ? `https://wa.me/994503260343?text=${encodeURIComponent(
+    ? `https://wa.me/994506209584?text=${encodeURIComponent(
         `Salam! Saytın kalkulyatorunda hesablama apardım:\n• Marka: ${concreteGrade} (${results.gradeClass})\n• Həcm: ${results.volumeM3s} m³\n• Mikser: ${results.trucksNeeded} ədəd\nZəhmət olmasa qiymət təklifi göndərəsiniz.`
       )}`
     : '';

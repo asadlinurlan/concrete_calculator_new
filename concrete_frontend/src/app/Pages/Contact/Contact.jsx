@@ -245,7 +245,7 @@ const Contact = ({ fullPage }) => {
                       <span>Komandamız ən qısa zamanda (adətən iş günü ərzində) sizinlə əlaqə saxlayacaq. Təcili haldırsa, birbaşa yaza və ya zəng edə bilərsiniz:</span>
                       <div className="form-success-actions">
                         <a
-                          href="https://wa.me/994503260343"
+                          href="https://wa.me/994506209584"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="fs-wa"
