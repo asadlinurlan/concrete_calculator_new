@@ -10,7 +10,7 @@ import { SITE_URL } from '../../../seo/seoConfig';
 import { CONCRETE_GRADES } from '../../../data/concreteGrades';
 import './ServiceDetail.css';
 
-const WA_NUMBER = '994506209584';
+const WA_NUMBER = '994503260343';
 
 /**
  * SEO landing page template for service pages (data-driven from

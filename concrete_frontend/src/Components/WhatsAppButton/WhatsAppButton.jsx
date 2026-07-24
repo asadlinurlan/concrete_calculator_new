@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
-export const WA_NUMBER = '994506209584';
+export const WA_NUMBER = '994503260343';
 export const waHref = (text) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
 /**
