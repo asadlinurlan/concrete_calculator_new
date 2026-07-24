@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { MapPin, Phone, Mail, Clock, CheckCircle2, MessageCircle } from 'lucide-react';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
+import { trackEvent } from '../../../lib/analytics';
 import './Contact.css';
 
 // Web3Forms access key — get a free one in ~1 min at https://web3forms.com
@@ -13,8 +14,13 @@ const Contact = ({ fullPage }) => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [botField, setBotField] = useState(''); // honeypot — real users leave it empty
+  const startedRef = useRef(false); // analytics: fire form_start only once
 
   const handleChange = (e) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent('contact_form_start', { page_path: window.location.pathname, form_name: 'contact' });
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors((er) => ({ ...er, [e.target.name]: undefined }));
     if (status === 'sent' || status === 'error') setStatus('idle');
@@ -69,11 +75,14 @@ const Contact = ({ fullPage }) => {
       if (data.success) {
         setStatus('sent');
         setFormData({ fullName: '', email: '', phone: '', message: '' });
+        trackEvent('contact_form_submit', { page_path: window.location.pathname, form_name: 'contact' });
       } else {
         setStatus('error');
+        trackEvent('contact_form_error', { page_path: window.location.pathname, form_name: 'contact' });
       }
     } catch {
       setStatus('error');
+      trackEvent('contact_form_error', { page_path: window.location.pathname, form_name: 'contact' });
     }
   };
 

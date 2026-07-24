@@ -93,16 +93,19 @@ function createServer() {
     const page = await browser.newPage();
     try {
       await page.setViewport({ width: 1366, height: 900 });
-      if (blockExternal) {
-        // Retry mode: skip external resources (fonts/analytics/maps) that can
-        // hang networkidle0 on a flaky network. They are purely visual — the
-        // rendered DOM and meta tags are identical without them.
-        await page.setRequestInterception(true);
-        page.on('request', (req) => {
-          if (new URL(req.url()).hostname === 'localhost') req.continue();
-          else req.abort();
-        });
-      }
+      // Always intercept so GTM/GA never fire during the build (the inline
+      // snippet stays in the saved HTML for real users, but no bot page views
+      // reach Analytics from the prerender). blockExternal additionally drops
+      // all other external resources on the flaky-network retry path.
+      await page.setRequestInterception(true);
+      page.on('request', (req) => {
+        const host = new URL(req.url()).hostname;
+        const isLocal = host === 'localhost';
+        const isAnalytics = /googletagmanager\.com|google-analytics\.com|analytics\.google\.com/.test(host);
+        if (isAnalytics) return req.abort();
+        if (blockExternal && !isLocal) return req.abort();
+        return req.continue();
+      });
       await page.goto(`http://localhost:${PORT}${route}`, { waitUntil: 'networkidle0', timeout: 60000 });
       await new Promise((r) => setTimeout(r, 400)); // let helmet/observers settle
       // Static paint must be fully visible: force all scroll-reveal elements

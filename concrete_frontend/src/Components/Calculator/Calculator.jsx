@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { trackEvent } from '../../lib/analytics';
 import { MessageCircle } from 'lucide-react';
 import {
   CONCRETE_GRADES,
@@ -311,6 +312,25 @@ const Calculator = () => {
       footingLength, footingWidth, footingDepth, footingQuantity,
       tubeOuterLength, tubeOuterWidth, tubeInnerLength, tubeInnerWidth, tubeDepth]);
 
+  // ── Analytics: calculator engagement funnel (fired once each) ──
+  const startedRef = useRef(false);
+  const completedRef = useRef(false);
+  const onCalcInteract = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent('calculator_start', { page_path: '/calculator' });
+  };
+  useEffect(() => {
+    if (results && !completedRef.current) {
+      completedRef.current = true;
+      trackEvent('calculator_complete', {
+        page_path: '/calculator',
+        concrete_grade: concreteGrade,
+        calculated_volume: parseFloat(results.volumeM3s),
+      });
+    }
+  }, [results, concreteGrade]);
+
   const converterResult = useMemo(() => {
     const value = parseFloat(converterValue);
     if (isNaN(value)) return null;
@@ -553,7 +573,7 @@ const Calculator = () => {
   };
 
   return (
-    <div className="calculator-page">
+    <div className="calculator-page" onChangeCapture={onCalcInteract}>
       <Seo page="calculator" />
       <div className="calculator-hero">
         <div className="calculator-hero-overlay"></div>

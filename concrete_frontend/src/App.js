@@ -25,13 +25,25 @@ import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 import WhatsAppFab from "./Components/WhatsAppFab/WhatsAppFab";
 import StickyContactBar from "./Components/StickyContactBar/StickyContactBar";
+import { trackPageView, attachAutoTracking } from "./lib/analytics";
 
-// Scrolls to top on navigation and (re)wires scroll-reveal for the new page.
+// Scrolls to top on navigation, (re)wires scroll-reveal and reports SPA
+// page views + auto-tracks contact-link clicks for analytics.
 function RouteManager() {
   const { pathname } = useLocation();
+
+  // One-time: delegated click tracking for tel/whatsapp/email/directions links.
+  useEffect(() => {
+    attachAutoTracking();
+  }, []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
+    // Defer a tick so react-helmet has updated document.title for this route.
+    const t = setTimeout(() => trackPageView(pathname), 50);
+    return () => clearTimeout(t);
   }, [pathname]);
+
   useScrollReveal([pathname]);
   return null;
 }

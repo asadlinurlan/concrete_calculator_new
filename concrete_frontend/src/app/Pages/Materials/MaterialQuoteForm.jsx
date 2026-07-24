@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import { MATERIALS } from '../../../data/materials';
+import { trackEvent } from '../../../lib/analytics';
 
 // Web3Forms — same access key as the main contact form.
 const WEB3FORMS_ACCESS_KEY = 'e1ffd016-dd39-419f-aa5c-382ee00c412d';
@@ -31,8 +32,16 @@ const MaterialQuoteForm = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [botField, setBotField] = useState(''); // honeypot
+  const startedRef = useRef(false); // analytics: fire form_start only once
+
+  const trackStart = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent('quote_form_start', { page_path: window.location.pathname, form_name: 'material_quote' });
+  };
 
   const setField = (e) => {
+    trackStart();
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((er) => ({ ...er, [name]: undefined }));
@@ -40,6 +49,7 @@ const MaterialQuoteForm = () => {
   };
 
   const toggleProduct = (id) => {
+    trackStart();
     setProducts((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
     setErrors((er) => ({ ...er, products: undefined }));
     if (status === 'sent' || status === 'error') setStatus('idle');
@@ -97,13 +107,21 @@ const MaterialQuoteForm = () => {
       const data = await res.json();
       if (data.success) {
         setStatus('sent');
+        trackEvent('quote_request', {
+          page_path: window.location.pathname,
+          form_name: 'material_quote',
+          products: productNames,
+          customer_type: form.customerType,
+        });
         setForm(INITIAL);
         setProducts([]);
       } else {
         setStatus('error');
+        trackEvent('quote_form_error', { page_path: window.location.pathname, form_name: 'material_quote' });
       }
     } catch {
       setStatus('error');
+      trackEvent('quote_form_error', { page_path: window.location.pathname, form_name: 'material_quote' });
     }
   };
 
