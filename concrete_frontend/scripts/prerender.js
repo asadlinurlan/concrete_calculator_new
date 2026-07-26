@@ -93,8 +93,8 @@ function createServer() {
     const page = await browser.newPage();
     try {
       await page.setViewport({ width: 1366, height: 900 });
-      // Always intercept so GTM/GA never fire during the build (the inline
-      // snippet stays in the saved HTML for real users, but no bot page views
+      // Always intercept so GTM/GA never fire during the build (the tag-init.js
+      // bootstrap stays in the saved HTML for real users, but no bot page views
       // reach Analytics from the prerender). blockExternal additionally drops
       // all other external resources on the flaky-network retry path.
       await page.setRequestInterception(true);
