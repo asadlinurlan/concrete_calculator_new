@@ -81,6 +81,7 @@ const Header = () => {
                 <Link
                   key={loc}
                   to={langTarget(loc)}
+                  state={{ keepScroll: true }}
                   className={`lang-switch-link ${locale === loc ? 'active' : ''}`}
                   aria-current={locale === loc ? 'page' : undefined}
                 >

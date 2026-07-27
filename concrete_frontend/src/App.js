@@ -31,7 +31,11 @@ import { LOCALES, LocaleProvider, localePath, splitPath } from "./i18n/i18n";
 // Scrolls to top on navigation, (re)wires scroll-reveal and reports SPA
 // page views + auto-tracks contact-link clicks for analytics.
 function RouteManager() {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
+  // Language switches navigate with state.keepScroll — the user stays where
+  // they are instead of being thrown back to the top of the page.
+  const keepScroll = Boolean(location.state && location.state.keepScroll);
 
   // One-time: delegated click tracking for tel/whatsapp/email/directions links.
   useEffect(() => {
@@ -39,15 +43,18 @@ function RouteManager() {
   }, []);
 
   useEffect(() => {
-    // Honour #anchor deep links (e.g. Ads sitelinks to /en/concrete#grades):
-    // the fresh render replaces the DOM node the browser scrolled to natively.
-    const { hash } = window.location;
-    const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
-    if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
-    else window.scrollTo({ top: 0, behavior: "auto" });
+    if (!keepScroll) {
+      // Honour #anchor deep links (e.g. Ads sitelinks to /en/concrete#grades):
+      // the fresh render replaces the DOM node the browser scrolled to natively.
+      const { hash } = window.location;
+      const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+      else window.scrollTo({ top: 0, behavior: "auto" });
+    }
     // Defer a tick so react-helmet has updated document.title for this route.
     const t = setTimeout(() => trackPageView(pathname), 50);
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useScrollReveal([pathname]);

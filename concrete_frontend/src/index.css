@@ -1,4 +1,13 @@
 /* Base reset — design tokens & typography live in App.css */
+
+/* Always reserve the vertical-scrollbar gutter: without this the page
+   shifts horizontally whenever content height crosses the viewport
+   (e.g. switching languages re-renders and the scrollbar pops in/out). */
+html { overflow-y: scroll; }
+@supports (scrollbar-gutter: stable) {
+  html { overflow-y: auto; scrollbar-gutter: stable; }
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
