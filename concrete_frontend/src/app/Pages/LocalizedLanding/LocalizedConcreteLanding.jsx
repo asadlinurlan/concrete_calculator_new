@@ -6,17 +6,18 @@ import {
   Menu,
   X,
   MessageCircle,
+  Calculator,
   ArrowRight,
   ShieldCheck,
-  Layers,
   Truck,
   Award,
+  Layers,
+  BadgeCheck,
+  BarChart3,
   Factory,
-  Gauge,
-  Home,
   MapPin,
-  Handshake,
   Mail,
+  Clock,
   CheckCircle2,
 } from 'lucide-react';
 import { SITE_URL } from '../../../seo/seoConfig';
@@ -25,8 +26,13 @@ import { waHref } from '../../../Components/WhatsAppButton/WhatsAppButton';
 import { trackEvent } from '../../../lib/analytics';
 import { LANDING_CONTENT } from './landingContent';
 import heroImage from '../img/concrete.jpeg';
-import deliveryImage from '../img/service-1.png';
-import pumpingImage from '../img/service-2.webp';
+import aboutImage from '../img/workers-construction-site.jpg';
+import serviceHazir from '../img/service-1.png';
+import serviceNasos from '../img/service-2.webp';
+import serviceTerezi from '../img/service-terezi-home.jpg';
+import imgQum from '../img/material-qum.webp';
+import imgAtsep from '../img/material-atsep.webp';
+import imgSeben from '../img/material-seben.webp';
 import './LocalizedConcreteLanding.css';
 
 // Web3Forms — same access key as the main contact form.
@@ -35,19 +41,68 @@ const WEB3FORMS_ACCESS_KEY = 'e1ffd016-dd39-419f-aa5c-382ee00c412d';
 // Official contact split — call and WhatsApp are DIFFERENT numbers.
 const CALL_TEL = 'tel:+994506209584';
 const CALL_DISPLAY = '+994 50 620 95 84';
-const WA_DISPLAY = '+994 50 326 03 43';
 const MAPS_URL = 'https://maps.app.goo.gl/uKEuWDVuWqoAccEZA';
 
 const BADGE_ICONS = { shield: ShieldCheck, layers: Layers, truck: Truck, award: Award };
-const SERVICE_ICONS = { factory: Factory, truck: Truck, gauge: Gauge, home: Home, mappin: MapPin, handshake: Handshake };
+const FEATURE_ICONS = { layers: Layers, badge: BadgeCheck, chart: BarChart3, truck: Truck };
+const SERVICE_IMAGES = { hazir: serviceHazir, nasos: serviceNasos, terezi: serviceTerezi };
+const MATERIAL_IMAGES = { qum: imgQum, atsep: imgAtsep, seben: imgSeben };
 
-const INITIAL_FORM = { fullName: '', phone: '', grade: '', volume: '', address: '', note: '' };
+const INITIAL_FORM = { fullName: '', phone: '', email: '', message: '' };
+
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="check-icon">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+);
+
+// Footer inline SVG icons — copied from the site Footer for a 1:1 look.
+const FOOTER_ICONS = {
+  location: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+  ),
+  phone: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+    </svg>
+  ),
+  email: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+  ),
+  clock: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </svg>
+  ),
+  facebook: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  ),
+  instagram: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  ),
+  linkedin: (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </svg>
+  ),
+};
 
 /**
  * Fully localized Google Ads landing page (locale = "en" | "ru").
- * Mirrors the original site's UI exactly — same header, hero, cards, form and
- * footer components/classes as the Azerbaijani homepage — with every visible
- * string coming from LANDING_CONTENT (single language per page).
+ * An exact clone of the Azerbaijani homepage — same sections, layout,
+ * icons and images — with every visible string translated 1:1 via
+ * LANDING_CONTENT (single language per page).
  */
 const LocalizedConcreteLanding = ({ locale }) => {
   const c = LANDING_CONTENT[locale] || LANDING_CONTENT.en;
@@ -81,34 +136,38 @@ const LocalizedConcreteLanding = ({ locale }) => {
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  /* ---------- Quote form ---------- */
-  const [form, setForm] = useState(INITIAL_FORM);
+  /* ---------- Contact form (same fields as the homepage form) ---------- */
+  const [formData, setFormData] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
-  const [showRequired, setShowRequired] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [botField, setBotField] = useState(''); // honeypot — real users leave it empty
   const startedRef = useRef(false); // analytics: fire contact_form_start only once
 
-  const setField = (e) => {
+  const handleChange = (e) => {
     if (!startedRef.current) {
       startedRef.current = true;
       trackEvent('contact_form_start', { page_path: c.path, form_name: c.formName });
     }
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
-    setErrors((er) => ({ ...er, [name]: undefined }));
-    setShowRequired(false);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors((er) => ({ ...er, [e.target.name]: undefined }));
     if (status === 'sent' || status === 'error') setStatus('idle');
   };
 
+  // Essential fields are required: name, phone, email and message
   const validate = () => {
     const er = {};
-    if (!form.fullName.trim()) er.fullName = c.quote.fieldErrors.fullName;
-    if (!form.phone.trim()) {
-      er.phone = c.quote.fieldErrors.phone;
-    } else if (!/^[+()\d\s-]{9,20}$/.test(form.phone.trim())) {
-      er.phone = c.quote.fieldErrors.phoneInvalid;
+    if (!formData.fullName.trim()) er.fullName = c.contact.errors.fullName;
+    if (!formData.phone.trim()) {
+      er.phone = c.contact.errors.phone;
+    } else if (!/^[+()\d\s-]{9,20}$/.test(formData.phone.trim())) {
+      er.phone = c.contact.errors.phoneInvalid;
     }
+    if (!formData.email.trim()) {
+      er.email = c.contact.errors.email;
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
+      er.email = c.contact.errors.emailInvalid;
+    }
+    if (!formData.message.trim()) er.message = c.contact.errors.message;
     return er;
   };
 
@@ -119,33 +178,30 @@ const LocalizedConcreteLanding = ({ locale }) => {
     const er = validate();
     if (Object.keys(er).length > 0) {
       setErrors(er);
-      setShowRequired(true);
       const el = document.getElementById(`lcl-${Object.keys(er)[0]}`);
       if (el) el.focus();
       return;
     }
     setStatus('sending');
     try {
-      // FormData (not JSON) → CORS "simple request", no preflight — same
-      // officially supported Web3Forms method as the existing forms.
+      // FormData (not JSON) → a CORS "simple request", so no preflight — this
+      // is Web3Forms' officially supported method, same as the main form.
       const fd = new FormData();
       fd.append('access_key', WEB3FORMS_ACCESS_KEY);
       fd.append('subject', c.web3forms.subject);
       fd.append('from_name', c.web3forms.fromName);
       fd.append('form_name', c.formName);
       fd.append('Language', c.web3forms.language);
-      fd.append('name', form.fullName);
-      fd.append('phone', form.phone);
-      fd.append('Concrete grade', form.grade || '—');
-      fd.append('Required volume', form.volume ? `${form.volume} m³` : '—');
-      fd.append('Delivery address', form.address || '—');
-      fd.append('Additional information', form.note || '—');
+      fd.append('name', formData.fullName);
+      fd.append('email', formData.email);
+      fd.append('phone', formData.phone);
+      fd.append('message', formData.message);
 
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
       const data = await res.json();
       if (data.success) {
         setStatus('sent');
-        setForm(INITIAL_FORM);
+        setFormData(INITIAL_FORM);
         trackEvent('contact_form_submit', { page_path: c.path, form_name: c.formName });
       } else {
         setStatus('error'); // keep entered data so the user can retry
@@ -180,10 +236,10 @@ const LocalizedConcreteLanding = ({ locale }) => {
   };
 
   const contactItems = [
-    { Icon: MapPin, title: c.footer.labels.address, value: c.footer.addressValue, href: MAPS_URL },
-    { Icon: Phone, title: c.footer.labels.call, value: CALL_DISPLAY, href: CALL_TEL },
-    { Icon: MessageCircle, title: c.footer.labels.whatsapp, value: WA_DISPLAY, href: waHref(c.whatsappText) },
-    { Icon: Mail, title: c.footer.labels.email, value: 'info@novxanibeton.az', href: 'mailto:info@novxanibeton.az' },
+    { Icon: MapPin, title: c.contact.infoAddress, value: c.contact.infoAddressValue, href: MAPS_URL },
+    { Icon: Phone, title: c.contact.infoPhone, value: CALL_DISPLAY, href: CALL_TEL },
+    { Icon: Mail, title: c.contact.infoEmail, value: 'info@novxanibeton.az', href: 'mailto:info@novxanibeton.az' },
+    { Icon: Clock, title: c.contact.infoHours, value: c.contact.infoHoursValue },
   ];
 
   return (
@@ -210,15 +266,20 @@ const LocalizedConcreteLanding = ({ locale }) => {
         <nav className="navbar" aria-label={c.header.navAriaLabel}>
           <div className="navbar-container container">
             <Link to={c.path} className="logo" aria-label={c.header.logoAriaLabel}>
-              <img src="/NOVKHANI.svg" alt="NOVXANI BETON" className="logo-svg" />
+              <img src="/NOVKHANI.svg" alt="Novxani Beton" className="logo-svg" />
               <span className="logo-wordmark" aria-hidden="true">NOVXANI</span>
             </Link>
 
             <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-              {c.header.nav.map((n) => (
-                <a key={n.href} href={n.href} className="nav-link" onClick={closeMenu}>
-                  {n.label}
-                </a>
+              {c.header.nav.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`nav-link ${link.to === c.path ? 'active' : ''}`}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </Link>
               ))}
               <div className="lcl-lang" role="group" aria-label={c.header.langSwitchAriaLabel}>
                 <Link
@@ -259,7 +320,7 @@ const LocalizedConcreteLanding = ({ locale }) => {
       </header>
 
       <main>
-        {/* ---------- Hero — same structure as the site hero ---------- */}
+        {/* ---------- Hero — same structure as the homepage hero ---------- */}
         <section className="hero-section">
           <img
             className="hero-bg-img"
@@ -274,29 +335,23 @@ const LocalizedConcreteLanding = ({ locale }) => {
           <div className="hero-content">
             <div className="container">
               <h1 className="hero-title reveal">
-                {c.hero.h1Line1}<br />
-                <span className="hero-accent">{c.hero.h1Accent}</span>
+                {c.hero.titleLine1}<br />
+                <span className="hero-accent">{c.hero.titleAccent}</span>
               </h1>
               <span className="hero-eyebrow reveal">{c.hero.eyebrow}</span>
-              <p className="hero-desc reveal">{c.hero.text}</p>
+              <p className="hero-desc reveal">{c.hero.desc}</p>
               <div className="hero-actions reveal">
-                <a href="#quote" className="btn btn-accent btn-lg">
+                <Link to="/calculator" className="btn btn-accent btn-lg">
+                  <Calculator size={20} aria-hidden="true" />
+                  {c.hero.ctaCalc}
+                </Link>
+                <Link to="/tikinti-materiallari" className="btn btn-ghost btn-lg">
+                  {c.hero.ctaMaterials}
+                  <ArrowRight size={20} aria-hidden="true" />
+                </Link>
+                <a href="#contact" className="btn btn-ghost btn-lg">
                   {c.hero.ctaQuote}
                   <ArrowRight size={20} aria-hidden="true" />
-                </a>
-                <a href={CALL_TEL} className="btn btn-ghost btn-lg">
-                  <Phone size={20} aria-hidden="true" />
-                  {c.hero.ctaCall}
-                </a>
-                <a
-                  href={waHref(c.whatsappText)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost btn-lg"
-                  aria-label={c.whatsappAriaLabel}
-                >
-                  <MessageCircle size={20} aria-hidden="true" />
-                  {c.hero.ctaWhatsApp}
                 </a>
               </div>
 
@@ -317,16 +372,12 @@ const LocalizedConcreteLanding = ({ locale }) => {
           </div>
         </section>
 
-        {/* ---------- Services — feature-card grid like the homepage ---------- */}
-        <section id="services" className="features-section lcl-anchor">
+        {/* ---------- Features — same 4 cards as the homepage ---------- */}
+        <section className="features-section">
           <div className="container">
-            <div className="section-head reveal">
-              <span className="section-subtitle">{c.services.subtitle}</span>
-              <h2 className="section-title">{c.services.title}</h2>
-            </div>
-            <div className="features-grid lcl-feat6">
-              {c.services.items.map(({ icon, title, text }, index) => {
-                const Icon = SERVICE_ICONS[icon];
+            <div className="features-grid">
+              {c.features.map(({ icon, title, description }, index) => {
+                const Icon = FEATURE_ICONS[icon];
                 return (
                   <div
                     key={title}
@@ -337,7 +388,7 @@ const LocalizedConcreteLanding = ({ locale }) => {
                       <Icon size={28} strokeWidth={1.75} />
                     </div>
                     <h3 className="feature-title">{title}</h3>
-                    <p className="feature-description">{text}</p>
+                    <p className="feature-description">{description}</p>
                   </div>
                 );
               })}
@@ -345,65 +396,140 @@ const LocalizedConcreteLanding = ({ locale }) => {
           </div>
         </section>
 
-        {/* ---------- Concrete grades ---------- */}
-        <section id="grades" className="lcl-grades-section lcl-anchor">
+        {/* ---------- About — same as the homepage about block ---------- */}
+        <section id="about" className="about-section">
+          <div className="about-content">
+            <div className="container">
+              <div className="about-grid">
+                <div className="about-image-container reveal">
+                  <img
+                    className="about-image main-image"
+                    src={aboutImage}
+                    alt={c.about.imgAlt}
+                    width="800"
+                    height="533"
+                    loading="lazy"
+                  />
+                  <div className="experience-badge">
+                    <span className="badge-number">{c.about.badgeNumber}</span>
+                    <span className="badge-text">{c.about.badgeText}</span>
+                  </div>
+                </div>
+                <div className="about-text reveal">
+                  <span className="section-subtitle">{c.about.subtitle}</span>
+                  <h2 className="section-title about-title">{c.about.title}</h2>
+                  <p className="about-description">{c.about.p1}</p>
+                  <p className="about-description">{c.about.p2}</p>
+                  <div className="about-features">
+                    {c.about.checks.map((check) => (
+                      <div className="about-feature" key={check}>
+                        <span className="check"><CheckIcon /></span> {check}
+                      </div>
+                    ))}
+                  </div>
+                  <a href="#contact" className="btn-explore">{c.about.cta}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- Services — same 3 image cards as the homepage ---------- */}
+        <section id="services" className="services-section">
+          <div className="services-content">
+            <div className="container">
+              <div className="section-head reveal">
+                <span className="section-subtitle">{c.services.subtitle}</span>
+                <h2 className="section-title">{c.services.title}</h2>
+              </div>
+              <div className="services-grid">
+                {c.services.cards.map((service, index) => (
+                  <div
+                    key={service.title}
+                    className="service-card-img reveal"
+                    style={{ transitionDelay: `${index * 0.08}s` }}
+                  >
+                    <div className="service-image">
+                      <img src={SERVICE_IMAGES[service.img]} alt={service.alt} width="600" height="400" loading="lazy" />
+                    </div>
+                    <div className="service-info">
+                      <h3>{service.title}</h3>
+                      <p>{service.description}</p>
+                      <Link
+                        to={service.to}
+                        className="service-link-arrow"
+                        aria-label={`${service.title} — ${c.services.detailSuffix}`}
+                      >
+                        <ArrowRight size={20} />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- Materials — same section as the homepage ---------- */}
+        <section id="materials" className="mh-section" aria-label={c.materials.ariaLabel}>
           <div className="container">
             <div className="section-head reveal">
-              <span className="section-subtitle">{c.grades.subtitle}</span>
-              <h2 className="section-title">{c.grades.title}</h2>
-              <p className="lcl-grades-lead">{c.grades.text}</p>
+              <span className="section-subtitle">{c.materials.subtitle}</span>
+              <h2 className="section-title">{c.materials.title}</h2>
+              <p className="mh-lead">{c.materials.lead}</p>
             </div>
-            <ul className="lcl-grades reveal" aria-label={c.grades.listAriaLabel}>
-              {CONCRETE_GRADES.map((g) => (
-                <li className="lcl-grade" key={g.id}>
-                  <strong>{g.id}</strong>
-                  <span>{g.bClass} · {g.strength} {c.grades.unit}</span>
-                </li>
+
+            <div className="mh-grid">
+              {c.materials.cards.map((m, index) => (
+                <article
+                  className="mh-card reveal"
+                  key={m.id}
+                  style={{ transitionDelay: `${index * 0.08}s` }}
+                >
+                  <div className="mh-card-media">
+                    <img src={MATERIAL_IMAGES[m.id]} alt={m.alt} width="900" height="600" loading="lazy" />
+                  </div>
+                  <div className="mh-card-body">
+                    <h3>{m.name}</h3>
+                    <p>{m.short}</p>
+                    <div className="mh-card-tags">
+                      <span>{c.materials.tagWholesale}</span>
+                      <span>{c.materials.tagRetail}</span>
+                      <span><Truck size={13} aria-hidden="true" /> {c.materials.tagDelivery}</span>
+                    </div>
+                    <Link to={`/${m.id}-satisi`} className="btn btn-primary mh-card-btn">
+                      {m.btn}
+                      <ArrowRight size={16} aria-hidden="true" />
+                    </Link>
+                  </div>
+                </article>
               ))}
-            </ul>
-          </div>
-        </section>
+            </div>
 
-        {/* ---------- Delivery & pumping — image cards like the homepage ---------- */}
-        <section className="services-section">
-          <div className="container">
-            <div className="services-grid lcl-duo">
-              <div id="delivery" className="service-card-img reveal lcl-anchor">
-                <div className="service-image">
-                  <img src={deliveryImage} alt={c.delivery.imgAlt} width="600" height="400" loading="lazy" />
-                </div>
-                <div className="service-info">
-                  <h2 className="lcl-service-h2">{c.delivery.title}</h2>
-                  <p>{c.delivery.text}</p>
-                  <a href="#quote" className="service-link-arrow" aria-label={c.delivery.linkAriaLabel}>
-                    <ArrowRight size={20} />
-                  </a>
+            <div className="mh-b2b reveal">
+              <div className="mh-b2b-text">
+                <span className="mh-b2b-icon" aria-hidden="true"><Factory size={22} /></span>
+                <div>
+                  <h3>{c.materials.b2bTitle}</h3>
+                  <p>{c.materials.b2bText}</p>
                 </div>
               </div>
-              <div id="pumping" className="service-card-img reveal lcl-anchor" style={{ transitionDelay: '0.08s' }}>
-                <div className="service-image">
-                  <img src={pumpingImage} alt={c.pumping.imgAlt} width="600" height="400" loading="lazy" />
-                </div>
-                <div className="service-info">
-                  <h2 className="lcl-service-h2">{c.pumping.title}</h2>
-                  <p>{c.pumping.text}</p>
-                  <a href="#quote" className="service-link-arrow" aria-label={c.pumping.linkAriaLabel}>
-                    <ArrowRight size={20} />
-                  </a>
-                </div>
-              </div>
+              <Link to="/tikinti-materiallari#topdan-satis" className="btn btn-accent">
+                {c.materials.b2bBtn}
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* ---------- Quote — same layout as the site contact block ---------- */}
-        <section id="quote" className="contact-section lcl-anchor">
+        {/* ---------- Contact — same as the homepage contact block ---------- */}
+        <section id="contact" className="contact-section">
           <div className="contact-content">
             <div className="container">
               <div className="contact-grid">
                 <div className="contact-info-side reveal">
-                  <h2 className="contact-main-title">{c.quote.title}</h2>
-                  <p className="contact-description">{c.quote.intro}</p>
+                  <h2 className="contact-main-title">{c.contact.title}</h2>
+                  <p className="contact-description">{c.contact.desc}</p>
 
                   <div className="contact-info-list">
                     {contactItems.map(({ Icon, title, value, href }) => (
@@ -411,15 +537,19 @@ const LocalizedConcreteLanding = ({ locale }) => {
                         <div className="info-icon" aria-hidden="true"><Icon size={22} /></div>
                         <div className="info-content">
                           <h4>{title}</h4>
-                          <p>
-                            <a
-                              href={href}
-                              className="info-link"
-                              {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                            >
-                              {value}
-                            </a>
-                          </p>
+                          {href ? (
+                            <p>
+                              <a
+                                href={href}
+                                className="info-link"
+                                {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                              >
+                                {value}
+                              </a>
+                            </p>
+                          ) : (
+                            <p>{value}</p>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -427,18 +557,18 @@ const LocalizedConcreteLanding = ({ locale }) => {
 
                   <div className="contact-map">
                     <iframe
-                      title={c.quote.mapTitle}
-                      src={`https://www.google.com/maps?q=40.4858529,49.8294278&z=16&hl=${c.quote.mapHl}&output=embed`}
+                      title={c.contact.mapTitle}
+                      src={`https://www.google.com/maps?q=40.4858529,49.8294278&z=16&hl=${c.contact.mapHl}&output=embed`}
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                     ></iframe>
                   </div>
                 </div>
 
-                <div className="contact-form-container reveal">
+                <div id="quote" className="contact-form-container reveal">
                   <div className="contact-form-head">
-                    <h3>{c.quote.formTitle}</h3>
-                    <p>{c.quote.formNote}</p>
+                    <h3>{c.contact.formTitle}</h3>
+                    <p>{c.contact.formNote}</p>
                   </div>
                   <form onSubmit={handleSubmit} className="contact-form" noValidate>
                     {/* Honeypot: hidden from users, bots tend to fill it */}
@@ -454,99 +584,78 @@ const LocalizedConcreteLanding = ({ locale }) => {
                     />
                     <div className="form-row">
                       <div className="form-group">
-                        <label htmlFor="lcl-fullName">{c.quote.labels.fullName} *</label>
+                        <label htmlFor="lcl-fullName">{c.contact.labels.fullName} *</label>
                         <input
                           type="text"
                           id="lcl-fullName"
                           name="fullName"
                           autoComplete="name"
-                          placeholder={c.quote.placeholders.fullName}
-                          value={form.fullName}
-                          onChange={setField}
+                          placeholder={c.contact.placeholders.fullName}
+                          value={formData.fullName}
+                          onChange={handleChange}
                           aria-invalid={!!errors.fullName}
                           aria-describedby={errors.fullName ? 'lcl-fullName-err' : undefined}
                           required
                         />
-                        {errors.fullName && (
-                          <span className="form-err" id="lcl-fullName-err" role="alert">{errors.fullName}</span>
-                        )}
+                        {errors.fullName && <span className="form-err" id="lcl-fullName-err" role="alert">{errors.fullName}</span>}
                       </div>
                       <div className="form-group">
-                        <label htmlFor="lcl-phone">{c.quote.labels.phone} *</label>
+                        <label htmlFor="lcl-phone">{c.contact.labels.phone} *</label>
                         <input
                           type="tel"
                           id="lcl-phone"
                           name="phone"
                           autoComplete="tel"
-                          placeholder={c.quote.placeholders.phone}
-                          value={form.phone}
-                          onChange={setField}
+                          placeholder={c.contact.placeholders.phone}
+                          value={formData.phone}
+                          onChange={handleChange}
                           aria-invalid={!!errors.phone}
                           aria-describedby={errors.phone ? 'lcl-phone-err' : undefined}
                           required
                         />
-                        {errors.phone && (
-                          <span className="form-err" id="lcl-phone-err" role="alert">{errors.phone}</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="lcl-grade">{c.quote.labels.grade}</label>
-                        <select id="lcl-grade" name="grade" value={form.grade} onChange={setField}>
-                          <option value="">{c.quote.gradePlaceholder}</option>
-                          {CONCRETE_GRADES.map((g) => (
-                            <option key={g.id} value={g.id}>{g.id} ({g.bClass})</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="lcl-volume">{c.quote.labels.volume}</label>
-                        <input
-                          type="text"
-                          id="lcl-volume"
-                          name="volume"
-                          inputMode="decimal"
-                          placeholder={c.quote.placeholders.volume}
-                          value={form.volume}
-                          onChange={setField}
-                        />
+                        {errors.phone && <span className="form-err" id="lcl-phone-err" role="alert">{errors.phone}</span>}
                       </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="lcl-address">{c.quote.labels.address}</label>
+                      <label htmlFor="lcl-email">{c.contact.labels.email} *</label>
                       <input
-                        type="text"
-                        id="lcl-address"
-                        name="address"
-                        autoComplete="street-address"
-                        placeholder={c.quote.placeholders.address}
-                        value={form.address}
-                        onChange={setField}
+                        type="email"
+                        id="lcl-email"
+                        name="email"
+                        autoComplete="email"
+                        placeholder={c.contact.placeholders.email}
+                        value={formData.email}
+                        onChange={handleChange}
+                        aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? 'lcl-email-err' : undefined}
+                        required
                       />
+                      {errors.email && <span className="form-err" id="lcl-email-err" role="alert">{errors.email}</span>}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="lcl-note">{c.quote.labels.note}</label>
+                      <label htmlFor="lcl-message">{c.contact.labels.message} *</label>
                       <textarea
-                        id="lcl-note"
-                        name="note"
-                        placeholder={c.quote.placeholders.note}
-                        rows="4"
-                        value={form.note}
-                        onChange={setField}
+                        id="lcl-message"
+                        name="message"
+                        placeholder={c.contact.placeholders.message}
+                        rows="5"
+                        value={formData.message}
+                        onChange={handleChange}
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? 'lcl-message-err' : undefined}
+                        required
                       ></textarea>
+                      {errors.message && <span className="form-err" id="lcl-message-err" role="alert">{errors.message}</span>}
                     </div>
                     <button type="submit" className="btn-submit" disabled={status === 'sending'}>
-                      {status === 'sending' ? c.quote.submitting : c.quote.submit}
+                      {status === 'sending' ? c.contact.sending : c.contact.submit}
                     </button>
-                    {showRequired && (
-                      <div className="form-error" role="alert">{c.quote.requiredFields}</div>
-                    )}
                     {status === 'sent' && (
                       <div className="form-success" role="status">
                         <CheckCircle2 size={22} aria-hidden="true" />
                         <div className="form-success-body">
-                          <strong>{c.quote.success}</strong>
+                          <strong>{c.contact.successTitle}</strong>
+                          <span>{c.contact.successText}</span>
                           <div className="form-success-actions">
                             <a
                               href={waHref(c.whatsappText)}
@@ -557,13 +666,13 @@ const LocalizedConcreteLanding = ({ locale }) => {
                               <MessageCircle size={15} aria-hidden="true" />
                               WhatsApp
                             </a>
-                            <a href={CALL_TEL} className="fs-call">{c.hero.ctaCall}</a>
+                            <a href={CALL_TEL} className="fs-call">{c.contact.successCall}</a>
                           </div>
                         </div>
                       </div>
                     )}
                     {status === 'error' && (
-                      <div className="form-error" role="alert">{c.quote.error}</div>
+                      <div className="form-error" role="alert">{c.contact.error}</div>
                     )}
                   </form>
                 </div>
@@ -573,39 +682,45 @@ const LocalizedConcreteLanding = ({ locale }) => {
         </section>
       </main>
 
-      {/* ---------- Footer — same look as the site footer, localized ---------- */}
-      <footer id="contact" className="footer lcl-anchor">
+      {/* ---------- Footer — same as the site footer, localized ---------- */}
+      <footer className="footer">
         <div className="footer-main">
           <div className="container">
-            <div className="footer-grid lcl-footer-grid">
+            <div className="footer-grid">
               <div className="footer-about">
-                <Link to={c.path} className="footer-logo" aria-label={c.header.logoAriaLabel}>
-                  <img src="/NOVKHANI.svg" alt="NOVXANI BETON" className="footer-logo-svg" />
+                <Link to={c.path} className="footer-logo">
+                  <img src="/NOVKHANI.svg" alt="Novxani Beton" className="footer-logo-svg" />
                 </Link>
-                <p className="footer-description">{c.footer.description}</p>
+                <p className="footer-description">{c.footer.about}</p>
                 <div className="footer-social">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                  </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                  </a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                  </a>
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">{FOOTER_ICONS.facebook}</a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">{FOOTER_ICONS.instagram}</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">{FOOTER_ICONS.linkedin}</a>
                 </div>
               </div>
               <div className="footer-links">
-                <h3>{c.footer.quickTitle}</h3>
+                <h3>{c.footer.linksTitle}</h3>
                 <ul>
-                  {c.header.nav.map((n) => (
-                    <li key={n.href}><a href={n.href}>{n.label}</a></li>
+                  {c.footer.links.map((link) => (
+                    <li key={link.to + link.label}><Link to={link.to}>{link.label}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="footer-links">
+                <h3>{c.footer.servicesTitle}</h3>
+                <ul>
+                  {c.footer.services.map((link) => (
+                    <li key={link.to + link.label}><Link to={link.to}>{link.label}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="footer-links">
+                <h3>{c.footer.gradesTitle}</h3>
+                <ul>
+                  {CONCRETE_GRADES.map((g) => (
+                    <li key={g.id}>
+                      <Link to={`/${g.id.toLowerCase()}-beton`}>{c.footer.gradeLabel(g.id)}</Link>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -613,29 +728,20 @@ const LocalizedConcreteLanding = ({ locale }) => {
                 <h3>{c.footer.contactTitle}</h3>
                 <ul>
                   <li>
-                    <span className="contact-icon"><Phone size={16} aria-hidden="true" /></span>
-                    <a href={CALL_TEL} className="lcl-footer-link">{c.footer.labels.call}: {CALL_DISPLAY}</a>
+                    <span className="contact-icon">{FOOTER_ICONS.location}</span>
+                    <span>{c.footer.addressValue}</span>
                   </li>
                   <li>
-                    <span className="contact-icon"><MessageCircle size={16} aria-hidden="true" /></span>
-                    <a
-                      href={waHref(c.whatsappText)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="lcl-footer-link"
-                    >
-                      {c.footer.labels.whatsapp}: {WA_DISPLAY}
-                    </a>
+                    <span className="contact-icon">{FOOTER_ICONS.phone}</span>
+                    <span>{CALL_DISPLAY}</span>
                   </li>
                   <li>
-                    <span className="contact-icon"><Mail size={16} aria-hidden="true" /></span>
-                    <a href="mailto:info@novxanibeton.az" className="lcl-footer-link">
-                      {c.footer.labels.email}: info@novxanibeton.az
-                    </a>
+                    <span className="contact-icon">{FOOTER_ICONS.email}</span>
+                    <span>info@novxanibeton.az</span>
                   </li>
                   <li>
-                    <span className="contact-icon"><MapPin size={16} aria-hidden="true" /></span>
-                    <span>{c.footer.labels.address}: {c.footer.addressValue}</span>
+                    <span className="contact-icon">{FOOTER_ICONS.clock}</span>
+                    <span>{c.footer.hoursValue}</span>
                   </li>
                 </ul>
               </div>

@@ -1,15 +1,14 @@
 /* ============================================================
    Localized Google Ads landing pages (/en/concrete, /ru/concrete)
 
-   The pages reuse the site's existing component styles (Header.css,
-   HeroSection.css, Features.css, Services.css, Contact.css, Footer.css,
-   WhatsAppFab.css, StickyContactBar.css — all bundled globally), so the
-   UI is identical to the Azerbaijani site. Only landing-specific
-   additions live here.
+   The pages are an exact clone of the Azerbaijani homepage and reuse
+   its component styles (Header.css, HeroSection.css, Features.css,
+   About.css, Services.css, MaterialsHome.css, Contact.css, Footer.css,
+   WhatsAppFab.css, StickyContactBar.css — all bundled globally).
+   Only the EN/RU language switcher and anchor offsets live here.
    ============================================================ */
 
 /* Anchor targets clear the fixed header */
-.lcl .lcl-anchor,
 .lcl [id] {
   scroll-margin-top: 96px;
 }
@@ -56,112 +55,7 @@
   .header.scrolled .lcl-lang-link { color: rgba(244, 246, 251, 0.85); }
 }
 
-/* ---------- Services: 6 feature cards → 3×2 on desktop ---------- */
-@media (min-width: 1025px) {
-  .lcl-feat6 { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ---------- Concrete grades ---------- */
-.lcl-grades-section {
-  background: var(--bg-raised);
-  padding: var(--sp-9) 0;
-}
-
-.lcl-grades-lead {
-  color: var(--text-muted);
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 62ch;
-  margin: 0 auto;
-}
-
-.lcl-grades {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.lcl-grade {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 118px;
-  padding: 14px 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-md);
-  box-shadow: var(--sh-sm);
-  transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med);
-}
-.lcl-grade:hover {
-  transform: translateY(-4px);
-  border-color: var(--steel-500);
-  box-shadow: var(--sh-glow);
-}
-.lcl-grade strong {
-  font-family: var(--font-head);
-  font-size: 17px;
-  color: var(--text-light);
-}
-.lcl-grade span {
-  font-size: 12.5px;
-  color: var(--text-muted);
-}
-
-/* ---------- Delivery/pumping cards: h2 styled like the card h3 ---------- */
-.lcl-service-h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 10px;
-}
-
-/* ---------- Quote form: the grade <select> matches the inputs ---------- */
-.lcl .contact-form select {
-  width: 100%;
-  padding: 12px 14px;
-  font-size: 14.5px;
-  font-family: var(--font-body);
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-sm);
-  background: var(--bg-inset);
-  color: var(--text-light);
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
-  outline: none;
-}
-.lcl .contact-form select:focus {
-  border-color: var(--steel-500);
-  box-shadow: 0 0 0 3px var(--steel-glow);
-}
-
-/* ---------- Footer: 3 columns instead of the site's 5 ---------- */
-.lcl-footer-grid {
-  grid-template-columns: 1.4fr 1fr 1.4fr;
-}
-@media (max-width: 1024px) {
-  .lcl-footer-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 768px) {
-  .lcl-footer-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.lcl-footer-link {
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--t-fast);
-}
-.lcl-footer-link:hover { color: var(--amber-500); }
-
-/* ---------- Focus visibility ---------- */
-.lcl a:focus-visible,
-.lcl button:focus-visible,
-.lcl input:focus-visible,
-.lcl select:focus-visible,
-.lcl textarea:focus-visible {
-  outline: 2px solid var(--steel-500);
-  outline-offset: 2px;
+/* Tighter desktops: keep the row from overflowing (mirrors Header.css) */
+@media (min-width: 1025px) and (max-width: 1320px) {
+  .lcl-lang-link { padding: 6px 10px; font-size: 12px; }
 }
