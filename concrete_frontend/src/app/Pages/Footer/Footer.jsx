@@ -1,8 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useT, LocaleLink } from '../../../i18n/i18n';
 import './Footer.css';
 
+// 'M100' → {az,en,ru} label; az stays byte-identical to the original text.
+const grade = (m) => ({ az: `${m} Beton`, en: `${m} Concrete`, ru: `Бетон ${m}` });
+
 const Footer = () => {
+  const t = useT();
   const icons = {
     location: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -50,13 +54,15 @@ const Footer = () => {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-about">
-              <Link to="/" className="footer-logo">
+              <LocaleLink to="/" className="footer-logo">
                 <img src="/NOVKHANI.svg" alt="Novxani Beton" className="footer-logo-svg" />
-              </Link>
+              </LocaleLink>
               <p className="footer-description">
-                Yüksək keyfiyyətli beton həlləri ilə yaşayış, kommersiya və sənaye 
-                layihələri üçün etibarlı tərəfdaşınız. 2018-ci ildən bəri möhkəm 
-                təməllər qururuq.
+                {t({
+                  az: 'Yüksək keyfiyyətli beton həlləri ilə yaşayış, kommersiya və sənaye layihələri üçün etibarlı tərəfdaşınız. 2018-ci ildən bəri möhkəm təməllər qururuq.',
+                  en: 'Your reliable partner for residential, commercial and industrial projects with high-quality concrete solutions. Building solid foundations since 2018.',
+                  ru: 'Ваш надежный партнер по жилым, коммерческим и промышленным проектам с высококачественными бетонными решениями. Строим прочный фундамент с 2018 года.',
+                })}
               </p>
               <div className="footer-social">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">{icons.facebook}</a>
@@ -65,52 +71,52 @@ const Footer = () => {
               </div>
             </div>
             <div className="footer-links">
-              <h3>Keçidlər</h3>
+              <h3>{t({ az: 'Keçidlər', en: 'Links', ru: 'Ссылки' })}</h3>
               <ul>
-                <li><Link to="/">Ana Səhifə</Link></li>
-                <li><Link to="/products">Məhsullar</Link></li>
-                <li><Link to="/services">Xidmətlər</Link></li>
-                <li><Link to="/tikinti-materiallari">Tikinti Materialları</Link></li>
-                <li><Link to="/calculator">Kalkulyator</Link></li>
-                <li><Link to="/gallery">Qalereya</Link></li>
-                <li><Link to="/betonun-istifade-saheleri">İstifadə Sahələri</Link></li>
-                <li><Link to="/faq">Tez-tez Verilən Suallar</Link></li>
-                <li><Link to="/about">Haqqımızda</Link></li>
-                <li><Link to="/contact">Əlaqə</Link></li>
+                <li><LocaleLink to="/">{t({ az: 'Ana Səhifə', en: 'Home', ru: 'Главная' })}</LocaleLink></li>
+                <li><LocaleLink to="/products">{t({ az: 'Məhsullar', en: 'Products', ru: 'Продукция' })}</LocaleLink></li>
+                <li><LocaleLink to="/services">{t({ az: 'Xidmətlər', en: 'Services', ru: 'Услуги' })}</LocaleLink></li>
+                <li><LocaleLink to="/tikinti-materiallari">{t({ az: 'Tikinti Materialları', en: 'Building Materials', ru: 'Стройматериалы' })}</LocaleLink></li>
+                <li><LocaleLink to="/calculator">{t({ az: 'Kalkulyator', en: 'Calculator', ru: 'Калькулятор' })}</LocaleLink></li>
+                <li><LocaleLink to="/gallery">{t({ az: 'Qalereya', en: 'Gallery', ru: 'Галерея' })}</LocaleLink></li>
+                <li><LocaleLink to="/betonun-istifade-saheleri">{t({ az: 'İstifadə Sahələri', en: 'Applications', ru: 'Области применения' })}</LocaleLink></li>
+                <li><LocaleLink to="/faq">{t({ az: 'Tez-tez Verilən Suallar', en: 'FAQ', ru: 'Частые вопросы' })}</LocaleLink></li>
+                <li><LocaleLink to="/about">{t({ az: 'Haqqımızda', en: 'About Us', ru: 'О нас' })}</LocaleLink></li>
+                <li><LocaleLink to="/contact">{t({ az: 'Əlaqə', en: 'Contact', ru: 'Контакты' })}</LocaleLink></li>
               </ul>
             </div>
             <div className="footer-links">
-              <h3>Xidmətlər</h3>
+              <h3>{t({ az: 'Xidmətlər', en: 'Services', ru: 'Услуги' })}</h3>
               <ul>
-                <li><Link to="/hazir-beton-satisi">Hazır Beton Satışı</Link></li>
-                <li><Link to="/beton-catdirilmasi">Beton Çatdırılması</Link></li>
-                <li><Link to="/beton-nasoslama">Beton Nasoslama</Link></li>
-                <li><Link to="/terezi-xidmeti">Tərəzi Xidməti</Link></li>
-                <li><Link to="/beton-qiymetleri">Beton Qiymətləri</Link></li>
-                <li><Link to="/beton-laboratoriyasi">Beton Laboratoriyası</Link></li>
-                <li><Link to="/topdan-beton-satisi">Topdan Beton Satışı</Link></li>
-                <li><Link to="/tikinti-materiallari">Qum, Atsep və Şeben Satışı</Link></li>
+                <li><LocaleLink to="/hazir-beton-satisi">{t({ az: 'Hazır Beton Satışı', en: 'Ready-Mix Concrete Sales', ru: 'Продажа товарного бетона' })}</LocaleLink></li>
+                <li><LocaleLink to="/beton-catdirilmasi">{t({ az: 'Beton Çatdırılması', en: 'Concrete Delivery', ru: 'Доставка бетона' })}</LocaleLink></li>
+                <li><LocaleLink to="/beton-nasoslama">{t({ az: 'Beton Nasoslama', en: 'Concrete Pumping', ru: 'Услуги бетононасоса' })}</LocaleLink></li>
+                <li><LocaleLink to="/terezi-xidmeti">{t({ az: 'Tərəzi Xidməti', en: 'Weighbridge Service', ru: 'Автомобильные весы' })}</LocaleLink></li>
+                <li><LocaleLink to="/beton-qiymetleri">{t({ az: 'Beton Qiymətləri', en: 'Concrete Prices', ru: 'Цены на бетон' })}</LocaleLink></li>
+                <li><LocaleLink to="/beton-laboratoriyasi">{t({ az: 'Beton Laboratoriyası', en: 'Concrete Laboratory', ru: 'Бетонная лаборатория' })}</LocaleLink></li>
+                <li><LocaleLink to="/topdan-beton-satisi">{t({ az: 'Topdan Beton Satışı', en: 'Wholesale Concrete Sales', ru: 'Оптовая продажа бетона' })}</LocaleLink></li>
+                <li><LocaleLink to="/tikinti-materiallari">{t({ az: 'Qum, Atsep və Şeben Satışı', en: 'Sand, Gravel Mix and Crushed Stone', ru: 'Песок, ПГС и щебень' })}</LocaleLink></li>
               </ul>
             </div>
             <div className="footer-links">
-              <h3>Beton Markaları</h3>
+              <h3>{t({ az: 'Beton Markaları', en: 'Concrete Grades', ru: 'Марки бетона' })}</h3>
               <ul>
-                <li><Link to="/m100-beton">M100 Beton</Link></li>
-                <li><Link to="/m150-beton">M150 Beton</Link></li>
-                <li><Link to="/m200-beton">M200 Beton</Link></li>
-                <li><Link to="/m250-beton">M250 Beton</Link></li>
-                <li><Link to="/m300-beton">M300 Beton</Link></li>
-                <li><Link to="/m350-beton">M350 Beton</Link></li>
-                <li><Link to="/m400-beton">M400 Beton</Link></li>
-                <li><Link to="/m450-beton">M450 Beton</Link></li>
+                <li><LocaleLink to="/m100-beton">{t(grade('M100'))}</LocaleLink></li>
+                <li><LocaleLink to="/m150-beton">{t(grade('M150'))}</LocaleLink></li>
+                <li><LocaleLink to="/m200-beton">{t(grade('M200'))}</LocaleLink></li>
+                <li><LocaleLink to="/m250-beton">{t(grade('M250'))}</LocaleLink></li>
+                <li><LocaleLink to="/m300-beton">{t(grade('M300'))}</LocaleLink></li>
+                <li><LocaleLink to="/m350-beton">{t(grade('M350'))}</LocaleLink></li>
+                <li><LocaleLink to="/m400-beton">{t(grade('M400'))}</LocaleLink></li>
+                <li><LocaleLink to="/m450-beton">{t(grade('M450'))}</LocaleLink></li>
               </ul>
             </div>
             <div className="footer-contact">
-              <h3>Əlaqə</h3>
+              <h3>{t({ az: 'Əlaqə', en: 'Contact', ru: 'Контакты' })}</h3>
               <ul>
                 <li>
                   <span className="contact-icon">{icons.location}</span>
-                  <span>Novxanı, Bakı, Azərbaycan</span>
+                  <span>{t({ az: 'Novxanı, Bakı, Azərbaycan', en: 'Novkhani, Baku, Azerbaijan', ru: 'Новханы, Баку, Азербайджан' })}</span>
                 </li>
                 <li>
                   <span className="contact-icon">{icons.phone}</span>
@@ -122,7 +128,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon">{icons.clock}</span>
-                  <span>B.e - B 7/24 fəaliyyətdəyik</span>
+                  <span>{t({ az: 'B.e - B 7/24 fəaliyyətdəyik', en: 'Mon–Sun — open 24/7', ru: 'Пн–Вс — работаем 24/7' })}</span>
                 </li>
               </ul>
             </div>
@@ -131,7 +137,11 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="container">
-          <p>© 2026 Novxanı Beton. Bütün hüquqlar qorunur.</p>
+          <p>{t({
+            az: '© 2026 Novxanı Beton. Bütün hüquqlar qorunur.',
+            en: '© 2026 Novxani Beton. All rights reserved.',
+            ru: '© 2026 Novxani Beton. Все права защищены.',
+          })}</p>
         </div>
       </div>
     </footer>

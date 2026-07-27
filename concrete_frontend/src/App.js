@@ -18,7 +18,6 @@ import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
 import Materials from "./app/Pages/Materials/Materials";
 import MaterialsHome from "./app/Pages/Materials/MaterialsHome";
 import FaqPage from "./app/Pages/FaqPage/FaqPage";
-import LocalizedConcreteLanding from "./app/Pages/LocalizedLanding/LocalizedConcreteLanding";
 import { SERVICE_PAGES } from "./data/servicePages";
 import { MATERIAL_PAGES } from "./data/materialPages";
 import { GRADE_PAGES } from "./data/gradePages";
@@ -27,6 +26,7 @@ import ScrollTop from "./Components/ScrollTop/ScrollTop";
 import WhatsAppFab from "./Components/WhatsAppFab/WhatsAppFab";
 import StickyContactBar from "./Components/StickyContactBar/StickyContactBar";
 import { trackPageView, attachAutoTracking } from "./lib/analytics";
+import { LOCALES, LocaleProvider, localePath, splitPath } from "./i18n/i18n";
 
 // Scrolls to top on navigation, (re)wires scroll-reveal and reports SPA
 // page views + auto-tracks contact-link clicks for analytics.
@@ -54,10 +54,12 @@ function RouteManager() {
   return null;
 }
 
-function HomePage() {
+// concreteAlias: the Google Ads landing URLs (/en/concrete, /ru/concrete) —
+// the localized homepage served at a stable URL with its own SEO config.
+function HomePage({ concreteAlias }) {
   return (
     <>
-      <Seo page="home" />
+      <Seo page={concreteAlias ? "concreteLanding" : "home"} />
       <HeroSection />
       <Features />
       <About />
@@ -68,53 +70,49 @@ function HomePage() {
   );
 }
 
-// Fully localized Google Ads landing pages — self-contained chrome, so the
-// Azerbaijani header/footer/FAB/sticky bar must not render on these routes.
-const LOCALIZED_LANDING_PATHS = ["/en/concrete", "/ru/concrete"];
+// az-relative route table — rendered once per locale ('', /en, /ru).
+const PAGE_ROUTES = [
+  { path: "/", element: <HomePage /> },
+  { path: "/products", element: <Products /> },
+  { path: "/services", element: <Services fullPage /> },
+  { path: "/calculator", element: <Calculator /> },
+  { path: "/gallery", element: <Gallery /> },
+  { path: "/tikinti-materiallari", element: <Materials /> },
+  { path: "/about", element: <About fullPage /> },
+  { path: "/contact", element: <Contact fullPage /> },
+  ...SERVICE_PAGES.map((p) => ({ path: p.slug, element: <ServiceDetail page={p} /> })),
+  ...MATERIAL_PAGES.map((p) => ({ path: p.slug, element: <ServiceDetail page={p} /> })),
+  ...GRADE_PAGES.map((p) => ({ path: p.slug, element: <ServiceDetail page={p} /> })),
+  { path: "/faq", element: <FaqPage /> },
+];
 
 function AppShell() {
   const { pathname } = useLocation();
-  const localizedLanding = LOCALIZED_LANDING_PATHS.includes(pathname);
-
-  const routes = (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/services" element={<Services fullPage />} />
-      <Route path="/calculator" element={<Calculator />} />
-      <Route path="/gallery" element={<Gallery />} />
-      <Route path="/tikinti-materiallari" element={<Materials />} />
-      <Route path="/about" element={<About fullPage />} />
-      <Route path="/contact" element={<Contact fullPage />} />
-      {/* key forces a remount on EN↔RU switch: form state and the
-          one-shot contact_form_start guard must not carry across locales */}
-      <Route path="/en/concrete" element={<LocalizedConcreteLanding key="en" locale="en" />} />
-      <Route path="/ru/concrete" element={<LocalizedConcreteLanding key="ru" locale="ru" />} />
-      {SERVICE_PAGES.map((p) => (
-        <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
-      ))}
-      {MATERIAL_PAGES.map((p) => (
-        <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
-      ))}
-      {GRADE_PAGES.map((p) => (
-        <Route key={p.slug} path={p.slug} element={<ServiceDetail page={p} />} />
-      ))}
-      <Route path="/faq" element={<FaqPage />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
+  const { locale } = splitPath(pathname);
 
   return (
-    <div className="App">
-      {!localizedLanding && <Header />}
-      {/* The localized landing supplies its own header/main/footer landmarks —
-          wrapping it in another <main> would nest main elements. */}
-      {localizedLanding ? routes : <main>{routes}</main>}
-      {!localizedLanding && <Footer />}
-      {!localizedLanding && <ScrollTop />}
-      {!localizedLanding && <WhatsAppFab />}
-      {!localizedLanding && <StickyContactBar />}
-    </div>
+    <LocaleProvider value={locale}>
+      <div className="App">
+        <Header />
+        <main>
+          <Routes>
+            {LOCALES.map((loc) =>
+              PAGE_ROUTES.map((r) => (
+                <Route key={`${loc}:${r.path}`} path={localePath(loc, r.path)} element={r.element} />
+              ))
+            )}
+            {/* Google Ads landing aliases — localized homepage at stable URLs */}
+            <Route path="/en/concrete" element={<HomePage concreteAlias />} />
+            <Route path="/ru/concrete" element={<HomePage concreteAlias />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+        <ScrollTop />
+        <WhatsAppFab />
+        <StickyContactBar />
+      </div>
+    </LocaleProvider>
   );
 }
 

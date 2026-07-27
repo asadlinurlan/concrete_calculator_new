@@ -7,6 +7,9 @@
    Content rules: only claims confirmed by the business are stated
    (GOST 26633, 28-day testing, M100–M450, 7/24, Novxanı plant,
    Bakı & Abşeron delivery). No invented specs or prices.
+
+   i18n: every user-visible string is a { az, en, ru } object;
+   consumers resolve the active language via t().
    ============================================================ */
 import imgHazirBeton from '../app/Pages/img/service-1.png';
 import imgCatdirilma from '../app/Pages/img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
@@ -21,458 +24,1651 @@ export const SERVICE_PAGES = [
   {
     slug: '/hazir-beton-satisi',
     seo: {
-      title: 'Hazır Beton Satışı — M100–M450 Markaları | NOVXANI BETON',
-      description:
-        'Bakı və Abşeronda laboratoriya nəzarətli hazır beton satışı. M100–M450 markaları GOST 26633 üzrə istehsal olunur, mikserlərlə ünvana çatdırılır. Fərdi qiymət təklifi alın.',
+      title: {
+        az: 'Hazır Beton Satışı — M100–M450 Markaları | NOVXANI BETON',
+        en: 'Ready-Mix Concrete Sales — Grades M100–M450 | NOVXANI BETON',
+        ru: 'Продажа товарного бетона — марки M100–M450 | NOVXANI BETON',
+      },
+      description: {
+        az: 'Bakı və Abşeronda laboratoriya nəzarətli hazır beton satışı. M100–M450 markaları GOST 26633 üzrə istehsal olunur, mikserlərlə ünvana çatdırılır. Fərdi qiymət təklifi alın.',
+        en: 'Laboratory-controlled ready-mix concrete sales in Baku and Absheron. Grades M100–M450 are produced to GOST 26633 and delivered to your site by mixer trucks. Request a personalized quote.',
+        ru: 'Продажа товарного бетона с лабораторным контролем в Баку и на Абшероне. Марки M100–M450 производятся по ГОСТ 26633 и доставляются миксерами на объект. Получите индивидуальное предложение.',
+      },
     },
-    crumb: 'Hazır Beton Satışı',
-    h1: 'Hazır Beton Satışı',
-    tagline:
-      'M100–M450 markalı, laboratoriya nəzarətli hazır beton — Bakı və Abşeron üzrə çatdırılma ilə',
-    hero: { image: imgHazirBeton, alt: 'Tikinti sahəsində hazır betonun tökülməsi' },
+    crumb: {
+      az: 'Hazır Beton Satışı',
+      en: 'Ready-Mix Concrete Sales',
+      ru: 'Продажа товарного бетона',
+    },
+    h1: {
+      az: 'Hazır Beton Satışı',
+      en: 'Ready-Mix Concrete Sales',
+      ru: 'Продажа товарного бетона',
+    },
+    tagline: {
+      az: 'M100–M450 markalı, laboratoriya nəzarətli hazır beton — Bakı və Abşeron üzrə çatdırılma ilə',
+      en: 'Laboratory-controlled ready-mix concrete in grades M100–M450 — with delivery across Baku and Absheron',
+      ru: 'Товарный бетон марок M100–M450 с лабораторным контролем — с доставкой по Баку и Абшерону',
+    },
+    hero: {
+      image: imgHazirBeton,
+      alt: {
+        az: 'Tikinti sahəsində hazır betonun tökülməsi',
+        en: 'Ready-mix concrete being poured at a construction site',
+        ru: 'Заливка товарного бетона на строительной площадке',
+      },
+    },
     intro: [
-      'Novxanı Beton 2018-ci ildən Bakı və Abşeron ərazisində tikinti şirkətləri və fərdi sifarişçilər üçün hazır beton istehsal edir. Bütün markalar müasir zavodda, laboratoriya nəzarəti altında hazırlanır və GOST 26633 tələblərinə uyğun 28 günlük möhkəmlik sınağından keçirilir.',
-      'Təməldən çoxmərtəbəli binaya qədər hər növ layihə üçün doğru markanı seçməyinizə kömək edirik: hamarlama qatı üçün M100, monolit təməl və plitələr üçün M300, xüsusi mühəndis konstruksiyaları üçün M450. Hansı markanın lazım olduğuna əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
+      {
+        az: 'Novxanı Beton 2018-ci ildən Bakı və Abşeron ərazisində tikinti şirkətləri və fərdi sifarişçilər üçün hazır beton istehsal edir. Bütün markalar müasir zavodda, laboratoriya nəzarəti altında hazırlanır və GOST 26633 tələblərinə uyğun 28 günlük möhkəmlik sınağından keçirilir.',
+        en: 'Since 2018, Novxani Beton has been producing ready-mix concrete for construction companies and private clients across Baku and Absheron. Every grade is produced at a modern plant under laboratory control and undergoes 28-day strength testing in accordance with GOST 26633.',
+        ru: 'С 2018 года Novxani Beton производит товарный бетон для строительных компаний и частных заказчиков в Баку и на Абшероне. Все марки выпускаются на современном заводе под лабораторным контролем и проходят 28-суточные испытания на прочность по ГОСТ 26633.',
+      },
+      {
+        az: 'Təməldən çoxmərtəbəli binaya qədər hər növ layihə üçün doğru markanı seçməyinizə kömək edirik: hamarlama qatı üçün M100, monolit təməl və plitələr üçün M300, xüsusi mühəndis konstruksiyaları üçün M450. Hansı markanın lazım olduğuna əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
+        en: 'We help you choose the right grade for any project, from foundations to multi-storey buildings: M100 for levelling layers, M300 for monolithic foundations and slabs, M450 for specialized engineering structures. Not sure which grade you need? Our specialists provide free advice.',
+        ru: 'Мы поможем подобрать подходящую марку для любого проекта — от фундамента до многоэтажного здания: M100 для выравнивающих слоёв, M300 для монолитных фундаментов и плит, M450 для специальных инженерных конструкций. Не уверены, какая марка нужна? Наши специалисты бесплатно проконсультируют вас.',
+      },
     ],
-    benefitsTitle: 'Niyə Novxanı Beton?',
+    benefitsTitle: {
+      az: 'Niyə Novxanı Beton?',
+      en: 'Why Novxani Beton?',
+      ru: 'Почему Novxani Beton?',
+    },
     benefits: [
-      { title: 'Laboratoriya nəzarəti', text: 'Hər partiya istehsal zamanı yoxlanılır, 28 günlük kub sınağı aparılır.' },
-      { title: 'Tam marka xətti', text: 'M100-dən M450-yə qədər bütün möhkəmlik sinifləri bir zavoddan.' },
-      { title: 'Vaxtında çatdırılma', text: '7/24 iş rejimi — beton tökmə qrafikiniz pozulmur.' },
-      { title: 'Texniki məsləhət', text: 'Layihənizə uyğun marka seçimində pulsuz peşəkar dəstək.' },
+      {
+        title: { az: 'Laboratoriya nəzarəti', en: 'Laboratory control', ru: 'Лабораторный контроль' },
+        text: {
+          az: 'Hər partiya istehsal zamanı yoxlanılır, 28 günlük kub sınağı aparılır.',
+          en: 'Every batch is checked during production and undergoes 28-day cube testing.',
+          ru: 'Каждая партия проверяется в процессе производства и проходит 28-суточные испытания кубиков.',
+        },
+      },
+      {
+        title: { az: 'Tam marka xətti', en: 'Full grade range', ru: 'Полная линейка марок' },
+        text: {
+          az: 'M100-dən M450-yə qədər bütün möhkəmlik sinifləri bir zavoddan.',
+          en: 'All strength classes from M100 to M450 from a single plant.',
+          ru: 'Все классы прочности от M100 до M450 с одного завода.',
+        },
+      },
+      {
+        title: { az: 'Vaxtında çatdırılma', en: 'On-time delivery', ru: 'Доставка точно в срок' },
+        text: {
+          az: '7/24 iş rejimi — beton tökmə qrafikiniz pozulmur.',
+          en: 'We operate 24/7 — your concrete pouring schedule stays on track.',
+          ru: 'Работаем 24/7 — ваш график заливки бетона не нарушается.',
+        },
+      },
+      {
+        title: { az: 'Texniki məsləhət', en: 'Technical advice', ru: 'Техническая консультация' },
+        text: {
+          az: 'Layihənizə uyğun marka seçimində pulsuz peşəkar dəstək.',
+          en: 'Free professional support in choosing the right grade for your project.',
+          ru: 'Бесплатная профессиональная помощь в подборе марки для вашего проекта.',
+        },
+      },
     ],
     showGrades: true,
-    stepsTitle: 'Sifariş prosesi',
+    stepsTitle: {
+      az: 'Sifariş prosesi',
+      en: 'Ordering process',
+      ru: 'Процесс заказа',
+    },
     steps: [
-      { title: 'Əlaqə və məsləhət', text: 'Zəng edin və ya WhatsApp-la yazın — həcmi və markanı birlikdə dəqiqləşdirək.' },
-      { title: 'Qiymət təklifi', text: 'Həcm, marka və ünvana görə fərdi təklif alırsınız.' },
-      { title: 'İstehsal', text: 'Beton sifarişinizə uyğun, laboratoriya nəzarəti ilə hazırlanır.' },
-      { title: 'Çatdırılma və tökmə', text: 'Mikserlər razılaşdırılmış vaxtda obyektə çatır; ehtiyac olduqda nasos xidməti təşkil olunur.' },
+      {
+        title: { az: 'Əlaqə və məsləhət', en: 'Contact and consultation', ru: 'Связь и консультация' },
+        text: {
+          az: 'Zəng edin və ya WhatsApp-la yazın — həcmi və markanı birlikdə dəqiqləşdirək.',
+          en: 'Call us or write on WhatsApp — together we will confirm the volume and grade.',
+          ru: 'Позвоните или напишите в WhatsApp — вместе уточним объём и марку.',
+        },
+      },
+      {
+        title: { az: 'Qiymət təklifi', en: 'Price quote', ru: 'Ценовое предложение' },
+        text: {
+          az: 'Həcm, marka və ünvana görə fərdi təklif alırsınız.',
+          en: 'You receive a personalized offer based on volume, grade and delivery address.',
+          ru: 'Вы получаете индивидуальное предложение с учётом объёма, марки и адреса.',
+        },
+      },
+      {
+        title: { az: 'İstehsal', en: 'Production', ru: 'Производство' },
+        text: {
+          az: 'Beton sifarişinizə uyğun, laboratoriya nəzarəti ilə hazırlanır.',
+          en: 'Your concrete is produced to order under laboratory control.',
+          ru: 'Бетон изготавливается под ваш заказ под лабораторным контролем.',
+        },
+      },
+      {
+        title: { az: 'Çatdırılma və tökmə', en: 'Delivery and pouring', ru: 'Доставка и заливка' },
+        text: {
+          az: 'Mikserlər razılaşdırılmış vaxtda obyektə çatır; ehtiyac olduqda nasos xidməti təşkil olunur.',
+          en: 'Mixer trucks arrive on site at the agreed time; a pumping service is arranged if needed.',
+          ru: 'Миксеры прибывают на объект в согласованное время; при необходимости организуется услуга бетононасоса.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Hansı beton markası mənə lazımdır?',
-        a: 'Marka konstruksiyanın yükündən asılıdır: hamarlama və altlıq üçün M100–M150, döşəmə və ümumi işlər üçün M200, monolit təməl, plitə və sütunlar üçün M300, çoxmərtəbəli karkas üçün M350 və yuxarı. Dəqiq seçim üçün Beton Markaları səhifəmizə baxın və ya bizimlə məsləhətləşin.',
+        q: {
+          az: 'Hansı beton markası mənə lazımdır?',
+          en: 'Which concrete grade do I need?',
+          ru: 'Какая марка бетона мне нужна?',
+        },
+        a: {
+          az: 'Marka konstruksiyanın yükündən asılıdır: hamarlama və altlıq üçün M100–M150, döşəmə və ümumi işlər üçün M200, monolit təməl, plitə və sütunlar üçün M300, çoxmərtəbəli karkas üçün M350 və yuxarı. Dəqiq seçim üçün Beton Markaları səhifəmizə baxın və ya bizimlə məsləhətləşin.',
+          en: 'The grade depends on the structural load: M100–M150 for levelling and blinding layers, M200 for floors and general work, M300 for monolithic foundations, slabs and columns, M350 and above for multi-storey frames. For an exact choice, see our Concrete Grades page or consult us.',
+          ru: 'Марка зависит от нагрузки на конструкцию: M100–M150 для выравнивающих и подготовительных слоёв, M200 для полов и общих работ, M300 для монолитных фундаментов, плит и колонн, M350 и выше для многоэтажного каркаса. Для точного выбора смотрите страницу «Марки бетона» или проконсультируйтесь с нами.',
+        },
       },
       {
-        q: '1 m³ beton neçə tondur?',
-        a: 'Adi armaturlu beton təxminən 2,4 ton/m³-dür. Layihəniz üçün lazımi həcmi və çəkini saytdakı pulsuz beton kalkulyatoru ilə bir dəqiqəyə hesablaya bilərsiniz.',
+        q: {
+          az: '1 m³ beton neçə tondur?',
+          en: 'How many tons does 1 m³ of concrete weigh?',
+          ru: 'Сколько тонн весит 1 м³ бетона?',
+        },
+        a: {
+          az: 'Adi armaturlu beton təxminən 2,4 ton/m³-dür. Layihəniz üçün lazımi həcmi və çəkini saytdakı pulsuz beton kalkulyatoru ilə bir dəqiqəyə hesablaya bilərsiniz.',
+          en: 'Standard reinforced concrete weighs approximately 2.4 t/m³. You can calculate the volume and weight your project needs in one minute with the free concrete calculator on our website.',
+          ru: 'Обычный армированный бетон весит примерно 2,4 т/м³. Необходимый объём и вес для вашего проекта можно рассчитать за минуту с помощью бесплатного калькулятора бетона на сайте.',
+        },
       },
       {
-        q: 'Betonun keyfiyyətinə necə zəmanət verilir?',
-        a: 'İstehsal GOST 26633 tələblərinə uyğun aparılır, markalar 28 günlük möhkəmlik sınağından keçirilir və laboratoriya nəzarəti altında buraxılır.',
+        q: {
+          az: 'Betonun keyfiyyətinə necə zəmanət verilir?',
+          en: 'How is concrete quality guaranteed?',
+          ru: 'Как гарантируется качество бетона?',
+        },
+        a: {
+          az: 'İstehsal GOST 26633 tələblərinə uyğun aparılır, markalar 28 günlük möhkəmlik sınağından keçirilir və laboratoriya nəzarəti altında buraxılır.',
+          en: 'Production follows the requirements of GOST 26633, every grade undergoes 28-day strength testing, and batches are released under laboratory control.',
+          ru: 'Производство ведётся по требованиям ГОСТ 26633, марки проходят 28-суточные испытания на прочность, а партии выпускаются под лабораторным контролем.',
+        },
       },
       {
-        q: 'Qiymətlər nə üçün saytda göstərilmir?',
-        a: 'Beton qiyməti marka, həcm, çatdırılma məsafəsi və nasos ehtiyacından asılı olaraq dəyişir. Buna görə hər layihə üçün fərdi təklif hazırlayırıq — bu, əksər halda sizin üçün daha sərfəlidir. Ətraflı məlumat üçün Beton Qiymətləri səhifəsinə baxın.',
+        q: {
+          az: 'Qiymətlər nə üçün saytda göstərilmir?',
+          en: 'Why are prices not listed on the website?',
+          ru: 'Почему цены не указаны на сайте?',
+        },
+        a: {
+          az: 'Beton qiyməti marka, həcm, çatdırılma məsafəsi və nasos ehtiyacından asılı olaraq dəyişir. Buna görə hər layihə üçün fərdi təklif hazırlayırıq — bu, əksər halda sizin üçün daha sərfəlidir. Ətraflı məlumat üçün Beton Qiymətləri səhifəsinə baxın.',
+          en: 'The price of concrete varies with grade, volume, delivery distance and pumping needs. That is why we prepare a personalized offer for each project — in most cases this works out cheaper for you. See the Concrete Prices page for details.',
+          ru: 'Цена бетона зависит от марки, объёма, расстояния доставки и необходимости бетононасоса. Поэтому для каждого проекта мы готовим индивидуальное предложение — в большинстве случаев это выгоднее для вас. Подробнее — на странице «Цены на бетон».',
+        },
       },
     ],
     related: [
-      { to: '/calculator', label: 'Beton miqdarını hesabla' },
-      { to: '/products', label: 'Beton markalarına bax (M100–M450)' },
-      { to: '/beton-catdirilmasi', label: 'Beton çatdırılması haqqında' },
-      { to: '/beton-qiymetleri', label: 'Qiymət necə formalaşır?' },
-      { to: '/betonun-istifade-saheleri', label: 'Hansı iş üçün hansı marka?' },
-      { to: '/topdan-beton-satisi', label: 'Tikinti şirkətləri üçün topdan satış' },
+      {
+        to: '/calculator',
+        label: { az: 'Beton miqdarını hesabla', en: 'Calculate concrete volume', ru: 'Рассчитать объём бетона' },
+      },
+      {
+        to: '/products',
+        label: { az: 'Beton markalarına bax (M100–M450)', en: 'View concrete grades (M100–M450)', ru: 'Смотреть марки бетона (M100–M450)' },
+      },
+      {
+        to: '/beton-catdirilmasi',
+        label: { az: 'Beton çatdırılması haqqında', en: 'About concrete delivery', ru: 'О доставке бетона' },
+      },
+      {
+        to: '/beton-qiymetleri',
+        label: { az: 'Qiymət necə formalaşır?', en: 'How is the price formed?', ru: 'Как формируется цена?' },
+      },
+      {
+        to: '/betonun-istifade-saheleri',
+        label: { az: 'Hansı iş üçün hansı marka?', en: 'Which grade for which job?', ru: 'Какая марка для какой работы?' },
+      },
+      {
+        to: '/topdan-beton-satisi',
+        label: { az: 'Tikinti şirkətləri üçün topdan satış', en: 'Wholesale sales for construction companies', ru: 'Оптовая продажа для строительных компаний' },
+      },
     ],
-    whatsappText: 'Salam! Hazır beton sifarişi üçün qiymət təklifi almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Hazır beton sifarişi üçün qiymət təklifi almaq istəyirəm.',
+      en: 'Hello! I would like to get a price quote for a ready-mix concrete order.',
+      ru: 'Здравствуйте! Хочу получить ценовое предложение на заказ товарного бетона.',
+    },
   },
 
   {
     slug: '/beton-catdirilmasi',
     seo: {
-      title: 'Beton Çatdırılması — Bakı və Abşeron | NOVXANI BETON',
-      description:
-        'Mikserlərlə ünvana beton çatdırılması: Bakı, Abşeron və Novxanı üzrə. 7/24 iş rejimi, dəqiq qrafik, tökmə vaxtına uyğun marşrut planlaşdırması. Sifariş üçün əlaqə saxlayın.',
+      title: {
+        az: 'Beton Çatdırılması — Bakı və Abşeron | NOVXANI BETON',
+        en: 'Concrete Delivery — Baku and Absheron | NOVXANI BETON',
+        ru: 'Доставка бетона — Баку и Абшерон | NOVXANI BETON',
+      },
+      description: {
+        az: 'Mikserlərlə ünvana beton çatdırılması: Bakı, Abşeron və Novxanı üzrə. 7/24 iş rejimi, dəqiq qrafik, tökmə vaxtına uyğun marşrut planlaşdırması. Sifariş üçün əlaqə saxlayın.',
+        en: 'Concrete delivered to your site by mixer trucks across Baku, Absheron and Novkhani. 24/7 operation, precise scheduling and routes planned around your pouring time. Contact us to order.',
+        ru: 'Доставка бетона миксерами на объект по Баку, Абшерону и Новханы. Работа 24/7, точный график, планирование маршрута под время заливки. Свяжитесь с нами для заказа.',
+      },
     },
-    crumb: 'Beton Çatdırılması',
-    h1: 'Beton Çatdırılması',
-    tagline: 'Bakı və Abşeron üzrə mikserlərlə dəqiq qrafikli çatdırılma — 7/24',
-    hero: { image: imgCatdirilma, alt: 'Beton mikserləri çatdırılma üçün hazır vəziyyətdə' },
+    crumb: {
+      az: 'Beton Çatdırılması',
+      en: 'Concrete Delivery',
+      ru: 'Доставка бетона',
+    },
+    h1: {
+      az: 'Beton Çatdırılması',
+      en: 'Concrete Delivery',
+      ru: 'Доставка бетона',
+    },
+    tagline: {
+      az: 'Bakı və Abşeron üzrə mikserlərlə dəqiq qrafikli çatdırılma — 7/24',
+      en: 'Precisely scheduled mixer-truck delivery across Baku and Absheron — 24/7',
+      ru: 'Доставка миксерами по точному графику по Баку и Абшерону — 24/7',
+    },
+    hero: {
+      image: imgCatdirilma,
+      alt: {
+        az: 'Beton mikserləri çatdırılma üçün hazır vəziyyətdə',
+        en: 'Concrete mixer trucks ready for delivery',
+        ru: 'Автобетоносмесители готовы к доставке',
+      },
+    },
     intro: [
-      'Betonun keyfiyyəti yalnız zavodda deyil, yolda da qorunmalıdır. Hazır qarışıq müəyyən vaxt ərzində tökülməlidir — gecikmə möhkəmliyə birbaşa təsir edir. Buna görə hər çatdırılmanı marşrut və qrafik üzrə dəqiq planlaşdırırıq.',
-      'Zavodumuz Novxanıda yerləşir — Bakı və Abşeronun əksər tikinti zonalarına qısa müddətdə çatırıq. Böyük həcmli tökmələrdə mikserlərin ardıcıl axını təşkil olunur ki, işiniz fasiləsiz davam etsin.',
+      {
+        az: 'Betonun keyfiyyəti yalnız zavodda deyil, yolda da qorunmalıdır. Hazır qarışıq müəyyən vaxt ərzində tökülməlidir — gecikmə möhkəmliyə birbaşa təsir edir. Buna görə hər çatdırılmanı marşrut və qrafik üzrə dəqiq planlaşdırırıq.',
+        en: 'Concrete quality must be protected not only at the plant but also on the road. A ready mix has to be poured within a set time — any delay directly affects strength. That is why we plan every delivery precisely, by route and by schedule.',
+        ru: 'Качество бетона нужно сохранять не только на заводе, но и в пути. Готовую смесь необходимо уложить в течение определённого времени — задержка напрямую влияет на прочность. Поэтому мы точно планируем каждую доставку по маршруту и графику.',
+      },
+      {
+        az: 'Zavodumuz Novxanıda yerləşir — Bakı və Abşeronun əksər tikinti zonalarına qısa müddətdə çatırıq. Böyük həcmli tökmələrdə mikserlərin ardıcıl axını təşkil olunur ki, işiniz fasiləsiz davam etsin.',
+        en: 'Our plant is located in Novkhani, so we reach most construction zones of Baku and Absheron in a short time. For large pours, a continuous flow of mixer trucks is organized so your work never stops.',
+        ru: 'Наш завод находится в Новханы — до большинства строительных зон Баку и Абшерона мы добираемся быстро. При больших заливках организуется непрерывный поток миксеров, чтобы работа шла без остановок.',
+      },
     ],
-    benefitsTitle: 'Çatdırılma üstünlüklərimiz',
+    benefitsTitle: {
+      az: 'Çatdırılma üstünlüklərimiz',
+      en: 'Our delivery advantages',
+      ru: 'Наши преимущества доставки',
+    },
     benefits: [
-      { title: '7/24 çatdırılma', text: 'Gecə tökmələri və təcili sifarişlər üçün də işləyirik.' },
-      { title: 'Dəqiq qrafik', text: 'Mikserlər razılaşdırılmış vaxt aralığında obyektdə olur.' },
-      { title: 'Ardıcıl axın', text: 'Böyük tökmələrdə fasiləsiz beton axını planlaşdırılır.' },
-      { title: 'Yaxın məsafə', text: 'Novxanı zavodundan Abşeronun əsas zonalarına sürətli çatış.' },
+      {
+        title: { az: '7/24 çatdırılma', en: '24/7 delivery', ru: 'Доставка 24/7' },
+        text: {
+          az: 'Gecə tökmələri və təcili sifarişlər üçün də işləyirik.',
+          en: 'We also handle night pours and urgent orders.',
+          ru: 'Работаем и на ночных заливках, и по срочным заказам.',
+        },
+      },
+      {
+        title: { az: 'Dəqiq qrafik', en: 'Precise scheduling', ru: 'Точный график' },
+        text: {
+          az: 'Mikserlər razılaşdırılmış vaxt aralığında obyektdə olur.',
+          en: 'Mixer trucks arrive on site within the agreed time window.',
+          ru: 'Миксеры прибывают на объект в согласованный интервал времени.',
+        },
+      },
+      {
+        title: { az: 'Ardıcıl axın', en: 'Continuous flow', ru: 'Непрерывный поток' },
+        text: {
+          az: 'Böyük tökmələrdə fasiləsiz beton axını planlaşdırılır.',
+          en: 'For large pours, an uninterrupted flow of concrete is planned.',
+          ru: 'При больших заливках планируется бесперебойная подача бетона.',
+        },
+      },
+      {
+        title: { az: 'Yaxın məsafə', en: 'Short distances', ru: 'Близкое расположение' },
+        text: {
+          az: 'Novxanı zavodundan Abşeronun əsas zonalarına sürətli çatış.',
+          en: 'Fast delivery from the Novkhani plant to the main zones of Absheron.',
+          ru: 'Быстрая доставка с завода в Новханы до основных зон Абшерона.',
+        },
+      },
     ],
-    stepsTitle: 'Çatdırılma necə işləyir',
+    stepsTitle: {
+      az: 'Çatdırılma necə işləyir',
+      en: 'How delivery works',
+      ru: 'Как работает доставка',
+    },
     steps: [
-      { title: 'Sifariş', text: 'Həcm, marka və ünvanı bildirirsiniz — telefon və ya WhatsApp ilə.' },
-      { title: 'Qrafik razılaşması', text: 'Tökmə vaxtına uyğun çatdırılma qrafiki müəyyən olunur.' },
-      { title: 'İstehsal və yüklənmə', text: 'Beton çatdırılma vaxtına uyğunlaşdırılaraq hazırlanır.' },
-      { title: 'Obyektdə boşaltma', text: 'Mikser təyin olunan vaxtda çatır; ehtiyac olduqda nasosla tökmə təşkil olunur.' },
+      {
+        title: { az: 'Sifariş', en: 'Order', ru: 'Заказ' },
+        text: {
+          az: 'Həcm, marka və ünvanı bildirirsiniz — telefon və ya WhatsApp ilə.',
+          en: 'You tell us the volume, grade and address — by phone or WhatsApp.',
+          ru: 'Вы сообщаете объём, марку и адрес — по телефону или в WhatsApp.',
+        },
+      },
+      {
+        title: { az: 'Qrafik razılaşması', en: 'Schedule agreement', ru: 'Согласование графика' },
+        text: {
+          az: 'Tökmə vaxtına uyğun çatdırılma qrafiki müəyyən olunur.',
+          en: 'A delivery schedule is set to match your pouring time.',
+          ru: 'График доставки составляется под время заливки.',
+        },
+      },
+      {
+        title: { az: 'İstehsal və yüklənmə', en: 'Production and loading', ru: 'Производство и загрузка' },
+        text: {
+          az: 'Beton çatdırılma vaxtına uyğunlaşdırılaraq hazırlanır.',
+          en: 'The concrete is produced and timed to the delivery schedule.',
+          ru: 'Бетон изготавливается с привязкой ко времени доставки.',
+        },
+      },
+      {
+        title: { az: 'Obyektdə boşaltma', en: 'Unloading on site', ru: 'Разгрузка на объекте' },
+        text: {
+          az: 'Mikser təyin olunan vaxtda çatır; ehtiyac olduqda nasosla tökmə təşkil olunur.',
+          en: 'The mixer truck arrives at the appointed time; pump pouring is arranged if needed.',
+          ru: 'Миксер прибывает в назначенное время; при необходимости организуется заливка бетононасосом.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Hansı ərazilərə çatdırırsınız?',
-        a: 'Bakı və Abşeron yarımadası üzrə çatdırılma edirik. Zavodumuz Novxanıda yerləşdiyi üçün Abşeron zonasına xüsusilə sürətli çatırıq. Konkret ünvanınız üçün bizimlə əlaqə saxlayın.',
+        q: {
+          az: 'Hansı ərazilərə çatdırırsınız?',
+          en: 'Which areas do you deliver to?',
+          ru: 'В какие районы вы доставляете?',
+        },
+        a: {
+          az: 'Bakı və Abşeron yarımadası üzrə çatdırılma edirik. Zavodumuz Novxanıda yerləşdiyi üçün Abşeron zonasına xüsusilə sürətli çatırıq. Konkret ünvanınız üçün bizimlə əlaqə saxlayın.',
+          en: 'We deliver across Baku and the Absheron peninsula. Since our plant is in Novkhani, delivery to the Absheron zone is especially fast. Contact us about your specific address.',
+          ru: 'Мы доставляем по Баку и Абшеронскому полуострову. Поскольку завод находится в Новханы, в зону Абшерона доставляем особенно быстро. Свяжитесь с нами по вашему конкретному адресу.',
+        },
       },
       {
-        q: 'Beton yolda nə qədər qala bilər?',
-        a: 'Hazır qarışıq adətən istehsaldan sonra 1,5–2 saat ərzində tökülməlidir (hava şəraitindən asılı olaraq). Marşrut və qrafiki məhz buna görə əvvəlcədən planlaşdırırıq.',
+        q: {
+          az: 'Beton yolda nə qədər qala bilər?',
+          en: 'How long can concrete stay in transit?',
+          ru: 'Сколько бетон может находиться в пути?',
+        },
+        a: {
+          az: 'Hazır qarışıq adətən istehsaldan sonra 1,5–2 saat ərzində tökülməlidir (hava şəraitindən asılı olaraq). Marşrut və qrafiki məhz buna görə əvvəlcədən planlaşdırırıq.',
+          en: 'A ready mix should normally be poured within 1.5–2 hours of production (depending on weather conditions). That is exactly why we plan the route and schedule in advance.',
+          ru: 'Готовую смесь обычно нужно уложить в течение 1,5–2 часов после производства (в зависимости от погодных условий). Именно поэтому мы заранее планируем маршрут и график.',
+        },
       },
       {
-        q: 'Bir mikserdə nə qədər beton gəlir?',
-        a: 'Standart mikserlərin tutumu adətən 7–10 m³ aralığındadır. Layihəniz üçün lazımi mikser sayını saytdakı beton kalkulyatoru avtomatik hesablayır.',
+        q: {
+          az: 'Bir mikserdə nə qədər beton gəlir?',
+          en: 'How much concrete does one mixer truck carry?',
+          ru: 'Сколько бетона привозит один миксер?',
+        },
+        a: {
+          az: 'Standart mikserlərin tutumu adətən 7–10 m³ aralığındadır. Layihəniz üçün lazımi mikser sayını saytdakı beton kalkulyatoru avtomatik hesablayır.',
+          en: 'Standard mixer trucks usually hold 7–10 m³. The concrete calculator on our website automatically works out how many mixer trucks your project needs.',
+          ru: 'Вместимость стандартных миксеров обычно составляет 7–10 м³. Калькулятор бетона на сайте автоматически рассчитает нужное количество миксеров для вашего проекта.',
+        },
       },
       {
-        q: 'Gecə və həftəsonu çatdırılma mümkündürmü?',
-        a: 'Bəli, 7/24 fəaliyyət göstəririk — qrafiki əvvəlcədən razılaşdırmaq kifayətdir.',
+        q: {
+          az: 'Gecə və həftəsonu çatdırılma mümkündürmü?',
+          en: 'Is delivery available at night and on weekends?',
+          ru: 'Возможна ли доставка ночью и в выходные?',
+        },
+        a: {
+          az: 'Bəli, 7/24 fəaliyyət göstəririk — qrafiki əvvəlcədən razılaşdırmaq kifayətdir.',
+          en: 'Yes, we operate 24/7 — you only need to agree on the schedule in advance.',
+          ru: 'Да, мы работаем 24/7 — достаточно заранее согласовать график.',
+        },
       },
     ],
     related: [
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı haqqında' },
-      { to: '/beton-nasoslama', label: 'Beton nasoslama xidməti' },
-      { to: '/calculator', label: 'Neçə mikser lazımdır? Hesabla' },
-      { to: '/contact', label: 'Çatdırılma üçün əlaqə saxla' },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
+      },
+      {
+        to: '/beton-nasoslama',
+        label: { az: 'Beton nasoslama xidməti', en: 'Concrete pumping service', ru: 'Услуги бетононасоса' },
+      },
+      {
+        to: '/calculator',
+        label: { az: 'Neçə mikser lazımdır? Hesabla', en: 'How many mixer trucks do you need? Calculate', ru: 'Сколько нужно миксеров? Рассчитать' },
+      },
+      {
+        to: '/contact',
+        label: { az: 'Çatdırılma üçün əlaqə saxla', en: 'Contact us about delivery', ru: 'Связаться по вопросам доставки' },
+      },
     ],
-    whatsappText: 'Salam! Beton çatdırılması üçün qiymət təklifi almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Beton çatdırılması üçün qiymət təklifi almaq istəyirəm.',
+      en: 'Hello! I would like to get a price quote for concrete delivery.',
+      ru: 'Здравствуйте! Хочу получить ценовое предложение на доставку бетона.',
+    },
   },
 
   {
     slug: '/beton-nasoslama',
     seo: {
-      title: 'Beton Nasoslama Xidməti — Hündür və Çətin Sahələr | NOVXANI BETON',
-      description:
-        'Beton nasosu ilə hündürmərtəbəli binalara və çətin əlçatan sahələrə beton tökülməsi. Sürətli, təmiz və bərabər tökmə. Bakı və Abşeron üzrə xidmət.',
+      title: {
+        az: 'Beton Nasoslama Xidməti — Hündür və Çətin Sahələr | NOVXANI BETON',
+        en: 'Concrete Pumping Service — High-Rise and Hard-to-Reach Sites | NOVXANI BETON',
+        ru: 'Услуги бетононасоса — высотные и труднодоступные участки | NOVXANI BETON',
+      },
+      description: {
+        az: 'Beton nasosu ilə hündürmərtəbəli binalara və çətin əlçatan sahələrə beton tökülməsi. Sürətli, təmiz və bərabər tökmə. Bakı və Abşeron üzrə xidmət.',
+        en: 'Concrete pumping for high-rise buildings and hard-to-reach areas. Fast, clean and even pouring. Serving Baku and Absheron.',
+        ru: 'Подача бетона бетононасосом на высотные здания и труднодоступные участки. Быстрая, чистая и равномерная заливка. Работаем по Баку и Абшерону.',
+      },
     },
-    crumb: 'Beton Nasoslama',
-    h1: 'Beton Nasoslama Xidməti',
-    tagline: 'Hündür mərtəbələrə və çətin əlçatan sahələrə sürətli, fasiləsiz beton tökülməsi',
-    hero: { image: imgNasoslama, alt: 'Beton nasosu tikinti meydançasında işləyir' },
+    crumb: {
+      az: 'Beton Nasoslama',
+      en: 'Concrete Pumping',
+      ru: 'Услуги бетононасоса',
+    },
+    h1: {
+      az: 'Beton Nasoslama Xidməti',
+      en: 'Concrete Pumping Service',
+      ru: 'Услуги бетононасоса',
+    },
+    tagline: {
+      az: 'Hündür mərtəbələrə və çətin əlçatan sahələrə sürətli, fasiləsiz beton tökülməsi',
+      en: 'Fast, continuous concrete pouring to upper floors and hard-to-reach areas',
+      ru: 'Быстрая и непрерывная подача бетона на верхние этажи и труднодоступные участки',
+    },
+    hero: {
+      image: imgNasoslama,
+      alt: {
+        az: 'Beton nasosu tikinti meydançasında işləyir',
+        en: 'Concrete pump operating at a construction site',
+        ru: 'Бетононасос работает на строительной площадке',
+      },
+    },
     intro: [
-      'Mikserin birbaşa yaxınlaşa bilmədiyi obyektlərdə — hündür mərtəbələr, dar həyətlər, binanın arxa hissəsi — beton nasosu ən səmərəli həlldir. Nasos betonu borular vasitəsilə birbaşa tökmə nöqtəsinə ötürür.',
-      'Nasosla tökmə həm sürətlidir, həm də keyfiyyətlidir: beton fasiləsiz axınla, bərabər paylanır; əl daşımalarında yaranan itki və ləngimələr aradan qalxır. Layihənizə uyğun nasos növünü birlikdə müəyyən edirik.',
+      {
+        az: 'Mikserin birbaşa yaxınlaşa bilmədiyi obyektlərdə — hündür mərtəbələr, dar həyətlər, binanın arxa hissəsi — beton nasosu ən səmərəli həlldir. Nasos betonu borular vasitəsilə birbaşa tökmə nöqtəsinə ötürür.',
+        en: 'On sites a mixer truck cannot reach directly — upper floors, narrow courtyards, the rear of a building — a concrete pump is the most efficient solution. The pump delivers concrete through pipes straight to the pouring point.',
+        ru: 'На объектах, куда миксер не может подъехать вплотную — верхние этажи, узкие дворы, задняя часть здания — бетононасос является самым эффективным решением. Насос подаёт бетон по трубам прямо к точке заливки.',
+      },
+      {
+        az: 'Nasosla tökmə həm sürətlidir, həm də keyfiyyətlidir: beton fasiləsiz axınla, bərabər paylanır; əl daşımalarında yaranan itki və ləngimələr aradan qalxır. Layihənizə uyğun nasos növünü birlikdə müəyyən edirik.',
+        en: 'Pump pouring is both fast and high quality: the concrete flows continuously and is distributed evenly, eliminating the losses and delays of manual handling. We will help you determine the right pump type for your project.',
+        ru: 'Заливка насосом — это и скорость, и качество: бетон подаётся непрерывным потоком и распределяется равномерно, а потери и задержки, характерные для ручной переноски, исключаются. Тип насоса под ваш проект подберём вместе.',
+      },
     ],
-    benefitsTitle: 'Nasosla tökmənin üstünlükləri',
+    benefitsTitle: {
+      az: 'Nasosla tökmənin üstünlükləri',
+      en: 'Advantages of pump pouring',
+      ru: 'Преимущества заливки насосом',
+    },
     benefits: [
-      { title: 'Hündürlüyə tökmə', text: 'Çoxmərtəbəli binaların yuxarı mərtəbələrinə birbaşa çatdırılma.' },
-      { title: 'Çətin sahələrə çıxış', text: 'Mikserin girə bilmədiyi dar və uzaq nöqtələrə tökmə.' },
-      { title: 'Sürətli, fasiləsiz axın', text: 'Böyük həcmlər qısa vaxtda, soyuq tikiş riski olmadan tökülür.' },
-      { title: 'Az itki, təmiz sahə', text: 'Material itkisi və meydança çirklənməsi minimuma enir.' },
+      {
+        title: { az: 'Hündürlüyə tökmə', en: 'Pouring at height', ru: 'Подача на высоту' },
+        text: {
+          az: 'Çoxmərtəbəli binaların yuxarı mərtəbələrinə birbaşa çatdırılma.',
+          en: 'Direct delivery to the upper floors of multi-storey buildings.',
+          ru: 'Прямая подача на верхние этажи многоэтажных зданий.',
+        },
+      },
+      {
+        title: { az: 'Çətin sahələrə çıxış', en: 'Access to difficult areas', ru: 'Доступ к сложным участкам' },
+        text: {
+          az: 'Mikserin girə bilmədiyi dar və uzaq nöqtələrə tökmə.',
+          en: 'Pouring into narrow and distant spots a mixer truck cannot reach.',
+          ru: 'Заливка в узкие и удалённые точки, куда миксер не может проехать.',
+        },
+      },
+      {
+        title: { az: 'Sürətli, fasiləsiz axın', en: 'Fast, continuous flow', ru: 'Быстрый непрерывный поток' },
+        text: {
+          az: 'Böyük həcmlər qısa vaxtda, soyuq tikiş riski olmadan tökülür.',
+          en: 'Large volumes are poured in a short time, without the risk of cold joints.',
+          ru: 'Большие объёмы заливаются за короткое время, без риска холодных швов.',
+        },
+      },
+      {
+        title: { az: 'Az itki, təmiz sahə', en: 'Less waste, cleaner site', ru: 'Меньше потерь, чистая площадка' },
+        text: {
+          az: 'Material itkisi və meydança çirklənməsi minimuma enir.',
+          en: 'Material loss and site contamination are kept to a minimum.',
+          ru: 'Потери материала и загрязнение площадки сводятся к минимуму.',
+        },
+      },
     ],
-    stepsTitle: 'Xidmət necə təşkil olunur',
+    stepsTitle: {
+      az: 'Xidmət necə təşkil olunur',
+      en: 'How the service is arranged',
+      ru: 'Как организуется услуга',
+    },
     steps: [
-      { title: 'Obyekt məlumatı', text: 'Mərtəbə sayı, məsafə və tökmə həcmi haqqında məlumat verirsiniz.' },
-      { title: 'Nasos seçimi və təklif', text: 'Obyektə uyğun texnika müəyyən olunur, fərdi qiymət təqdim edilir.' },
-      { title: 'Quraşdırma', text: 'Nasos razılaşdırılmış vaxtda obyektdə qurulur.' },
-      { title: 'Tökmə və yığışdırma', text: 'Beton fasiləsiz vurulur; iş bitdikdən sonra sahə təhvil verilir.' },
+      {
+        title: { az: 'Obyekt məlumatı', en: 'Site details', ru: 'Данные объекта' },
+        text: {
+          az: 'Mərtəbə sayı, məsafə və tökmə həcmi haqqında məlumat verirsiniz.',
+          en: 'You provide the number of floors, the distance and the pouring volume.',
+          ru: 'Вы сообщаете этажность, расстояние и объём заливки.',
+        },
+      },
+      {
+        title: { az: 'Nasos seçimi və təklif', en: 'Pump selection and offer', ru: 'Подбор насоса и предложение' },
+        text: {
+          az: 'Obyektə uyğun texnika müəyyən olunur, fərdi qiymət təqdim edilir.',
+          en: 'The right equipment is selected for the site and a personalized price is provided.',
+          ru: 'Подбирается техника под объект и предоставляется индивидуальная цена.',
+        },
+      },
+      {
+        title: { az: 'Quraşdırma', en: 'Setup', ru: 'Монтаж' },
+        text: {
+          az: 'Nasos razılaşdırılmış vaxtda obyektdə qurulur.',
+          en: 'The pump is set up on site at the agreed time.',
+          ru: 'Насос устанавливается на объекте в согласованное время.',
+        },
+      },
+      {
+        title: { az: 'Tökmə və yığışdırma', en: 'Pouring and cleanup', ru: 'Заливка и уборка' },
+        text: {
+          az: 'Beton fasiləsiz vurulur; iş bitdikdən sonra sahə təhvil verilir.',
+          en: 'Concrete is pumped continuously; once the work is finished, the site is handed back.',
+          ru: 'Бетон подаётся непрерывно; после завершения работ площадка сдаётся заказчику.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Nasos nə vaxt lazımdır?',
-        a: 'Yuxarı mərtəbələrə tökmələrdə, mikserin obyektə yaxınlaşa bilmədiyi hallarda və böyük sahəli plitələrin fasiləsiz tökülməsində nasos tövsiyə olunur.',
+        q: {
+          az: 'Nasos nə vaxt lazımdır?',
+          en: 'When is a pump needed?',
+          ru: 'Когда нужен бетононасос?',
+        },
+        a: {
+          az: 'Yuxarı mərtəbələrə tökmələrdə, mikserin obyektə yaxınlaşa bilmədiyi hallarda və böyük sahəli plitələrin fasiləsiz tökülməsində nasos tövsiyə olunur.',
+          en: 'A pump is recommended for pouring on upper floors, when a mixer truck cannot get close to the site, and for the continuous pouring of large-area slabs.',
+          ru: 'Насос рекомендуется при заливке верхних этажей, когда миксер не может подъехать к объекту, а также при непрерывной заливке плит большой площади.',
+        },
       },
       {
-        q: 'Nasos xidməti ayrıca sifariş oluna bilərmi?',
-        a: 'Bəli, beton sifarişi ilə birlikdə və ya ayrıca təşkil oluna bilər. Qiymət obyektin şərtlərindən (hündürlük, məsafə, həcm) asılıdır.',
+        q: {
+          az: 'Nasos xidməti ayrıca sifariş oluna bilərmi?',
+          en: 'Can the pumping service be ordered separately?',
+          ru: 'Можно ли заказать услугу насоса отдельно?',
+        },
+        a: {
+          az: 'Bəli, beton sifarişi ilə birlikdə və ya ayrıca təşkil oluna bilər. Qiymət obyektin şərtlərindən (hündürlük, məsafə, həcm) asılıdır.',
+          en: 'Yes, it can be arranged together with a concrete order or on its own. The price depends on the site conditions (height, distance, volume).',
+          ru: 'Да, услугу можно организовать вместе с заказом бетона или отдельно. Цена зависит от условий объекта (высота, расстояние, объём).',
+        },
       },
       {
-        q: 'Hansı hündürlüyə beton vurmaq olur?',
-        a: 'Bu, seçilən nasosun növündən asılıdır. Obyektiniz haqqında məlumat verin — layihənizə uyğun texnikanı təklif edək.',
+        q: {
+          az: 'Hansı hündürlüyə beton vurmaq olur?',
+          en: 'To what height can concrete be pumped?',
+          ru: 'На какую высоту можно подавать бетон?',
+        },
+        a: {
+          az: 'Bu, seçilən nasosun növündən asılıdır. Obyektiniz haqqında məlumat verin — layihənizə uyğun texnikanı təklif edək.',
+          en: 'It depends on the type of pump selected. Tell us about your site and we will suggest the right equipment for your project.',
+          ru: 'Это зависит от типа выбранного насоса. Расскажите о вашем объекте — мы предложим технику под ваш проект.',
+        },
       },
       {
-        q: 'Nasosla hansı markaları vurmaq olar?',
-        a: 'İstehsal etdiyimiz bütün markalar (M100–M450) nasosla tökülə bilər — qarışıq nasoslamaya uyğun hazırlanır.',
+        q: {
+          az: 'Nasosla hansı markaları vurmaq olar?',
+          en: 'Which grades can be pumped?',
+          ru: 'Какие марки можно подавать насосом?',
+        },
+        a: {
+          az: 'İstehsal etdiyimiz bütün markalar (M100–M450) nasosla tökülə bilər — qarışıq nasoslamaya uyğun hazırlanır.',
+          en: 'All the grades we produce (M100–M450) can be pump-poured — the mix is prepared to be pumpable.',
+          ru: 'Все производимые нами марки (M100–M450) можно заливать насосом — смесь готовится с учётом перекачивания.',
+        },
       },
     ],
     related: [
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı haqqında' },
-      { to: '/beton-catdirilmasi', label: 'Çatdırılma necə işləyir?' },
-      { to: '/calculator', label: 'Tökmə həcmini hesabla' },
-      { to: '/beton-qiymetleri', label: 'Qiymətə nə təsir edir?' },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
+      },
+      {
+        to: '/beton-catdirilmasi',
+        label: { az: 'Çatdırılma necə işləyir?', en: 'How does delivery work?', ru: 'Как работает доставка?' },
+      },
+      {
+        to: '/calculator',
+        label: { az: 'Tökmə həcmini hesabla', en: 'Calculate your pouring volume', ru: 'Рассчитать объём заливки' },
+      },
+      {
+        to: '/beton-qiymetleri',
+        label: { az: 'Qiymətə nə təsir edir?', en: 'What affects the price?', ru: 'Что влияет на цену?' },
+      },
     ],
-    whatsappText: 'Salam! Beton nasoslama xidməti üçün qiymət təklifi almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Beton nasoslama xidməti üçün qiymət təklifi almaq istəyirəm.',
+      en: 'Hello! I would like to get a price quote for the concrete pumping service.',
+      ru: 'Здравствуйте! Хочу получить ценовое предложение на услуги бетононасоса.',
+    },
   },
 
   {
     slug: '/terezi-xidmeti',
     seo: {
-      title: 'Tərəzi Xidməti — Avtomobil Körpü Tərəzisi | NOVXANI BETON',
-      description:
-        'Novxanıda avtomobil körpü tərəzisi ilə yük maşınlarının dəqiq çəkilməsi. Tikinti və logistika şirkətləri üçün sürətli, sənədləşdirilmiş çəki xidməti — 7/24.',
+      title: {
+        az: 'Tərəzi Xidməti — Avtomobil Körpü Tərəzisi | NOVXANI BETON',
+        en: 'Weighbridge Service — Truck Weighbridge | NOVXANI BETON',
+        ru: 'Услуги автомобильных весов — взвешивание грузовиков | NOVXANI BETON',
+      },
+      description: {
+        az: 'Novxanıda avtomobil körpü tərəzisi ilə yük maşınlarının dəqiq çəkilməsi. Tikinti və logistika şirkətləri üçün sürətli, sənədləşdirilmiş çəki xidməti — 7/24.',
+        en: 'Accurate truck weighing on a truck weighbridge in Novkhani. Fast, documented weighing service for construction and logistics companies — 24/7.',
+        ru: 'Точное взвешивание грузовиков на автомобильных весах в Новханы. Быстрая, документально оформленная услуга взвешивания для строительных и логистических компаний — 24/7.',
+      },
     },
-    crumb: 'Tərəzi Xidməti',
-    h1: 'Tərəzi (Çəki) Xidməti',
-    tagline: 'Avtomobil körpü tərəzisi ilə yüklərin dəqiq və sənədli ölçülməsi — Novxanı, 7/24',
-    hero: { image: imgTerezi, alt: 'Mikser avtomobil körpü tərəzisində çəkilir' },
+    crumb: {
+      az: 'Tərəzi Xidməti',
+      en: 'Weighbridge Service',
+      ru: 'Услуги автомобильных весов',
+    },
+    h1: {
+      az: 'Tərəzi (Çəki) Xidməti',
+      en: 'Weighbridge (Weighing) Service',
+      ru: 'Услуги взвешивания (автомобильные весы)',
+    },
+    tagline: {
+      az: 'Avtomobil körpü tərəzisi ilə yüklərin dəqiq və sənədli ölçülməsi — Novxanı, 7/24',
+      en: 'Accurate, documented weighing of loads on a truck weighbridge — Novkhani, 24/7',
+      ru: 'Точное и документально оформленное взвешивание грузов на автомобильных весах — Новханы, 24/7',
+    },
+    hero: {
+      image: imgTerezi,
+      alt: {
+        az: 'Mikser avtomobil körpü tərəzisində çəkilir',
+        en: 'A mixer truck being weighed on a truck weighbridge',
+        ru: 'Миксер взвешивается на автомобильных весах',
+      },
+    },
     intro: [
-      'Novxanı zavodumuzda yerləşən avtomobil körpü tərəzisi ilə yük maşınlarının və qoşquların dəqiq çəkisini ölçürük. Xidmət həm öz sifarişçilərimiz, həm də kənar tikinti, logistika və istehsalat şirkətləri üçün açıqdır.',
-      'Dəqiq çəki — artıq yük cərimələrindən qorunmaq, materialın düzgün uçotu və şəffaf hesablaşma üçün vacibdir. Ölçmə bir neçə dəqiqə çəkir, nəticə sənədlə təqdim olunur.',
+      {
+        az: 'Novxanı zavodumuzda yerləşən avtomobil körpü tərəzisi ilə yük maşınlarının və qoşquların dəqiq çəkisini ölçürük. Xidmət həm öz sifarişçilərimiz, həm də kənar tikinti, logistika və istehsalat şirkətləri üçün açıqdır.',
+        en: 'With the truck weighbridge located at our Novkhani plant, we measure the exact weight of trucks and trailers. The service is open both to our own customers and to third-party construction, logistics and manufacturing companies.',
+        ru: 'На автомобильных весах, расположенных на нашем заводе в Новханы, мы точно измеряем вес грузовиков и прицепов. Услуга доступна как нашим заказчикам, так и сторонним строительным, логистическим и производственным компаниям.',
+      },
+      {
+        az: 'Dəqiq çəki — artıq yük cərimələrindən qorunmaq, materialın düzgün uçotu və şəffaf hesablaşma üçün vacibdir. Ölçmə bir neçə dəqiqə çəkir, nəticə sənədlə təqdim olunur.',
+        en: 'Accurate weighing matters: it protects you from overload fines, ensures correct material accounting and keeps settlements transparent. Weighing takes just a few minutes and the result is issued as a document.',
+        ru: 'Точный вес важен для защиты от штрафов за перегруз, правильного учёта материалов и прозрачных расчётов. Взвешивание занимает несколько минут, результат оформляется документально.',
+      },
     ],
-    benefitsTitle: 'Xidmətin üstünlükləri',
+    benefitsTitle: {
+      az: 'Xidmətin üstünlükləri',
+      en: 'Advantages of the service',
+      ru: 'Преимущества услуги',
+    },
     benefits: [
-      { title: 'Dəqiq ölçüm', text: 'Körpü tərəzisi ağır və uzun bazalı nəqliyyat üçün nəzərdə tutulub.' },
-      { title: 'Sürətli xidmət', text: 'Çəkilmə prosesi cəmi bir neçə dəqiqə vaxt alır.' },
-      { title: 'Sənədləşdirmə', text: 'Nəticə çəki qəbzi ilə rəsmiləşdirilir.' },
-      { title: 'Əlverişli yerləşmə', text: 'Novxanıda, əsas marşrutlara yaxın — 7/24 açıq.' },
+      {
+        title: { az: 'Dəqiq ölçüm', en: 'Accurate measurement', ru: 'Точное измерение' },
+        text: {
+          az: 'Körpü tərəzisi ağır və uzun bazalı nəqliyyat üçün nəzərdə tutulub.',
+          en: 'The weighbridge is designed for heavy and long-wheelbase vehicles.',
+          ru: 'Весы рассчитаны на тяжёлый и длиннобазный транспорт.',
+        },
+      },
+      {
+        title: { az: 'Sürətli xidmət', en: 'Fast service', ru: 'Быстрое обслуживание' },
+        text: {
+          az: 'Çəkilmə prosesi cəmi bir neçə dəqiqə vaxt alır.',
+          en: 'The weighing process takes only a few minutes.',
+          ru: 'Процесс взвешивания занимает всего несколько минут.',
+        },
+      },
+      {
+        title: { az: 'Sənədləşdirmə', en: 'Documentation', ru: 'Документальное оформление' },
+        text: {
+          az: 'Nəticə çəki qəbzi ilə rəsmiləşdirilir.',
+          en: 'The result is formalized with a weight ticket.',
+          ru: 'Результат оформляется весовой квитанцией.',
+        },
+      },
+      {
+        title: { az: 'Əlverişli yerləşmə', en: 'Convenient location', ru: 'Удобное расположение' },
+        text: {
+          az: 'Novxanıda, əsas marşrutlara yaxın — 7/24 açıq.',
+          en: 'In Novkhani, close to the main routes — open 24/7.',
+          ru: 'В Новханы, рядом с основными маршрутами — открыто 24/7.',
+        },
+      },
     ],
-    stepsTitle: 'Necə işləyir',
+    stepsTitle: {
+      az: 'Necə işləyir',
+      en: 'How it works',
+      ru: 'Как это работает',
+    },
     steps: [
-      { title: 'Gəliş', text: 'Zavoda yaxınlaşırsınız (əvvəlcədən zəng etməyiniz gözləməni azaldır).' },
-      { title: 'Dolu çəki', text: 'Yüklü nəqliyyat vasitəsi tərəzidə ölçülür.' },
-      { title: 'Boş çəki (tara)', text: 'Boşaldıqdan sonra təkrar ölçmə ilə xalis yük müəyyən olunur.' },
-      { title: 'Qəbz və hesablaşma', text: 'Nəticə sənədləşdirilir və təqdim olunur.' },
+      {
+        title: { az: 'Gəliş', en: 'Arrival', ru: 'Приезд' },
+        text: {
+          az: 'Zavoda yaxınlaşırsınız (əvvəlcədən zəng etməyiniz gözləməni azaldır).',
+          en: 'You drive up to the plant (calling ahead reduces waiting time).',
+          ru: 'Вы подъезжаете к заводу (предварительный звонок сокращает ожидание).',
+        },
+      },
+      {
+        title: { az: 'Dolu çəki', en: 'Gross weight', ru: 'Вес брутто' },
+        text: {
+          az: 'Yüklü nəqliyyat vasitəsi tərəzidə ölçülür.',
+          en: 'The loaded vehicle is weighed on the weighbridge.',
+          ru: 'Гружёное транспортное средство взвешивается на весах.',
+        },
+      },
+      {
+        title: { az: 'Boş çəki (tara)', en: 'Empty weight (tare)', ru: 'Вес пустого (тара)' },
+        text: {
+          az: 'Boşaldıqdan sonra təkrar ölçmə ilə xalis yük müəyyən olunur.',
+          en: 'After unloading, a second weighing determines the net load.',
+          ru: 'После разгрузки повторное взвешивание определяет вес нетто.',
+        },
+      },
+      {
+        title: { az: 'Qəbz və hesablaşma', en: 'Ticket and settlement', ru: 'Квитанция и расчёт' },
+        text: {
+          az: 'Nəticə sənədləşdirilir və təqdim olunur.',
+          en: 'The result is documented and handed over.',
+          ru: 'Результат оформляется документально и выдаётся.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Hansı nəqliyyat vasitələri çəkilə bilər?',
-        a: 'Yük maşınları, mikserlər, qoşqulu TIR-lar və digər ağır texnika — körpü tərəzisi uzun bazalı nəqliyyat üçün nəzərdə tutulub.',
+        q: {
+          az: 'Hansı nəqliyyat vasitələri çəkilə bilər?',
+          en: 'Which vehicles can be weighed?',
+          ru: 'Какие транспортные средства можно взвешивать?',
+        },
+        a: {
+          az: 'Yük maşınları, mikserlər, qoşqulu TIR-lar və digər ağır texnika — körpü tərəzisi uzun bazalı nəqliyyat üçün nəzərdə tutulub.',
+          en: 'Trucks, mixer trucks, articulated lorries with trailers and other heavy vehicles — the weighbridge is designed for long-wheelbase transport.',
+          ru: 'Грузовики, миксеры, фуры с прицепами и другая тяжёлая техника — весы рассчитаны на длиннобазный транспорт.',
+        },
       },
       {
-        q: 'Nəticə sənədlə verilirmi?',
-        a: 'Bəli, ölçmənin nəticəsi çəki qəbzi ilə rəsmiləşdirilir.',
+        q: {
+          az: 'Nəticə sənədlə verilirmi?',
+          en: 'Is the result issued as a document?',
+          ru: 'Выдаётся ли результат в виде документа?',
+        },
+        a: {
+          az: 'Bəli, ölçmənin nəticəsi çəki qəbzi ilə rəsmiləşdirilir.',
+          en: 'Yes, the weighing result is formalized with a weight ticket.',
+          ru: 'Да, результат взвешивания оформляется весовой квитанцией.',
+        },
       },
       {
-        q: 'Xidmətdən kimlər istifadə edə bilər?',
-        a: 'Hər kəs — bizim müştərimiz olmayan şirkətlər və fərdi sürücülər də tərəzi xidmətindən istifadə edə bilər.',
+        q: {
+          az: 'Xidmətdən kimlər istifadə edə bilər?',
+          en: 'Who can use the service?',
+          ru: 'Кто может воспользоваться услугой?',
+        },
+        a: {
+          az: 'Hər kəs — bizim müştərimiz olmayan şirkətlər və fərdi sürücülər də tərəzi xidmətindən istifadə edə bilər.',
+          en: 'Anyone — companies that are not our customers and individual drivers can also use the weighbridge service.',
+          ru: 'Все желающие — компании, не являющиеся нашими клиентами, и частные водители также могут воспользоваться услугой взвешивания.',
+        },
       },
       {
-        q: 'İş saatları necədir?',
-        a: 'Zavod 7/24 fəaliyyət göstərir; gəlişdən əvvəl zəng etməyiniz gözləməni minimuma endirir.',
+        q: {
+          az: 'İş saatları necədir?',
+          en: 'What are the working hours?',
+          ru: 'Какой режим работы?',
+        },
+        a: {
+          az: 'Zavod 7/24 fəaliyyət göstərir; gəlişdən əvvəl zəng etməyiniz gözləməni minimuma endirir.',
+          en: 'The plant operates 24/7; calling before arrival keeps waiting to a minimum.',
+          ru: 'Завод работает 24/7; звонок перед приездом сводит ожидание к минимуму.',
+        },
       },
     ],
     related: [
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı haqqında' },
-      { to: '/services', label: 'Bütün xidmətlərimiz' },
-      { to: '/contact', label: 'Ünvan və əlaqə məlumatları' },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
+      },
+      {
+        to: '/services',
+        label: { az: 'Bütün xidmətlərimiz', en: 'All our services', ru: 'Все наши услуги' },
+      },
+      {
+        to: '/contact',
+        label: { az: 'Ünvan və əlaqə məlumatları', en: 'Address and contact details', ru: 'Адрес и контактные данные' },
+      },
     ],
-    whatsappText: 'Salam! Tərəzi (çəki) xidməti haqqında məlumat almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Tərəzi (çəki) xidməti haqqında məlumat almaq istəyirəm.',
+      en: 'Hello! I would like to get information about the weighbridge service.',
+      ru: 'Здравствуйте! Хочу получить информацию об услуге взвешивания.',
+    },
   },
 
   {
     slug: '/beton-qiymetleri',
     seo: {
-      title: 'Beton Qiymətləri — Fərdi Təklif Alın | NOVXANI BETON',
-      description:
-        'Beton qiyməti nədən asılıdır: marka, həcm, çatdırılma məsafəsi və nasos ehtiyacı. Layihəniz üçün pulsuz fərdi qiymət təklifi alın — WhatsApp və ya zənglə.',
+      title: {
+        az: 'Beton Qiymətləri — Fərdi Təklif Alın | NOVXANI BETON',
+        en: 'Concrete Prices — Request a Personalized Quote | NOVXANI BETON',
+        ru: 'Цены на бетон — получите индивидуальное предложение | NOVXANI BETON',
+      },
+      description: {
+        az: 'Beton qiyməti nədən asılıdır: marka, həcm, çatdırılma məsafəsi və nasos ehtiyacı. Layihəniz üçün pulsuz fərdi qiymət təklifi alın — WhatsApp və ya zənglə.',
+        en: 'What determines the price of concrete: grade, volume, delivery distance and pumping needs. Get a free personalized quote for your project — via WhatsApp or a call.',
+        ru: 'От чего зависит цена бетона: марка, объём, расстояние доставки и необходимость насоса. Получите бесплатное индивидуальное предложение для вашего проекта — в WhatsApp или по телефону.',
+      },
     },
-    crumb: 'Beton Qiymətləri',
-    h1: 'Beton Qiymətləri',
-    tagline: 'Layihənizə uyğun fərdi qiymət təklifi — pulsuz və öhdəliksiz',
-    hero: { image: imgQiymet, alt: 'Hazır beton qarışığı yaxın planda' },
+    crumb: {
+      az: 'Beton Qiymətləri',
+      en: 'Concrete Prices',
+      ru: 'Цены на бетон',
+    },
+    h1: {
+      az: 'Beton Qiymətləri',
+      en: 'Concrete Prices',
+      ru: 'Цены на бетон',
+    },
+    tagline: {
+      az: 'Layihənizə uyğun fərdi qiymət təklifi — pulsuz və öhdəliksiz',
+      en: 'A personalized quote tailored to your project — free and with no obligation',
+      ru: 'Индивидуальное ценовое предложение под ваш проект — бесплатно и без обязательств',
+    },
+    hero: {
+      image: imgQiymet,
+      alt: {
+        az: 'Hazır beton qarışığı yaxın planda',
+        en: 'Close-up of a ready-mix concrete mixture',
+        ru: 'Готовая бетонная смесь крупным планом',
+      },
+    },
     intro: [
-      'Beton qiyməti sabit rəqəm deyil — marka (M100–M450), sifariş həcmi, çatdırılma məsafəsi, nasos ehtiyacı və tökmə qrafiki qiymətə birbaşa təsir edir. Xammal bazarı da mütəmadi dəyişir.',
-      'Buna görə saytda “hamı üçün bir qiymət” yazmaq əvəzinə, hər layihə üçün fərdi təklif hazırlayırıq — beləcə artıq xərc ödəmirsiniz, yalnız öz layihənizə uyğun real qiyməti alırsınız. Təklif almaq pulsuzdur və heç bir öhdəlik yaratmır.',
+      {
+        az: 'Beton qiyməti sabit rəqəm deyil — marka (M100–M450), sifariş həcmi, çatdırılma məsafəsi, nasos ehtiyacı və tökmə qrafiki qiymətə birbaşa təsir edir. Xammal bazarı da mütəmadi dəyişir.',
+        en: 'The price of concrete is not a fixed number — the grade (M100–M450), order volume, delivery distance, pumping needs and pouring schedule all directly affect it. The raw materials market also changes regularly.',
+        ru: 'Цена бетона — не фиксированная цифра: марка (M100–M450), объём заказа, расстояние доставки, необходимость насоса и график заливки напрямую влияют на неё. Рынок сырья также регулярно меняется.',
+      },
+      {
+        az: 'Buna görə saytda “hamı üçün bir qiymət” yazmaq əvəzinə, hər layihə üçün fərdi təklif hazırlayırıq — beləcə artıq xərc ödəmirsiniz, yalnız öz layihənizə uyğun real qiyməti alırsınız. Təklif almaq pulsuzdur və heç bir öhdəlik yaratmır.',
+        en: 'That is why, instead of posting “one price for everyone” on the website, we prepare a personalized offer for each project — so you never overpay and only get the real price for your own project. Requesting a quote is free and creates no obligation.',
+        ru: 'Поэтому вместо «одной цены для всех» на сайте мы готовим индивидуальное предложение для каждого проекта — так вы не переплачиваете и получаете реальную цену именно вашего проекта. Запрос предложения бесплатен и ни к чему не обязывает.',
+      },
     ],
-    benefitsTitle: 'Qiymətə nə təsir edir?',
+    benefitsTitle: {
+      az: 'Qiymətə nə təsir edir?',
+      en: 'What affects the price?',
+      ru: 'Что влияет на цену?',
+    },
     benefits: [
-      { title: 'Beton markası', text: 'Möhkəmlik sinfi artdıqca qarışıqda sement payı artır.' },
-      { title: 'Sifariş həcmi', text: 'Böyük həcmli sifarişlərdə daha sərfəli şərtlər mümkündür.' },
-      { title: 'Çatdırılma məsafəsi', text: 'Obyektin zavoddan uzaqlığı nəqliyyat xərcinə təsir edir.' },
-      { title: 'Nasos və qrafik', text: 'Xüsusi texnika ehtiyacı və gecə tökmələri ayrıca hesablanır.' },
+      {
+        title: { az: 'Beton markası', en: 'Concrete grade', ru: 'Марка бетона' },
+        text: {
+          az: 'Möhkəmlik sinfi artdıqca qarışıqda sement payı artır.',
+          en: 'The higher the strength class, the more cement the mix contains.',
+          ru: 'Чем выше класс прочности, тем больше доля цемента в смеси.',
+        },
+      },
+      {
+        title: { az: 'Sifariş həcmi', en: 'Order volume', ru: 'Объём заказа' },
+        text: {
+          az: 'Böyük həcmli sifarişlərdə daha sərfəli şərtlər mümkündür.',
+          en: 'Better terms are available for large-volume orders.',
+          ru: 'Для крупных заказов возможны более выгодные условия.',
+        },
+      },
+      {
+        title: { az: 'Çatdırılma məsafəsi', en: 'Delivery distance', ru: 'Расстояние доставки' },
+        text: {
+          az: 'Obyektin zavoddan uzaqlığı nəqliyyat xərcinə təsir edir.',
+          en: 'The distance from the plant to your site affects the transport cost.',
+          ru: 'Удалённость объекта от завода влияет на транспортные расходы.',
+        },
+      },
+      {
+        title: { az: 'Nasos və qrafik', en: 'Pump and schedule', ru: 'Насос и график' },
+        text: {
+          az: 'Xüsusi texnika ehtiyacı və gecə tökmələri ayrıca hesablanır.',
+          en: 'Special equipment needs and night pours are calculated separately.',
+          ru: 'Потребность в спецтехнике и ночные заливки рассчитываются отдельно.',
+        },
+      },
     ],
-    stepsTitle: '3 addıma qiymət alın',
+    stepsTitle: {
+      az: '3 addıma qiymət alın',
+      en: 'Get a price in 3 steps',
+      ru: 'Получите цену за 3 шага',
+    },
     steps: [
-      { title: 'Həcmi hesablayın', text: 'Pulsuz beton kalkulyatoru ilə layihənizə lazım olan m³-ü dəqiqləşdirin.' },
-      { title: 'Bizə göndərin', text: 'Kalkulyatordakı WhatsApp düyməsi hesablamanı avtomatik mesaja çevirir.' },
-      { title: 'Fərdi təklif alın', text: 'Marka, həcm və ünvana uyğun dəqiq qiymət təklifi sizə göndərilir.' },
+      {
+        title: { az: 'Həcmi hesablayın', en: 'Calculate the volume', ru: 'Рассчитайте объём' },
+        text: {
+          az: 'Pulsuz beton kalkulyatoru ilə layihənizə lazım olan m³-ü dəqiqləşdirin.',
+          en: 'Use the free concrete calculator to determine how many m³ your project needs.',
+          ru: 'С помощью бесплатного калькулятора бетона уточните, сколько м³ нужно вашему проекту.',
+        },
+      },
+      {
+        title: { az: 'Bizə göndərin', en: 'Send it to us', ru: 'Отправьте нам' },
+        text: {
+          az: 'Kalkulyatordakı WhatsApp düyməsi hesablamanı avtomatik mesaja çevirir.',
+          en: 'The WhatsApp button in the calculator turns your calculation into a message automatically.',
+          ru: 'Кнопка WhatsApp в калькуляторе автоматически превращает расчёт в сообщение.',
+        },
+      },
+      {
+        title: { az: 'Fərdi təklif alın', en: 'Receive a personalized offer', ru: 'Получите индивидуальное предложение' },
+        text: {
+          az: 'Marka, həcm və ünvana uyğun dəqiq qiymət təklifi sizə göndərilir.',
+          en: 'You get an exact price quote based on the grade, volume and address.',
+          ru: 'Вам направляется точное ценовое предложение с учётом марки, объёма и адреса.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Qiymətə çatdırılma daxildirmi?',
-        a: 'Təklifdə beton və çatdırılma ayrıca, şəffaf şəkildə göstərilir — ünvanınıza görə dəqiq hesablanır.',
+        q: {
+          az: 'Qiymətə çatdırılma daxildirmi?',
+          en: 'Is delivery included in the price?',
+          ru: 'Включена ли доставка в цену?',
+        },
+        a: {
+          az: 'Təklifdə beton və çatdırılma ayrıca, şəffaf şəkildə göstərilir — ünvanınıza görə dəqiq hesablanır.',
+          en: 'In the offer, the concrete and the delivery are shown separately and transparently — calculated exactly for your address.',
+          ru: 'В предложении бетон и доставка указываются отдельно и прозрачно — с точным расчётом по вашему адресу.',
+        },
       },
       {
-        q: 'Böyük həcmli sifarişlərə endirim varmı?',
-        a: 'Bəli, böyük həcmli və davamlı layihələr üçün xüsusi şərtlər təklif olunur.',
+        q: {
+          az: 'Böyük həcmli sifarişlərə endirim varmı?',
+          en: 'Are there discounts for large orders?',
+          ru: 'Есть ли скидки на крупные заказы?',
+        },
+        a: {
+          az: 'Bəli, böyük həcmli və davamlı layihələr üçün xüsusi şərtlər təklif olunur.',
+          en: 'Yes, special terms are offered for large-volume and ongoing projects.',
+          ru: 'Да, для крупных и долгосрочных проектов предлагаются специальные условия.',
+        },
       },
       {
-        q: 'Təklif almaq nə qədər vaxt aparır?',
-        a: 'Ən sürətli yol WhatsApp-dır — sorğulara qısa zamanda cavab veririk.',
+        q: {
+          az: 'Təklif almaq nə qədər vaxt aparır?',
+          en: 'How long does it take to get a quote?',
+          ru: 'Сколько времени занимает получение предложения?',
+        },
+        a: {
+          az: 'Ən sürətli yol WhatsApp-dır — sorğulara qısa zamanda cavab veririk.',
+          en: 'The fastest way is WhatsApp — we respond to inquiries promptly.',
+          ru: 'Самый быстрый способ — WhatsApp: мы отвечаем на запросы в кратчайшие сроки.',
+        },
       },
       {
-        q: 'Ödəniş şərtləri necədir?',
-        a: 'Ödəniş qaydaları (nağd, nağdsız, mərhələli) təklif zamanı razılaşdırılır.',
+        q: {
+          az: 'Ödəniş şərtləri necədir?',
+          en: 'What are the payment terms?',
+          ru: 'Каковы условия оплаты?',
+        },
+        a: {
+          az: 'Ödəniş qaydaları (nağd, nağdsız, mərhələli) təklif zamanı razılaşdırılır.',
+          en: 'Payment arrangements (cash, bank transfer, staged payments) are agreed when the offer is made.',
+          ru: 'Порядок оплаты (наличный, безналичный, поэтапный) согласовывается при подготовке предложения.',
+        },
       },
     ],
     related: [
-      { to: '/calculator', label: 'Beton miqdarını hesabla' },
-      { to: '/products', label: 'Beton markalarına bax' },
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı haqqında' },
-      { to: '/faq', label: 'Tez-tez verilən suallar' },
-      { to: '/contact', label: 'Birbaşa əlaqə saxla' },
+      {
+        to: '/calculator',
+        label: { az: 'Beton miqdarını hesabla', en: 'Calculate concrete volume', ru: 'Рассчитать объём бетона' },
+      },
+      {
+        to: '/products',
+        label: { az: 'Beton markalarına bax', en: 'View concrete grades', ru: 'Смотреть марки бетона' },
+      },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
+      },
+      {
+        to: '/faq',
+        label: { az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' },
+      },
+      {
+        to: '/contact',
+        label: { az: 'Birbaşa əlaqə saxla', en: 'Contact us directly', ru: 'Связаться с нами напрямую' },
+      },
     ],
-    whatsappText: 'Salam! Layihəm üçün beton qiymət təklifi almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Layihəm üçün beton qiymət təklifi almaq istəyirəm.',
+      en: 'Hello! I would like to get a concrete price quote for my project.',
+      ru: 'Здравствуйте! Хочу получить ценовое предложение на бетон для моего проекта.',
+    },
   },
 
   {
     slug: '/beton-laboratoriyasi',
     seo: {
-      title: 'Beton Laboratoriyası — Keyfiyyət Nəzarəti və Sınaqlar | NOVXANI BETON',
-      description:
-        'Betonun keyfiyyəti necə yoxlanılır: laboratoriya nəzarəti, 28 günlük kub sınağı və GOST 26633 üzrə istehsal. Novxanı Beton zavodunda hər partiya sınaqdan keçirilir.',
+      title: {
+        az: 'Beton Laboratoriyası — Keyfiyyət Nəzarəti və Sınaqlar | NOVXANI BETON',
+        en: 'Concrete Laboratory — Quality Control and Testing | NOVXANI BETON',
+        ru: 'Бетонная лаборатория — контроль качества и испытания | NOVXANI BETON',
+      },
+      description: {
+        az: 'Betonun keyfiyyəti necə yoxlanılır: laboratoriya nəzarəti, 28 günlük kub sınağı və GOST 26633 üzrə istehsal. Novxanı Beton zavodunda hər partiya sınaqdan keçirilir.',
+        en: 'How concrete quality is verified: laboratory control, 28-day cube testing and production to GOST 26633. Every batch at the Novxani Beton plant is tested.',
+        ru: 'Как проверяется качество бетона: лабораторный контроль, 28-суточные испытания кубиков и производство по ГОСТ 26633. На заводе Novxani Beton испытывается каждая партия.',
+      },
     },
-    crumb: 'Beton Laboratoriyası',
-    h1: 'Beton Laboratoriyası və Keyfiyyət Nəzarəti',
-    tagline: 'Hər partiya laboratoriya nəzarəti ilə istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir',
-    hero: { image: imgLab, alt: 'Laboratoriya nəzarətli beton qarışığı yaxın planda' },
+    crumb: {
+      az: 'Beton Laboratoriyası',
+      en: 'Concrete Laboratory',
+      ru: 'Бетонная лаборатория',
+    },
+    h1: {
+      az: 'Beton Laboratoriyası və Keyfiyyət Nəzarəti',
+      en: 'Concrete Laboratory and Quality Control',
+      ru: 'Бетонная лаборатория и контроль качества',
+    },
+    tagline: {
+      az: 'Hər partiya laboratoriya nəzarəti ilə istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir',
+      en: 'Every batch is produced under laboratory control and undergoes 28-day strength testing',
+      ru: 'Каждая партия производится под лабораторным контролем и проходит 28-суточные испытания на прочность',
+    },
+    hero: {
+      image: imgLab,
+      alt: {
+        az: 'Laboratoriya nəzarətli beton qarışığı yaxın planda',
+        en: 'Close-up of a laboratory-controlled concrete mix',
+        ru: 'Бетонная смесь под лабораторным контролем крупным планом',
+      },
+    },
     intro: [
-      'Betonun keyfiyyəti gözlə görünmür — o, yalnız laboratoriya sınağı ilə təsdiqlənir. Novxanı Beton zavodunda istehsal GOST 26633 tələblərinə uyğun aparılır: qarışığın resepti laboratoriyada təyin olunur, hər partiya istehsal zamanı yoxlanılır və nümunələr 28 günlük kub sınağından keçirilir.',
-      'Bu nəzarət sizin üçün konkret zəmanət deməkdir: sifariş etdiyiniz marka (məsələn, M300 / B22.5) real olaraq həmin möhkəmliyi verir. Layihə tələb etdikdə sınaq nəticələri sənədlə təqdim olunur — tikinti nəzarəti və texniki sənədləşmə üçün.',
+      {
+        az: 'Betonun keyfiyyəti gözlə görünmür — o, yalnız laboratoriya sınağı ilə təsdiqlənir. Novxanı Beton zavodunda istehsal GOST 26633 tələblərinə uyğun aparılır: qarışığın resepti laboratoriyada təyin olunur, hər partiya istehsal zamanı yoxlanılır və nümunələr 28 günlük kub sınağından keçirilir.',
+        en: 'Concrete quality cannot be seen with the naked eye — it can only be confirmed by laboratory testing. At the Novxani Beton plant, production follows the requirements of GOST 26633: the mix design is set in the laboratory, every batch is checked during production, and samples undergo 28-day cube testing.',
+        ru: 'Качество бетона не видно на глаз — его подтверждают только лабораторные испытания. На заводе Novxani Beton производство ведётся по требованиям ГОСТ 26633: рецептура смеси определяется в лаборатории, каждая партия проверяется в процессе производства, а образцы проходят 28-суточные испытания кубиков.',
+      },
+      {
+        az: 'Bu nəzarət sizin üçün konkret zəmanət deməkdir: sifariş etdiyiniz marka (məsələn, M300 / B22.5) real olaraq həmin möhkəmliyi verir. Layihə tələb etdikdə sınaq nəticələri sənədlə təqdim olunur — tikinti nəzarəti və texniki sənədləşmə üçün.',
+        en: 'For you, this control means a tangible guarantee: the grade you order (for example, M300 / B22.5) actually delivers that strength. When the project requires it, test results are provided in documented form — for construction supervision and technical records.',
+        ru: 'Для вас этот контроль означает конкретную гарантию: заказанная марка (например, M300 / B22.5) действительно обеспечивает заявленную прочность. Если проект того требует, результаты испытаний предоставляются документально — для строительного надзора и технической документации.',
+      },
     ],
-    benefitsTitle: 'Keyfiyyət necə təmin olunur',
+    benefitsTitle: {
+      az: 'Keyfiyyət necə təmin olunur',
+      en: 'How quality is ensured',
+      ru: 'Как обеспечивается качество',
+    },
     benefits: [
-      { title: 'GOST 26633 üzrə istehsal', text: 'Bütün markalar standartın tələblərinə uyğun hazırlanır.' },
-      { title: '28 günlük kub sınağı', text: 'Nümunə kublar standart müddətdə möhkəmliyə yoxlanılır.' },
-      { title: 'Partiya nəzarəti', text: 'Hər istehsal partiyası buraxılışdan əvvəl yoxlanılır.' },
-      { title: 'Layihəyə uyğun resept', text: 'Yekun qarışıq dizaynı laboratoriyada, layihə tələbinə görə təyin olunur.' },
+      {
+        title: { az: 'GOST 26633 üzrə istehsal', en: 'Production to GOST 26633', ru: 'Производство по ГОСТ 26633' },
+        text: {
+          az: 'Bütün markalar standartın tələblərinə uyğun hazırlanır.',
+          en: 'All grades are produced in accordance with the requirements of the standard.',
+          ru: 'Все марки изготавливаются в соответствии с требованиями стандарта.',
+        },
+      },
+      {
+        title: { az: '28 günlük kub sınağı', en: '28-day cube testing', ru: '28-суточные испытания кубиков' },
+        text: {
+          az: 'Nümunə kublar standart müddətdə möhkəmliyə yoxlanılır.',
+          en: 'Sample cubes are strength-tested over the standard period.',
+          ru: 'Образцы-кубики проверяются на прочность в течение стандартного срока.',
+        },
+      },
+      {
+        title: { az: 'Partiya nəzarəti', en: 'Batch control', ru: 'Контроль партий' },
+        text: {
+          az: 'Hər istehsal partiyası buraxılışdan əvvəl yoxlanılır.',
+          en: 'Every production batch is checked before release.',
+          ru: 'Каждая производственная партия проверяется перед выпуском.',
+        },
+      },
+      {
+        title: { az: 'Layihəyə uyğun resept', en: 'Project-specific mix design', ru: 'Рецептура под проект' },
+        text: {
+          az: 'Yekun qarışıq dizaynı laboratoriyada, layihə tələbinə görə təyin olunur.',
+          en: 'The final mix design is set in the laboratory according to project requirements.',
+          ru: 'Итоговый состав смеси определяется в лаборатории с учётом требований проекта.',
+        },
+      },
     ],
-    stepsTitle: 'Sınaq prosesi necə gedir',
+    stepsTitle: {
+      az: 'Sınaq prosesi necə gedir',
+      en: 'How the testing process works',
+      ru: 'Как проходят испытания',
+    },
     steps: [
-      { title: 'Resept və istehsal', text: 'Marka üçün qarışıq resepti laboratoriyada müəyyən olunur, istehsal ona uyğun aparılır.' },
-      { title: 'Nümunə götürülməsi', text: 'İstehsal zamanı partiyadan nümunə kublar hazırlanır.' },
-      { title: 'Möhkəmlik sınağı', text: 'Kublar 28 günlük standart müddətdə sınaqdan keçirilir.' },
-      { title: 'Sənədləşdirmə', text: 'Nəticələr qeydə alınır və tələb olunduqda sifarişçiyə təqdim olunur.' },
+      {
+        title: { az: 'Resept və istehsal', en: 'Mix design and production', ru: 'Рецептура и производство' },
+        text: {
+          az: 'Marka üçün qarışıq resepti laboratoriyada müəyyən olunur, istehsal ona uyğun aparılır.',
+          en: 'The mix design for the grade is set in the laboratory and production follows it.',
+          ru: 'Рецептура смеси для марки определяется в лаборатории, производство ведётся по ней.',
+        },
+      },
+      {
+        title: { az: 'Nümunə götürülməsi', en: 'Sampling', ru: 'Отбор образцов' },
+        text: {
+          az: 'İstehsal zamanı partiyadan nümunə kublar hazırlanır.',
+          en: 'Sample cubes are made from the batch during production.',
+          ru: 'Во время производства из партии изготавливаются образцы-кубики.',
+        },
+      },
+      {
+        title: { az: 'Möhkəmlik sınağı', en: 'Strength testing', ru: 'Испытание на прочность' },
+        text: {
+          az: 'Kublar 28 günlük standart müddətdə sınaqdan keçirilir.',
+          en: 'The cubes are tested over the standard 28-day period.',
+          ru: 'Кубики испытываются в течение стандартного 28-суточного срока.',
+        },
+      },
+      {
+        title: { az: 'Sənədləşdirmə', en: 'Documentation', ru: 'Документальное оформление' },
+        text: {
+          az: 'Nəticələr qeydə alınır və tələb olunduqda sifarişçiyə təqdim olunur.',
+          en: 'The results are recorded and provided to the client on request.',
+          ru: 'Результаты фиксируются и при необходимости предоставляются заказчику.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Betonun keyfiyyəti necə yoxlanılır?',
-        a: 'Standart üsul kub sınağıdır: istehsal zamanı götürülən nümunə kublar 28 gün saxlanılır və press altında möhkəmliyə yoxlanılır. Nəticə markanın (məsələn, M300 üçün 22.5 MPa) təmin olunduğunu təsdiqləyir.',
+        q: {
+          az: 'Betonun keyfiyyəti necə yoxlanılır?',
+          en: 'How is concrete quality tested?',
+          ru: 'Как проверяется качество бетона?',
+        },
+        a: {
+          az: 'Standart üsul kub sınağıdır: istehsal zamanı götürülən nümunə kublar 28 gün saxlanılır və press altında möhkəmliyə yoxlanılır. Nəticə markanın (məsələn, M300 üçün 22.5 MPa) təmin olunduğunu təsdiqləyir.',
+          en: 'The standard method is cube testing: sample cubes taken during production are cured for 28 days and then checked for strength under a press. The result confirms that the grade (for example, 22.5 MPa for M300) is achieved.',
+          ru: 'Стандартный метод — испытание кубиков: образцы, отобранные во время производства, выдерживаются 28 суток и проверяются на прочность под прессом. Результат подтверждает, что марка (например, 22,5 МПа для M300) обеспечена.',
+        },
       },
       {
-        q: 'Beton neçə günə bərkiyir?',
-        a: 'Beton töküldükdən sonra ilk günlərdə sürətlə möhkəmlənir və 28-ci gündə layihə möhkəmliyinin standart göstəricisinə çatır — buna görə sınaqlar məhz 28 günlük aparılır. Hava şəraiti prosesin sürətinə təsir edir.',
+        q: {
+          az: 'Beton neçə günə bərkiyir?',
+          en: 'How long does concrete take to harden?',
+          ru: 'Сколько дней твердеет бетон?',
+        },
+        a: {
+          az: 'Beton töküldükdən sonra ilk günlərdə sürətlə möhkəmlənir və 28-ci gündə layihə möhkəmliyinin standart göstəricisinə çatır — buna görə sınaqlar məhz 28 günlük aparılır. Hava şəraiti prosesin sürətinə təsir edir.',
+          en: 'Concrete gains strength rapidly in the first days after pouring and reaches the standard indicator of its design strength on day 28 — which is exactly why the tests run for 28 days. Weather conditions affect the speed of the process.',
+          ru: 'После заливки бетон быстро набирает прочность в первые дни и на 28-е сутки достигает стандартного показателя проектной прочности — именно поэтому испытания длятся 28 суток. Погодные условия влияют на скорость процесса.',
+        },
       },
       {
-        q: 'Sınaq nəticələrini sənədlə ala bilərəmmi?',
-        a: 'Bəli, layihə və tikinti nəzarəti tələb etdikdə partiya üzrə sınaq nəticələri sənədlə təqdim olunur.',
+        q: {
+          az: 'Sınaq nəticələrini sənədlə ala bilərəmmi?',
+          en: 'Can I receive the test results as a document?',
+          ru: 'Могу ли я получить результаты испытаний документально?',
+        },
+        a: {
+          az: 'Bəli, layihə və tikinti nəzarəti tələb etdikdə partiya üzrə sınaq nəticələri sənədlə təqdim olunur.',
+          en: 'Yes, when the project and construction supervision require it, batch test results are provided in documented form.',
+          ru: 'Да, если этого требуют проект и строительный надзор, результаты испытаний по партии предоставляются документально.',
+        },
       },
       {
-        q: 'Hazır beton yaxşıdır, yoxsa yerində qarışdırılan?',
-        a: 'Zavod betonunda resept laboratoriyada təyin olunur, dozalama avtomatik aparılır və hər partiya yoxlanılır — yerində əl ilə qarışdırmada isə nisbətlər gözəyarı olur və möhkəmlik nəzarətsiz qalır. Konstruktiv işlərdə zavod betonu etibarlı seçimdir.',
+        q: {
+          az: 'Hazır beton yaxşıdır, yoxsa yerində qarışdırılan?',
+          en: 'Which is better: ready-mix or site-mixed concrete?',
+          ru: 'Что лучше: товарный бетон или замешанный на месте?',
+        },
+        a: {
+          az: 'Zavod betonunda resept laboratoriyada təyin olunur, dozalama avtomatik aparılır və hər partiya yoxlanılır — yerində əl ilə qarışdırmada isə nisbətlər gözəyarı olur və möhkəmlik nəzarətsiz qalır. Konstruktiv işlərdə zavod betonu etibarlı seçimdir.',
+          en: 'With plant-produced concrete, the mix design is set in the laboratory, batching is automated and every batch is checked — with manual mixing on site, proportions are done by eye and strength goes unchecked. For structural work, plant concrete is the reliable choice.',
+          ru: 'В заводском бетоне рецептура определяется в лаборатории, дозирование выполняется автоматически и каждая партия проверяется — при ручном замесе на месте пропорции определяются на глаз, а прочность остаётся без контроля. Для конструктивных работ заводской бетон — надёжный выбор.',
+        },
       },
     ],
     related: [
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı' },
-      { to: '/products', label: 'Beton markaları (M100–M450)' },
-      { to: '/betonun-istifade-saheleri', label: 'Betonun istifadə sahələri' },
-      { to: '/faq', label: 'Tez-tez verilən suallar' },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete sales', ru: 'Продажа товарного бетона' },
+      },
+      {
+        to: '/products',
+        label: { az: 'Beton markaları (M100–M450)', en: 'Concrete grades (M100–M450)', ru: 'Марки бетона (M100–M450)' },
+      },
+      {
+        to: '/betonun-istifade-saheleri',
+        label: { az: 'Betonun istifadə sahələri', en: 'Applications of concrete', ru: 'Области применения бетона' },
+      },
+      {
+        to: '/faq',
+        label: { az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' },
+      },
     ],
-    whatsappText: 'Salam! Betonun keyfiyyət nəzarəti və sınaq sənədləri haqqında məlumat almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Betonun keyfiyyət nəzarəti və sınaq sənədləri haqqında məlumat almaq istəyirəm.',
+      en: 'Hello! I would like to get information about concrete quality control and test documentation.',
+      ru: 'Здравствуйте! Хочу получить информацию о контроле качества бетона и документах испытаний.',
+    },
   },
 
   {
     slug: '/betonun-istifade-saheleri',
     seo: {
-      title: 'Betonun İstifadə Sahələri — Fundament, Döşəmə, Həyət, Yol | NOVXANI BETON',
-      description:
-        'Hansı iş üçün hansı beton lazımdır: fundament, döşəmə, həyət betonlaması, yol, qaraj, hovuz və monolit işlər üzrə marka tövsiyələri (M100–M450). Pulsuz məsləhət və fərdi qiymət.',
+      title: {
+        az: 'Betonun İstifadə Sahələri — Fundament, Döşəmə, Həyət, Yol | NOVXANI BETON',
+        en: 'Applications of Concrete — Foundations, Floors, Yards, Roads | NOVXANI BETON',
+        ru: 'Области применения бетона — фундамент, полы, двор, дороги | NOVXANI BETON',
+      },
+      description: {
+        az: 'Hansı iş üçün hansı beton lazımdır: fundament, döşəmə, həyət betonlaması, yol, qaraj, hovuz və monolit işlər üzrə marka tövsiyələri (M100–M450). Pulsuz məsləhət və fərdi qiymət.',
+        en: 'Which concrete you need for which job: grade recommendations (M100–M450) for foundations, floors, yard concreting, roads, garages, pools and monolithic work. Free advice and a personalized price.',
+        ru: 'Какой бетон нужен для какой работы: рекомендации по маркам (M100–M450) для фундамента, полов, бетонирования двора, дорог, гаража, бассейна и монолитных работ. Бесплатная консультация и индивидуальная цена.',
+      },
     },
-    crumb: 'Betonun İstifadə Sahələri',
-    h1: 'Betonun İstifadə Sahələri',
-    tagline: 'Fundamentdən hovuza qədər — hər iş üçün doğru beton markasının seçimi',
-    hero: { image: imgUsage, alt: 'Tikinti sahəsində beton tökmə işləri' },
+    crumb: {
+      az: 'Betonun İstifadə Sahələri',
+      en: 'Applications of Concrete',
+      ru: 'Области применения бетона',
+    },
+    h1: {
+      az: 'Betonun İstifadə Sahələri',
+      en: 'Applications of Concrete',
+      ru: 'Области применения бетона',
+    },
+    tagline: {
+      az: 'Fundamentdən hovuza qədər — hər iş üçün doğru beton markasının seçimi',
+      en: 'From foundations to pools — choosing the right concrete grade for every job',
+      ru: 'От фундамента до бассейна — правильный выбор марки бетона для каждой работы',
+    },
+    hero: {
+      image: imgUsage,
+      alt: {
+        az: 'Tikinti sahəsində beton tökmə işləri',
+        en: 'Concrete pouring work at a construction site',
+        ru: 'Работы по заливке бетона на строительной площадке',
+      },
+    },
     intro: [
-      'Müştərilərimiz çox vaxt marka ilə deyil, gördükləri işlə müraciət edirlər: “həyətə beton tökəcəyəm”, “fundament üçün beton lazımdır”, “qaraj döşəməsi tökülməlidir”. Bu səhifədə ən çox rast gəlinən istifadə sahələrini və hər biri üçün tövsiyə olunan markanı bir yerdə topladıq.',
-      'Ümumi qayda sadədir: yük artdıqca marka da artır. Hazırlıq qatları üçün M100 kifayətdirsə, monolit təməl M300, çoxmərtəbəli karkas isə M350 tələb edir. Aşağıdakı bölmələr ilkin istiqamət üçündür — dəqiq seçimi layihəniz və ya pulsuz məsləhətimizlə dəqiqləşdirin.',
+      {
+        az: 'Müştərilərimiz çox vaxt marka ilə deyil, gördükləri işlə müraciət edirlər: “həyətə beton tökəcəyəm”, “fundament üçün beton lazımdır”, “qaraj döşəməsi tökülməlidir”. Bu səhifədə ən çox rast gəlinən istifadə sahələrini və hər biri üçün tövsiyə olunan markanı bir yerdə topladıq.',
+        en: 'Customers often come to us not with a grade but with a job: “I am going to concrete my yard”, “I need concrete for a foundation”, “a garage floor needs pouring”. On this page we have gathered the most common applications and the recommended grade for each.',
+        ru: 'Клиенты часто обращаются не с маркой, а с задачей: «нужно забетонировать двор», «нужен бетон для фундамента», «надо залить пол в гараже». На этой странице мы собрали самые распространённые области применения и рекомендуемую марку для каждой.',
+      },
+      {
+        az: 'Ümumi qayda sadədir: yük artdıqca marka da artır. Hazırlıq qatları üçün M100 kifayətdirsə, monolit təməl M300, çoxmərtəbəli karkas isə M350 tələb edir. Aşağıdakı bölmələr ilkin istiqamət üçündür — dəqiq seçimi layihəniz və ya pulsuz məsləhətimizlə dəqiqləşdirin.',
+        en: 'The general rule is simple: the greater the load, the higher the grade. Where M100 is enough for preparation layers, a monolithic foundation calls for M300 and a multi-storey frame for M350. The sections below give initial guidance — confirm the exact choice with your project documentation or our free consultation.',
+        ru: 'Общее правило простое: чем больше нагрузка, тем выше марка. Если для подготовительных слоёв достаточно M100, то монолитный фундамент требует M300, а многоэтажный каркас — M350. Разделы ниже дают первичный ориентир — точный выбор уточняйте по проекту или на нашей бесплатной консультации.',
+      },
     ],
-    benefitsTitle: 'İşə görə marka tövsiyələri',
+    benefitsTitle: {
+      az: 'İşə görə marka tövsiyələri',
+      en: 'Grade recommendations by job',
+      ru: 'Рекомендации марок по видам работ',
+    },
     benefits: [
-      { title: 'Fundament və özül — M250–M300', text: 'Zolaq təməl üçün M250, monolit plitə təməl üçün M300 standart seçimdir.' },
-      { title: 'Döşəmə və qaraj — M200', text: 'Ev, qaraj və anbar döşəmələri üçün möhkəmlik-qiymət balansı.' },
-      { title: 'Həyət betonlaması — M150–M200', text: 'Piyada sahələrə M150, avtomobil keçən sahələrə M200.' },
-      { title: 'Yol və meydança — M200–M300', text: 'Yükdən asılı olaraq: yüngül örtüklər M200, ağır texnika M300.' },
-      { title: 'Sütun və örtük — M300–M350', text: 'Monolit karkas elementləri və mərtəbəarası plitələr.' },
-      { title: 'Hovuz — M300', text: 'Sıx strukturlu qarışıq su qurğuları üçün üstünlükdür.' },
-      { title: 'Pilləkən və səki — M150–M200', text: 'Yükə görə seçim; bordür yatağı üçün M100–M150.' },
-      { title: 'Körpü və xüsusi işlər — M400–M450', text: 'İnfrastruktur və xüsusi mühəndis konstruksiyaları.' },
+      {
+        title: { az: 'Fundament və özül — M250–M300', en: 'Foundations and footings — M250–M300', ru: 'Фундамент и основание — M250–M300' },
+        text: {
+          az: 'Zolaq təməl üçün M250, monolit plitə təməl üçün M300 standart seçimdir.',
+          en: 'M250 for strip foundations and M300 for monolithic slab foundations are the standard choices.',
+          ru: 'M250 для ленточного фундамента и M300 для монолитного плитного фундамента — стандартный выбор.',
+        },
+      },
+      {
+        title: { az: 'Döşəmə və qaraj — M200', en: 'Floors and garages — M200', ru: 'Полы и гараж — M200' },
+        text: {
+          az: 'Ev, qaraj və anbar döşəmələri üçün möhkəmlik-qiymət balansı.',
+          en: 'The strength-to-price balance for house, garage and warehouse floors.',
+          ru: 'Баланс прочности и цены для полов дома, гаража и склада.',
+        },
+      },
+      {
+        title: { az: 'Həyət betonlaması — M150–M200', en: 'Yard concreting — M150–M200', ru: 'Бетонирование двора — M150–M200' },
+        text: {
+          az: 'Piyada sahələrə M150, avtomobil keçən sahələrə M200.',
+          en: 'M150 for pedestrian areas, M200 for areas with car traffic.',
+          ru: 'M150 для пешеходных зон, M200 для участков с проездом автомобилей.',
+        },
+      },
+      {
+        title: { az: 'Yol və meydança — M200–M300', en: 'Roads and hardstandings — M200–M300', ru: 'Дороги и площадки — M200–M300' },
+        text: {
+          az: 'Yükdən asılı olaraq: yüngül örtüklər M200, ağır texnika M300.',
+          en: 'Depending on the load: M200 for light pavements, M300 for heavy machinery.',
+          ru: 'В зависимости от нагрузки: M200 для лёгких покрытий, M300 для тяжёлой техники.',
+        },
+      },
+      {
+        title: { az: 'Sütun və örtük — M300–M350', en: 'Columns and slabs — M300–M350', ru: 'Колонны и перекрытия — M300–M350' },
+        text: {
+          az: 'Monolit karkas elementləri və mərtəbəarası plitələr.',
+          en: 'Monolithic frame elements and floor slabs.',
+          ru: 'Элементы монолитного каркаса и межэтажные плиты.',
+        },
+      },
+      {
+        title: { az: 'Hovuz — M300', en: 'Pools — M300', ru: 'Бассейн — M300' },
+        text: {
+          az: 'Sıx strukturlu qarışıq su qurğuları üçün üstünlükdür.',
+          en: 'A dense-structure mix is preferable for water-retaining structures.',
+          ru: 'Смесь плотной структуры предпочтительна для гидротехнических сооружений.',
+        },
+      },
+      {
+        title: { az: 'Pilləkən və səki — M150–M200', en: 'Stairs and sidewalks — M150–M200', ru: 'Лестницы и тротуары — M150–M200' },
+        text: {
+          az: 'Yükə görə seçim; bordür yatağı üçün M100–M150.',
+          en: 'Chosen by load; M100–M150 for kerb bedding.',
+          ru: 'Выбор по нагрузке; для основания под бордюр — M100–M150.',
+        },
+      },
+      {
+        title: { az: 'Körpü və xüsusi işlər — M400–M450', en: 'Bridges and special works — M400–M450', ru: 'Мосты и специальные работы — M400–M450' },
+        text: {
+          az: 'İnfrastruktur və xüsusi mühəndis konstruksiyaları.',
+          en: 'Infrastructure and specialized engineering structures.',
+          ru: 'Инфраструктура и специальные инженерные конструкции.',
+        },
+      },
     ],
     showGrades: true,
-    stepsTitle: 'Doğru markanı 3 addıma seçin',
+    stepsTitle: {
+      az: 'Doğru markanı 3 addıma seçin',
+      en: 'Choose the right grade in 3 steps',
+      ru: 'Выберите правильную марку за 3 шага',
+    },
     steps: [
-      { title: 'İşi müəyyənləşdirin', text: 'Nə tökəcəksiniz: təməl, döşəmə, həyət, sütun, hovuz?' },
-      { title: 'Həcmi hesablayın', text: 'Beton kalkulyatoru ölçülərə görə m³-ü və mikser sayını verir.' },
-      { title: 'Təsdiq və sifariş', text: 'Seçiminizi bizimlə dəqiqləşdirin — marka üzrə pulsuz məsləhət və fərdi qiymət alın.' },
+      {
+        title: { az: 'İşi müəyyənləşdirin', en: 'Define the job', ru: 'Определите работу' },
+        text: {
+          az: 'Nə tökəcəksiniz: təməl, döşəmə, həyət, sütun, hovuz?',
+          en: 'What will you pour: a foundation, floor, yard, columns, a pool?',
+          ru: 'Что будете заливать: фундамент, пол, двор, колонны, бассейн?',
+        },
+      },
+      {
+        title: { az: 'Həcmi hesablayın', en: 'Calculate the volume', ru: 'Рассчитайте объём' },
+        text: {
+          az: 'Beton kalkulyatoru ölçülərə görə m³-ü və mikser sayını verir.',
+          en: 'The concrete calculator gives the m³ and the number of mixer trucks from your dimensions.',
+          ru: 'Калькулятор бетона по размерам определяет м³ и количество миксеров.',
+        },
+      },
+      {
+        title: { az: 'Təsdiq və sifariş', en: 'Confirm and order', ru: 'Подтверждение и заказ' },
+        text: {
+          az: 'Seçiminizi bizimlə dəqiqləşdirin — marka üzrə pulsuz məsləhət və fərdi qiymət alın.',
+          en: 'Verify your choice with us — get free grade advice and a personalized price.',
+          ru: 'Уточните свой выбор с нами — получите бесплатную консультацию по марке и индивидуальную цену.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Fundament üçün hansı beton markası lazımdır?',
-        a: 'Yüngül 1–2 mərtəbəli evlərin zolaq təməli üçün adətən M250, monolit plitə təməl və 2+ mərtəbə üçün M300 tövsiyə olunur. Zəif qruntda və böyük yüklərdə layihə üzrə daha yüksək marka tələb oluna bilər.',
+        q: {
+          az: 'Fundament üçün hansı beton markası lazımdır?',
+          en: 'Which concrete grade is needed for a foundation?',
+          ru: 'Какая марка бетона нужна для фундамента?',
+        },
+        a: {
+          az: 'Yüngül 1–2 mərtəbəli evlərin zolaq təməli üçün adətən M250, monolit plitə təməl və 2+ mərtəbə üçün M300 tövsiyə olunur. Zəif qruntda və böyük yüklərdə layihə üzrə daha yüksək marka tələb oluna bilər.',
+          en: 'For the strip foundation of light 1–2 storey houses, M250 is usually recommended; for monolithic slab foundations and buildings of 2+ storeys, M300. On weak soil or under heavy loads, the project may require a higher grade.',
+          ru: 'Для ленточного фундамента лёгких домов в 1–2 этажа обычно рекомендуется M250, для монолитного плитного фундамента и зданий от 2 этажей — M300. На слабых грунтах и при больших нагрузках проект может требовать более высокую марку.',
+        },
       },
       {
-        q: 'Həyətə beton tökmək üçün hansı marka və qalınlıq lazımdır?',
-        a: 'Piyada sahələr üçün M150 (8–10 sm), minik avtomobili keçən sahələr üçün M200 (10–15 sm) standart tövsiyədir. Sahəni kalkulyatora yazın — lazımi m³ dərhal hesablanacaq.',
+        q: {
+          az: 'Həyətə beton tökmək üçün hansı marka və qalınlıq lazımdır?',
+          en: 'What grade and thickness are needed to concrete a yard?',
+          ru: 'Какая марка и толщина нужны для бетонирования двора?',
+        },
+        a: {
+          az: 'Piyada sahələr üçün M150 (8–10 sm), minik avtomobili keçən sahələr üçün M200 (10–15 sm) standart tövsiyədir. Sahəni kalkulyatora yazın — lazımi m³ dərhal hesablanacaq.',
+          en: 'The standard recommendation is M150 (8–10 cm) for pedestrian areas and M200 (10–15 cm) for areas where passenger cars drive. Enter your area into the calculator — the required m³ is worked out instantly.',
+          ru: 'Стандартная рекомендация: M150 (8–10 см) для пешеходных зон и M200 (10–15 см) для участков с проездом легковых автомобилей. Введите площадь в калькулятор — необходимые м³ будут рассчитаны сразу.',
+        },
       },
       {
-        q: '100 kvadrat sahəyə neçə kub beton gedir?',
-        a: 'Bu, qalınlıqdan asılıdır: 10 sm qalınlıqda 100 m² üçün 10 m³, 15 sm-də 15 m³, 20 sm-də 20 m³ beton lazımdır. Dəqiq hesablama üçün beton kalkulyatorumuzdan istifadə edin.',
+        q: {
+          az: '100 kvadrat sahəyə neçə kub beton gedir?',
+          en: 'How many cubic meters of concrete for a 100-square-meter area?',
+          ru: 'Сколько кубов бетона нужно на 100 квадратных метров?',
+        },
+        a: {
+          az: 'Bu, qalınlıqdan asılıdır: 10 sm qalınlıqda 100 m² üçün 10 m³, 15 sm-də 15 m³, 20 sm-də 20 m³ beton lazımdır. Dəqiq hesablama üçün beton kalkulyatorumuzdan istifadə edin.',
+          en: 'It depends on the thickness: for 100 m² you need 10 m³ of concrete at 10 cm thickness, 15 m³ at 15 cm and 20 m³ at 20 cm. Use our concrete calculator for an exact figure.',
+          ru: 'Это зависит от толщины: на 100 м² при толщине 10 см нужно 10 м³ бетона, при 15 см — 15 м³, при 20 см — 20 м³. Для точного расчёта воспользуйтесь нашим калькулятором бетона.',
+        },
       },
       {
-        q: 'Qışda və ya yağışda beton tökmək olar?',
-        a: 'Soyuq və yağışlı havada tökmə mümkündür, lakin əlavə tədbirlər tələb edir (səthin qorunması, müvafiq qarışıq). Tökmə tarixini planlaşdırarkən bizimlə məsləhətləşin — hava şəraitinə uyğun tövsiyə verək.',
+        q: {
+          az: 'Qışda və ya yağışda beton tökmək olar?',
+          en: 'Can concrete be poured in winter or in the rain?',
+          ru: 'Можно ли заливать бетон зимой или в дождь?',
+        },
+        a: {
+          az: 'Soyuq və yağışlı havada tökmə mümkündür, lakin əlavə tədbirlər tələb edir (səthin qorunması, müvafiq qarışıq). Tökmə tarixini planlaşdırarkən bizimlə məsləhətləşin — hava şəraitinə uyğun tövsiyə verək.',
+          en: 'Pouring in cold or rainy weather is possible but requires extra measures (surface protection, a suitable mix). Consult us when planning your pouring date — we will advise you based on the weather conditions.',
+          ru: 'Заливка в холодную и дождливую погоду возможна, но требует дополнительных мер (защита поверхности, соответствующая смесь). Планируя дату заливки, посоветуйтесь с нами — дадим рекомендации с учётом погодных условий.',
+        },
       },
     ],
     related: [
-      { to: '/products', label: 'Bütün beton markaları' },
-      { to: '/calculator', label: 'Beton kalkulyatoru' },
-      { to: '/m300-beton', label: 'M300 beton — təməl və plitə' },
-      { to: '/m200-beton', label: 'M200 beton — döşəmə və həyət' },
-      { to: '/beton-qiymetleri', label: 'Beton qiymətləri' },
+      {
+        to: '/products',
+        label: { az: 'Bütün beton markaları', en: 'All concrete grades', ru: 'Все марки бетона' },
+      },
+      {
+        to: '/calculator',
+        label: { az: 'Beton kalkulyatoru', en: 'Concrete calculator', ru: 'Калькулятор бетона' },
+      },
+      {
+        to: '/m300-beton',
+        label: { az: 'M300 beton — təməl və plitə', en: 'M300 concrete — foundations and slabs', ru: 'Бетон M300 — фундамент и плиты' },
+      },
+      {
+        to: '/m200-beton',
+        label: { az: 'M200 beton — döşəmə və həyət', en: 'M200 concrete — floors and yards', ru: 'Бетон M200 — полы и двор' },
+      },
+      {
+        to: '/beton-qiymetleri',
+        label: { az: 'Beton qiymətləri', en: 'Concrete prices', ru: 'Цены на бетон' },
+      },
     ],
-    whatsappText: 'Salam! Görəcəyim iş üçün hansı beton markasının uyğun olduğunu öyrənmək istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Görəcəyim iş üçün hansı beton markasının uyğun olduğunu öyrənmək istəyirəm.',
+      en: 'Hello! I would like to find out which concrete grade suits the job I am planning.',
+      ru: 'Здравствуйте! Хочу узнать, какая марка бетона подходит для планируемой работы.',
+    },
   },
 
   {
     slug: '/topdan-beton-satisi',
     seo: {
-      title: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün Təchizat | NOVXANI BETON',
-      description:
-        'Tikinti şirkətləri və podratçılar üçün topdan beton satışı: davamlı təchizat qrafiki, fasiləsiz mikser axını, müqavilə əsaslı əməkdaşlıq. Bakı və Abşeron üzrə. Kommersiya təklifi alın.',
+      title: {
+        az: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün Təchizat | NOVXANI BETON',
+        en: 'Wholesale Concrete Sales — Supply for Construction Companies | NOVXANI BETON',
+        ru: 'Оптовая продажа бетона — снабжение строительных компаний | NOVXANI BETON',
+      },
+      description: {
+        az: 'Tikinti şirkətləri və podratçılar üçün topdan beton satışı: davamlı təchizat qrafiki, fasiləsiz mikser axını, müqavilə əsaslı əməkdaşlıq. Bakı və Abşeron üzrə. Kommersiya təklifi alın.',
+        en: 'Wholesale concrete sales for construction companies and contractors: a steady supply schedule, continuous mixer-truck flow and contract-based cooperation. Across Baku and Absheron. Request a commercial offer.',
+        ru: 'Оптовая продажа бетона для строительных компаний и подрядчиков: стабильный график поставок, непрерывный поток миксеров, сотрудничество на договорной основе. По Баку и Абшерону. Получите коммерческое предложение.',
+      },
     },
-    crumb: 'Topdan Beton Satışı',
-    h1: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün',
-    tagline: 'Böyük layihələr üçün davamlı, qrafikli beton təchizatı — müqavilə əsaslı əməkdaşlıq',
-    hero: { image: imgB2b, alt: 'Böyük tikinti layihəsi üçün material təchizatı' },
+    crumb: {
+      az: 'Topdan Beton Satışı',
+      en: 'Wholesale Concrete Sales',
+      ru: 'Оптовая продажа бетона',
+    },
+    h1: {
+      az: 'Topdan Beton Satışı — Tikinti Şirkətləri üçün',
+      en: 'Wholesale Concrete Sales — for Construction Companies',
+      ru: 'Оптовая продажа бетона — для строительных компаний',
+    },
+    tagline: {
+      az: 'Böyük layihələr üçün davamlı, qrafikli beton təchizatı — müqavilə əsaslı əməkdaşlıq',
+      en: 'Steady, scheduled concrete supply for large projects — contract-based cooperation',
+      ru: 'Стабильные поставки бетона по графику для крупных проектов — сотрудничество на договорной основе',
+    },
+    hero: {
+      image: imgB2b,
+      alt: {
+        az: 'Böyük tikinti layihəsi üçün material təchizatı',
+        en: 'Material supply for a large construction project',
+        ru: 'Поставка материалов для крупного строительного проекта',
+      },
+    },
     intro: [
-      'Böyük layihədə beton təchizatı bir maşın sifarişindən fərqli məsələdir: tökmə qrafiki, fasiləsiz mikser axını, sabit keyfiyyət və proqnozlaşdırıla bilən şərtlər tələb olunur. Novxanı Beton tikinti şirkətləri, podratçılar və layihə qrupları ilə məhz bu formatda işləyir.',
-      'Layihənin ümumi həcminə və müddətinə uyğun kommersiya təklifi hazırlayırıq: razılaşdırılmış qrafik üzrə gündəlik təchizat, gecə tökmələri daxil 7/24 iş rejimi, nasos xidməti və hər partiya üzrə laboratoriya nəzarəti. Zavodumuz Novxanıda yerləşir — Abşeron zonasındakı obyektlərə logistika xüsusilə operativdir.',
+      {
+        az: 'Böyük layihədə beton təchizatı bir maşın sifarişindən fərqli məsələdir: tökmə qrafiki, fasiləsiz mikser axını, sabit keyfiyyət və proqnozlaşdırıla bilən şərtlər tələb olunur. Novxanı Beton tikinti şirkətləri, podratçılar və layihə qrupları ilə məhz bu formatda işləyir.',
+        en: 'Supplying concrete to a large project is a different matter from ordering a single truck: it requires a pouring schedule, a continuous flow of mixer trucks, consistent quality and predictable terms. Novxani Beton works with construction companies, contractors and project teams in exactly this format.',
+        ru: 'Снабжение бетоном крупного проекта — это не разовый заказ машины: требуются график заливки, непрерывный поток миксеров, стабильное качество и предсказуемые условия. Novxani Beton работает со строительными компаниями, подрядчиками и проектными командами именно в таком формате.',
+      },
+      {
+        az: 'Layihənin ümumi həcminə və müddətinə uyğun kommersiya təklifi hazırlayırıq: razılaşdırılmış qrafik üzrə gündəlik təchizat, gecə tökmələri daxil 7/24 iş rejimi, nasos xidməti və hər partiya üzrə laboratoriya nəzarəti. Zavodumuz Novxanıda yerləşir — Abşeron zonasındakı obyektlərə logistika xüsusilə operativdir.',
+        en: 'We prepare a commercial offer based on the total volume and duration of your project: daily supply on an agreed schedule, 24/7 operation including night pours, pumping service and laboratory control of every batch. Our plant is located in Novkhani — logistics to sites in the Absheron zone is especially efficient.',
+        ru: 'Мы готовим коммерческое предложение с учётом общего объёма и сроков проекта: ежедневные поставки по согласованному графику, режим работы 24/7, включая ночные заливки, услуги бетононасоса и лабораторный контроль каждой партии. Завод находится в Новханы — логистика до объектов Абшеронской зоны особенно оперативна.',
+      },
     ],
-    benefitsTitle: 'B2B əməkdaşlığın üstünlükləri',
+    benefitsTitle: {
+      az: 'B2B əməkdaşlığın üstünlükləri',
+      en: 'Advantages of B2B cooperation',
+      ru: 'Преимущества B2B-сотрудничества',
+    },
     benefits: [
-      { title: 'Davamlı təchizat', text: 'Layihə boyu razılaşdırılmış qrafik üzrə gündəlik beton axını.' },
-      { title: 'Həcmə görə şərtlər', text: 'Böyük və davamlı sifarişlər üçün xüsusi kommersiya şərtləri.' },
-      { title: 'Sabit keyfiyyət', text: 'Hər partiya laboratoriya nəzarətindən keçir, sənədləşdirilir.' },
-      { title: 'Tam xidmət paketi', text: 'Beton + çatdırılma + nasos + tərəzi bir təchizatçıdan.' },
+      {
+        title: { az: 'Davamlı təchizat', en: 'Continuous supply', ru: 'Непрерывное снабжение' },
+        text: {
+          az: 'Layihə boyu razılaşdırılmış qrafik üzrə gündəlik beton axını.',
+          en: 'A daily flow of concrete on an agreed schedule throughout the project.',
+          ru: 'Ежедневная подача бетона по согласованному графику на протяжении всего проекта.',
+        },
+      },
+      {
+        title: { az: 'Həcmə görə şərtlər', en: 'Volume-based terms', ru: 'Условия по объёму' },
+        text: {
+          az: 'Böyük və davamlı sifarişlər üçün xüsusi kommersiya şərtləri.',
+          en: 'Special commercial terms for large and ongoing orders.',
+          ru: 'Специальные коммерческие условия для крупных и постоянных заказов.',
+        },
+      },
+      {
+        title: { az: 'Sabit keyfiyyət', en: 'Consistent quality', ru: 'Стабильное качество' },
+        text: {
+          az: 'Hər partiya laboratoriya nəzarətindən keçir, sənədləşdirilir.',
+          en: 'Every batch passes laboratory control and is documented.',
+          ru: 'Каждая партия проходит лабораторный контроль и оформляется документально.',
+        },
+      },
+      {
+        title: { az: 'Tam xidmət paketi', en: 'Full service package', ru: 'Полный пакет услуг' },
+        text: {
+          az: 'Beton + çatdırılma + nasos + tərəzi bir təchizatçıdan.',
+          en: 'Concrete + delivery + pump + weighbridge from a single supplier.',
+          ru: 'Бетон + доставка + насос + весы от одного поставщика.',
+        },
+      },
     ],
-    stepsTitle: 'Əməkdaşlıq necə başlayır',
+    stepsTitle: {
+      az: 'Əməkdaşlıq necə başlayır',
+      en: 'How cooperation starts',
+      ru: 'Как начинается сотрудничество',
+    },
     steps: [
-      { title: 'Layihə məlumatı', text: 'Ümumi həcm, markalar, obyektin yeri və tökmə qrafiki barədə məlumat verirsiniz.' },
-      { title: 'Kommersiya təklifi', text: 'Həcmə və müddətə uyğun şərtlərlə təklif hazırlanır.' },
-      { title: 'Müqavilə və qrafik', text: 'Şərtlər razılaşdırılır, təchizat qrafiki təsdiqlənir.' },
-      { title: 'Davamlı təchizat', text: 'Beton qrafik üzrə, fasiləsiz axınla obyektə çatdırılır.' },
+      {
+        title: { az: 'Layihə məlumatı', en: 'Project details', ru: 'Данные проекта' },
+        text: {
+          az: 'Ümumi həcm, markalar, obyektin yeri və tökmə qrafiki barədə məlumat verirsiniz.',
+          en: 'You provide the total volume, grades, site location and pouring schedule.',
+          ru: 'Вы сообщаете общий объём, марки, местоположение объекта и график заливки.',
+        },
+      },
+      {
+        title: { az: 'Kommersiya təklifi', en: 'Commercial offer', ru: 'Коммерческое предложение' },
+        text: {
+          az: 'Həcmə və müddətə uyğun şərtlərlə təklif hazırlanır.',
+          en: 'An offer is prepared with terms based on volume and duration.',
+          ru: 'Готовится предложение с условиями по объёму и срокам.',
+        },
+      },
+      {
+        title: { az: 'Müqavilə və qrafik', en: 'Contract and schedule', ru: 'Договор и график' },
+        text: {
+          az: 'Şərtlər razılaşdırılır, təchizat qrafiki təsdiqlənir.',
+          en: 'Terms are agreed and the supply schedule is confirmed.',
+          ru: 'Согласовываются условия и утверждается график поставок.',
+        },
+      },
+      {
+        title: { az: 'Davamlı təchizat', en: 'Ongoing supply', ru: 'Непрерывные поставки' },
+        text: {
+          az: 'Beton qrafik üzrə, fasiləsiz axınla obyektə çatdırılır.',
+          en: 'Concrete is delivered to the site on schedule, in a continuous flow.',
+          ru: 'Бетон доставляется на объект по графику, непрерывным потоком.',
+        },
+      },
     ],
     faqs: [
       {
-        q: 'Hansı həcmdən topdan şərtlər tətbiq olunur?',
-        a: 'Sabit hədd yoxdur — şərtlər layihənin ümumi həcminə və müddətinə görə müəyyən olunur. Layihə məlumatını göndərin, konkret təklif hazırlayaq.',
+        q: {
+          az: 'Hansı həcmdən topdan şərtlər tətbiq olunur?',
+          en: 'From what volume do wholesale terms apply?',
+          ru: 'С какого объёма действуют оптовые условия?',
+        },
+        a: {
+          az: 'Sabit hədd yoxdur — şərtlər layihənin ümumi həcminə və müddətinə görə müəyyən olunur. Layihə məlumatını göndərin, konkret təklif hazırlayaq.',
+          en: 'There is no fixed threshold — terms are set according to the total volume and duration of the project. Send us your project details and we will prepare a specific offer.',
+          ru: 'Фиксированного порога нет — условия определяются общим объёмом и сроками проекта. Пришлите данные проекта, и мы подготовим конкретное предложение.',
+        },
       },
       {
-        q: 'Tender və layihə sənədləri üçün məlumat verirsinizmi?',
-        a: 'Bəli, tələb olunduqda markalar üzrə texniki məlumat və sınaq nəticələri sənədlə təqdim olunur.',
+        q: {
+          az: 'Tender və layihə sənədləri üçün məlumat verirsinizmi?',
+          en: 'Do you provide information for tenders and project documentation?',
+          ru: 'Предоставляете ли вы информацию для тендеров и проектной документации?',
+        },
+        a: {
+          az: 'Bəli, tələb olunduqda markalar üzrə texniki məlumat və sınaq nəticələri sənədlə təqdim olunur.',
+          en: 'Yes, on request we provide documented technical information and test results for each grade.',
+          ru: 'Да, при необходимости мы документально предоставляем техническую информацию по маркам и результаты испытаний.',
+        },
       },
       {
-        q: 'Eyni gündə bir neçə obyektə təchizat mümkündürmü?',
-        a: 'Bəli, qrafiklər əvvəlcədən razılaşdırılmaqla paralel obyektlərə təchizat planlaşdırılır.',
+        q: {
+          az: 'Eyni gündə bir neçə obyektə təchizat mümkündürmü?',
+          en: 'Can you supply several sites on the same day?',
+          ru: 'Возможны ли поставки на несколько объектов в один день?',
+        },
+        a: {
+          az: 'Bəli, qrafiklər əvvəlcədən razılaşdırılmaqla paralel obyektlərə təchizat planlaşdırılır.',
+          en: 'Yes, with schedules agreed in advance, supply to parallel sites is planned.',
+          ru: 'Да, при заблаговременном согласовании графиков планируются поставки на параллельные объекты.',
+        },
       },
       {
-        q: 'Materialları (qum, atsep, şeben) da topdan alaq bilərikmi?',
-        a: 'Bəli, beton zavodları və tikinti şirkətləri üçün qum, atsep və şeben üzrə davamlı topdan təchizat da təşkil edirik — ayrıca və ya betonla birlikdə.',
+        q: {
+          az: 'Materialları (qum, atsep, şeben) da topdan alaq bilərikmi?',
+          en: 'Can we also buy materials (sand, screenings, crushed stone) wholesale?',
+          ru: 'Можно ли также покупать оптом материалы (песок, отсев, щебень)?',
+        },
+        a: {
+          az: 'Bəli, beton zavodları və tikinti şirkətləri üçün qum, atsep və şeben üzrə davamlı topdan təchizat da təşkil edirik — ayrıca və ya betonla birlikdə.',
+          en: 'Yes, we also organize ongoing wholesale supply of sand, screenings and crushed stone for concrete plants and construction companies — separately or together with concrete.',
+          ru: 'Да, для бетонных заводов и строительных компаний мы также организуем постоянные оптовые поставки песка, отсева и щебня — отдельно или вместе с бетоном.',
+        },
       },
     ],
     related: [
-      { to: '/hazir-beton-satisi', label: 'Hazır beton satışı' },
-      { to: '/beton-catdirilmasi', label: 'Çatdırılma və qrafik' },
-      { to: '/beton-laboratoriyasi', label: 'Keyfiyyət nəzarəti' },
-      { to: '/tikinti-materiallari', label: 'Topdan material təchizatı' },
-      { to: '/contact', label: 'Kommersiya təklifi üçün əlaqə' },
+      {
+        to: '/hazir-beton-satisi',
+        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete sales', ru: 'Продажа товарного бетона' },
+      },
+      {
+        to: '/beton-catdirilmasi',
+        label: { az: 'Çatdırılma və qrafik', en: 'Delivery and scheduling', ru: 'Доставка и график' },
+      },
+      {
+        to: '/beton-laboratoriyasi',
+        label: { az: 'Keyfiyyət nəzarəti', en: 'Quality control', ru: 'Контроль качества' },
+      },
+      {
+        to: '/tikinti-materiallari',
+        label: { az: 'Topdan material təchizatı', en: 'Wholesale material supply', ru: 'Оптовые поставки материалов' },
+      },
+      {
+        to: '/contact',
+        label: { az: 'Kommersiya təklifi üçün əlaqə', en: 'Contact us for a commercial offer', ru: 'Связаться для коммерческого предложения' },
+      },
     ],
-    whatsappText: 'Salam! Layihəmiz üçün topdan beton təchizatı üzrə kommersiya təklifi almaq istəyirəm.',
+    whatsappText: {
+      az: 'Salam! Layihəmiz üçün topdan beton təchizatı üzrə kommersiya təklifi almaq istəyirəm.',
+      en: 'Hello! I would like to receive a commercial offer for wholesale concrete supply for our project.',
+      ru: 'Здравствуйте! Хочу получить коммерческое предложение на оптовые поставки бетона для нашего проекта.',
+    },
   },
 ];
 

@@ -2,12 +2,27 @@ import React, { useState, useRef } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import { MATERIALS } from '../../../data/materials';
 import { trackEvent } from '../../../lib/analytics';
+import { useT } from '../../../i18n/i18n';
 
 // Web3Forms — same access key as the main contact form.
 const WEB3FORMS_ACCESS_KEY = 'e1ffd016-dd39-419f-aa5c-382ee00c412d';
 
-const CUSTOMER_TYPES = ['Fiziki şəxs', 'Şirkət', 'Beton zavodu'];
-const UNITS = ['ton', 'm³', 'maşın (yük)'];
+// The `az` string is the canonical form value (kept in state and sent in
+// the email), the visible <option> text is localized via t().
+const CUSTOMER_TYPES = [
+  { az: 'Fiziki şəxs', en: 'Individual', ru: 'Частное лицо' },
+  { az: 'Şirkət', en: 'Company', ru: 'Компания' },
+  { az: 'Beton zavodu', en: 'Concrete plant', ru: 'Бетонный завод' },
+];
+const UNITS = [
+  { az: 'ton', en: 't', ru: 'т' },
+  { az: 'm³', en: 'm³', ru: 'м³' },
+  { az: 'maşın (yük)', en: 'truckload', ru: 'машина (рейс)' },
+];
+const DELIVERY_OPTIONS = [
+  { az: 'Bəli', en: 'Yes', ru: 'Да' },
+  { az: 'Xeyr', en: 'No', ru: 'Нет' },
+];
 
 const INITIAL = {
   fullName: '',
@@ -33,6 +48,7 @@ const MaterialQuoteForm = () => {
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const [botField, setBotField] = useState(''); // honeypot
   const startedRef = useRef(false); // analytics: fire form_start only once
+  const t = useT();
 
   const trackStart = () => {
     if (startedRef.current) return;
@@ -57,14 +73,14 @@ const MaterialQuoteForm = () => {
 
   const validate = () => {
     const er = {};
-    if (!form.fullName.trim()) er.fullName = 'Ad və soyadınızı yazın';
+    if (!form.fullName.trim()) er.fullName = t({ az: 'Ad və soyadınızı yazın', en: 'Enter your full name', ru: 'Укажите имя и фамилию' });
     if (!form.phone.trim()) {
-      er.phone = 'Telefon nömrənizi yazın';
+      er.phone = t({ az: 'Telefon nömrənizi yazın', en: 'Enter your phone number', ru: 'Укажите номер телефона' });
     } else if (!/^[+()\d\s-]{9,20}$/.test(form.phone.trim())) {
-      er.phone = 'Telefon nömrəsini düzgün formatda yazın';
+      er.phone = t({ az: 'Telefon nömrəsini düzgün formatda yazın', en: 'Enter the phone number in a valid format', ru: 'Укажите номер телефона в правильном формате' });
     }
-    if (!form.customerType) er.customerType = 'Müştəri növünü seçin';
-    if (products.length === 0) er.products = 'Ən azı bir məhsul seçin';
+    if (!form.customerType) er.customerType = t({ az: 'Müştəri növünü seçin', en: 'Select your customer type', ru: 'Выберите тип клиента' });
+    if (products.length === 0) er.products = t({ az: 'Ən azı bir məhsul seçin', en: 'Select at least one product', ru: 'Выберите хотя бы один продукт' });
     return er;
   };
 
@@ -83,8 +99,10 @@ const MaterialQuoteForm = () => {
 
     setStatus('sending');
     try {
+      // Canonical AZ names — keeps the notification email and analytics
+      // params consistent regardless of the visitor's locale.
       const productNames = products
-        .map((id) => MATERIALS.find((m) => m.id === id)?.name)
+        .map((id) => MATERIALS.find((m) => m.id === id)?.name?.az)
         .filter(Boolean)
         .join(', ');
 
@@ -141,13 +159,13 @@ const MaterialQuoteForm = () => {
 
       <div className="mqf-row">
         <div className="mqf-group">
-          <label htmlFor="mqf-fullName">Ad və soyad *</label>
+          <label htmlFor="mqf-fullName">{t({ az: 'Ad və soyad', en: 'Full name', ru: 'Имя и фамилия' })} *</label>
           <input
             type="text"
             id="mqf-fullName"
             name="fullName"
             autoComplete="name"
-            placeholder="Məs.: Elvin Məmmədov"
+            placeholder={t({ az: 'Məs.: Elvin Məmmədov', en: 'E.g. Elvin Mammadov', ru: 'Напр.: Эльвин Мамедов' })}
             value={form.fullName}
             onChange={setField}
             aria-invalid={!!errors.fullName}
@@ -157,7 +175,7 @@ const MaterialQuoteForm = () => {
           {errors.fullName && <span className="mqf-err" id="mqf-fullName-err" role="alert">{errors.fullName}</span>}
         </div>
         <div className="mqf-group">
-          <label htmlFor="mqf-phone">Telefon nömrəsi *</label>
+          <label htmlFor="mqf-phone">{t({ az: 'Telefon nömrəsi', en: 'Phone number', ru: 'Номер телефона' })} *</label>
           <input
             type="tel"
             id="mqf-phone"
@@ -176,7 +194,7 @@ const MaterialQuoteForm = () => {
 
       <div className="mqf-row">
         <div className="mqf-group">
-          <label htmlFor="mqf-customerType">Müştəri növü *</label>
+          <label htmlFor="mqf-customerType">{t({ az: 'Müştəri növü', en: 'Customer type', ru: 'Тип клиента' })} *</label>
           <select
             id="mqf-customerType"
             name="customerType"
@@ -186,9 +204,9 @@ const MaterialQuoteForm = () => {
             aria-describedby={errors.customerType ? 'mqf-customerType-err' : undefined}
             required
           >
-            <option value="" disabled>Seçin…</option>
-            {CUSTOMER_TYPES.map((t) => (
-              <option key={t} value={t}>{t}</option>
+            <option value="" disabled>{t({ az: 'Seçin…', en: 'Select…', ru: 'Выберите…' })}</option>
+            {CUSTOMER_TYPES.map((opt) => (
+              <option key={opt.az} value={opt.az}>{t(opt)}</option>
             ))}
           </select>
           {errors.customerType && (
@@ -196,7 +214,7 @@ const MaterialQuoteForm = () => {
           )}
         </div>
         <div className="mqf-group">
-          <span className="mqf-label" id="mqf-products-label">Məhsul * <small>(bir neçəsini seçmək olar)</small></span>
+          <span className="mqf-label" id="mqf-products-label">{t({ az: 'Məhsul', en: 'Product', ru: 'Продукт' })} * <small>({t({ az: 'bir neçəsini seçmək olar', en: 'you can select several', ru: 'можно выбрать несколько' })})</small></span>
           <div
             className="mqf-checks"
             role="group"
@@ -211,7 +229,7 @@ const MaterialQuoteForm = () => {
                   checked={products.includes(m.id)}
                   onChange={() => toggleProduct(m.id)}
                 />
-                {m.name}
+                {t(m.name)}
               </label>
             ))}
           </div>
@@ -221,7 +239,7 @@ const MaterialQuoteForm = () => {
 
       <div className="mqf-row">
         <div className="mqf-group">
-          <label htmlFor="mqf-volume">Təxmini həcm</label>
+          <label htmlFor="mqf-volume">{t({ az: 'Təxmini həcm', en: 'Approximate volume', ru: 'Примерный объём' })}</label>
           <input
             type="number"
             id="mqf-volume"
@@ -229,16 +247,16 @@ const MaterialQuoteForm = () => {
             min="0"
             step="any"
             inputMode="decimal"
-            placeholder="Məs.: 20"
+            placeholder={t({ az: 'Məs.: 20', en: 'E.g. 20', ru: 'Напр.: 20' })}
             value={form.volume}
             onChange={setField}
           />
         </div>
         <div className="mqf-group">
-          <label htmlFor="mqf-unit">Ölçü vahidi</label>
+          <label htmlFor="mqf-unit">{t({ az: 'Ölçü vahidi', en: 'Unit', ru: 'Единица измерения' })}</label>
           <select id="mqf-unit" name="unit" value={form.unit} onChange={setField}>
             {UNITS.map((u) => (
-              <option key={u} value={u}>{u}</option>
+              <option key={u.az} value={u.az}>{t(u)}</option>
             ))}
           </select>
         </div>
@@ -246,30 +264,30 @@ const MaterialQuoteForm = () => {
 
       <div className="mqf-row">
         <div className="mqf-group">
-          <label htmlFor="mqf-address">Çatdırılma ünvanı</label>
+          <label htmlFor="mqf-address">{t({ az: 'Çatdırılma ünvanı', en: 'Delivery address', ru: 'Адрес доставки' })}</label>
           <input
             type="text"
             id="mqf-address"
             name="address"
             autoComplete="street-address"
-            placeholder="Rayon / qəsəbə / obyekt ünvanı"
+            placeholder={t({ az: 'Rayon / qəsəbə / obyekt ünvanı', en: 'District / settlement / site address', ru: 'Район / посёлок / адрес объекта' })}
             value={form.address}
             onChange={setField}
           />
         </div>
         <div className="mqf-group">
-          <span className="mqf-label" id="mqf-delivery-label">Çatdırılma tələb olunur?</span>
+          <span className="mqf-label" id="mqf-delivery-label">{t({ az: 'Çatdırılma tələb olunur?', en: 'Is delivery required?', ru: 'Нужна ли доставка?' })}</span>
           <div className="mqf-checks" role="radiogroup" aria-labelledby="mqf-delivery-label">
-            {['Bəli', 'Xeyr'].map((v) => (
-              <label key={v} className={`mqf-check ${form.delivery === v ? 'checked' : ''}`}>
+            {DELIVERY_OPTIONS.map((opt) => (
+              <label key={opt.az} className={`mqf-check ${form.delivery === opt.az ? 'checked' : ''}`}>
                 <input
                   type="radio"
                   name="delivery"
-                  value={v}
-                  checked={form.delivery === v}
+                  value={opt.az}
+                  checked={form.delivery === opt.az}
                   onChange={setField}
                 />
-                {v}
+                {t(opt)}
               </label>
             ))}
           </div>
@@ -277,12 +295,12 @@ const MaterialQuoteForm = () => {
       </div>
 
       <div className="mqf-group">
-        <label htmlFor="mqf-note">Əlavə qeyd</label>
+        <label htmlFor="mqf-note">{t({ az: 'Əlavə qeyd', en: 'Additional note', ru: 'Дополнительный комментарий' })}</label>
         <textarea
           id="mqf-note"
           name="note"
           rows="3"
-          placeholder="Layihəniz və ya sifarişinizlə bağlı əlavə məlumat"
+          placeholder={t({ az: 'Layihəniz və ya sifarişinizlə bağlı əlavə məlumat', en: 'Additional details about your project or order', ru: 'Дополнительная информация о вашем проекте или заказе' })}
           value={form.note}
           onChange={setField}
         ></textarea>
@@ -290,17 +308,22 @@ const MaterialQuoteForm = () => {
 
       <button type="submit" className="btn btn-accent btn-lg mqf-submit" disabled={status === 'sending'}>
         <Send size={18} aria-hidden="true" />
-        {status === 'sending' ? 'Göndərilir…' : 'Qiymət təklifi al'}
+        {status === 'sending'
+          ? t({ az: 'Göndərilir…', en: 'Sending…', ru: 'Отправка…' })
+          : t({ az: 'Qiymət təklifi al', en: 'Request a Quote', ru: 'Получить предложение' })}
       </button>
 
       {status === 'sent' && (
         <div className="mqf-success" role="status">
           <CheckCircle2 size={22} aria-hidden="true" />
           <div>
-            <strong>Sorğunuz qəbul olundu!</strong>
+            <strong>{t({ az: 'Sorğunuz qəbul olundu!', en: 'Your request has been received!', ru: 'Ваша заявка принята!' })}</strong>
             <span>
-              Komandamız həcmə və ünvana uyğun qiymət təklifini hazırlayıb ən qısa zamanda sizinlə
-              əlaqə saxlayacaq. Təcili sifariş üçün birbaşa zəng edə bilərsiniz:{' '}
+              {t({
+                az: 'Komandamız həcmə və ünvana uyğun qiymət təklifini hazırlayıb ən qısa zamanda sizinlə əlaqə saxlayacaq. Təcili sifariş üçün birbaşa zəng edə bilərsiniz:',
+                en: 'Our team will prepare a quote based on the volume and address and contact you as soon as possible. For urgent orders you can call us directly:',
+                ru: 'Наша команда подготовит ценовое предложение с учётом объёма и адреса и свяжется с вами в ближайшее время. Для срочного заказа можно позвонить напрямую:',
+              })}{' '}
               <a href="tel:+994506209584">+994 50 620 95 84</a>
             </span>
           </div>
@@ -308,8 +331,13 @@ const MaterialQuoteForm = () => {
       )}
       {status === 'error' && (
         <div className="mqf-error" role="alert">
-          Sorğu göndərilmədi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa{' '}
-          <a href="tel:+994506209584">+994 50 620 95 84</a> nömrəsi ilə əlaqə saxlayın.
+          {t({
+            az: 'Sorğu göndərilmədi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa',
+            en: 'The request could not be sent. Please try again or call us directly at',
+            ru: 'Заявка не отправлена. Пожалуйста, попробуйте ещё раз или позвоните напрямую по номеру',
+          })}{' '}
+          <a href="tel:+994506209584">+994 50 620 95 84</a>
+          {t({ az: ' nömrəsi ilə əlaqə saxlayın.', en: '.', ru: '.' })}
         </div>
       )}
     </form>

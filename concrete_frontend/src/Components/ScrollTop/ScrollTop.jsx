@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useT } from '../../i18n/i18n';
 import './ScrollTop.css';
+
+const TOP_LABEL = {
+  az: 'Yuxarı qayıt',
+  en: 'Back to top',
+  ru: 'Наверх',
+};
 
 /**
  * Floating "back to top" circle button.
@@ -8,6 +15,7 @@ import './ScrollTop.css';
  */
 const ScrollTop = () => {
   const [visible, setVisible] = useState(false);
+  const t = useT();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 480);
@@ -20,7 +28,7 @@ const ScrollTop = () => {
     <button
       className={`scroll-top ${visible ? 'visible' : ''}`}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      aria-label="Yuxarı qayıt"
+      aria-label={t(TOP_LABEL)}
       tabIndex={visible ? 0 : -1}
     >
       <ArrowUp size={20} aria-hidden="true" />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Phone, ArrowRight, CheckCircle2, MapPin, Mail, Clock, Calculator } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
@@ -8,6 +7,7 @@ import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import Seo from '../../../Components/Seo/Seo';
 import { SITE_URL } from '../../../seo/seoConfig';
 import { CONCRETE_GRADES } from '../../../data/concreteGrades';
+import { LocaleLink, useT } from '../../../i18n/i18n';
 import './ServiceDetail.css';
 
 const WA_NUMBER = '994503260343';
@@ -19,29 +19,30 @@ const WA_NUMBER = '994503260343';
  */
 const ServiceDetail = ({ page }) => {
   useScrollReveal([page.slug]);
+  const t = useT();
 
-  const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(page.whatsappText)}`;
+  const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t(page.whatsappText))}`;
 
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: page.faqs.map((f) => ({
       '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
+      name: t(f.q),
+      acceptedAnswer: { '@type': 'Answer', text: t(f.a) },
     })),
   };
 
   const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: page.crumb,
-    description: page.seo.description,
+    name: t(page.crumb),
+    description: t(page.seo.description),
     url: SITE_URL + page.slug,
     areaServed: ['Bakı', 'Abşeron', 'Novxanı'],
     provider: {
       '@type': 'LocalBusiness',
-      name: 'Novxanı Beton',
+      name: t({ az: 'Novxanı Beton', en: 'Novxani Beton', ru: 'Novxani Beton' }),
       telephone: '+994506209584',
       url: SITE_URL + '/',
     },
@@ -57,14 +58,14 @@ const ServiceDetail = ({ page }) => {
 
       {/* Hero */}
       <div className="sd-hero">
-        <img className="sd-hero-img" src={page.hero.image} alt={page.hero.alt} width="1600" height="900" fetchpriority="high" />
+        <img className="sd-hero-img" src={page.hero.image} alt={t(page.hero.alt)} width="1600" height="900" fetchpriority="high" />
         <div className="sd-hero-shade" aria-hidden="true"></div>
         <div className="container sd-hero-content">
-          <h1 className="sd-title">{page.h1}</h1>
-          <p className="sd-tagline">{page.tagline}</p>
+          <h1 className="sd-title">{t(page.h1)}</h1>
+          <p className="sd-tagline">{t(page.tagline)}</p>
           <div className="sd-hero-actions">
             <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
-              Qiymət təklifi al
+              {t({ az: 'Qiymət təklifi al', en: 'Get a quote', ru: 'Получить предложение' })}
               <ArrowRight size={18} aria-hidden="true" />
             </a>
             <a href="tel:+994506209584" className="btn btn-ghost sd-ghost">
@@ -85,20 +86,20 @@ const ServiceDetail = ({ page }) => {
               {/* Intro */}
               <section className="sd-section reveal">
                 {page.intro.map((p, i) => (
-                  <p className="sd-text" key={i}>{p}</p>
+                  <p className="sd-text" key={i}>{t(p)}</p>
                 ))}
               </section>
 
               {/* Benefits */}
               <section className="sd-section reveal">
-                <h2 className="sd-h2">{page.benefitsTitle}</h2>
+                <h2 className="sd-h2">{t(page.benefitsTitle)}</h2>
                 <div className="sd-benefits">
                   {page.benefits.map((b) => (
-                    <div className="sd-benefit" key={b.title}>
+                    <div className="sd-benefit" key={t(b.title)}>
                       <span className="sd-benefit-icon"><CheckCircle2 size={20} aria-hidden="true" /></span>
                       <div>
-                        <h3>{b.title}</h3>
-                        <p>{b.text}</p>
+                        <h3>{t(b.title)}</h3>
+                        <p>{t(b.text)}</p>
                       </div>
                     </div>
                   ))}
@@ -108,38 +109,42 @@ const ServiceDetail = ({ page }) => {
               {/* Grade chips (only for pages that sell concrete directly) */}
               {page.showGrades && (
                 <section className="sd-section reveal">
-                  <h2 className="sd-h2">İstehsal etdiyimiz markalar</h2>
+                  <h2 className="sd-h2">{t({ az: 'İstehsal etdiyimiz markalar', en: 'Concrete grades we produce', ru: 'Марки, которые мы производим' })}</h2>
                   <div className="sd-grades">
                     {CONCRETE_GRADES.map((g) => (
-                      <Link
+                      <LocaleLink
                         to={`/${g.id.toLowerCase()}-beton`}
                         className={`sd-grade-chip ${page.currentGrade === g.id ? 'is-current' : ''}`}
                         key={g.id}
-                        title={g.use}
+                        title={t(g.use)}
                         aria-current={page.currentGrade === g.id ? 'page' : undefined}
                       >
                         <strong>{g.id}</strong>
-                        <span>{g.name}</span>
-                      </Link>
+                        <span>{t(g.name)}</span>
+                      </LocaleLink>
                     ))}
                   </div>
                   <p className="sd-grades-note">
-                    Markalar GOST 26633 tələblərinə uyğun istehsal olunur.{' '}
-                    <Link to="/products">Texniki detallara bax →</Link>
+                    {t({
+                      az: 'Markalar GOST 26633 tələblərinə uyğun istehsal olunur.',
+                      en: 'All grades are produced to GOST 26633 requirements.',
+                      ru: 'Марки производятся в соответствии с требованиями ГОСТ 26633.',
+                    })}{' '}
+                    <LocaleLink to="/products">{t({ az: 'Texniki detallara bax →', en: 'See technical details →', ru: 'Смотреть технические детали →' })}</LocaleLink>
                   </p>
                 </section>
               )}
 
               {/* Steps */}
               <section className="sd-section reveal">
-                <h2 className="sd-h2">{page.stepsTitle}</h2>
+                <h2 className="sd-h2">{t(page.stepsTitle)}</h2>
                 <ol className="sd-steps">
                   {page.steps.map((s, i) => (
-                    <li className="sd-step" key={s.title}>
+                    <li className="sd-step" key={t(s.title)}>
                       <span className="sd-step-num">{i + 1}</span>
                       <div>
-                        <h3>{s.title}</h3>
-                        <p>{s.text}</p>
+                        <h3>{t(s.title)}</h3>
+                        <p>{t(s.text)}</p>
                       </div>
                     </li>
                   ))}
@@ -148,12 +153,12 @@ const ServiceDetail = ({ page }) => {
 
               {/* FAQ */}
               <section className="sd-section reveal">
-                <h2 className="sd-h2">Tez-tez verilən suallar</h2>
+                <h2 className="sd-h2">{t({ az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' })}</h2>
                 <div className="sd-faq">
                   {page.faqs.map((f) => (
-                    <details className="sd-faq-item" key={f.q}>
-                      <summary>{f.q}</summary>
-                      <p>{f.a}</p>
+                    <details className="sd-faq-item" key={t(f.q)}>
+                      <summary>{t(f.q)}</summary>
+                      <p>{t(f.a)}</p>
                     </details>
                   ))}
                 </div>
@@ -163,25 +168,25 @@ const ServiceDetail = ({ page }) => {
             {/* Aside */}
             <aside className="sd-aside">
               <div className="sd-card sd-contact-card reveal">
-                <h3>Sifariş və məsləhət</h3>
+                <h3>{t({ az: 'Sifariş və məsləhət', en: 'Orders and advice', ru: 'Заказ и консультация' })}</h3>
                 <ul>
                   <li><Phone size={16} aria-hidden="true" /> <a href="tel:+994506209584">+994 50 620 95 84</a></li>
                   <li><Mail size={16} aria-hidden="true" /> <a href="mailto:info@novxanibeton.az">info@novxanibeton.az</a></li>
-                  <li><MapPin size={16} aria-hidden="true" /> Novxanı, Bakı, Azərbaycan</li>
-                  <li><Clock size={16} aria-hidden="true" /> 7/24 fəaliyyətdəyik</li>
+                  <li><MapPin size={16} aria-hidden="true" /> {t({ az: 'Novxanı, Bakı, Azərbaycan', en: 'Novkhani, Baku, Azerbaijan', ru: 'Новханы, Баку, Азербайджан' })}</li>
+                  <li><Clock size={16} aria-hidden="true" /> {t({ az: '7/24 fəaliyyətdəyik', en: 'Open 24/7', ru: 'Работаем 24/7' })}</li>
                 </ul>
-                <WhatsAppButton text={page.whatsappText} label="WhatsApp ilə yaz" onLight block className="sd-wa-btn" />
+                <WhatsAppButton text={page.whatsappText} label={{ az: 'WhatsApp ilə yaz', en: 'Message on WhatsApp', ru: 'Написать в WhatsApp' }} onLight block className="sd-wa-btn" />
               </div>
 
               <div className="sd-card reveal">
-                <h3>Faydalı keçidlər</h3>
+                <h3>{t({ az: 'Faydalı keçidlər', en: 'Useful links', ru: 'Полезные ссылки' })}</h3>
                 <ul className="sd-links">
                   {page.related.map((r) => (
-                    <li key={r.to + r.label}>
-                      <Link to={r.to}>
+                    <li key={r.to}>
+                      <LocaleLink to={r.to}>
                         <ArrowRight size={14} aria-hidden="true" />
-                        {r.label}
-                      </Link>
+                        {t(r.label)}
+                      </LocaleLink>
                     </li>
                   ))}
                 </ul>
@@ -189,11 +194,15 @@ const ServiceDetail = ({ page }) => {
 
               <div className="sd-card sd-calc-card reveal">
                 <Calculator size={26} aria-hidden="true" />
-                <h3>Nə qədər beton lazımdır?</h3>
-                <p>Ölçüləri yazın — m³, material və mikser sayını dərhal görün.</p>
-                <Link to="/calculator" className="btn btn-primary sd-calc-btn">
-                  Beton kalkulyatoru
-                </Link>
+                <h3>{t({ az: 'Nə qədər beton lazımdır?', en: 'How much concrete do you need?', ru: 'Сколько бетона вам нужно?' })}</h3>
+                <p>{t({
+                  az: 'Ölçüləri yazın — m³, material və mikser sayını dərhal görün.',
+                  en: 'Enter the dimensions — instantly see the m³, materials and number of mixer trucks.',
+                  ru: 'Введите размеры — сразу увидите м³, материалы и число миксеров.',
+                })}</p>
+                <LocaleLink to="/calculator" className="btn btn-primary sd-calc-btn">
+                  {t({ az: 'Beton kalkulyatoru', en: 'Concrete calculator', ru: 'Калькулятор бетона' })}
+                </LocaleLink>
               </div>
             </aside>
           </div>
@@ -204,14 +213,18 @@ const ServiceDetail = ({ page }) => {
       <div className="sd-cta-band">
         <div className="container sd-cta-inner">
           <div>
-            <h2>Layihəniz üçün qiymət təklifi alın</h2>
-            <p>Pulsuz və öhdəliksiz — həcmi və ünvanı yazın, qalanını biz edək.</p>
+            <h2>{t({ az: 'Layihəniz üçün qiymət təklifi alın', en: 'Get a quote for your project', ru: 'Получите предложение для вашего проекта' })}</h2>
+            <p>{t({
+              az: 'Pulsuz və öhdəliksiz — həcmi və ünvanı yazın, qalanını biz edək.',
+              en: 'Free and non-binding — send the volume and address, we will do the rest.',
+              ru: 'Бесплатно и без обязательств — напишите объём и адрес, остальное сделаем мы.',
+            })}</p>
           </div>
           <div className="sd-cta-actions">
             <WhatsAppButton text={page.whatsappText} />
             <a href="tel:+994506209584" className="btn btn-ghost sd-ghost">
               <Phone size={18} aria-hidden="true" />
-              Zəng et
+              {t({ az: 'Zəng et', en: 'Call', ru: 'Позвонить' })}
             </a>
           </div>
         </div>

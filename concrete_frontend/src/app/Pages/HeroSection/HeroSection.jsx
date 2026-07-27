@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Calculator, ArrowRight, ShieldCheck, Truck, Award, Layers } from 'lucide-react';
+import { useT, LocaleLink } from '../../../i18n/i18n';
 import heroImage from '../img/concrete.jpeg';
 import './HeroSection.css';
 
 const HeroSection = () => {
+  const t = useT();
   return (
     <section className="hero-section">
       {/* Real <img> (not CSS background): indexable by Google Images and
@@ -12,7 +13,11 @@ const HeroSection = () => {
       <img
         className="hero-bg-img"
         src={heroImage}
-        alt="Bakıda tikinti sahəsində hazır betonun tökülməsi — Novxanı Beton"
+        alt={t({
+          az: 'Bakıda tikinti sahəsində hazır betonun tökülməsi — Novxanı Beton',
+          en: 'Ready-mix concrete being poured at a construction site in Baku — Novxani Beton',
+          ru: 'Заливка товарного бетона на строительной площадке в Баку — Novxani Beton',
+        })}
         width="1920"
         height="1280"
         fetchpriority="high"
@@ -22,35 +27,77 @@ const HeroSection = () => {
       <div className="hero-content">
         <div className="container">
           <h1 className="hero-title reveal">
-            Beton və Tikinti Materiallarının<br />
-            <span className="hero-accent">Etibarlı Ünvanı</span>
+            {t({
+              az: 'Beton və Tikinti Materiallarının',
+              en: 'Concrete and Building Materials',
+              ru: 'Бетон и строительные материалы',
+            })}<br />
+            <span className="hero-accent">{t({
+              az: 'Etibarlı Ünvanı',
+              en: 'Your Trusted Source',
+              ru: 'Ваш надежный адрес',
+            })}</span>
           </h1>
-          <span className="hero-eyebrow reveal">2018-ci ildən etibarlı tərəfdaş</span>
+          <span className="hero-eyebrow reveal">{t({
+            az: '2018-ci ildən etibarlı tərəfdaş',
+            en: 'Reliable partner since 2018',
+            ru: 'Надежный партнер с 2018 года',
+          })}</span>
           <p className="hero-desc reveal">
-            Keyfiyyətli hazır beton, qum, atsep və şeben satışı — fərdi və korporativ
-            müştərilər üçün operativ çatdırılma və sərfəli təkliflər. Layihənizi
-            peşəkar kalkulyatorumuzla dəqiq planlaşdırın.
+            {t({
+              az: 'Keyfiyyətli hazır beton, qum, atsep və şeben satışı — fərdi və korporativ müştərilər üçün operativ çatdırılma və sərfəli təkliflər. Layihənizi peşəkar kalkulyatorumuzla dəqiq planlaşdırın.',
+              en: 'Quality ready-mix concrete, sand, gravel mix and crushed stone — fast delivery and competitive offers for private and corporate customers. Plan your project precisely with our professional calculator.',
+              ru: 'Качественный товарный бетон, песок, ПГС и щебень — оперативная доставка и выгодные предложения для частных и корпоративных клиентов. Точно спланируйте свой проект с помощью нашего профессионального калькулятора.',
+            })}
           </p>
           <div className="hero-actions reveal">
-            <Link to="/calculator" className="btn btn-accent btn-lg">
+            <LocaleLink to="/calculator" className="btn btn-accent btn-lg">
               <Calculator size={20} aria-hidden="true" />
-              Kalkulyatordan İstifadə Et
-            </Link>
-            <Link to="/tikinti-materiallari" className="btn btn-ghost btn-lg">
-              Qum, Atsep, Şeben Sifariş Et
+              {t({
+                az: 'Kalkulyatordan İstifadə Et',
+                en: 'Use the Calculator',
+                ru: 'Открыть калькулятор',
+              })}
+            </LocaleLink>
+            <LocaleLink to="/tikinti-materiallari" className="btn btn-ghost btn-lg">
+              {t({
+                az: 'Qum, Atsep, Şeben Sifariş Et',
+                en: 'Order Sand, Gravel Mix, Crushed Stone',
+                ru: 'Заказать песок, ПГС, щебень',
+              })}
               <ArrowRight size={20} aria-hidden="true" />
-            </Link>
-            <Link to="/contact" className="btn btn-ghost btn-lg">
-              Qiymət təklifi al
+            </LocaleLink>
+            <LocaleLink to="/contact" className="btn btn-ghost btn-lg">
+              {t({
+                az: 'Qiymət təklifi al',
+                en: 'Request a Quote',
+                ru: 'Получить предложение',
+              })}
               <ArrowRight size={20} aria-hidden="true" />
-            </Link>
+            </LocaleLink>
           </div>
 
           <ul className="hero-badges reveal">
-            <li><ShieldCheck size={20} aria-hidden="true" /> Sertifikatlı keyfiyyət</li>
-            <li><Layers size={20} aria-hidden="true" /> Qum, atsep və şeben satışı</li>
-            <li><Truck size={20} aria-hidden="true" /> Vaxtında çatdırılma</li>
-            <li><Award size={20} aria-hidden="true" /> 8+ il təcrübə</li>
+            <li><ShieldCheck size={20} aria-hidden="true" /> {t({
+              az: 'Sertifikatlı keyfiyyət',
+              en: 'Certified quality',
+              ru: 'Сертифицированное качество',
+            })}</li>
+            <li><Layers size={20} aria-hidden="true" /> {t({
+              az: 'Qum, atsep və şeben satışı',
+              en: 'Sand, gravel mix and crushed stone',
+              ru: 'Песок, ПГС и щебень',
+            })}</li>
+            <li><Truck size={20} aria-hidden="true" /> {t({
+              az: 'Vaxtında çatdırılma',
+              en: 'On-time delivery',
+              ru: 'Доставка вовремя',
+            })}</li>
+            <li><Award size={20} aria-hidden="true" /> {t({
+              az: '8+ il təcrübə',
+              en: '8+ years of experience',
+              ru: 'Более 8 лет опыта',
+            })}</li>
           </ul>
         </div>
       </div>

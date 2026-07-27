@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, X } from 'lucide-react';
+import { useLocale, useT, localePath, splitPath, LocaleLink } from '../../../i18n/i18n';
 import './Header.css';
 
 const NAV_LINKS = [
-  { to: '/', label: 'Ana Səhifə' },
-  { to: '/products', label: 'Məhsullar' },
-  { to: '/services', label: 'Xidmətlər' },
-  { to: '/tikinti-materiallari', label: 'Materiallar' },
-  { to: '/calculator', label: 'Kalkulyator' },
-  { to: '/gallery', label: 'Qalereya' },
-  { to: '/about', label: 'Haqqımızda' },
-  { to: '/contact', label: 'Əlaqə' },
+  { to: '/', label: { az: 'Ana Səhifə', en: 'Home', ru: 'Главная' } },
+  { to: '/products', label: { az: 'Məhsullar', en: 'Products', ru: 'Продукция' } },
+  { to: '/services', label: { az: 'Xidmətlər', en: 'Services', ru: 'Услуги' } },
+  { to: '/tikinti-materiallari', label: { az: 'Materiallar', en: 'Materials', ru: 'Материалы' } },
+  { to: '/calculator', label: { az: 'Kalkulyator', en: 'Calculator', ru: 'Калькулятор' } },
+  { to: '/gallery', label: { az: 'Qalereya', en: 'Gallery', ru: 'Галерея' } },
+  { to: '/about', label: { az: 'Haqqımızda', en: 'About Us', ru: 'О нас' } },
+  { to: '/contact', label: { az: 'Əlaqə', en: 'Contact', ru: 'Контакты' } },
 ];
+
+const TXT = {
+  navAria: { az: 'Əsas naviqasiya', en: 'Main navigation', ru: 'Основная навигация' },
+  logoAria: { az: 'Novxanı Beton ana səhifə', en: 'Novxani Beton home page', ru: 'Главная страница Novxani Beton' },
+  phoneAria: { az: 'Zəng et: +994 50 620 95 84', en: 'Call: +994 50 620 95 84', ru: 'Позвонить: +994 50 620 95 84' },
+  closeMenu: { az: 'Menyunu bağla', en: 'Close menu', ru: 'Закрыть меню' },
+  openMenu: { az: 'Menyunu aç', en: 'Open menu', ru: 'Открыть меню' },
+  langAria: { az: 'Sayt dili', en: 'Site language', ru: 'Язык сайта' },
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const locale = useLocale();
+  const t = useT();
+
+  const { base } = splitPath(location.pathname);
+  // The Ads landing alias (/en/concrete, /ru/concrete) maps to the homepage
+  // when switching languages; every other path keeps its own base.
+  const switchBase = base === '/concrete' ? '/' : base;
+  const langTarget = (loc) =>
+    loc !== 'az' && base === '/concrete' ? localePath(loc, '/concrete') : localePath(loc, switchBase);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -39,43 +58,56 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <nav className="navbar" aria-label="Əsas naviqasiya">
+      <nav className="navbar" aria-label={t(TXT.navAria)}>
         <div className="navbar-container container">
-          <Link to="/" className="logo" aria-label="Novxanı Beton ana səhifə">
-            <img src="/NOVKHANI.svg" alt="Novxanı Beton" className="logo-svg" />
+          <LocaleLink to="/" className="logo" aria-label={t(TXT.logoAria)}>
+            <img src="/NOVKHANI.svg" alt="Novxani Beton" className="logo-svg" />
             <span className="logo-wordmark" aria-hidden="true">NOVXANI</span>
-          </Link>
+          </LocaleLink>
 
           <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
             {NAV_LINKS.map((link) => (
-              <Link
+              <LocaleLink
                 key={link.to}
                 to={link.to}
-                className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}
+                className={`nav-link ${base === link.to || (link.to === '/' && base === '/concrete') ? 'active' : ''}`}
               >
-                {link.label}
-              </Link>
+                {t(link.label)}
+              </LocaleLink>
             ))}
+            {/* Language switcher — AZ | EN | RU, same page in the target locale */}
+            <div className="lang-switch" role="group" aria-label={t(TXT.langAria)}>
+              {['az', 'en', 'ru'].map((loc) => (
+                <Link
+                  key={loc}
+                  to={langTarget(loc)}
+                  className={`lang-switch-link ${locale === loc ? 'active' : ''}`}
+                  aria-current={locale === loc ? 'page' : undefined}
+                >
+                  {loc.toUpperCase()}
+                </Link>
+              ))}
+            </div>
             {/* Click-to-call: number on wide screens, icon-only on tighter
                 desktops; hidden in the mobile menu (sticky bar covers it) */}
-            <a href="tel:+994506209584" className="nav-phone" aria-label="Zəng et: +994 50 620 95 84">
+            <a href="tel:+994506209584" className="nav-phone" aria-label={t(TXT.phoneAria)}>
               <Phone size={15} aria-hidden="true" />
               <span className="nav-phone-num">+994 50 620 95 84</span>
             </a>
             <button
               className="menu-close-btn"
               onClick={() => setIsMenuOpen(false)}
-              aria-label="Menyunu bağla"
+              aria-label={t(TXT.closeMenu)}
             >
               <X size={18} aria-hidden="true" />
-              Menyunu bağla
+              {t(TXT.closeMenu)}
             </button>
           </div>
 
           <button
             className="hamburger"
             onClick={() => setIsMenuOpen((v) => !v)}
-            aria-label={isMenuOpen ? 'Menyunu bağla' : 'Menyunu aç'}
+            aria-label={isMenuOpen ? t(TXT.closeMenu) : t(TXT.openMenu)}
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

@@ -15,7 +15,7 @@ const puppeteer = require('puppeteer');
 const BUILD = path.resolve(__dirname, '..', 'build');
 const PORT = Number(process.env.PRERENDER_PORT) || 4173;
 
-const ROUTES = [
+const BASE_ROUTES = [
   '/',
   '/products',
   '/services',
@@ -44,22 +44,28 @@ const ROUTES = [
   '/m350-beton',
   '/m400-beton',
   '/m450-beton',
+];
+
+// Every az route exists under /en and /ru too, plus the stable Google Ads
+// landing aliases /en/concrete and /ru/concrete (localized homepage).
+const ROUTES = [
+  ...BASE_ROUTES,
+  ...BASE_ROUTES.map((r) => `/en${r === '/' ? '' : r}`),
+  ...BASE_ROUTES.map((r) => `/ru${r === '/' ? '' : r}`),
   '/en/concrete',
   '/ru/concrete',
 ];
 
-/* Localized Google Ads landing pages: react-helmet handles title/meta/canonical/
-   hreflang/JSON-LD at runtime, but a few AZ bits are baked statically into
-   public/index.html and must be swapped in the saved HTML for these routes. */
-const LOCALIZED_ROUTES = {
-  '/en/concrete': {
-    ogLocale: 'en_US',
-    noscript: 'Please enable JavaScript to view this site.',
-  },
-  '/ru/concrete': {
-    ogLocale: 'ru_RU',
-    noscript: 'Включите JavaScript, чтобы просмотреть этот сайт.',
-  },
+/* Localized routes: react-helmet handles title/meta/canonical/hreflang/JSON-LD
+   at runtime, but a few AZ bits are baked statically into public/index.html
+   and must be swapped in the saved HTML for /en/* and /ru/* routes. */
+const LOCALIZED_META = {
+  en: { ogLocale: 'en_US', noscript: 'Please enable JavaScript to view this site.' },
+  ru: { ogLocale: 'ru_RU', noscript: 'Включите JavaScript, чтобы просмотреть этот сайт.' },
+};
+const localizedFor = (route) => {
+  const m = /^\/(en|ru)(\/|$)/.exec(route);
+  return m ? LOCALIZED_META[m[1]] : null;
 };
 
 const MIME = {
@@ -135,7 +141,7 @@ function createServer() {
           .querySelectorAll('script[src*="googletagmanager.com"], script[src*="google-analytics.com"]')
           .forEach((s) => s.remove());
       });
-      const localized = LOCALIZED_ROUTES[route];
+      const localized = localizedFor(route);
       if (localized) {
         await page.evaluate((loc) => {
           // Static AZ LocalBusiness JSON-LD from index.html (no data-rh attr) —
