@@ -44,7 +44,23 @@ const ROUTES = [
   '/m350-beton',
   '/m400-beton',
   '/m450-beton',
+  '/en/concrete',
+  '/ru/concrete',
 ];
+
+/* Localized Google Ads landing pages: react-helmet handles title/meta/canonical/
+   hreflang/JSON-LD at runtime, but a few AZ bits are baked statically into
+   public/index.html and must be swapped in the saved HTML for these routes. */
+const LOCALIZED_ROUTES = {
+  '/en/concrete': {
+    ogLocale: 'en_US',
+    noscript: 'Please enable JavaScript to view this site.',
+  },
+  '/ru/concrete': {
+    ogLocale: 'ru_RU',
+    noscript: 'Включите JavaScript, чтобы просмотреть этот сайт.',
+  },
+};
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -119,6 +135,28 @@ function createServer() {
           .querySelectorAll('script[src*="googletagmanager.com"], script[src*="google-analytics.com"]')
           .forEach((s) => s.remove());
       });
+      const localized = LOCALIZED_ROUTES[route];
+      if (localized) {
+        await page.evaluate((loc) => {
+          // Static AZ LocalBusiness JSON-LD from index.html (no data-rh attr) —
+          // the landing page injects its own localized record via helmet, so
+          // dropping this one avoids duplicate/conflicting Organization data.
+          document
+            .querySelectorAll('head script[type="application/ld+json"]:not([data-rh])')
+            .forEach((s) => s.remove());
+          const og = document.querySelector('meta[property="og:locale"]:not([data-rh])');
+          if (og) og.setAttribute('content', loc.ogLocale);
+          // Brand name in its official latin spelling — keeps these pages free
+          // of Azerbaijani-specific characters entirely.
+          const site = document.querySelector('meta[property="og:site_name"]:not([data-rh])');
+          if (site) site.setAttribute('content', 'NOVXANI BETON');
+          // AZ "enable JavaScript" fallback → localized text (the GTM noscript
+          // iframe is left untouched).
+          document.querySelectorAll('noscript').forEach((n) => {
+            if (n.textContent.includes('JavaScript-i')) n.textContent = loc.noscript;
+          });
+        }, localized);
+      }
       return await page.content();
     } finally {
       await page.close();

@@ -29,6 +29,9 @@ const Seo = ({ page, custom }) => {
 
   return (
     <Helmet prioritizeSeoTags>
+      {/* Re-assert the document language: the /en/ and /ru/ landing pages set
+          their own <html lang>, which would otherwise linger after SPA nav. */}
+      <html lang="az" />
       <title>{cfg.title}</title>
       <meta name="description" content={cfg.description} />
       <link rel="canonical" href={url} />
