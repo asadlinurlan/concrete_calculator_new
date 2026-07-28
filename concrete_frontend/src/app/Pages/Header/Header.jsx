@@ -75,20 +75,6 @@ const Header = () => {
                 {t(link.label)}
               </LocaleLink>
             ))}
-            {/* Language switcher — AZ | EN | RU, same page in the target locale */}
-            <div className="lang-switch" role="group" aria-label={t(TXT.langAria)}>
-              {['az', 'en', 'ru'].map((loc) => (
-                <Link
-                  key={loc}
-                  to={langTarget(loc)}
-                  state={{ keepScroll: true }}
-                  className={`lang-switch-link ${locale === loc ? 'active' : ''}`}
-                  aria-current={locale === loc ? 'page' : undefined}
-                >
-                  {loc.toUpperCase()}
-                </Link>
-              ))}
-            </div>
             {/* Click-to-call: number on wide screens, icon-only on tighter
                 desktops; hidden in the mobile menu (sticky bar covers it) */}
             <a href="tel:+994506209584" className="nav-phone" aria-label={t(TXT.phoneAria)}>
@@ -103,6 +89,23 @@ const Header = () => {
               <X size={18} aria-hidden="true" />
               {t(TXT.closeMenu)}
             </button>
+          </div>
+
+          {/* Language switcher — anchored OUTSIDE the nav flow so the varying
+              link-text widths of each language can never push it around.
+              Its neighbours (phone number, hamburger) have constant width. */}
+          <div className="lang-switch" role="group" aria-label={t(TXT.langAria)}>
+            {['az', 'en', 'ru'].map((loc) => (
+              <Link
+                key={loc}
+                to={langTarget(loc)}
+                state={{ keepScroll: true }}
+                className={`lang-switch-link ${locale === loc ? 'active' : ''}`}
+                aria-current={locale === loc ? 'page' : undefined}
+              >
+                {loc.toUpperCase()}
+              </Link>
+            ))}
           </div>
 
           <button
