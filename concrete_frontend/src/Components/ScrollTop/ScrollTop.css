@@ -30,19 +30,13 @@
 .scroll-top:hover { background: var(--amber-600); }
 .scroll-top:active { transform: scale(0.92); }
 
+/* Phones: compact back-to-top in the bottom-right corner (WhatsApp
+   occupies the bottom-left). */
 @media (max-width: 560px) {
   .scroll-top {
     width: 44px;
     height: 44px;
     right: calc(14px + env(safe-area-inset-right, 0px));
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* Pages with a bottom sticky contact bar (e.g. /tikinti-materiallari)
-   set body.has-sticky-cta — lift the button above the bar on phones */
-@media (max-width: 768px) {
-  body.has-sticky-cta .scroll-top {
-    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
 }

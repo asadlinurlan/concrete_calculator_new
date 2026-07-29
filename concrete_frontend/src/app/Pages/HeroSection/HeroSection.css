@@ -159,8 +159,10 @@ html[lang='ru'] .hero-title {
   .hero-eyebrow { font-size: 11px; letter-spacing: 2px; padding: 7px 12px; }
   .hero-title { margin-top: 20px; margin-bottom: 18px; }
   .hero-desc { margin-bottom: 28px; }
-  .hero-actions { gap: 12px; margin-bottom: 36px; }
-  .hero-actions .btn { flex: 1 1 100%; min-height: 52px; }
+  /* Compact CTAs: natural width instead of three stacked full-width bars —
+     the primary amber button leads, the ghosts read as secondary actions. */
+  .hero-actions { gap: 10px; margin-bottom: 32px; }
+  .hero-actions .btn { flex: 0 1 auto; min-height: 44px; }
   .hero-badges { flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 20px; }
   .hero-wave svg { height: 40px; }
 }

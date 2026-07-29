@@ -18,8 +18,8 @@ const WA_LABEL = {
 
 /**
  * Site-wide floating WhatsApp button — bottom-left squircle in the
- * graphite→amber brand gradient. Desktop/tablet only: on phones the
- * sticky contact bar already provides WhatsApp, so the FAB hides.
+ * graphite→amber brand gradient. Desktop keeps it bottom-left; on phones
+ * it is the single floating contact action, compact in the bottom-right.
  */
 const WhatsAppFab = () => {
   const t = useT();

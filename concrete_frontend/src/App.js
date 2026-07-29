@@ -24,7 +24,6 @@ import { GRADE_PAGES } from "./data/gradePages";
 import Seo from "./Components/Seo/Seo";
 import ScrollTop from "./Components/ScrollTop/ScrollTop";
 import WhatsAppFab from "./Components/WhatsAppFab/WhatsAppFab";
-import StickyContactBar from "./Components/StickyContactBar/StickyContactBar";
 import { trackPageView, attachAutoTracking } from "./lib/analytics";
 import { LOCALES, LocaleProvider, localePath, splitPath } from "./i18n/i18n";
 
@@ -117,7 +116,6 @@ function AppShell() {
         <Footer />
         <ScrollTop />
         <WhatsAppFab />
-        <StickyContactBar />
       </div>
     </LocaleProvider>
   );

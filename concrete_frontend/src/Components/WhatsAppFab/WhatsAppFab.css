@@ -24,7 +24,15 @@
 }
 .wa-fab:active { transform: scale(0.94); }
 
-/* Phones: the sticky contact bar already offers WhatsApp */
+/* Phones: compact 48px squircle in the bottom-LEFT corner (same side as
+   desktop) — the bottom-right belongs to the scroll-top button. */
 @media (max-width: 768px) {
-  .wa-fab { display: none; }
+  .wa-fab {
+    left: max(16px, env(safe-area-inset-left, 0px));
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(13, 17, 23, 0.3);
+  }
 }

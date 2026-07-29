@@ -10,7 +10,8 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.1fr 0.9fr 1.1fr;
+  /* about | links | services | contact */
+  grid-template-columns: 1.5fr 1fr 1.2fr 1.2fr;
   gap: 44px;
 }
 
@@ -183,8 +184,4 @@
 
   .footer-bottom { padding: 16px 0 calc(16px + env(safe-area-inset-bottom, 0px)); }
   .footer-bottom p { font-size: 12px; }
-
-  /* Pages with a bottom sticky contact bar (body.has-sticky-cta, e.g.
-     /tikinti-materiallari) — keep the © row visible above the bar */
-  body.has-sticky-cta .footer { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }

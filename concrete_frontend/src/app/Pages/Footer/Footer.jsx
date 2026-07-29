@@ -2,9 +2,6 @@ import React from 'react';
 import { useT, LocaleLink } from '../../../i18n/i18n';
 import './Footer.css';
 
-// 'M100' → {az,en,ru} label; az stays byte-identical to the original text.
-const grade = (m) => ({ az: `${m} Beton`, en: `${m} Concrete`, ru: `Бетон ${m}` });
-
 const Footer = () => {
   const t = useT();
   const icons = {
@@ -96,19 +93,6 @@ const Footer = () => {
                 <li><LocaleLink to="/beton-laboratoriyasi">{t({ az: 'Beton Laboratoriyası', en: 'Concrete Laboratory', ru: 'Бетонная лаборатория' })}</LocaleLink></li>
                 <li><LocaleLink to="/topdan-beton-satisi">{t({ az: 'Topdan Beton Satışı', en: 'Wholesale Concrete Sales', ru: 'Оптовая продажа бетона' })}</LocaleLink></li>
                 <li><LocaleLink to="/tikinti-materiallari">{t({ az: 'Qum, Atsep və Şeben Satışı', en: 'Sand, Gravel Mix and Crushed Stone', ru: 'Песок, ПГС и щебень' })}</LocaleLink></li>
-              </ul>
-            </div>
-            <div className="footer-links">
-              <h3>{t({ az: 'Beton Markaları', en: 'Concrete Grades', ru: 'Марки бетона' })}</h3>
-              <ul>
-                <li><LocaleLink to="/m100-beton">{t(grade('M100'))}</LocaleLink></li>
-                <li><LocaleLink to="/m150-beton">{t(grade('M150'))}</LocaleLink></li>
-                <li><LocaleLink to="/m200-beton">{t(grade('M200'))}</LocaleLink></li>
-                <li><LocaleLink to="/m250-beton">{t(grade('M250'))}</LocaleLink></li>
-                <li><LocaleLink to="/m300-beton">{t(grade('M300'))}</LocaleLink></li>
-                <li><LocaleLink to="/m350-beton">{t(grade('M350'))}</LocaleLink></li>
-                <li><LocaleLink to="/m400-beton">{t(grade('M400'))}</LocaleLink></li>
-                <li><LocaleLink to="/m450-beton">{t(grade('M450'))}</LocaleLink></li>
               </ul>
             </div>
             <div className="footer-contact">
