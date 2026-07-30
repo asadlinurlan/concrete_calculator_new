@@ -23,12 +23,13 @@
   --amber-500: #f0b252;      /* soft amber */
   --amber-600: #e09a35;
   --amber-400: #f7c878;
+  --amber-700: #b06f10;      /* readable amber for text links on white */
   --amber-glow: rgba(240, 178, 82, 0.28);
 
   /* ---- Semantic tokens (LIGHT THEME) ---- */
-  --primary-color: var(--steel-500);
-  --primary-dark: var(--steel-600);
-  --primary-light: var(--steel-400);
+  --primary-color: var(--amber-500);
+  --primary-dark: var(--amber-600);
+  --primary-light: var(--amber-400);
   --accent-color: var(--amber-500);
   --accent-dark: var(--amber-600);
 
@@ -147,14 +148,19 @@ a { color: inherit; }
 }
 .btn:active { transform: translateY(0) scale(0.98); }
 
+/* Primary = white surface with amber outline/text; hover fills amber.
+   One accent family site-wide — no blue buttons. */
 .btn-primary {
-  background: var(--steel-500);
-  color: #fff;
+  background: #fff;
+  color: var(--amber-600);
+  border-color: var(--amber-500);
 }
 .btn-primary:hover {
-  background: var(--steel-600);
+  background: var(--amber-500);
+  border-color: var(--amber-500);
+  color: var(--graphite-900);
   transform: translateY(-2px);
-  box-shadow: var(--sh-glow);
+  box-shadow: var(--sh-amber);
 }
 
 .btn-accent {
@@ -173,8 +179,8 @@ a { color: inherit; }
   border-color: var(--graphite-500);
 }
 .btn-ghost:hover {
-  border-color: var(--steel-500);
-  color: var(--steel-400);
+  border-color: var(--amber-500);
+  color: var(--amber-400);
   transform: translateY(-2px);
 }
 
@@ -207,9 +213,9 @@ a { color: inherit; }
 
 /* legacy button alias */
 .btn-primary-custom {
-  background: var(--steel-500);
-  color: #fff;
-  border: none;
+  background: #fff;
+  color: var(--amber-600);
+  border: 1px solid var(--amber-500);
   padding: 14px 32px;
   border-radius: var(--r-sm);
   font-weight: 600;
@@ -222,9 +228,10 @@ a { color: inherit; }
   display: inline-block;
 }
 .btn-primary-custom:hover {
-  background: var(--steel-600);
+  background: var(--amber-500);
+  color: var(--graphite-900);
   transform: translateY(-2px);
-  box-shadow: var(--sh-glow);
+  box-shadow: var(--sh-amber);
 }
 
 /* Cards */
@@ -343,11 +350,10 @@ a, button, input, select, textarea, summary, [role="button"] {
   input, select, textarea { font-size: 16px !important; }
 }
 
-/* Page heroes (Products/Gallery/About/Contact/Services): keep the centered
+/* Page heroes (Products/About/Contact/Services): keep the centered
    title clear of the fixed header + logo on touch devices */
 @media (max-width: 1024px) {
   .page-hero-products,
-  .page-hero-gallery,
   .page-hero-about,
   .page-hero-contact,
   .page-hero-services {

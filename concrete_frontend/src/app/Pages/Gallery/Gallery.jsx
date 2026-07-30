@@ -1,10 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import useScrollReveal from '../../../hooks/useScrollReveal';
 import { useT } from '../../../i18n/i18n';
-import Seo from '../../../Components/Seo/Seo';
-import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
-import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Gallery.css';
 import img1 from '../img/beatriz-novaes-1-Rf38Y1QHk-unsplash.jpg';
 import img2 from '../img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
@@ -57,8 +53,12 @@ const IMAGES = [
   },
 ];
 
+/**
+ * Photo gallery section with a lightbox. Rendered as part of the
+ * combined "Haqqımızda" page (the old standalone /gallery route now
+ * redirects there).
+ */
 const Gallery = () => {
-  useScrollReveal();
   const t = useT();
   const [index, setIndex] = useState(null);
   const isOpen = index !== null;
@@ -91,64 +91,41 @@ const Gallery = () => {
   }, [isOpen, close, movePrev, moveNext]);
 
   return (
-    <section className="gallery-section">
-      <Seo page="gallery" />
-      <div className="page-hero-gallery">
-        <div className="page-hero-overlay"></div>
-        <div className="hero-content-center">
-          <h1 className="page-title-center">
+    <section
+      className="gallery-section"
+      aria-label={t({ az: 'Qalereya', en: 'Gallery', ru: 'Галерея' })}
+    >
+      <div className="container">
+        <div className="section-head gallery-head reveal">
+          <span className="section-subtitle">
             {t({ az: 'Qalereya', en: 'Gallery', ru: 'Галерея' })}
-          </h1>
-          <p className="page-subtitle-center">
+          </span>
+          <h2 className="section-title">
             {t({
               az: 'Layihələrimiz və istehsal prosesimiz',
               en: 'Our projects and production process',
               ru: 'Наши проекты и производственный процесс',
             })}
-          </p>
+          </h2>
+        </div>
+        <div className="gallery-grid">
+          {IMAGES.map((img, i) => (
+            <button
+              key={img.src}
+              className="gallery-item reveal"
+              style={{ transitionDelay: `${(i % 4) * 0.06}s` }}
+              onClick={() => setIndex(i)}
+              aria-label={`${t(img.title)} — ${t({ az: 'böyüt', en: 'zoom in', ru: 'увеличить' })}`}
+            >
+              <img src={img.src} alt={t(img.title)} loading="lazy" />
+              <span className="gallery-overlay">
+                <ZoomIn size={26} aria-hidden="true" />
+                <span className="gallery-caption">{t(img.title)}</span>
+              </span>
+            </button>
+          ))}
         </div>
       </div>
-
-      <div className="gallery-content">
-        <div className="container">
-          <Breadcrumbs current={t({ az: 'Qalereya', en: 'Gallery', ru: 'Галерея' })} />
-          <div className="gallery-grid">
-            {IMAGES.map((img, i) => (
-              <button
-                key={img.src}
-                className="gallery-item reveal"
-                style={{ transitionDelay: `${(i % 4) * 0.06}s` }}
-                onClick={() => setIndex(i)}
-                aria-label={`${t(img.title)} — ${t({ az: 'böyüt', en: 'zoom in', ru: 'увеличить' })}`}
-              >
-                <img src={img.src} alt={t(img.title)} loading="lazy" />
-                <span className="gallery-overlay">
-                  <ZoomIn size={26} aria-hidden="true" />
-                  <span className="gallery-caption">{t(img.title)}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <CtaBand
-        title={{
-          az: 'Layihənizi birlikdə həyata keçirək',
-          en: "Let's bring your project to life together",
-          ru: 'Реализуем ваш проект вместе',
-        }}
-        text={{
-          az: 'Gördüyünüz işlər kimi — layihəniz üçün beton və tikinti materiallarını bir ünvandan alın.',
-          en: 'Just like the projects you see — get concrete and construction materials for your project from one place.',
-          ru: 'Как и работы, которые вы видите, — получите бетон и стройматериалы для вашего проекта в одном месте.',
-        }}
-        whatsappText={{
-          az: 'Salam! Layihəm üçün qiymət təklifi almaq istəyirəm.',
-          en: 'Hello! I would like to get a price quote for my project.',
-          ru: 'Здравствуйте! Хочу получить ценовое предложение для моего проекта.',
-        }}
-      />
 
       {isOpen && (
         <div

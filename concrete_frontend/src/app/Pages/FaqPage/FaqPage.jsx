@@ -6,7 +6,6 @@ import { useT, LocaleLink } from '../../../i18n/i18n';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import Faq from '../../../Components/Faq/Faq';
-import CtaBand from '../../../Components/CtaBand/CtaBand';
 import { FAQ_GROUPS, ALL_FAQ_ITEMS } from '../../../data/faqPage';
 import './FaqPage.css';
 
@@ -115,23 +114,6 @@ const FaqPage = () => {
         </div>
       </div>
 
-      <CtaBand
-        title={{
-          az: 'Sualınız cavabsız qaldı?',
-          en: 'Still have a question?',
-          ru: 'Ваш вопрос остался без ответа?',
-        }}
-        text={{
-          az: 'Layihənizi yazın — mütəxəssislərimiz pulsuz məsləhət və fərdi qiymət təklifi versin.',
-          en: 'Tell us about your project — our specialists will provide free advice and an individual price quote.',
-          ru: 'Напишите о вашем проекте — наши специалисты бесплатно проконсультируют и подготовят индивидуальное ценовое предложение.',
-        }}
-        whatsappText={{
-          az: 'Salam! Beton sifarişi ilə bağlı sualım var.',
-          en: 'Hello! I have a question about ordering concrete.',
-          ru: 'Здравствуйте! У меня вопрос по заказу бетона.',
-        }}
-      />
     </section>
   );
 };

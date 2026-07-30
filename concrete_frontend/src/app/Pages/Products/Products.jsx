@@ -6,44 +6,7 @@ import { useT, LocaleLink } from '../../../i18n/i18n';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
 import Faq from '../../../Components/Faq/Faq';
-import CtaBand from '../../../Components/CtaBand/CtaBand';
 import './Products.css';
-
-// "Nə tökürsünüz?" → tövsiyə olunan marka. Hər iş növü bir markaya bağlanır.
-const USE_CASES = [
-  {
-    label: { az: 'Hamarlama / altlıq', en: 'Levelling / blinding', ru: 'Выравнивание / подбетонка' },
-    grade: 'M100',
-  },
-  {
-    label: { az: 'Səki / bordür', en: 'Pavement / kerb', ru: 'Тротуар / бордюр' },
-    grade: 'M150',
-  },
-  {
-    label: { az: 'Döşəmə / ümumi tikinti', en: 'Floor slab / general construction', ru: 'Пол (стяжка) / общее строительство' },
-    grade: 'M200',
-  },
-  {
-    label: { az: 'Zolaq təməl / divar', en: 'Strip foundation / wall', ru: 'Ленточный фундамент / стена' },
-    grade: 'M250',
-  },
-  {
-    label: { az: 'Monolit təməl / plitə / sütun', en: 'Monolithic foundation / slab / column', ru: 'Монолитный фундамент / плита / колонна' },
-    grade: 'M300',
-  },
-  {
-    label: { az: 'Çoxmərtəbəli karkas', en: 'Multi-storey frame', ru: 'Многоэтажный каркас' },
-    grade: 'M350',
-  },
-  {
-    label: { az: 'Körpü / yüksək yük', en: 'Bridge / heavy loads', ru: 'Мост / высокие нагрузки' },
-    grade: 'M400',
-  },
-  {
-    label: { az: 'Xüsusi konstruksiya', en: 'Special structures', ru: 'Специальные конструкции' },
-    grade: 'M450',
-  },
-];
 
 const PRODUCT_FAQS = [
   {
@@ -114,16 +77,6 @@ const Products = () => {
       else next.add(id);
       return next;
     });
-  // "Nə tökürsünüz?" helper: highlighted/recommended grade card.
-  const [recommended, setRecommended] = useState(null);
-
-  // Toggle: clicking the active chip deselects it. No auto-scroll —
-  // the answer appears inline right under the chips, the page never jumps.
-  const recommend = (grade) => {
-    setRecommended((cur) => (cur === grade ? null : grade));
-  };
-
-  const recommendedGrade = CONCRETE_GRADES.find((g) => g.id === recommended);
 
   return (
     <section className="products-section">
@@ -167,71 +120,6 @@ const Products = () => {
             </p>
           </div>
 
-          {/* Use-case → grade helper for non-expert customers.
-              Chips toggle (second click deselects); the recommendation is
-              shown inline in a result card — the page never scroll-jumps. */}
-          <div className="grade-helper reveal">
-            <span className="grade-helper-q">
-              {t({
-                az: 'Nə tökürsünüz? — iş növünü seçin, uyğun markanı göstərək',
-                en: 'What are you pouring? — choose the type of work and we will show the right grade',
-                ru: 'Что вы заливаете? — выберите вид работ, и мы покажем подходящую марку',
-              })}
-            </span>
-            <div
-              className="grade-helper-chips"
-              role="group"
-              aria-label={t({
-                az: 'İş növünə görə marka seçimi',
-                en: 'Grade selection by type of work',
-                ru: 'Выбор марки по виду работ',
-              })}
-            >
-              {USE_CASES.map((u) => (
-                <button
-                  key={u.grade}
-                  type="button"
-                  className={`grade-chip ${recommended === u.grade ? 'active' : ''}`}
-                  aria-pressed={recommended === u.grade}
-                  onClick={() => recommend(u.grade)}
-                >
-                  {t(u.label)}
-                </button>
-              ))}
-            </div>
-            {recommendedGrade && (
-              <div className="grade-helper-result" role="status">
-                <div className="ghr-info">
-                  <span className="ghr-badge">
-                    {recommendedGrade.id} · {recommendedGrade.bClass}
-                  </span>
-                  <p>
-                    <strong>{t(recommendedGrade.name)}</strong> — {t(recommendedGrade.use)}.{' '}
-                    {t({ az: 'Möhkəmlik:', en: 'Strength:', ru: 'Прочность:' })}{' '}
-                    {recommendedGrade.strength} {t(MPA)}.
-                  </p>
-                </div>
-                <div className="ghr-actions">
-                  <LocaleLink to={`/calculator?grade=${recommendedGrade.id}`} className="btn btn-primary ghr-btn">
-                    <Calculator size={15} aria-hidden="true" />
-                    {t(CALC_WITH_GRADE)}
-                  </LocaleLink>
-                  <LocaleLink to={`/${recommendedGrade.id.toLowerCase()}-beton`} className="ghr-link">
-                    {t({
-                      az: `${recommendedGrade.id} haqqında ətraflı`,
-                      en: `More about ${recommendedGrade.id}`,
-                      ru: `Подробнее о ${recommendedGrade.id}`,
-                    })}
-                    <ArrowRight size={14} aria-hidden="true" />
-                  </LocaleLink>
-                  <button type="button" className="ghr-clear" onClick={() => setRecommended(null)}>
-                    {t({ az: 'Seçimi sıfırla', en: 'Reset selection', ru: 'Сбросить выбор' })}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
           <div className="products-grid">
             {CONCRETE_GRADES.map((grade, index) => {
               const m = materialsPerM3(grade);
@@ -239,21 +127,16 @@ const Products = () => {
                 <article
                   key={grade.id}
                   id={`grade-${grade.id}`}
-                  // Highlight via data-attribute, NOT className: the scroll-reveal
-                  // observer adds `is-visible` imperatively, and a React className
-                  // update would wipe it — hiding the card (opacity: 0) for good.
                   className="product-card reveal"
-                  data-recommended={recommended === grade.id ? 'true' : undefined}
                   style={{ transitionDelay: `${(index % 4) * 0.07}s` }}
                 >
-                  {recommended === grade.id && (
-                    <span className="recommended-badge">
-                      {t({ az: 'Tövsiyə olunur', en: 'Recommended', ru: 'Рекомендуется' })}
-                    </span>
-                  )}
                   <div className={`card-flip ${flipped.has(grade.id) ? 'is-flipped' : ''}`}>
-                    {/* ── Front face ── */}
-                    <div className="card-face card-front" aria-hidden={flipped.has(grade.id)}>
+                    {/* ── Front face ──
+                        Hidden face uses `inert` (not aria-hidden): it also blocks
+                        focus, so the flip button never keeps focus inside a hidden
+                        subtree (Chrome blocks aria-hidden around focused nodes).
+                        React 18: '' sets the attribute, undefined removes it. */}
+                    <div className="card-face card-front" inert={flipped.has(grade.id) ? '' : undefined}>
                       <div className="product-card-head">
                         <div className="product-grade">
                           <span className="grade-id">{grade.id}</span>
@@ -302,7 +185,7 @@ const Products = () => {
                     </div>
 
                     {/* ── Back face (technical data) ── */}
-                    <div className="card-face card-back" aria-hidden={!flipped.has(grade.id)}>
+                    <div className="card-face card-back" inert={flipped.has(grade.id) ? undefined : ''}>
                       <div className="product-card-head">
                         <div className="product-grade">
                           <span className="grade-id">{grade.id}</span>
@@ -372,24 +255,6 @@ const Products = () => {
           />
         </div>
       </div>
-
-      <CtaBand
-        title={{
-          az: 'Doğru markanı birlikdə seçək',
-          en: "Let's choose the right grade together",
-          ru: 'Выберем правильную марку вместе',
-        }}
-        text={{
-          az: 'Layihənizi yazın — marka seçimində pulsuz məsləhət və fərdi qiymət təklifi alın.',
-          en: 'Tell us about your project — get free advice on grade selection and an individual price quote.',
-          ru: 'Напишите о вашем проекте — получите бесплатную консультацию по выбору марки и индивидуальное ценовое предложение.',
-        }}
-        whatsappText={{
-          az: 'Salam! Beton markası seçimi və qiymət təklifi üçün məlumat almaq istəyirəm.',
-          en: 'Hello! I would like information about choosing a concrete grade and a price quote.',
-          ru: 'Здравствуйте! Хочу получить информацию о выборе марки бетона и ценовое предложение.',
-        }}
-      />
     </section>
   );
 };

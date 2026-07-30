@@ -1,18 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import {
-  Phone,
-  ArrowRight,
-  CheckCircle2,
-  Factory,
-  Truck,
-  Scale,
-  Handshake,
-  Layers,
-  Clock,
-  BadgeCheck,
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
 import WhatsAppButton from '../../../Components/WhatsAppButton/WhatsAppButton';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
@@ -47,72 +36,6 @@ const PAGE_DESCRIPTION = {
   ru: 'NOVXANI BETON предлагает продажу песка, ПГС и щебня для частных лиц, строительных компаний и бетонных заводов — оптовые заказы и оперативная доставка.',
 };
 
-const WHY_US = [
-  {
-    Icon: Factory,
-    title: { az: 'Birbaşa zavoddan satış', en: 'Direct from the plant', ru: 'Продажа напрямую с завода' },
-    text: {
-      az: 'Vasitəçi yoxdur — material birbaşa Novxanı zavodundan yüklənir.',
-      en: 'No middlemen — materials are loaded directly at the Novkhani plant.',
-      ru: 'Без посредников — материал отгружается напрямую с завода в Новханы.',
-    },
-  },
-  {
-    Icon: BadgeCheck,
-    title: { az: 'Keyfiyyətə nəzarət', en: 'Quality control', ru: 'Контроль качества' },
-    text: {
-      az: 'Öz beton istehsalımızda istifadə etdiyimiz materialları satırıq.',
-      en: 'We sell the same materials we use in our own concrete production.',
-      ru: 'Мы продаём те же материалы, которые используем в собственном производстве бетона.',
-    },
-  },
-  {
-    Icon: Scale,
-    title: { az: 'Topdan və pərakəndə', en: 'Wholesale and retail', ru: 'Опт и розница' },
-    text: {
-      az: 'Bir maşından davamlı iri həcmli təchizata qədər istənilən sifariş.',
-      en: 'Any order — from a single truckload to continuous large-volume supply.',
-      ru: 'Любой заказ — от одной машины до постоянных крупных поставок.',
-    },
-  },
-  {
-    Icon: Truck,
-    title: { az: 'Operativ çatdırılma', en: 'Fast delivery', ru: 'Оперативная доставка' },
-    text: {
-      az: 'Bakı və Abşeron üzrə ünvana çatdırılma, dəqiq qrafiklə.',
-      en: 'Delivery to your address across Baku and Absheron, on a precise schedule.',
-      ru: 'Доставка по адресу по Баку и Абшерону, точно по графику.',
-    },
-  },
-  {
-    Icon: Handshake,
-    title: { az: 'Fərdi və korporativ', en: 'Individuals and businesses', ru: 'Частным и корпоративным' },
-    text: {
-      az: 'Fiziki şəxslər, şirkətlər və beton zavodları ilə işləyirik.',
-      en: 'We work with individuals, companies and concrete plants.',
-      ru: 'Работаем с частными лицами, компаниями и бетонными заводами.',
-    },
-  },
-  {
-    Icon: Layers,
-    title: { az: 'Hər şey bir ünvandan', en: 'Everything from one place', ru: 'Всё из одних рук' },
-    text: {
-      az: 'Beton və tikinti materiallarını eyni şirkətdən alın — vaxta qənaət edin.',
-      en: 'Buy concrete and building materials from the same company — save time.',
-      ru: 'Покупайте бетон и стройматериалы у одной компании — экономьте время.',
-    },
-  },
-  {
-    Icon: Clock,
-    title: { az: '7/24 müraciət', en: '24/7 requests', ru: 'Обращения 24/7' },
-    text: {
-      az: 'Zavod 7/24 fəaliyyət göstərir — sorğunuzu istənilən vaxt göndərin.',
-      en: 'The plant operates 24/7 — send your request at any time.',
-      ru: 'Завод работает круглосуточно — отправляйте запрос в любое время.',
-    },
-  },
-];
-
 const B2B_POINTS = [
   {
     az: 'Böyük həcmli sifarişlərin qəbulu',
@@ -143,41 +66,6 @@ const B2B_POINTS = [
     az: 'Həcmə uyğun fərdi qiymətləndirmə',
     en: 'Individual pricing based on volume',
     ru: 'Индивидуальная оценка в зависимости от объёма',
-  },
-];
-
-const STEPS = [
-  {
-    title: { az: 'Materialı seçin', en: 'Choose the material', ru: 'Выберите материал' },
-    text: {
-      az: 'Qum, atsep, şeben — və ya bir neçə material birlikdə.',
-      en: 'Sand, gravel mix, crushed stone — or several materials together.',
-      ru: 'Песок, ПГС, щебень — или несколько материалов сразу.',
-    },
-  },
-  {
-    title: { az: 'Həcmi bildirin', en: 'Specify the volume', ru: 'Укажите объём' },
-    text: {
-      az: 'Materialın növünü və təxmini həcmini (ton, m³ və ya maşın) qeyd edin.',
-      en: 'State the material type and approximate volume (tons, m³ or truckloads).',
-      ru: 'Укажите вид материала и примерный объём (тонны, м³ или машины).',
-    },
-  },
-  {
-    title: { az: 'Ünvanı göndərin', en: 'Send the address', ru: 'Отправьте адрес' },
-    text: {
-      az: 'Çatdırılma ünvanını və əlaqə məlumatlarınızı yazın.',
-      en: 'Write the delivery address and your contact details.',
-      ru: 'Напишите адрес доставки и ваши контактные данные.',
-    },
-  },
-  {
-    title: { az: 'Təklifi təsdiqləyin', en: 'Confirm the offer', ru: 'Подтвердите предложение' },
-    text: {
-      az: 'Həcmə uyğun qiymət təklifini alın və sifarişi təsdiqləyin.',
-      en: 'Receive a quote based on the volume and confirm the order.',
-      ru: 'Получите ценовое предложение по объёму и подтвердите заказ.',
-    },
   },
 ];
 
@@ -235,7 +123,7 @@ const FAQS = [
 /**
  * SEO landing page for the construction-materials line of business:
  * qum / atsep / şeben satışı. Hero, detailed product sections, B2B
- * supply block, trust points, ordering steps, quote form and FAQ
+ * supply block, quote form and FAQ
  * (+Product ItemList, Service & FAQPage JSON-LD).
  */
 const Materials = () => {
@@ -521,66 +409,6 @@ const Materials = () => {
         </section>
 
         <div className="container">
-          {/* ── Why us ── */}
-          <section
-            className="mt-why reveal"
-            aria-label={t({ az: 'Niyə Novxanı Beton', en: 'Why Novxani Beton', ru: 'Почему Novxani Beton' })}
-          >
-            <div className="section-head">
-              <span className="section-subtitle">
-                {t({ az: 'Niyə Novxanı Beton?', en: 'Why Novxani Beton?', ru: 'Почему Novxani Beton?' })}
-              </span>
-              <h2 className="mt-h2">
-                {t({
-                  az: 'Etibarlı təchizatçı ilə işləyin',
-                  en: 'Work with a reliable supplier',
-                  ru: 'Работайте с надёжным поставщиком',
-                })}
-              </h2>
-            </div>
-            <div className="mt-why-grid">
-              {WHY_US.map(({ Icon, title, text }) => (
-                <div className="mt-why-card" key={title.az}>
-                  <span className="mt-why-icon" aria-hidden="true">
-                    <Icon size={22} />
-                  </span>
-                  <h3>{t(title)}</h3>
-                  <p>{t(text)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── Steps ── */}
-          <section
-            className="mt-steps-section reveal"
-            aria-label={t({ az: 'Sifariş prosesi', en: 'Ordering process', ru: 'Процесс заказа' })}
-          >
-            <div className="section-head">
-              <span className="section-subtitle">
-                {t({ az: 'Sifariş prosesi', en: 'Ordering process', ru: 'Процесс заказа' })}
-              </span>
-              <h2 className="mt-h2">
-                {t({
-                  az: '4 sadə addımda sifariş',
-                  en: 'Order in 4 simple steps',
-                  ru: 'Заказ в 4 простых шага',
-                })}
-              </h2>
-            </div>
-            <ol className="mt-steps">
-              {STEPS.map((s, i) => (
-                <li className="mt-step" key={s.title.az}>
-                  <span className="mt-step-num">{i + 1}</span>
-                  <div>
-                    <h3>{t(s.title)}</h3>
-                    <p>{t(s.text)}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-
           {/* ── Quote form ── */}
           <section
             className="mt-form-section reveal"
@@ -650,35 +478,6 @@ const Materials = () => {
           </section>
         </div>
 
-        {/* ── Bottom CTA band ── */}
-        <div className="mt-cta-band">
-          <div className="container mt-cta-inner">
-            <div>
-              <h2>{t({ az: 'Materiala ehtiyacınız var?', en: 'Need materials?', ru: 'Нужны материалы?' })}</h2>
-              <p>
-                {t({
-                  az: 'Həcmi və ünvanı yazın — qalanını biz edək. Beton və materiallar bir ünvandan.',
-                  en: 'Send the volume and address — we will handle the rest. Concrete and materials from one place.',
-                  ru: 'Напишите объём и адрес — остальное мы сделаем сами. Бетон и материалы из одних рук.',
-                })}
-              </p>
-            </div>
-            <div className="mt-cta-actions">
-              <WhatsAppButton
-                text={t(WA_DEFAULT)}
-                label={t({
-                  az: 'WhatsApp ilə qiymət al',
-                  en: 'Get a quote on WhatsApp',
-                  ru: 'Узнать цену в WhatsApp',
-                })}
-              />
-              <a href="tel:+994506209584" className="btn btn-ghost mt-ghost">
-                <Phone size={18} aria-hidden="true" />
-                {t({ az: 'Zəng et', en: 'Call', ru: 'Позвонить' })}
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>

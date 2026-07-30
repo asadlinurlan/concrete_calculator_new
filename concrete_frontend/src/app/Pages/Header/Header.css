@@ -225,7 +225,7 @@
   cursor: pointer;
   color: #fff;
 }
-.hamburger:hover { border-color: var(--steel-500); }
+.hamburger:hover { border-color: var(--amber-500); }
 
 @media (max-width: 1024px) {
   .hamburger { display: flex; width: 46px; height: 46px; transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast); }

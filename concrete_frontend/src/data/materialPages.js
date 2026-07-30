@@ -16,41 +16,6 @@ import imgQum from '../app/Pages/img/material-qum.webp';
 import imgAtsep from '../app/Pages/img/material-atsep.webp';
 import imgSeben from '../app/Pages/img/material-seben.webp';
 
-const orderSteps = [
-  {
-    title: { az: 'Materialı seçin', en: 'Choose your material', ru: 'Выберите материал' },
-    text: {
-      az: 'Ehtiyacınız olan materialı və təxmini həcmi (ton, m³ və ya maşın sayı) müəyyənləşdirin.',
-      en: 'Decide which material you need and the approximate volume (tons, m³ or number of truckloads).',
-      ru: 'Определите нужный материал и примерный объём (в тоннах, м³ или числом машин).',
-    },
-  },
-  {
-    title: { az: 'Sorğu göndərin', en: 'Send a request', ru: 'Отправьте заявку' },
-    text: {
-      az: 'Zəng, WhatsApp və ya sayt forması ilə həcmi və çatdırılma ünvanını bildirin.',
-      en: 'Tell us the volume and delivery address by phone, WhatsApp or the website form.',
-      ru: 'Сообщите объём и адрес доставки по телефону, в WhatsApp или через форму на сайте.',
-    },
-  },
-  {
-    title: { az: 'Fərdi təklif alın', en: 'Get a personal quote', ru: 'Получите индивидуальное предложение' },
-    text: {
-      az: 'Həcmə və məsafəyə uyğun qiymət təklifini alırsınız — pulsuz və öhdəliksiz.',
-      en: 'You receive a price quote based on the volume and distance — free and non-binding.',
-      ru: 'Вы получаете ценовое предложение с учётом объёма и расстояния — бесплатно и без обязательств.',
-    },
-  },
-  {
-    title: { az: 'Çatdırılma', en: 'Delivery', ru: 'Доставка' },
-    text: {
-      az: 'Razılaşdırılmış vaxtda material ünvanınıza çatdırılır.',
-      en: 'The material is delivered to your address at the agreed time.',
-      ru: 'Материал доставляется по вашему адресу в согласованное время.',
-    },
-  },
-];
-
 export const MATERIAL_PAGES = [
   {
     slug: '/qum-satisi',
@@ -132,8 +97,6 @@ export const MATERIAL_PAGES = [
         },
       },
     ],
-    stepsTitle: { az: 'Qum sifarişi necə verilir', en: 'How to order sand', ru: 'Как заказать песок' },
-    steps: orderSteps,
     faqs: [
       {
         q: {
@@ -182,28 +145,6 @@ export const MATERIAL_PAGES = [
           en: 'The price depends on the order volume and the delivery distance. That is why we prepare a personal quote for every order — sending a request is free and creates no obligation.',
           ru: 'Цена зависит от объёма заказа и расстояния доставки. Поэтому для каждого заказа мы готовим индивидуальное предложение — отправить запрос можно бесплатно и без каких-либо обязательств.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/tikinti-materiallari',
-        label: { az: 'Bütün tikinti materialları', en: 'All construction materials', ru: 'Все стройматериалы' },
-      },
-      {
-        to: '/seben-satisi',
-        label: { az: 'Şeben satışı', en: 'Crushed stone for sale', ru: 'Продажа щебня' },
-      },
-      {
-        to: '/atsep-satisi',
-        label: { az: 'Atsep satışı', en: 'Gravel mix for sale', ru: 'Продажа ПГС' },
-      },
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete for sale', ru: 'Продажа готового бетона' },
-      },
-      {
-        to: '/calculator',
-        label: { az: 'Beton miqdarını hesabla', en: 'Calculate how much concrete you need', ru: 'Рассчитать количество бетона' },
       },
     ],
     whatsappText: {
@@ -293,8 +234,6 @@ export const MATERIAL_PAGES = [
         },
       },
     ],
-    stepsTitle: { az: 'Atsep sifarişi necə verilir', en: 'How to order gravel mix', ru: 'Как заказать ПГС' },
-    steps: orderSteps,
     faqs: [
       {
         q: {
@@ -343,28 +282,6 @@ export const MATERIAL_PAGES = [
           en: 'We deliver across Baku and the Absheron peninsula. Our plant in Novkhani is close to the Absheron zone, so delivery is fast.',
           ru: 'Мы доставляем по Баку и Абшеронскому полуострову. Наш завод в Новханы находится рядом с зоной Абшерона, поэтому доставка оперативна.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/tikinti-materiallari',
-        label: { az: 'Bütün tikinti materialları', en: 'All construction materials', ru: 'Все стройматериалы' },
-      },
-      {
-        to: '/qum-satisi',
-        label: { az: 'Qum satışı', en: 'Sand for sale', ru: 'Продажа песка' },
-      },
-      {
-        to: '/seben-satisi',
-        label: { az: 'Şeben satışı', en: 'Crushed stone for sale', ru: 'Продажа щебня' },
-      },
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete for sale', ru: 'Продажа готового бетона' },
-      },
-      {
-        to: '/contact',
-        label: { az: 'Topdan təchizat üçün əlaqə', en: 'Contact us for wholesale supply', ru: 'Связаться по оптовым поставкам' },
       },
     ],
     whatsappText: {
@@ -454,8 +371,6 @@ export const MATERIAL_PAGES = [
         },
       },
     ],
-    stepsTitle: { az: 'Şeben sifarişi necə verilir', en: 'How to order crushed stone', ru: 'Как заказать щебень' },
-    steps: orderSteps,
     faqs: [
       {
         q: {
@@ -504,28 +419,6 @@ export const MATERIAL_PAGES = [
           en: 'Across Baku and the Absheron peninsula. Since our plant is in Novkhani, delivery towards Absheron is especially fast. Tell us your address and we will agree on a schedule.',
           ru: 'По Баку и Абшеронскому полуострову. Наш завод находится в Новханы, поэтому доставка в направлении Абшерона особенно оперативна. Сообщите ваш адрес — согласуем график.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/tikinti-materiallari',
-        label: { az: 'Bütün tikinti materialları', en: 'All construction materials', ru: 'Все стройматериалы' },
-      },
-      {
-        to: '/qum-satisi',
-        label: { az: 'Qum satışı', en: 'Sand for sale', ru: 'Продажа песка' },
-      },
-      {
-        to: '/atsep-satisi',
-        label: { az: 'Atsep satışı', en: 'Gravel mix for sale', ru: 'Продажа ПГС' },
-      },
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete for sale', ru: 'Продажа готового бетона' },
-      },
-      {
-        to: '/calculator',
-        label: { az: 'Beton miqdarını hesabla', en: 'Calculate how much concrete you need', ru: 'Рассчитать количество бетона' },
       },
     ],
     whatsappText: {

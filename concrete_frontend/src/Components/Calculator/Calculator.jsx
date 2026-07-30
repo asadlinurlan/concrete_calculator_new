@@ -13,7 +13,6 @@ import {
 import Seo from '../Seo/Seo';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import Faq from '../Faq/Faq';
-import CtaBand from '../CtaBand/CtaBand';
 import './Calculator.css';
 
 const CALC_FAQS = [
@@ -243,25 +242,6 @@ const WA_CALC_MSG = {
     `Здравствуйте! Я сделал расчет в калькуляторе на сайте:\n• Марка: ${grade} (${cls})\n• Объем: ${vol} м³\n• Миксеров: ${trucks}\nПожалуйста, отправьте ценовое предложение.`,
 };
 
-/* CtaBand props — passed as {az,en,ru} objects; CtaBand t()'s them itself. */
-const CTA_BAND = {
-  title: {
-    az: 'Hesabladınız? İndi qiymət təklifi alın',
-    en: 'Done calculating? Get a price quote now',
-    ru: 'Рассчитали? Получите ценовое предложение',
-  },
-  text: {
-    az: 'Hesabladığınız həcmi və ünvanı göndərin — marka və çatdırılmaya uyğun fərdi təklif hazırlayaq.',
-    en: 'Send us the calculated volume and your address — we will prepare a personalised offer for the grade and delivery.',
-    ru: 'Отправьте рассчитанный объем и адрес — мы подготовим индивидуальное предложение с учетом марки и доставки.',
-  },
-  whatsappText: {
-    az: 'Salam! Kalkulyatorla hesabladığım beton həcmi üçün qiymət təklifi almaq istəyirəm.',
-    en: 'Hello! I would like a price quote for the concrete volume I calculated with the calculator.',
-    ru: 'Здравствуйте! Хочу получить ценовое предложение по объему бетона, рассчитанному в калькуляторе.',
-  },
-};
-
 /* Volume + surface + formwork area for a given shape, all in SI (metres / m³).
    Depth-type inputs are entered in sm (cm), length-type inputs in m. */
 function computeGeometry(tab, v) {
@@ -477,12 +457,12 @@ const Calculator = () => {
 
     // Material mass breakdown (for the chart)
     const breakdownTotal = cement + sandKg + gravelKg + water;
-    // Calm monochrome steel scale (avoids the "too many colors" clutter)
+    // Calm monochrome amber scale (avoids the "too many colors" clutter)
     const breakdown = [
-      { key: 'cement', label: TXT.cement, kg: cement, color: '#3f70d6' },
-      { key: 'gravel', label: TXT.gravel, kg: gravelKg, color: '#6f9bea' },
-      { key: 'sand', label: TXT.sand, kg: sandKg, color: '#a9c3f2' },
-      { key: 'water', label: TXT.water, kg: water, color: '#d4e2fa' },
+      { key: 'cement', label: TXT.cement, kg: cement, color: '#b06f10' },
+      { key: 'gravel', label: TXT.gravel, kg: gravelKg, color: '#e09a35' },
+      { key: 'sand', label: TXT.sand, kg: sandKg, color: '#f0b252' },
+      { key: 'water', label: TXT.water, kg: water, color: '#f9dcae' },
     ].map((m) => ({ ...m, pct: (m.kg / breakdownTotal) * 100 }));
 
     // Rebar
@@ -1192,11 +1172,6 @@ const Calculator = () => {
         </div>
       </div>
 
-      <CtaBand
-        title={CTA_BAND.title}
-        text={CTA_BAND.text}
-        whatsappText={CTA_BAND.whatsappText}
-      />
     </div>
   );
 };

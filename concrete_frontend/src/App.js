@@ -1,5 +1,5 @@
 // App.js
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import "./App.css";
 import useScrollReveal from "./hooks/useScrollReveal";
@@ -12,7 +12,6 @@ import Contact from "./app/Pages/Contact/Contact";
 import Footer from "./app/Pages/Footer/Footer";
 import Calculator from "./Components/Calculator/Calculator";
 import Products from "./app/Pages/Products/Products";
-import Gallery from "./app/Pages/Gallery/Gallery";
 import NotFound from "./app/Pages/NotFound/NotFound";
 import ServiceDetail from "./app/Pages/ServiceDetail/ServiceDetail";
 import Materials from "./app/Pages/Materials/Materials";
@@ -76,13 +75,21 @@ function HomePage({ concreteAlias }) {
   );
 }
 
+// The old standalone gallery page was merged into /about — redirect,
+// keeping the visitor's locale (server-side 301s live in public/_redirects).
+function GalleryRedirect() {
+  const { pathname } = useLocation();
+  const { locale } = splitPath(pathname);
+  return <Navigate to={localePath(locale, "/about")} replace />;
+}
+
 // az-relative route table — rendered once per locale ('', /en, /ru).
 const PAGE_ROUTES = [
   { path: "/", element: <HomePage /> },
   { path: "/products", element: <Products /> },
   { path: "/services", element: <Services fullPage /> },
   { path: "/calculator", element: <Calculator /> },
-  { path: "/gallery", element: <Gallery /> },
+  { path: "/gallery", element: <GalleryRedirect /> },
   { path: "/tikinti-materiallari", element: <Materials /> },
   { path: "/about", element: <About fullPage /> },
   { path: "/contact", element: <Contact fullPage /> },

@@ -22,8 +22,7 @@
 
 .feature-card:hover {
   transform: translateY(-6px);
-  border-color: var(--steel-500);
-  box-shadow: var(--sh-glow);
+  box-shadow: var(--sh-lg);
 }
 
 .feature-icon {

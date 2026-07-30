@@ -1,7 +1,7 @@
 import React from 'react';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
-import CtaBand from '../../../Components/CtaBand/CtaBand';
+import Gallery from '../Gallery/Gallery';
 import { useT, LocaleLink } from '../../../i18n/i18n';
 import './About.css';
 import aboutImage from '../img/workers-construction-site.jpg';
@@ -84,25 +84,8 @@ const About = ({ fullPage }) => {
         </div>
       </div>
 
-      {fullPage && (
-        <CtaBand
-          title={{
-            az: '2018-ci ildən etibarlı tərəfdaşınız',
-            en: 'Your reliable partner since 2018',
-            ru: 'Ваш надежный партнер с 2018 года',
-          }}
-          text={{
-            az: 'Beton və tikinti materialları bir ünvandan — layihəniz üçün fərdi qiymət təklifi alın.',
-            en: 'Concrete and building materials from one address — get an individual quote for your project.',
-            ru: 'Бетон и стройматериалы из одних рук — получите индивидуальное предложение для вашего проекта.',
-          }}
-          whatsappText={{
-            az: 'Salam! Layihəm üçün qiymət təklifi almaq istəyirəm.',
-            en: 'Hello! I would like to get a quote for my project.',
-            ru: 'Здравствуйте! Хочу получить предложение по моему проекту.',
-          }}
-        />
-      )}
+      {/* Combined page: the old /gallery content lives here now */}
+      {fullPage && <Gallery />}
     </section>
   );
 };

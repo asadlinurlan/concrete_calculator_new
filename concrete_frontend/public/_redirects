@@ -1,1 +1,6 @@
+# /gallery merged into /about (page consolidation)
+/gallery      /about      301
+/en/gallery   /en/about   301
+/ru/gallery   /ru/about   301
+
 /*    /index.html   200

@@ -20,7 +20,6 @@ const BASE_ROUTES = [
   '/products',
   '/services',
   '/calculator',
-  '/gallery',
   '/about',
   '/contact',
   '/tikinti-materiallari',

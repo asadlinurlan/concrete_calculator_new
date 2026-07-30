@@ -75,7 +75,6 @@ const Footer = () => {
                 <li><LocaleLink to="/services">{t({ az: 'Xidmətlər', en: 'Services', ru: 'Услуги' })}</LocaleLink></li>
                 <li><LocaleLink to="/tikinti-materiallari">{t({ az: 'Tikinti Materialları', en: 'Building Materials', ru: 'Стройматериалы' })}</LocaleLink></li>
                 <li><LocaleLink to="/calculator">{t({ az: 'Kalkulyator', en: 'Calculator', ru: 'Калькулятор' })}</LocaleLink></li>
-                <li><LocaleLink to="/gallery">{t({ az: 'Qalereya', en: 'Gallery', ru: 'Галерея' })}</LocaleLink></li>
                 <li><LocaleLink to="/betonun-istifade-saheleri">{t({ az: 'İstifadə Sahələri', en: 'Applications', ru: 'Области применения' })}</LocaleLink></li>
                 <li><LocaleLink to="/faq">{t({ az: 'Tez-tez Verilən Suallar', en: 'FAQ', ru: 'Частые вопросы' })}</LocaleLink></li>
                 <li><LocaleLink to="/about">{t({ az: 'Haqqımızda', en: 'About Us', ru: 'О нас' })}</LocaleLink></li>

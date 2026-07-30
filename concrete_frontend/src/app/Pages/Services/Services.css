@@ -58,7 +58,6 @@
 .service-card-img:hover {
   transform: translateY(-8px);
   box-shadow: var(--sh-lg);
-  border-color: var(--steel-500);
 }
 
 .service-image {
@@ -104,15 +103,15 @@
   bottom: 20px;
   width: 44px;
   height: 44px;
-  background: var(--steel-500);
+  background: var(--amber-500);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--graphite-900);
   transition: transform var(--t-fast), background-color var(--t-fast);
 }
-.service-link-arrow:hover { background: var(--amber-500); color: var(--graphite-900); transform: scale(1.1); }
+.service-link-arrow:hover { background: var(--amber-600); color: var(--graphite-900); transform: scale(1.1); }
 
 @media (max-width: 1200px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }

@@ -39,8 +39,6 @@
   margin-bottom: 26px;
 }
 .mt-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.mt-ghost { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
-.mt-ghost:hover { border-color: #fff; color: #fff; background: rgba(255, 255, 255, 0.08); }
 
 /* ── Body ── */
 .mt-body { padding: var(--sp-7) 0 0; }
@@ -116,7 +114,7 @@
   gap: 7px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--steel-600);
+  color: var(--amber-700);
   text-decoration: none;
 }
 .mt-detail-link:hover { text-decoration: underline; }
@@ -152,74 +150,13 @@
   display: block;
 }
 
-/* ── Why us ── */
-.mt-why { padding-top: var(--sp-8); margin-bottom: var(--sp-8); }
+/* ── Section heading ── */
 .mt-h2 {
   font-size: clamp(24px, 3.6vw, 34px);
   font-weight: 700;
   color: var(--text-light);
   margin-bottom: var(--sp-6);
 }
-.mt-why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
-}
-.mt-why-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-md);
-  padding: 20px;
-}
-.mt-why-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--r-sm);
-  background: rgba(240, 178, 82, 0.14);
-  color: var(--amber-600);
-  margin-bottom: 12px;
-}
-.mt-why-card h3 { font-size: 15.5px; font-weight: 600; color: var(--text-light); margin-bottom: 6px; }
-.mt-why-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin: 0; }
-
-/* ── Steps ── */
-.mt-steps-section { margin-bottom: var(--sp-8); }
-.mt-steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-.mt-step {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-md);
-  padding: 18px;
-}
-.mt-step-num {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  border-radius: 50%;
-  background: var(--steel-500);
-  color: #fff;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 15px;
-}
-.mt-step h3 { font-size: 15px; font-weight: 600; color: var(--text-light); margin-bottom: 4px; }
-.mt-step p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin: 0; }
 
 /* ── Quote form ── */
 .mt-form-section { margin-bottom: var(--sp-8); scroll-margin-top: 90px; }
@@ -265,8 +202,8 @@
 .mqf-group select:focus,
 .mqf-group textarea:focus {
   outline: none;
-  border-color: var(--steel-500);
-  box-shadow: 0 0 0 3px var(--steel-glow);
+  border-color: var(--amber-500);
+  box-shadow: 0 0 0 3px var(--amber-glow);
 }
 .mqf-group input[aria-invalid='true'],
 .mqf-group select[aria-invalid='true'] { border-color: var(--danger); }
@@ -288,17 +225,17 @@
   user-select: none;
   transition: border-color var(--t-fast), background-color var(--t-fast);
 }
-.mqf-check:hover { border-color: var(--steel-400); }
+.mqf-check:hover { border-color: var(--amber-400); }
 .mqf-check.checked {
-  background: rgba(91, 141, 239, 0.12);
-  border-color: var(--steel-500);
-  color: var(--steel-600);
+  background: rgba(240, 178, 82, 0.14);
+  border-color: var(--amber-500);
+  color: var(--amber-700);
   font-weight: 600;
 }
 .mqf-check input {
   width: 16px;
   height: 16px;
-  accent-color: var(--steel-500);
+  accent-color: var(--amber-500);
   margin: 0;
 }
 
@@ -319,7 +256,7 @@
 .mqf-success svg { color: var(--success); flex-shrink: 0; margin-top: 2px; }
 .mqf-success strong { display: block; margin-bottom: 4px; }
 .mqf-success span { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
-.mqf-success a { color: var(--steel-600); font-weight: 600; text-decoration: none; }
+.mqf-success a { color: var(--amber-700); font-weight: 600; text-decoration: none; }
 .mqf-success a:hover { text-decoration: underline; }
 
 .mqf-error {
@@ -367,7 +304,7 @@
   flex-shrink: 0;
 }
 .mt-faq-item[open] summary::after { content: '−'; }
-.mt-faq-item summary:hover { color: var(--steel-600); }
+.mt-faq-item summary:hover { color: var(--amber-600); }
 .mt-faq-item p {
   padding: 0 18px 16px;
   margin: 0;
@@ -376,24 +313,8 @@
   color: var(--text-muted);
 }
 .mt-related { margin-top: 22px; font-size: 14px; color: var(--text-muted); }
-.mt-related a { color: var(--steel-600); font-weight: 600; text-decoration: none; }
+.mt-related a { color: var(--amber-700); font-weight: 600; text-decoration: none; }
 .mt-related a:hover { text-decoration: underline; }
-
-/* ── Bottom CTA band ── */
-.mt-cta-band {
-  background: linear-gradient(135deg, var(--graphite-900) 0%, var(--graphite-700) 100%);
-  padding: 52px 0;
-}
-.mt-cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-.mt-cta-inner h2 { color: #fff; font-size: clamp(21px, 3vw, 28px); margin-bottom: 8px; }
-.mt-cta-inner p { color: var(--on-dark-muted); font-size: 15px; margin: 0; }
-.mt-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
@@ -420,20 +341,6 @@
   .mt-form-card { padding: 26px 20px; }
   .mqf-row { grid-template-columns: 1fr; }
   .mqf-submit { align-self: stretch; min-width: 0; }
-  .mt-cta-inner { flex-direction: column; align-items: stretch; text-align: center; }
-  .mt-cta-actions { flex-direction: column; }
-
-  /* Compact 2-col trust grid — keeps the long page shorter on phones */
-  .mt-why-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .mt-why-card { padding: 14px; }
-  .mt-why-icon { width: 36px; height: 36px; margin-bottom: 10px; }
-  .mt-why-card h3 { font-size: 14px; }
-  .mt-why-card p { font-size: 12.5px; }
-
-  /* The site-wide sticky contact bar overlays the bottom on phones —
-     give the closing CTA band breathing room above it */
-  .mt-page { padding-bottom: 0; }
-  .mt-cta-band { padding-bottom: 72px; }
 }
 
 @media (max-width: 560px) {
@@ -446,9 +353,4 @@
 @media (max-width: 400px) {
   .mt-product-info { padding: 20px 16px; }
   .mt-form-card { padding: 22px 14px; }
-}
-
-/* Ultra-narrow phones only: trust cards back to one column */
-@media (max-width: 360px) {
-  .mt-why-grid { grid-template-columns: 1fr; }
 }

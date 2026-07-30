@@ -1,8 +1,7 @@
 /* ============================================================
    Service landing pages — single source of truth.
    Each entry drives a full SEO page rendered by <ServiceDetail/>:
-   hero, intro, benefits, ordering steps, FAQ (+FAQPage JSON-LD),
-   related internal links and per-page metadata.
+   hero, intro, benefits, FAQ (+FAQPage JSON-LD) and per-page metadata.
 
    Content rules: only claims confirmed by the business are stated
    (GOST 26633, 28-day testing, M100–M450, 7/24, Novxanı plant,
@@ -70,85 +69,7 @@ export const SERVICE_PAGES = [
         ru: 'Мы поможем подобрать подходящую марку для любого проекта — от фундамента до многоэтажного здания: M100 для выравнивающих слоёв, M300 для монолитных фундаментов и плит, M450 для специальных инженерных конструкций. Не уверены, какая марка нужна? Наши специалисты бесплатно проконсультируют вас.',
       },
     ],
-    benefitsTitle: {
-      az: 'Niyə Novxanı Beton?',
-      en: 'Why Novxani Beton?',
-      ru: 'Почему Novxani Beton?',
-    },
-    benefits: [
-      {
-        title: { az: 'Laboratoriya nəzarəti', en: 'Laboratory control', ru: 'Лабораторный контроль' },
-        text: {
-          az: 'Hər partiya istehsal zamanı yoxlanılır, 28 günlük kub sınağı aparılır.',
-          en: 'Every batch is checked during production and undergoes 28-day cube testing.',
-          ru: 'Каждая партия проверяется в процессе производства и проходит 28-суточные испытания кубиков.',
-        },
-      },
-      {
-        title: { az: 'Tam marka xətti', en: 'Full grade range', ru: 'Полная линейка марок' },
-        text: {
-          az: 'M100-dən M450-yə qədər bütün möhkəmlik sinifləri bir zavoddan.',
-          en: 'All strength classes from M100 to M450 from a single plant.',
-          ru: 'Все классы прочности от M100 до M450 с одного завода.',
-        },
-      },
-      {
-        title: { az: 'Vaxtında çatdırılma', en: 'On-time delivery', ru: 'Доставка точно в срок' },
-        text: {
-          az: '7/24 iş rejimi — beton tökmə qrafikiniz pozulmur.',
-          en: 'We operate 24/7 — your concrete pouring schedule stays on track.',
-          ru: 'Работаем 24/7 — ваш график заливки бетона не нарушается.',
-        },
-      },
-      {
-        title: { az: 'Texniki məsləhət', en: 'Technical advice', ru: 'Техническая консультация' },
-        text: {
-          az: 'Layihənizə uyğun marka seçimində pulsuz peşəkar dəstək.',
-          en: 'Free professional support in choosing the right grade for your project.',
-          ru: 'Бесплатная профессиональная помощь в подборе марки для вашего проекта.',
-        },
-      },
-    ],
     showGrades: true,
-    stepsTitle: {
-      az: 'Sifariş prosesi',
-      en: 'Ordering process',
-      ru: 'Процесс заказа',
-    },
-    steps: [
-      {
-        title: { az: 'Əlaqə və məsləhət', en: 'Contact and consultation', ru: 'Связь и консультация' },
-        text: {
-          az: 'Zəng edin və ya WhatsApp-la yazın — həcmi və markanı birlikdə dəqiqləşdirək.',
-          en: 'Call us or write on WhatsApp — together we will confirm the volume and grade.',
-          ru: 'Позвоните или напишите в WhatsApp — вместе уточним объём и марку.',
-        },
-      },
-      {
-        title: { az: 'Qiymət təklifi', en: 'Price quote', ru: 'Ценовое предложение' },
-        text: {
-          az: 'Həcm, marka və ünvana görə fərdi təklif alırsınız.',
-          en: 'You receive a personalized offer based on volume, grade and delivery address.',
-          ru: 'Вы получаете индивидуальное предложение с учётом объёма, марки и адреса.',
-        },
-      },
-      {
-        title: { az: 'İstehsal', en: 'Production', ru: 'Производство' },
-        text: {
-          az: 'Beton sifarişinizə uyğun, laboratoriya nəzarəti ilə hazırlanır.',
-          en: 'Your concrete is produced to order under laboratory control.',
-          ru: 'Бетон изготавливается под ваш заказ под лабораторным контролем.',
-        },
-      },
-      {
-        title: { az: 'Çatdırılma və tökmə', en: 'Delivery and pouring', ru: 'Доставка и заливка' },
-        text: {
-          az: 'Mikserlər razılaşdırılmış vaxtda obyektə çatır; ehtiyac olduqda nasos xidməti təşkil olunur.',
-          en: 'Mixer trucks arrive on site at the agreed time; a pumping service is arranged if needed.',
-          ru: 'Миксеры прибывают на объект в согласованное время; при необходимости организуется услуга бетононасоса.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -197,32 +118,6 @@ export const SERVICE_PAGES = [
           en: 'The price of concrete varies with grade, volume, delivery distance and pumping needs. That is why we prepare a personalized offer for each project — in most cases this works out cheaper for you. See the Concrete Prices page for details.',
           ru: 'Цена бетона зависит от марки, объёма, расстояния доставки и необходимости бетононасоса. Поэтому для каждого проекта мы готовим индивидуальное предложение — в большинстве случаев это выгоднее для вас. Подробнее — на странице «Цены на бетон».',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/calculator',
-        label: { az: 'Beton miqdarını hesabla', en: 'Calculate concrete volume', ru: 'Рассчитать объём бетона' },
-      },
-      {
-        to: '/products',
-        label: { az: 'Beton markalarına bax (M100–M450)', en: 'View concrete grades (M100–M450)', ru: 'Смотреть марки бетона (M100–M450)' },
-      },
-      {
-        to: '/beton-catdirilmasi',
-        label: { az: 'Beton çatdırılması haqqında', en: 'About concrete delivery', ru: 'О доставке бетона' },
-      },
-      {
-        to: '/beton-qiymetleri',
-        label: { az: 'Qiymət necə formalaşır?', en: 'How is the price formed?', ru: 'Как формируется цена?' },
-      },
-      {
-        to: '/betonun-istifade-saheleri',
-        label: { az: 'Hansı iş üçün hansı marka?', en: 'Which grade for which job?', ru: 'Какая марка для какой работы?' },
-      },
-      {
-        to: '/topdan-beton-satisi',
-        label: { az: 'Tikinti şirkətləri üçün topdan satış', en: 'Wholesale sales for construction companies', ru: 'Оптовая продажа для строительных компаний' },
       },
     ],
     whatsappText: {
@@ -320,45 +215,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: 'Çatdırılma necə işləyir',
-      en: 'How delivery works',
-      ru: 'Как работает доставка',
-    },
-    steps: [
-      {
-        title: { az: 'Sifariş', en: 'Order', ru: 'Заказ' },
-        text: {
-          az: 'Həcm, marka və ünvanı bildirirsiniz — telefon və ya WhatsApp ilə.',
-          en: 'You tell us the volume, grade and address — by phone or WhatsApp.',
-          ru: 'Вы сообщаете объём, марку и адрес — по телефону или в WhatsApp.',
-        },
-      },
-      {
-        title: { az: 'Qrafik razılaşması', en: 'Schedule agreement', ru: 'Согласование графика' },
-        text: {
-          az: 'Tökmə vaxtına uyğun çatdırılma qrafiki müəyyən olunur.',
-          en: 'A delivery schedule is set to match your pouring time.',
-          ru: 'График доставки составляется под время заливки.',
-        },
-      },
-      {
-        title: { az: 'İstehsal və yüklənmə', en: 'Production and loading', ru: 'Производство и загрузка' },
-        text: {
-          az: 'Beton çatdırılma vaxtına uyğunlaşdırılaraq hazırlanır.',
-          en: 'The concrete is produced and timed to the delivery schedule.',
-          ru: 'Бетон изготавливается с привязкой ко времени доставки.',
-        },
-      },
-      {
-        title: { az: 'Obyektdə boşaltma', en: 'Unloading on site', ru: 'Разгрузка на объекте' },
-        text: {
-          az: 'Mikser təyin olunan vaxtda çatır; ehtiyac olduqda nasosla tökmə təşkil olunur.',
-          en: 'The mixer truck arrives at the appointed time; pump pouring is arranged if needed.',
-          ru: 'Миксер прибывает в назначенное время; при необходимости организуется заливка бетононасосом.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -407,24 +263,6 @@ export const SERVICE_PAGES = [
           en: 'Yes, we operate 24/7 — you only need to agree on the schedule in advance.',
           ru: 'Да, мы работаем 24/7 — достаточно заранее согласовать график.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
-      },
-      {
-        to: '/beton-nasoslama',
-        label: { az: 'Beton nasoslama xidməti', en: 'Concrete pumping service', ru: 'Услуги бетононасоса' },
-      },
-      {
-        to: '/calculator',
-        label: { az: 'Neçə mikser lazımdır? Hesabla', en: 'How many mixer trucks do you need? Calculate', ru: 'Сколько нужно миксеров? Рассчитать' },
-      },
-      {
-        to: '/contact',
-        label: { az: 'Çatdırılma üçün əlaqə saxla', en: 'Contact us about delivery', ru: 'Связаться по вопросам доставки' },
       },
     ],
     whatsappText: {
@@ -522,45 +360,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: 'Xidmət necə təşkil olunur',
-      en: 'How the service is arranged',
-      ru: 'Как организуется услуга',
-    },
-    steps: [
-      {
-        title: { az: 'Obyekt məlumatı', en: 'Site details', ru: 'Данные объекта' },
-        text: {
-          az: 'Mərtəbə sayı, məsafə və tökmə həcmi haqqında məlumat verirsiniz.',
-          en: 'You provide the number of floors, the distance and the pouring volume.',
-          ru: 'Вы сообщаете этажность, расстояние и объём заливки.',
-        },
-      },
-      {
-        title: { az: 'Nasos seçimi və təklif', en: 'Pump selection and offer', ru: 'Подбор насоса и предложение' },
-        text: {
-          az: 'Obyektə uyğun texnika müəyyən olunur, fərdi qiymət təqdim edilir.',
-          en: 'The right equipment is selected for the site and a personalized price is provided.',
-          ru: 'Подбирается техника под объект и предоставляется индивидуальная цена.',
-        },
-      },
-      {
-        title: { az: 'Quraşdırma', en: 'Setup', ru: 'Монтаж' },
-        text: {
-          az: 'Nasos razılaşdırılmış vaxtda obyektdə qurulur.',
-          en: 'The pump is set up on site at the agreed time.',
-          ru: 'Насос устанавливается на объекте в согласованное время.',
-        },
-      },
-      {
-        title: { az: 'Tökmə və yığışdırma', en: 'Pouring and cleanup', ru: 'Заливка и уборка' },
-        text: {
-          az: 'Beton fasiləsiz vurulur; iş bitdikdən sonra sahə təhvil verilir.',
-          en: 'Concrete is pumped continuously; once the work is finished, the site is handed back.',
-          ru: 'Бетон подаётся непрерывно; после завершения работ площадка сдаётся заказчику.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -609,24 +408,6 @@ export const SERVICE_PAGES = [
           en: 'All the grades we produce (M100–M450) can be pump-poured — the mix is prepared to be pumpable.',
           ru: 'Все производимые нами марки (M100–M450) можно заливать насосом — смесь готовится с учётом перекачивания.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
-      },
-      {
-        to: '/beton-catdirilmasi',
-        label: { az: 'Çatdırılma necə işləyir?', en: 'How does delivery work?', ru: 'Как работает доставка?' },
-      },
-      {
-        to: '/calculator',
-        label: { az: 'Tökmə həcmini hesabla', en: 'Calculate your pouring volume', ru: 'Рассчитать объём заливки' },
-      },
-      {
-        to: '/beton-qiymetleri',
-        label: { az: 'Qiymətə nə təsir edir?', en: 'What affects the price?', ru: 'Что влияет на цену?' },
       },
     ],
     whatsappText: {
@@ -724,45 +505,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: 'Necə işləyir',
-      en: 'How it works',
-      ru: 'Как это работает',
-    },
-    steps: [
-      {
-        title: { az: 'Gəliş', en: 'Arrival', ru: 'Приезд' },
-        text: {
-          az: 'Zavoda yaxınlaşırsınız (əvvəlcədən zəng etməyiniz gözləməni azaldır).',
-          en: 'You drive up to the plant (calling ahead reduces waiting time).',
-          ru: 'Вы подъезжаете к заводу (предварительный звонок сокращает ожидание).',
-        },
-      },
-      {
-        title: { az: 'Dolu çəki', en: 'Gross weight', ru: 'Вес брутто' },
-        text: {
-          az: 'Yüklü nəqliyyat vasitəsi tərəzidə ölçülür.',
-          en: 'The loaded vehicle is weighed on the weighbridge.',
-          ru: 'Гружёное транспортное средство взвешивается на весах.',
-        },
-      },
-      {
-        title: { az: 'Boş çəki (tara)', en: 'Empty weight (tare)', ru: 'Вес пустого (тара)' },
-        text: {
-          az: 'Boşaldıqdan sonra təkrar ölçmə ilə xalis yük müəyyən olunur.',
-          en: 'After unloading, a second weighing determines the net load.',
-          ru: 'После разгрузки повторное взвешивание определяет вес нетто.',
-        },
-      },
-      {
-        title: { az: 'Qəbz və hesablaşma', en: 'Ticket and settlement', ru: 'Квитанция и расчёт' },
-        text: {
-          az: 'Nəticə sənədləşdirilir və təqdim olunur.',
-          en: 'The result is documented and handed over.',
-          ru: 'Результат оформляется документально и выдаётся.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -811,20 +553,6 @@ export const SERVICE_PAGES = [
           en: 'The plant operates 24/7; calling before arrival keeps waiting to a minimum.',
           ru: 'Завод работает 24/7; звонок перед приездом сводит ожидание к минимуму.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
-      },
-      {
-        to: '/services',
-        label: { az: 'Bütün xidmətlərimiz', en: 'All our services', ru: 'Все наши услуги' },
-      },
-      {
-        to: '/contact',
-        label: { az: 'Ünvan və əlaqə məlumatları', en: 'Address and contact details', ru: 'Адрес и контактные данные' },
       },
     ],
     whatsappText: {
@@ -922,37 +650,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: '3 addıma qiymət alın',
-      en: 'Get a price in 3 steps',
-      ru: 'Получите цену за 3 шага',
-    },
-    steps: [
-      {
-        title: { az: 'Həcmi hesablayın', en: 'Calculate the volume', ru: 'Рассчитайте объём' },
-        text: {
-          az: 'Pulsuz beton kalkulyatoru ilə layihənizə lazım olan m³-ü dəqiqləşdirin.',
-          en: 'Use the free concrete calculator to determine how many m³ your project needs.',
-          ru: 'С помощью бесплатного калькулятора бетона уточните, сколько м³ нужно вашему проекту.',
-        },
-      },
-      {
-        title: { az: 'Bizə göndərin', en: 'Send it to us', ru: 'Отправьте нам' },
-        text: {
-          az: 'Kalkulyatordakı WhatsApp düyməsi hesablamanı avtomatik mesaja çevirir.',
-          en: 'The WhatsApp button in the calculator turns your calculation into a message automatically.',
-          ru: 'Кнопка WhatsApp в калькуляторе автоматически превращает расчёт в сообщение.',
-        },
-      },
-      {
-        title: { az: 'Fərdi təklif alın', en: 'Receive a personalized offer', ru: 'Получите индивидуальное предложение' },
-        text: {
-          az: 'Marka, həcm və ünvana uyğun dəqiq qiymət təklifi sizə göndərilir.',
-          en: 'You get an exact price quote based on the grade, volume and address.',
-          ru: 'Вам направляется точное ценовое предложение с учётом марки, объёма и адреса.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -1001,28 +698,6 @@ export const SERVICE_PAGES = [
           en: 'Payment arrangements (cash, bank transfer, staged payments) are agreed when the offer is made.',
           ru: 'Порядок оплаты (наличный, безналичный, поэтапный) согласовывается при подготовке предложения.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/calculator',
-        label: { az: 'Beton miqdarını hesabla', en: 'Calculate concrete volume', ru: 'Рассчитать объём бетона' },
-      },
-      {
-        to: '/products',
-        label: { az: 'Beton markalarına bax', en: 'View concrete grades', ru: 'Смотреть марки бетона' },
-      },
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı haqqında', en: 'About ready-mix concrete sales', ru: 'О продаже товарного бетона' },
-      },
-      {
-        to: '/faq',
-        label: { az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' },
-      },
-      {
-        to: '/contact',
-        label: { az: 'Birbaşa əlaqə saxla', en: 'Contact us directly', ru: 'Связаться с нами напрямую' },
       },
     ],
     whatsappText: {
@@ -1120,45 +795,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: 'Sınaq prosesi necə gedir',
-      en: 'How the testing process works',
-      ru: 'Как проходят испытания',
-    },
-    steps: [
-      {
-        title: { az: 'Resept və istehsal', en: 'Mix design and production', ru: 'Рецептура и производство' },
-        text: {
-          az: 'Marka üçün qarışıq resepti laboratoriyada müəyyən olunur, istehsal ona uyğun aparılır.',
-          en: 'The mix design for the grade is set in the laboratory and production follows it.',
-          ru: 'Рецептура смеси для марки определяется в лаборатории, производство ведётся по ней.',
-        },
-      },
-      {
-        title: { az: 'Nümunə götürülməsi', en: 'Sampling', ru: 'Отбор образцов' },
-        text: {
-          az: 'İstehsal zamanı partiyadan nümunə kublar hazırlanır.',
-          en: 'Sample cubes are made from the batch during production.',
-          ru: 'Во время производства из партии изготавливаются образцы-кубики.',
-        },
-      },
-      {
-        title: { az: 'Möhkəmlik sınağı', en: 'Strength testing', ru: 'Испытание на прочность' },
-        text: {
-          az: 'Kublar 28 günlük standart müddətdə sınaqdan keçirilir.',
-          en: 'The cubes are tested over the standard 28-day period.',
-          ru: 'Кубики испытываются в течение стандартного 28-суточного срока.',
-        },
-      },
-      {
-        title: { az: 'Sənədləşdirmə', en: 'Documentation', ru: 'Документальное оформление' },
-        text: {
-          az: 'Nəticələr qeydə alınır və tələb olunduqda sifarişçiyə təqdim olunur.',
-          en: 'The results are recorded and provided to the client on request.',
-          ru: 'Результаты фиксируются и при необходимости предоставляются заказчику.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -1207,24 +843,6 @@ export const SERVICE_PAGES = [
           en: 'With plant-produced concrete, the mix design is set in the laboratory, batching is automated and every batch is checked — with manual mixing on site, proportions are done by eye and strength goes unchecked. For structural work, plant concrete is the reliable choice.',
           ru: 'В заводском бетоне рецептура определяется в лаборатории, дозирование выполняется автоматически и каждая партия проверяется — при ручном замесе на месте пропорции определяются на глаз, а прочность остаётся без контроля. Для конструктивных работ заводской бетон — надёжный выбор.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete sales', ru: 'Продажа товарного бетона' },
-      },
-      {
-        to: '/products',
-        label: { az: 'Beton markaları (M100–M450)', en: 'Concrete grades (M100–M450)', ru: 'Марки бетона (M100–M450)' },
-      },
-      {
-        to: '/betonun-istifade-saheleri',
-        label: { az: 'Betonun istifadə sahələri', en: 'Applications of concrete', ru: 'Области применения бетона' },
-      },
-      {
-        to: '/faq',
-        label: { az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' },
       },
     ],
     whatsappText: {
@@ -1355,37 +973,6 @@ export const SERVICE_PAGES = [
       },
     ],
     showGrades: true,
-    stepsTitle: {
-      az: 'Doğru markanı 3 addıma seçin',
-      en: 'Choose the right grade in 3 steps',
-      ru: 'Выберите правильную марку за 3 шага',
-    },
-    steps: [
-      {
-        title: { az: 'İşi müəyyənləşdirin', en: 'Define the job', ru: 'Определите работу' },
-        text: {
-          az: 'Nə tökəcəksiniz: təməl, döşəmə, həyət, sütun, hovuz?',
-          en: 'What will you pour: a foundation, floor, yard, columns, a pool?',
-          ru: 'Что будете заливать: фундамент, пол, двор, колонны, бассейн?',
-        },
-      },
-      {
-        title: { az: 'Həcmi hesablayın', en: 'Calculate the volume', ru: 'Рассчитайте объём' },
-        text: {
-          az: 'Beton kalkulyatoru ölçülərə görə m³-ü və mikser sayını verir.',
-          en: 'The concrete calculator gives the m³ and the number of mixer trucks from your dimensions.',
-          ru: 'Калькулятор бетона по размерам определяет м³ и количество миксеров.',
-        },
-      },
-      {
-        title: { az: 'Təsdiq və sifariş', en: 'Confirm and order', ru: 'Подтверждение и заказ' },
-        text: {
-          az: 'Seçiminizi bizimlə dəqiqləşdirin — marka üzrə pulsuz məsləhət və fərdi qiymət alın.',
-          en: 'Verify your choice with us — get free grade advice and a personalized price.',
-          ru: 'Уточните свой выбор с нами — получите бесплатную консультацию по марке и индивидуальную цену.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -1434,28 +1021,6 @@ export const SERVICE_PAGES = [
           en: 'Pouring in cold or rainy weather is possible but requires extra measures (surface protection, a suitable mix). Consult us when planning your pouring date — we will advise you based on the weather conditions.',
           ru: 'Заливка в холодную и дождливую погоду возможна, но требует дополнительных мер (защита поверхности, соответствующая смесь). Планируя дату заливки, посоветуйтесь с нами — дадим рекомендации с учётом погодных условий.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/products',
-        label: { az: 'Bütün beton markaları', en: 'All concrete grades', ru: 'Все марки бетона' },
-      },
-      {
-        to: '/calculator',
-        label: { az: 'Beton kalkulyatoru', en: 'Concrete calculator', ru: 'Калькулятор бетона' },
-      },
-      {
-        to: '/m300-beton',
-        label: { az: 'M300 beton — təməl və plitə', en: 'M300 concrete — foundations and slabs', ru: 'Бетон M300 — фундамент и плиты' },
-      },
-      {
-        to: '/m200-beton',
-        label: { az: 'M200 beton — döşəmə və həyət', en: 'M200 concrete — floors and yards', ru: 'Бетон M200 — полы и двор' },
-      },
-      {
-        to: '/beton-qiymetleri',
-        label: { az: 'Beton qiymətləri', en: 'Concrete prices', ru: 'Цены на бетон' },
       },
     ],
     whatsappText: {
@@ -1553,45 +1118,6 @@ export const SERVICE_PAGES = [
         },
       },
     ],
-    stepsTitle: {
-      az: 'Əməkdaşlıq necə başlayır',
-      en: 'How cooperation starts',
-      ru: 'Как начинается сотрудничество',
-    },
-    steps: [
-      {
-        title: { az: 'Layihə məlumatı', en: 'Project details', ru: 'Данные проекта' },
-        text: {
-          az: 'Ümumi həcm, markalar, obyektin yeri və tökmə qrafiki barədə məlumat verirsiniz.',
-          en: 'You provide the total volume, grades, site location and pouring schedule.',
-          ru: 'Вы сообщаете общий объём, марки, местоположение объекта и график заливки.',
-        },
-      },
-      {
-        title: { az: 'Kommersiya təklifi', en: 'Commercial offer', ru: 'Коммерческое предложение' },
-        text: {
-          az: 'Həcmə və müddətə uyğun şərtlərlə təklif hazırlanır.',
-          en: 'An offer is prepared with terms based on volume and duration.',
-          ru: 'Готовится предложение с условиями по объёму и срокам.',
-        },
-      },
-      {
-        title: { az: 'Müqavilə və qrafik', en: 'Contract and schedule', ru: 'Договор и график' },
-        text: {
-          az: 'Şərtlər razılaşdırılır, təchizat qrafiki təsdiqlənir.',
-          en: 'Terms are agreed and the supply schedule is confirmed.',
-          ru: 'Согласовываются условия и утверждается график поставок.',
-        },
-      },
-      {
-        title: { az: 'Davamlı təchizat', en: 'Ongoing supply', ru: 'Непрерывные поставки' },
-        text: {
-          az: 'Beton qrafik üzrə, fasiləsiz axınla obyektə çatdırılır.',
-          en: 'Concrete is delivered to the site on schedule, in a continuous flow.',
-          ru: 'Бетон доставляется на объект по графику, непрерывным потоком.',
-        },
-      },
-    ],
     faqs: [
       {
         q: {
@@ -1640,28 +1166,6 @@ export const SERVICE_PAGES = [
           en: 'Yes, we also organize ongoing wholesale supply of sand, screenings and crushed stone for concrete plants and construction companies — separately or together with concrete.',
           ru: 'Да, для бетонных заводов и строительных компаний мы также организуем постоянные оптовые поставки песка, отсева и щебня — отдельно или вместе с бетоном.',
         },
-      },
-    ],
-    related: [
-      {
-        to: '/hazir-beton-satisi',
-        label: { az: 'Hazır beton satışı', en: 'Ready-mix concrete sales', ru: 'Продажа товарного бетона' },
-      },
-      {
-        to: '/beton-catdirilmasi',
-        label: { az: 'Çatdırılma və qrafik', en: 'Delivery and scheduling', ru: 'Доставка и график' },
-      },
-      {
-        to: '/beton-laboratoriyasi',
-        label: { az: 'Keyfiyyət nəzarəti', en: 'Quality control', ru: 'Контроль качества' },
-      },
-      {
-        to: '/tikinti-materiallari',
-        label: { az: 'Topdan material təchizatı', en: 'Wholesale material supply', ru: 'Оптовые поставки материалов' },
-      },
-      {
-        to: '/contact',
-        label: { az: 'Kommersiya təklifi üçün əlaqə', en: 'Contact us for a commercial offer', ru: 'Связаться для коммерческого предложения' },
       },
     ],
     whatsappText: {

@@ -99,31 +99,17 @@ export const PAGES = {
     },
     crumb: { az: 'Kalkulyator', en: 'Calculator', ru: 'Калькулятор' },
   },
-  gallery: {
-    path: '/gallery',
-    title: {
-      az: 'Qalereya — Beton Zavodu və Layihələr | NOVXANI BETON',
-      en: 'Gallery — Concrete Plant & Projects | NOVXANI BETON',
-      ru: 'Галерея — бетонный завод и проекты | NOVXANI BETON',
-    },
-    description: {
-      az: 'Novxanı Beton zavodu, mikser parkı və görülmüş layihələrdən şəkillər. İstehsal prosesimiz və iş nümunələrimiz.',
-      en: 'Photos of the Novxani Beton plant, mixer fleet and completed projects. Our production process and examples of our work.',
-      ru: 'Фотографии завода Novxani Beton, парка миксеров и выполненных проектов. Наш производственный процесс и примеры работ.',
-    },
-    crumb: { az: 'Qalereya', en: 'Gallery', ru: 'Галерея' },
-  },
   about: {
     path: '/about',
     title: {
-      az: 'Haqqımızda — 2018-ci ildən Etibarlı Tərəfdaş | NOVXANI BETON',
-      en: 'About Us — A Reliable Partner Since 2018 | NOVXANI BETON',
-      ru: 'О нас — надежный партнер с 2018 года | NOVXANI BETON',
+      az: 'Haqqımızda və Qalereya — 2018-ci ildən Etibarlı Tərəfdaş | NOVXANI BETON',
+      en: 'About Us & Gallery — A Reliable Partner Since 2018 | NOVXANI BETON',
+      ru: 'О нас и галерея — надежный партнер с 2018 года | NOVXANI BETON',
     },
     description: {
-      az: 'Novxanı Beton 2018-ci ildən Bakı və Abşeronda yüksək keyfiyyətli beton həlləri təqdim edir. Təcrübəli komanda, laboratoriya nəzarəti və vaxtında çatdırılma.',
-      en: 'Since 2018 Novxani Beton has been delivering high-quality concrete solutions across Baku and Absheron. Experienced team, laboratory control and on-time delivery.',
-      ru: 'С 2018 года Novxani Beton поставляет качественные бетонные решения по Баку и Абшерону. Опытная команда, лабораторный контроль и доставка точно в срок.',
+      az: 'Novxanı Beton 2018-ci ildən Bakı və Abşeronda yüksək keyfiyyətli beton həlləri təqdim edir. Şirkət haqqında məlumat və layihələrimizdən şəkillər.',
+      en: 'Since 2018 Novxani Beton has been delivering high-quality concrete solutions across Baku and Absheron. About the company and photos of our projects.',
+      ru: 'С 2018 года Novxani Beton поставляет качественные бетонные решения по Баку и Абшерону. О компании и фотографии наших проектов.',
     },
     crumb: { az: 'Haqqımızda', en: 'About Us', ru: 'О нас' },
   },

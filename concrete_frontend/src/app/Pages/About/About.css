@@ -127,8 +127,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--steel-500);
-  color: #fff;
+  background: #fff;
+  color: var(--amber-600);
+  border: 1px solid var(--amber-500);
   padding: 14px 30px;
   border-radius: var(--r-sm);
   text-decoration: none;
@@ -137,9 +138,10 @@
   transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast);
 }
 .btn-explore:hover {
-  background: var(--steel-600);
+  background: var(--amber-500);
+  color: var(--graphite-900);
   transform: translateY(-2px);
-  box-shadow: var(--sh-glow);
+  box-shadow: var(--sh-amber);
 }
 
 @media (max-width: 1024px) {

@@ -27,7 +27,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 500px at 85% 20%, var(--steel-glow), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, var(--amber-glow), transparent 60%),
     radial-gradient(600px 400px at 10% 90%, var(--amber-glow), transparent 55%);
   opacity: 0.5;
   pointer-events: none;
@@ -64,7 +64,7 @@
   max-width: 16ch;
 }
 .hero-accent {
-  background: linear-gradient(100deg, var(--steel-400), var(--amber-400));
+  background: linear-gradient(100deg, var(--amber-400), var(--amber-600));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

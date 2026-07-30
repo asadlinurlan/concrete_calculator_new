@@ -80,7 +80,7 @@
 .social-link:hover {
   background-color: var(--primary-color);
   transform: translateY(-3px);
-  color: white;
+  color: var(--graphite-900);
 }
 
 .footer-links h3,

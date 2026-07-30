@@ -40,97 +40,6 @@
   align-items: start;
 }
 
-/* ── "Nə tökürsünüz?" → marka bələdçisi ── */
-.grade-helper {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-lg);
-  padding: 20px 22px;
-  margin-bottom: 28px;
-}
-.grade-helper-q {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: 14px;
-}
-.grade-helper-chips { display: flex; flex-wrap: wrap; gap: 9px; }
-.grade-chip {
-  border: 1px solid var(--border-color);
-  background: var(--bg-inset);
-  color: var(--text-light);
-  border-radius: var(--r-pill);
-  padding: 9px 16px;
-  font-size: 13.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: border-color var(--t-fast), background-color var(--t-fast), color var(--t-fast);
-}
-.grade-chip:hover { border-color: var(--steel-500); color: var(--steel-600); }
-.grade-chip.active {
-  background: var(--amber-500);
-  border-color: var(--amber-500);
-  color: var(--graphite-900);
-  font-weight: 600;
-}
-/* Inline recommendation card — appears under the chips, no page jump */
-.grade-helper-result {
-  margin: 16px 0 0;
-  padding: 16px 18px;
-  background: var(--bg-inset);
-  border: 1px solid var(--border-color);
-  border-left: 3px solid var(--amber-500);
-  border-radius: var(--r-md);
-  font-size: 14.5px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-.grade-helper-result strong { color: var(--text-light); font-family: var(--font-head); }
-.ghr-info { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-.ghr-info p { margin: 0; flex: 1; min-width: 200px; }
-.ghr-badge {
-  display: inline-block;
-  padding: 5px 12px;
-  background: var(--amber-500);
-  color: var(--graphite-900);
-  border-radius: var(--r-pill);
-  font-family: var(--font-head);
-  font-size: 13.5px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.ghr-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-.ghr-btn { padding: 10px 18px; font-size: 13.5px; gap: 7px; }
-.ghr-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--steel-600);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 13.5px;
-}
-.ghr-link:hover { text-decoration: underline; }
-.ghr-clear {
-  margin-left: auto;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 13px;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 6px 0;
-}
-.ghr-clear:hover { color: var(--text-light); }
-
 .product-card {
   position: relative;
   background: var(--bg-card);
@@ -142,27 +51,9 @@
   perspective: 1400px; /* depth for the .card-flip 3D turn */
   transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med);
 }
-/* Highlighted by the use-case helper (data-attr — see Products.jsx note) */
-.product-card[data-recommended='true'] {
-  border-color: var(--amber-500);
-  box-shadow: 0 0 0 3px var(--amber-glow);
-}
-.recommended-badge {
-  position: absolute;
-  top: -11px;
-  left: 22px;
-  background: var(--amber-500);
-  color: var(--graphite-900);
-  font-size: 11.5px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: var(--r-pill);
-  letter-spacing: 0.3px;
-}
 .product-card:hover {
   transform: translateY(-6px);
-  border-color: var(--steel-500);
-  box-shadow: var(--sh-glow);
+  box-shadow: var(--sh-lg);
 }
 
 .product-card-head {
@@ -193,9 +84,9 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--steel-400);
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: var(--amber-600);
+  background: rgba(240, 178, 82, 0.12);
+  border: 1px solid rgba(240, 178, 82, 0.35);
   padding: 6px 10px;
   border-radius: var(--r-pill);
   white-space: nowrap;
@@ -234,7 +125,7 @@
   margin-bottom: 16px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--steel-600);
+  color: var(--amber-700);
   text-decoration: none;
 }
 .product-more:hover { text-decoration: underline; }
@@ -295,7 +186,7 @@
   cursor: pointer;
   transition: color var(--t-fast), border-color var(--t-fast);
 }
-.flip-btn:hover { color: var(--text-light); border-color: var(--steel-400); }
+.flip-btn:hover { color: var(--text-light); border-color: var(--amber-400); }
 .flip-btn-hint { margin-left: auto; opacity: 0.55; }
 .flip-btn--return { margin-top: auto; margin-bottom: 0; justify-content: center; }
 /* Front controls sit at the card bottom; the two auto margins SPLIT the

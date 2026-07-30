@@ -41,7 +41,7 @@
   color: var(--text-light);
   border-color: var(--border-color);
 }
-.notfound-ghost:hover { border-color: var(--steel-500); color: var(--steel-600); }
+.notfound-ghost:hover { border-color: var(--amber-500); color: var(--amber-600); }
 
 @media (max-width: 480px) {
   .notfound-actions .btn { width: 100%; }

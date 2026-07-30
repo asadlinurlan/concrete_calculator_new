@@ -20,57 +20,6 @@ import imgQiymet from '../app/Pages/img/d-c-rnqRdfYyywM-unsplash.jpg';
 import imgPour from '../app/Pages/img/claus-grunstaudl-1_DvZyR3dRk-unsplash.jpg';
 import imgSite from '../app/Pages/img/workers-construction-site.jpg';
 
-const orderSteps = [
-  {
-    title: {
-      az: 'Həcmi dəqiqləşdirin',
-      en: 'Determine the volume',
-      ru: 'Определите объём',
-    },
-    text: {
-      az: 'Beton kalkulyatoru ilə lazımi m³-ü hesablayın və ya ölçüləri bizə göndərin.',
-      en: 'Calculate the required m³ with our concrete calculator or send us your dimensions.',
-      ru: 'Рассчитайте нужный объём в м³ с помощью калькулятора бетона или пришлите нам размеры.',
-    },
-  },
-  {
-    title: {
-      az: 'Sorğu göndərin',
-      en: 'Send a request',
-      ru: 'Отправьте заявку',
-    },
-    text: {
-      az: 'Zəng və ya WhatsApp ilə markanı, həcmi və ünvanı bildirin.',
-      en: 'Tell us the grade, volume and address by phone or WhatsApp.',
-      ru: 'Сообщите марку, объём и адрес по телефону или в WhatsApp.',
-    },
-  },
-  {
-    title: {
-      az: 'Fərdi təklif alın',
-      en: 'Get a personalized offer',
-      ru: 'Получите индивидуальное предложение',
-    },
-    text: {
-      az: 'Marka, həcm və məsafəyə uyğun qiymət təklifi — pulsuz və öhdəliksiz.',
-      en: 'A price quote based on grade, volume and distance — free and with no obligation.',
-      ru: 'Ценовое предложение с учётом марки, объёма и расстояния — бесплатно и без обязательств.',
-    },
-  },
-  {
-    title: {
-      az: 'Çatdırılma və tökmə',
-      en: 'Delivery and pouring',
-      ru: 'Доставка и заливка',
-    },
-    text: {
-      az: 'Beton laboratoriya nəzarəti ilə istehsal olunub mikserlə ünvana çatdırılır.',
-      en: 'The concrete is produced under laboratory control and delivered to your site by mixer truck.',
-      ru: 'Бетон производится под лабораторным контролем и доставляется миксером на объект.',
-    },
-  },
-];
-
 // Per-grade unique editorial content. Merged below with the technical
 // reference data (bClass, strength) from concreteGrades.js. The `use`
 // field mirrors the lowercased AZ use text from concreteGrades.js so the
@@ -1078,60 +1027,6 @@ const GRADE_CONTENT = {
   },
 };
 
-// Neighbour-grade related links: previous/next grade + always-useful pages.
-const buildRelated = (id) => {
-  const idx = CONCRETE_GRADES.findIndex((g) => g.id === id);
-  const rel = [
-    {
-      to: `/calculator?grade=${id}`,
-      label: {
-        az: `${id} ilə həcmi hesabla`,
-        en: `Calculate the volume with ${id}`,
-        ru: `Рассчитать объём с ${id}`,
-      },
-    },
-    {
-      to: '/beton-qiymetleri',
-      label: {
-        az: 'Qiymət necə formalaşır?',
-        en: 'How is the price formed?',
-        ru: 'Как формируется цена?',
-      },
-    },
-  ];
-  const prev = CONCRETE_GRADES[idx - 1];
-  const next = CONCRETE_GRADES[idx + 1];
-  if (prev) {
-    rel.push({
-      to: `/${prev.id.toLowerCase()}-beton`,
-      label: {
-        az: `${prev.id} beton (${prev.bClass})`,
-        en: `${prev.id} concrete (${prev.bClass})`,
-        ru: `Бетон ${prev.id} (${prev.bClass})`,
-      },
-    });
-  }
-  if (next) {
-    rel.push({
-      to: `/${next.id.toLowerCase()}-beton`,
-      label: {
-        az: `${next.id} beton (${next.bClass})`,
-        en: `${next.id} concrete (${next.bClass})`,
-        ru: `Бетон ${next.id} (${next.bClass})`,
-      },
-    });
-  }
-  rel.push({
-    to: '/products',
-    label: {
-      az: 'Bütün beton markaları',
-      en: 'All concrete grades',
-      ru: 'Все марки бетона',
-    },
-  });
-  return rel;
-};
-
 export const GRADE_PAGES = CONCRETE_GRADES.map((g) => {
   const c = GRADE_CONTENT[g.id];
   return {
@@ -1184,14 +1079,7 @@ export const GRADE_PAGES = CONCRETE_GRADES.map((g) => {
     benefits: c.benefits,
     showGrades: true,
     currentGrade: g.id,
-    stepsTitle: {
-      az: `${g.id} beton sifarişi necə verilir`,
-      en: `How to order ${g.id} concrete`,
-      ru: `Как заказать бетон ${g.id}`,
-    },
-    steps: orderSteps,
     faqs: c.faqs,
-    related: buildRelated(g.id),
     whatsappText: {
       az: `Salam! ${g.id} beton üçün qiymət təklifi almaq istəyirəm.`,
       en: `Hello! I would like to get a quote for ${g.id} concrete.`,

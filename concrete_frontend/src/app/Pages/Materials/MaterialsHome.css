@@ -79,7 +79,7 @@
   font-weight: 600;
   color: var(--text-muted);
 }
-.mh-card-tags svg { color: var(--steel-500); }
+.mh-card-tags svg { color: var(--amber-500); }
 
 .mh-card-btn { align-self: flex-start; padding: 12px 22px; font-size: 14px; }
 

@@ -14,8 +14,8 @@ const WA_NUMBER = '994503260343';
 
 /**
  * SEO landing page template for service pages (data-driven from
- * src/data/servicePages.js). Renders hero, intro, benefits, ordering
- * steps, FAQ (+FAQPage & Service JSON-LD), related links and CTAs.
+ * src/data/servicePages.js). Renders hero, intro, benefits and
+ * FAQ (+FAQPage & Service JSON-LD).
  */
 const ServiceDetail = ({ page }) => {
   useScrollReveal([page.slug]);
@@ -90,21 +90,23 @@ const ServiceDetail = ({ page }) => {
                 ))}
               </section>
 
-              {/* Benefits */}
-              <section className="sd-section reveal">
-                <h2 className="sd-h2">{t(page.benefitsTitle)}</h2>
-                <div className="sd-benefits">
-                  {page.benefits.map((b) => (
-                    <div className="sd-benefit" key={t(b.title)}>
-                      <span className="sd-benefit-icon"><CheckCircle2 size={20} aria-hidden="true" /></span>
-                      <div>
-                        <h3>{t(b.title)}</h3>
-                        <p>{t(b.text)}</p>
+              {/* Benefits (optional — some pages skip this section) */}
+              {page.benefits && page.benefits.length > 0 && (
+                <section className="sd-section reveal">
+                  <h2 className="sd-h2">{t(page.benefitsTitle)}</h2>
+                  <div className="sd-benefits">
+                    {page.benefits.map((b) => (
+                      <div className="sd-benefit" key={t(b.title)}>
+                        <span className="sd-benefit-icon"><CheckCircle2 size={20} aria-hidden="true" /></span>
+                        <div>
+                          <h3>{t(b.title)}</h3>
+                          <p>{t(b.text)}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Grade chips (only for pages that sell concrete directly) */}
               {page.showGrades && (
@@ -135,22 +137,6 @@ const ServiceDetail = ({ page }) => {
                 </section>
               )}
 
-              {/* Steps */}
-              <section className="sd-section reveal">
-                <h2 className="sd-h2">{t(page.stepsTitle)}</h2>
-                <ol className="sd-steps">
-                  {page.steps.map((s, i) => (
-                    <li className="sd-step" key={t(s.title)}>
-                      <span className="sd-step-num">{i + 1}</span>
-                      <div>
-                        <h3>{t(s.title)}</h3>
-                        <p>{t(s.text)}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-
               {/* FAQ */}
               <section className="sd-section reveal">
                 <h2 className="sd-h2">{t({ az: 'Tez-tez verilən suallar', en: 'Frequently Asked Questions', ru: 'Часто задаваемые вопросы' })}</h2>
@@ -178,20 +164,6 @@ const ServiceDetail = ({ page }) => {
                 <WhatsAppButton text={page.whatsappText} label={{ az: 'WhatsApp ilə yaz', en: 'Message on WhatsApp', ru: 'Написать в WhatsApp' }} onLight block className="sd-wa-btn" />
               </div>
 
-              <div className="sd-card reveal">
-                <h3>{t({ az: 'Faydalı keçidlər', en: 'Useful links', ru: 'Полезные ссылки' })}</h3>
-                <ul className="sd-links">
-                  {page.related.map((r) => (
-                    <li key={r.to}>
-                      <LocaleLink to={r.to}>
-                        <ArrowRight size={14} aria-hidden="true" />
-                        {t(r.label)}
-                      </LocaleLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               <div className="sd-card sd-calc-card reveal">
                 <Calculator size={26} aria-hidden="true" />
                 <h3>{t({ az: 'Nə qədər beton lazımdır?', en: 'How much concrete do you need?', ru: 'Сколько бетона вам нужно?' })}</h3>
@@ -209,26 +181,6 @@ const ServiceDetail = ({ page }) => {
         </div>
       </div>
 
-      {/* Bottom CTA band */}
-      <div className="sd-cta-band">
-        <div className="container sd-cta-inner">
-          <div>
-            <h2>{t({ az: 'Layihəniz üçün qiymət təklifi alın', en: 'Get a quote for your project', ru: 'Получите предложение для вашего проекта' })}</h2>
-            <p>{t({
-              az: 'Pulsuz və öhdəliksiz — həcmi və ünvanı yazın, qalanını biz edək.',
-              en: 'Free and non-binding — send the volume and address, we will do the rest.',
-              ru: 'Бесплатно и без обязательств — напишите объём и адрес, остальное сделаем мы.',
-            })}</p>
-          </div>
-          <div className="sd-cta-actions">
-            <WhatsAppButton text={page.whatsappText} />
-            <a href="tel:+994506209584" className="btn btn-ghost sd-ghost">
-              <Phone size={18} aria-hidden="true" />
-              {t({ az: 'Zəng et', en: 'Call', ru: 'Позвонить' })}
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

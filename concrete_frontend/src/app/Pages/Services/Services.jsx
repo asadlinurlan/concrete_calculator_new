@@ -2,12 +2,10 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
-import CtaBand from '../../../Components/CtaBand/CtaBand';
 import { useT, LocaleLink } from '../../../i18n/i18n';
 import './Services.css';
 import service1 from '../img/service-1.png';
 import service2 from '../img/service-2.webp';
-import service3 from '../img/service-3.jpg';
 import tereziHome from '../img/service-terezi-home.jpg';
 
 const hazirBeton = {
@@ -48,25 +46,6 @@ const betonNasoslama = {
   },
   to: '/beton-nasoslama',
 };
-const kommersiya = {
-  image: service3,
-  alt: {
-    az: 'Çoxmərtəbəli kommersiya binasının tikintisi',
-    en: 'Construction of a multi-storey commercial building',
-    ru: 'Строительство многоэтажного коммерческого здания',
-  },
-  title: {
-    az: 'Kommersiya Tikintisi',
-    en: 'Commercial Construction',
-    ru: 'Коммерческое строительство',
-  },
-  description: {
-    az: 'Kommersiya və sənaye binaları üçün geniş miqyaslı beton həlləri.',
-    en: 'Large-scale concrete solutions for commercial and industrial buildings.',
-    ru: 'Масштабные бетонные решения для коммерческих и промышленных зданий.',
-  },
-  to: '/contact',
-};
 const terezi = {
   alt: {
     az: 'Mikser avtomobil körpü tərəzisində çəkilir',
@@ -88,12 +67,8 @@ const terezi = {
 
 const Services = ({ fullPage }) => {
   const t = useT();
-  // Ana səhifə: 3 kart (Kommersiya əvəzinə Tərəzi).
-  // /services səhifəsi: 4 kart (hamısı).
   const tereziCard = { ...terezi, image: tereziHome };
-  const services = fullPage
-    ? [hazirBeton, betonNasoslama, kommersiya, tereziCard]
-    : [hazirBeton, betonNasoslama, tereziCard];
+  const services = [hazirBeton, betonNasoslama, tereziCard];
 
   return (
     <section className={`services-section ${fullPage ? 'full-page' : ''}`}>
@@ -144,25 +119,6 @@ const Services = ({ fullPage }) => {
         </div>
       </div>
 
-      {fullPage && (
-        <CtaBand
-          title={{
-            az: 'Xidmətlərimizlə maraqlanırsınız?',
-            en: 'Interested in our services?',
-            ru: 'Заинтересовали наши услуги?',
-          }}
-          text={{
-            az: 'Layihənizə uyğun xidməti seçin — sizə fərdi qiymət təklifi hazırlayaq.',
-            en: 'Choose the right service for your project — we will prepare an individual quote for you.',
-            ru: 'Выберите подходящую услугу для вашего проекта — мы подготовим для вас индивидуальное предложение.',
-          }}
-          whatsappText={{
-            az: 'Salam! Xidmətləriniz haqqında məlumat və qiymət təklifi almaq istəyirəm.',
-            en: 'Hello! I would like to learn about your services and get a quote.',
-            ru: 'Здравствуйте! Хочу узнать о ваших услугах и получить предложение.',
-          }}
-        />
-      )}
     </section>
   );
 };

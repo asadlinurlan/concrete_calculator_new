@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { to: '/services', label: { az: 'Xidmətlər', en: 'Services', ru: 'Услуги' } },
   { to: '/tikinti-materiallari', label: { az: 'Materiallar', en: 'Materials', ru: 'Материалы' } },
   { to: '/calculator', label: { az: 'Kalkulyator', en: 'Calculator', ru: 'Калькулятор' } },
-  { to: '/gallery', label: { az: 'Qalereya', en: 'Gallery', ru: 'Галерея' } },
   { to: '/about', label: { az: 'Haqqımızda', en: 'About Us', ru: 'О нас' } },
   { to: '/contact', label: { az: 'Əlaqə', en: 'Contact', ru: 'Контакты' } },
 ];
