@@ -25,9 +25,9 @@
 - [M350 Beton](https://novxanibeton.az/m350-beton): B25 — çoxmərtəbəli karkas, yüksək yüklü örtüklər
 - [M400 Beton](https://novxanibeton.az/m400-beton): B30 — körpü, hidrotexniki qurğular
 - [M450 Beton](https://novxanibeton.az/m450-beton): B35 — xüsusi mühəndis konstruksiyaları
-- [M500 Beton](https://novxanibeton.az/m500-beton): yüksək möhkəmlikli beton — sənaye obyektləri, yüksək yüklü konstruksiyalar (sinif layihə üzrə dəqiqləşdirilir)
-- [M550 Beton](https://novxanibeton.az/m550-beton): yüksək möhkəmlikli beton — infrastruktur, yüksək yüklü mühəndis obyektləri (sinif layihə üzrə dəqiqləşdirilir)
-- [M600 Beton](https://novxanibeton.az/m600-beton): yüksək möhkəmlikli beton — xüsusi tikinti layihələri, maksimal yükdaşıma tələbləri (sinif layihə üzrə dəqiqləşdirilir)
+- [M500 Beton](https://novxanibeton.az/m500-beton): B40 — yüksək möhkəmlikli beton; sənaye obyektləri, yüksək yüklü konstruksiyalar
+- [M550 Beton](https://novxanibeton.az/m550-beton): B40 — yüksək möhkəmlikli beton; infrastruktur, yüksək yüklü mühəndis obyektləri
+- [M600 Beton](https://novxanibeton.az/m600-beton): B45 — yüksək möhkəmlikli beton; xüsusi tikinti layihələri, maksimal yükdaşıma tələbləri
 
 ## Xidmətlər
 
@@ -53,7 +53,7 @@
 
 ## Vacib faktlar
 
-- Beton markaları: M100 (B7.5), M150 (B10), M200 (B15), M250 (B20), M300 (B22.5), M350 (B25), M400 (B30), M450 (B35), M500, M550, M600 (yüksək möhkəmlikli — sinif layihə üzrə dəqiqləşdirilir)
+- Beton markaları: M100 (B7.5), M150 (B10), M200 (B15), M250 (B20), M300 (B22.5), M350 (B25), M400 (B30), M450 (B35), M500 (B40), M550 (B40), M600 (B45)
 - Standart: GOST 26633; hər marka 28 günlük möhkəmlik sınağından keçirilir
 - Xidmət ərazisi: Bakı, Abşeron yarımadası, Novxanı
 - İş rejimi: 7/24 (gecə tökmələri və təcili sifarişlər daxil)

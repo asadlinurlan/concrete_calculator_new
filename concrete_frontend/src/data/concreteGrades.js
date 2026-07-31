@@ -50,19 +50,23 @@ export const CONCRETE_GRADES = [
   { id: 'M450', bClass: 'B35',  strength: 35,   ratio: [1, 1.1, 2.2], wc: 0.43,
     name: { az: 'Xüsusi konstruksiya', en: 'Special structures', ru: 'Специальные конструкции' },
     use:  { az: 'Xüsusi mühəndis konstruksiyaları', en: 'Special engineering structures', ru: 'Специальные инженерные конструкции' } },
-  // High-strength grades M500–M600. bClass/strength/ratio/wc are left null
-  // ON PURPOSE: the official strength-class equivalents and nominal mix
-  // values have not been provided by the plant yet, and nothing here may be
-  // invented. Components treat null as "spec confirmed per project design":
-  // these grades are listed and orderable, but stay out of the calculator's
-  // material estimation until the values are filled in.
-  { id: 'M500', bClass: null, strength: null, ratio: null, wc: null,
+  // High-strength grades M500–M600. Class/MPa follow the standard GOST 26633
+  // correspondence (client-approved): M500→B40, M550→B40, M600→B45 — note
+  // M550 certifies to the same B40 class as M500 (its M-grade strength sits
+  // between B40 and B45; there is no intermediate class in the GOST row).
+  // ratio/wc stay null ON PURPOSE: high-strength concrete has no meaningful
+  // nominal volumetric mix — it is admixture-based laboratory design-mix
+  // territory (the nominal ladder would exceed the realistic cement band
+  // above). So these grades show class/MPa but stay out of the calculator's
+  // material estimation (hasMixData === false) until a lab-confirmed
+  // planning mix is provided.
+  { id: 'M500', bClass: 'B40', strength: 40, ratio: null, wc: null,
     name: { az: 'Sənaye konstruksiyaları', en: 'Industrial structures', ru: 'Промышленные конструкции' },
     use:  { az: 'Sənaye obyektləri, yüksək yüklü konstruksiyalar', en: 'Industrial facilities, heavily loaded structures', ru: 'Промышленные объекты, высоконагруженные конструкции' } },
-  { id: 'M550', bClass: null, strength: null, ratio: null, wc: null,
+  { id: 'M550', bClass: 'B40', strength: 40, ratio: null, wc: null,
     name: { az: 'İnfrastruktur layihələri', en: 'Infrastructure projects', ru: 'Инфраструктурные проекты' },
     use:  { az: 'İnfrastruktur, yüksək yüklü mühəndis obyektləri', en: 'Infrastructure, heavily loaded engineering works', ru: 'Инфраструктура, высоконагруженные инженерные объекты' } },
-  { id: 'M600', bClass: null, strength: null, ratio: null, wc: null,
+  { id: 'M600', bClass: 'B45', strength: 45, ratio: null, wc: null,
     name: { az: 'Maksimal yük tələbləri', en: 'Maximum load requirements', ru: 'Максимальные нагрузки' },
     use:  { az: 'Xüsusi tikinti layihələri, maksimal yükdaşıma tələbləri', en: 'Special construction projects, maximum load-bearing requirements', ru: 'Специальные строительные проекты, максимальные требования к несущей способности' } },
 ];

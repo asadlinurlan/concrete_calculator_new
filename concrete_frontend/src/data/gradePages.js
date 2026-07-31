@@ -1122,9 +1122,9 @@ const GRADE_CONTENT = {
           ru: 'Где узнать технические параметры бетона M500?',
         },
         a: {
-          az: 'M500–M600 markaları üzrə möhkəmlik sinfi və qarışıq göstəriciləri layihə tələbinə əsasən laboratoriyada dəqiqləşdirilir. Layihə və tender sənədləri üçün texniki məlumat sorğu əsasında təqdim olunur.',
-          en: 'For the M500–M600 grades, the strength class and mix parameters are confirmed in the laboratory according to the project requirements. Technical information for design and tender documents is provided on request.',
-          ru: 'Для марок M500–M600 класс прочности и параметры смеси уточняются в лаборатории согласно требованиям проекта. Техническая информация для проектной и тендерной документации предоставляется по запросу.',
+          az: 'M500 beton B40 sinfinə uyğundur. Qarışığın tərkibi bu səviyyəli betonlarda nominal nisbətlə deyil, layihə tələbinə əsasən laboratoriyada təyin olunur. Layihə və tender sənədləri üçün texniki məlumat sorğu əsasında təqdim olunur.',
+          en: 'M500 concrete corresponds to class B40. At this level the mix composition is determined in the laboratory to the project requirements rather than by a nominal ratio. Technical information for design and tender documents is provided on request.',
+          ru: 'Бетон M500 соответствует классу B40. Состав смеси для бетонов этого уровня определяется в лаборатории по требованиям проекта, а не по номинальной пропорции. Техническая информация для проектной и тендерной документации предоставляется по запросу.',
         },
       },
       {
@@ -1407,8 +1407,8 @@ const GRADE_CONTENT = {
 
 export const GRADE_PAGES = CONCRETE_GRADES.map((g) => {
   const c = GRADE_CONTENT[g.id];
-  // M500–M600: no published class/MPa — titles fall back to the id, the
-  // description leads with the "yüksək möhkəmlikli beton" keyword instead.
+  // Grades without a published class would fall back to the id alone; the
+  // description then leads with the "yüksək möhkəmlikli beton" keyword.
   const cls = g.bClass ? ` (${g.bClass})` : '';
   return {
     slug: `/${g.id.toLowerCase()}-beton`,

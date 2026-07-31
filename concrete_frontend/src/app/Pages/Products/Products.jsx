@@ -16,9 +16,9 @@ const PRODUCT_FAQS = [
       ru: 'Что означают буквы M и B?',
     },
     a: {
-      az: 'M — betonun möhkəmlik markasıdır (kqq/sm² ilə), B — möhkəmlik sinfidir (MPa ilə). Məsələn, M300 markası B22.5 sinfinə uyğundur və 22.5 MPa möhkəmlik göstəricisinə malikdir. M500–M600 yüksək möhkəmlikli markaları üzrə sinif göstəriciləri layihə tələbinə əsasən dəqiqləşdirilir.',
-      en: 'M is the concrete strength grade (in kgf/cm²), B is the strength class (in MPa). For example, grade M300 corresponds to class B22.5 and has a strength of 22.5 MPa. For the high-strength grades M500–M600, the class figures are confirmed according to the project requirements.',
-      ru: 'M — марка прочности бетона (в кгс/см²), B — класс прочности (в МПа). Например, марка M300 соответствует классу B22.5 и имеет прочность 22.5 МПа. Для высокопрочных марок M500–M600 показатели класса уточняются согласно требованиям проекта.',
+      az: 'M — betonun möhkəmlik markasıdır (kqq/sm² ilə), B — möhkəmlik sinfidir (MPa ilə). Məsələn, M300 markası B22.5 sinfinə uyğundur və 22.5 MPa möhkəmlik göstəricisinə malikdir. Hər kartda hər iki göstərici qeyd olunub. Qeyd: GOST sinif sırasında aralıq sinif olmadığı üçün M500 və M550 eyni B40 sinfinə uyğun gəlir.',
+      en: 'M is the concrete strength grade (in kgf/cm²), B is the strength class (in MPa). For example, grade M300 corresponds to class B22.5 and has a strength of 22.5 MPa. Both figures are shown on every card. Note: as the GOST class row has no intermediate class, both M500 and M550 correspond to class B40.',
+      ru: 'M — марка прочности бетона (в кгс/см²), B — класс прочности (в МПа). Например, марка M300 соответствует классу B22.5 и имеет прочность 22.5 МПа. Оба показателя указаны на каждой карточке. Примечание: поскольку в ряду классов ГОСТ нет промежуточного класса, марки M500 и M550 соответствуют одному классу B40.',
     },
   },
   {
