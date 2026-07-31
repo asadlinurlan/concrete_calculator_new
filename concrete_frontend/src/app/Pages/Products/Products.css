@@ -199,9 +199,6 @@
 .card-front .product-more { margin-top: auto; }
 .card-front .flip-btn { margin-top: auto; }
 .card-front .product-cta { margin-top: 0; }
-/* Quote CTA (M500–M600): no flip button above it, so it carries its own
-   auto margin — the leftover space still splits into two even gaps. */
-.card-front .product-cta--quote { margin-top: auto; }
 
 .back-face-label {
   align-self: center;

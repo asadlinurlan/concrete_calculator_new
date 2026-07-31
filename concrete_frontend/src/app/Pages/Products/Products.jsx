@@ -175,13 +175,11 @@ const Products = () => {
                         <ArrowRight size={14} aria-hidden="true" />
                       </LocaleLink>
 
-                      {m && (
-                        <button type="button" className="flip-btn" onClick={() => toggleFlip(grade.id)}>
-                          <Layers size={15} aria-hidden="true" />
-                          {t(TECH_LABEL)}
-                          <RotateCcw size={14} aria-hidden="true" className="flip-btn-hint" />
-                        </button>
-                      )}
+                      <button type="button" className="flip-btn" onClick={() => toggleFlip(grade.id)}>
+                        <Layers size={15} aria-hidden="true" />
+                        {t(TECH_LABEL)}
+                        <RotateCcw size={14} aria-hidden="true" className="flip-btn-hint" />
+                      </button>
 
                       {m ? (
                         <LocaleLink to={`/calculator?grade=${grade.id}`} className="product-cta">
@@ -190,15 +188,17 @@ const Products = () => {
                           <ArrowRight size={16} aria-hidden="true" />
                         </LocaleLink>
                       ) : (
-                        <LocaleLink to="/contact" className="product-cta product-cta--quote">
+                        <LocaleLink to="/contact" className="product-cta">
                           {t({ az: 'Fərdi təklif alın', en: 'Request a quote', ru: 'Получить предложение' })}
                           <ArrowRight size={16} aria-hidden="true" />
                         </LocaleLink>
                       )}
                     </div>
 
-                    {/* ── Back face (technical data) ── */}
-                    {m && (
+                    {/* ── Back face (technical data) ──
+                        Grades with a nominal mix show planning quantities;
+                        the high-strength grades (no nominal mix — lab
+                        design-mix only) show class/MPa + control facts. */}
                     <div className="card-face card-back" inert={flipped.has(grade.id) ? undefined : ''}>
                       <div className="product-card-head">
                         <div className="product-grade">
@@ -208,48 +208,79 @@ const Products = () => {
                         <span className="back-face-label">{t(TECH_LABEL)}</span>
                       </div>
 
-                      <div className="product-mix">
-                        <span className="mix-label">
-                          {t({ az: 'Qarışıq (S:Q:Ç)', en: 'Mix (C:S:G)', ru: 'Смесь (Ц:П:Щ)' })}
-                        </span>
-                        <span className="mix-value">{ratioLabel(grade)}</span>
-                      </div>
-                      <ul className="product-stats">
-                        <li>
-                          <span>{t({ az: 'Sement', en: 'Cement', ru: 'Цемент' })}</span>
-                          <strong>
-                            {Math.round(m.cementKg)} {t({ az: 'kq/m³', en: 'kg/m³', ru: 'кг/м³' })}
-                          </strong>
-                        </li>
-                        <li>
-                          <span>{t({ az: 'Qum', en: 'Sand', ru: 'Песок' })}</span>
-                          <strong>{m.sandVol.toFixed(2)} m³/m³</strong>
-                        </li>
-                        <li>
-                          <span>{t({ az: 'Çınqıl', en: 'Gravel', ru: 'Щебень' })}</span>
-                          <strong>{m.gravelVol.toFixed(2)} m³/m³</strong>
-                        </li>
-                        <li>
-                          <span>{t({ az: 'Su', en: 'Water', ru: 'Вода' })}</span>
-                          <strong>
-                            {Math.round(m.waterL)} {t({ az: 'L/m³', en: 'L/m³', ru: 'л/м³' })}
-                          </strong>
-                        </li>
-                      </ul>
-                      <p className="tech-disclaimer">
-                        {t({
-                          az: 'Nominal qarışıq əsasında təxmini planlaşdırma dəyərləri. Yekun qarışıq dizaynı layihəyə uyğun laboratoriyada təyin olunur.',
-                          en: 'Approximate planning values based on a nominal mix. The final mix design is determined in the laboratory according to the project.',
-                          ru: 'Приблизительные плановые значения на основе номинальной смеси. Окончательный состав смеси определяется в лаборатории согласно проекту.',
-                        })}
-                      </p>
+                      {m ? (
+                        <>
+                          <div className="product-mix">
+                            <span className="mix-label">
+                              {t({ az: 'Qarışıq (S:Q:Ç)', en: 'Mix (C:S:G)', ru: 'Смесь (Ц:П:Щ)' })}
+                            </span>
+                            <span className="mix-value">{ratioLabel(grade)}</span>
+                          </div>
+                          <ul className="product-stats">
+                            <li>
+                              <span>{t({ az: 'Sement', en: 'Cement', ru: 'Цемент' })}</span>
+                              <strong>
+                                {Math.round(m.cementKg)} {t({ az: 'kq/m³', en: 'kg/m³', ru: 'кг/м³' })}
+                              </strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'Qum', en: 'Sand', ru: 'Песок' })}</span>
+                              <strong>{m.sandVol.toFixed(2)} m³/m³</strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'Çınqıl', en: 'Gravel', ru: 'Щебень' })}</span>
+                              <strong>{m.gravelVol.toFixed(2)} m³/m³</strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'Su', en: 'Water', ru: 'Вода' })}</span>
+                              <strong>
+                                {Math.round(m.waterL)} {t({ az: 'L/m³', en: 'L/m³', ru: 'л/м³' })}
+                              </strong>
+                            </li>
+                          </ul>
+                          <p className="tech-disclaimer">
+                            {t({
+                              az: 'Nominal qarışıq əsasında təxmini planlaşdırma dəyərləri. Yekun qarışıq dizaynı layihəyə uyğun laboratoriyada təyin olunur.',
+                              en: 'Approximate planning values based on a nominal mix. The final mix design is determined in the laboratory according to the project.',
+                              ru: 'Приблизительные плановые значения на основе номинальной смеси. Окончательный состав смеси определяется в лаборатории согласно проекту.',
+                            })}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <ul className="product-stats">
+                            <li>
+                              <span>{t({ az: 'Möhkəmlik sinfi', en: 'Strength class', ru: 'Класс прочности' })}</span>
+                              <strong>{grade.bClass}</strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'Möhkəmlik', en: 'Strength', ru: 'Прочность' })}</span>
+                              <strong>{grade.strength} {t(MPA)}</strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'Qarışıq dizaynı', en: 'Mix design', ru: 'Состав смеси' })}</span>
+                              <strong>{t({ az: 'Layihə üzrə', en: 'Per project', ru: 'По проекту' })}</strong>
+                            </li>
+                            <li>
+                              <span>{t({ az: 'İstehsal nəzarəti', en: 'Production control', ru: 'Контроль производства' })}</span>
+                              <strong>GOST 26633</strong>
+                            </li>
+                          </ul>
+                          <p className="tech-disclaimer">
+                            {t({
+                              az: 'Yüksək möhkəmlikli betonlarda qarışığın tərkibi nominal nisbətlə deyil, layihə tələbinə uyğun laboratoriya mix-design-ı ilə təyin olunur. Texniki məlumat sorğu əsasında sənədlə təqdim olunur.',
+                              en: 'For high-strength concrete the mix composition is determined by a laboratory mix design to the project requirements, not by a nominal ratio. Technical documentation is provided on request.',
+                              ru: 'Для высокопрочных бетонов состав смеси определяется лабораторным подбором (mix design) по требованиям проекта, а не номинальной пропорцией. Техническая документация предоставляется по запросу.',
+                            })}
+                          </p>
+                        </>
+                      )}
 
                       <button type="button" className="flip-btn flip-btn--return" onClick={() => toggleFlip(grade.id)}>
                         <RotateCcw size={15} aria-hidden="true" />
                         {t({ az: 'Geri qayıt', en: 'Go back', ru: 'Назад' })}
                       </button>
                     </div>
-                    )}
                   </div>
                 </article>
               );
