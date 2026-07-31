@@ -190,7 +190,7 @@ const Products = () => {
                           <ArrowRight size={16} aria-hidden="true" />
                         </LocaleLink>
                       ) : (
-                        <LocaleLink to="/contact" className="product-cta">
+                        <LocaleLink to="/contact" className="product-cta product-cta--quote">
                           {t({ az: 'Fərdi təklif alın', en: 'Request a quote', ru: 'Получить предложение' })}
                           <ArrowRight size={16} aria-hidden="true" />
                         </LocaleLink>

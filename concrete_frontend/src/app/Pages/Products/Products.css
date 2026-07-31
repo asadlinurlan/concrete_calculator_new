@@ -35,9 +35,12 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  /* Opening one card's tech details must not stretch its row neighbours —
-     each card keeps its own height */
-  align-items: start;
+  /* Equal rows: the M500–M600 cards (no technical back face yet) must not
+     end up shorter than the rest — every card stretches to the same height.
+     Flipping never changes a card's height (faces are stacked in one grid
+     cell), so neighbours are unaffected. */
+  grid-auto-rows: 1fr;
+  align-items: stretch;
 }
 
 .product-card {
@@ -196,6 +199,9 @@
 .card-front .product-more { margin-top: auto; }
 .card-front .flip-btn { margin-top: auto; }
 .card-front .product-cta { margin-top: 0; }
+/* Quote CTA (M500–M600): no flip button above it, so it carries its own
+   auto margin — the leftover space still splits into two even gaps. */
+.card-front .product-cta--quote { margin-top: auto; }
 
 .back-face-label {
   align-self: center;
@@ -280,7 +286,9 @@
   .product-cta { min-height: 48px; font-size: 13px; }
 }
 @media (max-width: 560px) {
-  .products-grid { grid-template-columns: 1fr; gap: 14px; }
+  /* Single column: natural heights again — stretching every card to the
+     tallest one would leave big empty gaps on phones. */
+  .products-grid { grid-template-columns: 1fr; gap: 14px; grid-auto-rows: auto; align-items: start; }
   .grade-id { font-size: 26px; }
   .products-trust { font-size: 13.5px; }
 }
