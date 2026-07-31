@@ -9,6 +9,7 @@ import {
   materialsPerM3,
   ratioLabel,
   DENSITY,
+  hasMixData,
 } from '../../data/concreteGrades';
 import Seo from '../Seo/Seo';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
@@ -359,11 +360,13 @@ const Calculator = () => {
   const [tubeInnerWidth, setTubeInnerWidth] = useState('');
   const [tubeDepth, setTubeDepth] = useState('');
 
-  // Advanced options — preselect grade from ?grade=Mxxx (e.g. Products page CTA)
+  // Advanced options — preselect grade from ?grade=Mxxx (e.g. Products page CTA).
+  // Only grades with confirmed mix data are calculable — M500–M600 have no
+  // official nominal-mix values yet, so they fall back to the default here.
   const [searchParams] = useSearchParams();
   const gradeParam = searchParams.get('grade');
   const [concreteGrade, setConcreteGrade] = useState(
-    CONCRETE_GRADES.some((g) => g.id === gradeParam) ? gradeParam : 'M300'
+    CONCRETE_GRADES.some((g) => g.id === gradeParam && hasMixData(g)) ? gradeParam : 'M300'
   );
   const [wastePct, setWastePct] = useState(5); // material waste allowance %
   const [rebarEnabled, setRebarEnabled] = useState(true);
@@ -837,7 +840,7 @@ const Calculator = () => {
                 <div className="form-section grade-first">
                   <h4>{t(TXT.gradeHeading)}</h4>
                   <select value={concreteGrade} onChange={(e) => setConcreteGrade(e.target.value)} className="form-select">
-                    {CONCRETE_GRADES.map((g) => (
+                    {CONCRETE_GRADES.filter(hasMixData).map((g) => (
                       <option key={g.id} value={g.id}>{g.id} ({g.bClass}) – {t(g.name)}</option>
                     ))}
                   </select>

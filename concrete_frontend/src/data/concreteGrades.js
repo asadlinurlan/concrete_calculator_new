@@ -50,7 +50,27 @@ export const CONCRETE_GRADES = [
   { id: 'M450', bClass: 'B35',  strength: 35,   ratio: [1, 1.1, 2.2], wc: 0.43,
     name: { az: 'Xüsusi konstruksiya', en: 'Special structures', ru: 'Специальные конструкции' },
     use:  { az: 'Xüsusi mühəndis konstruksiyaları', en: 'Special engineering structures', ru: 'Специальные инженерные конструкции' } },
+  // High-strength grades M500–M600. bClass/strength/ratio/wc are left null
+  // ON PURPOSE: the official strength-class equivalents and nominal mix
+  // values have not been provided by the plant yet, and nothing here may be
+  // invented. Components treat null as "spec confirmed per project design":
+  // these grades are listed and orderable, but stay out of the calculator's
+  // material estimation until the values are filled in.
+  { id: 'M500', bClass: null, strength: null, ratio: null, wc: null,
+    name: { az: 'Sənaye konstruksiyaları', en: 'Industrial structures', ru: 'Промышленные конструкции' },
+    use:  { az: 'Sənaye obyektləri, yüksək yüklü konstruksiyalar', en: 'Industrial facilities, heavily loaded structures', ru: 'Промышленные объекты, высоконагруженные конструкции' } },
+  { id: 'M550', bClass: null, strength: null, ratio: null, wc: null,
+    name: { az: 'İnfrastruktur layihələri', en: 'Infrastructure projects', ru: 'Инфраструктурные проекты' },
+    use:  { az: 'İnfrastruktur, yüksək yüklü mühəndis obyektləri', en: 'Infrastructure, heavily loaded engineering works', ru: 'Инфраструктура, высоконагруженные инженерные объекты' } },
+  { id: 'M600', bClass: null, strength: null, ratio: null, wc: null,
+    name: { az: 'Maksimal yük tələbləri', en: 'Maximum load requirements', ru: 'Максимальные нагрузки' },
+    use:  { az: 'Xüsusi tikinti layihələri, maksimal yükdaşıma tələbləri', en: 'Special construction projects, maximum load-bearing requirements', ru: 'Специальные строительные проекты, максимальные требования к несущей способности' } },
 ];
+
+/** True when a grade has confirmed technical/mix data (class, MPa, nominal
+ *  mix). M500–M600 return false until the plant provides official values. */
+export const hasMixData = (g) =>
+  Boolean(g && g.bClass && g.strength && g.ratio && g.wc);
 
 export const getGrade = (id) =>
   CONCRETE_GRADES.find((g) => g.id === id) || CONCRETE_GRADES[2];

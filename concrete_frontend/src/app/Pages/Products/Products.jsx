@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Gauge, Layers, ArrowRight, Calculator, RotateCcw, CheckCircle2 } from 'lucide-react';
 import useScrollReveal from '../../../hooks/useScrollReveal';
-import { CONCRETE_GRADES, materialsPerM3, ratioLabel } from '../../../data/concreteGrades';
+import { CONCRETE_GRADES, materialsPerM3, ratioLabel, hasMixData } from '../../../data/concreteGrades';
 import { useT, LocaleLink } from '../../../i18n/i18n';
 import Seo from '../../../Components/Seo/Seo';
 import Breadcrumbs from '../../../Components/Breadcrumbs/Breadcrumbs';
@@ -16,9 +16,9 @@ const PRODUCT_FAQS = [
       ru: 'Что означают буквы M и B?',
     },
     a: {
-      az: 'M — betonun möhkəmlik markasıdır (kqq/sm² ilə), B — möhkəmlik sinfidir (MPa ilə). Məsələn, M300 markası B22.5 sinfinə uyğundur və 22.5 MPa möhkəmlik göstəricisinə malikdir. Hər kartda hər iki göstərici qeyd olunub.',
-      en: 'M is the concrete strength grade (in kgf/cm²), B is the strength class (in MPa). For example, grade M300 corresponds to class B22.5 and has a strength of 22.5 MPa. Both figures are shown on every card.',
-      ru: 'M — марка прочности бетона (в кгс/см²), B — класс прочности (в МПа). Например, марка M300 соответствует классу B22.5 и имеет прочность 22.5 МПа. Оба показателя указаны на каждой карточке.',
+      az: 'M — betonun möhkəmlik markasıdır (kqq/sm² ilə), B — möhkəmlik sinfidir (MPa ilə). Məsələn, M300 markası B22.5 sinfinə uyğundur və 22.5 MPa möhkəmlik göstəricisinə malikdir. M500–M600 yüksək möhkəmlikli markaları üzrə sinif göstəriciləri layihə tələbinə əsasən dəqiqləşdirilir.',
+      en: 'M is the concrete strength grade (in kgf/cm²), B is the strength class (in MPa). For example, grade M300 corresponds to class B22.5 and has a strength of 22.5 MPa. For the high-strength grades M500–M600, the class figures are confirmed according to the project requirements.',
+      ru: 'M — марка прочности бетона (в кгс/см²), B — класс прочности (в МПа). Например, марка M300 соответствует классу B22.5 и имеет прочность 22.5 МПа. Для высокопрочных марок M500–M600 показатели класса уточняются согласно требованиям проекта.',
     },
   },
   {
@@ -28,9 +28,9 @@ const PRODUCT_FAQS = [
       ru: 'Какую марку выбрать для моего проекта?',
     },
     a: {
-      az: 'Marka konstruksiyanın yükündən asılıdır: hamarlama və altlıq üçün M100–M150, döşəmə və ümumi işlər üçün M200, zolaq təməl və daşıyıcı divar üçün M250, monolit təməl, plitə və sütunlar üçün M300, çoxmərtəbəli karkas üçün M350 və yuxarı. Əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
-      en: 'The grade depends on the structural load: M100–M150 for levelling and blinding, M200 for floor slabs and general work, M250 for strip foundations and load-bearing walls, M300 for monolithic foundations, slabs and columns, M350 and above for multi-storey frames. If you are unsure, our specialists provide free advice.',
-      ru: 'Марка зависит от нагрузки на конструкцию: M100–M150 для выравнивания и подбетонки, M200 для полов и общих работ, M250 для ленточного фундамента и несущих стен, M300 для монолитного фундамента, плит и колонн, M350 и выше для многоэтажного каркаса. Если вы не уверены, наши специалисты бесплатно проконсультируют.',
+      az: 'Marka konstruksiyanın yükündən asılıdır: hamarlama və altlıq üçün M100–M150, döşəmə və ümumi işlər üçün M200, zolaq təməl və daşıyıcı divar üçün M250, monolit təməl, plitə və sütunlar üçün M300, çoxmərtəbəli karkas üçün M350 və yuxarı, yüksək yükdaşıma qabiliyyəti tələb olunan sənaye, infrastruktur və xüsusi layihələr üçün isə M500–M600 yüksək möhkəmlikli betonlar. Əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
+      en: 'The grade depends on the structural load: M100–M150 for levelling and blinding, M200 for floor slabs and general work, M250 for strip foundations and load-bearing walls, M300 for monolithic foundations, slabs and columns, M350 and above for multi-storey frames, and the high-strength grades M500–M600 for industrial, infrastructure and special projects requiring high load-bearing capacity. If you are unsure, our specialists provide free advice.',
+      ru: 'Марка зависит от нагрузки на конструкцию: M100–M150 для выравнивания и подбетонки, M200 для полов и общих работ, M250 для ленточного фундамента и несущих стен, M300 для монолитного фундамента, плит и колонн, M350 и выше для многоэтажного каркаса, а высокопрочные марки M500–M600 — для промышленных, инфраструктурных и специальных проектов с высокими требованиями к несущей способности. Если вы не уверены, наши специалисты бесплатно проконсультируют.',
     },
   },
   {
@@ -113,16 +113,18 @@ const Products = () => {
             </h2>
             <p className="products-trust">
               {t({
-                az: 'M100–M450 markaları GOST 26633 tələblərinə uyğun istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir.',
-                en: 'Grades M100–M450 are produced in accordance with GOST 26633 requirements and undergo 28-day strength testing.',
-                ru: 'Марки M100–M450 производятся в соответствии с требованиями ГОСТ 26633 и проходят испытание на прочность через 28 суток.',
+                az: 'M100–M600 markaları GOST 26633 tələblərinə uyğun istehsal olunur və 28 günlük möhkəmlik sınağından keçirilir.',
+                en: 'Grades M100–M600 are produced in accordance with GOST 26633 requirements and undergo 28-day strength testing.',
+                ru: 'Марки M100–M600 производятся в соответствии с требованиями ГОСТ 26633 и проходят испытание на прочность через 28 суток.',
               })}
             </p>
           </div>
 
           <div className="products-grid">
             {CONCRETE_GRADES.map((grade, index) => {
-              const m = materialsPerM3(grade);
+              // High-strength grades (M500–M600) have no confirmed mix data
+              // yet — no technical back face, no per-m³ material figures.
+              const m = hasMixData(grade) ? materialsPerM3(grade) : null;
               return (
                 <article
                   key={grade.id}
@@ -140,15 +142,17 @@ const Products = () => {
                       <div className="product-card-head">
                         <div className="product-grade">
                           <span className="grade-id">{grade.id}</span>
-                          <span className="grade-class">{grade.bClass}</span>
+                          {grade.bClass && <span className="grade-class">{grade.bClass}</span>}
                         </div>
-                        <div
-                          className="product-strength"
-                          title={t({ az: 'Möhkəmlik', en: 'Strength', ru: 'Прочность' })}
-                        >
-                          <Gauge size={18} aria-hidden="true" />
-                          {grade.strength} {t(MPA)}
-                        </div>
+                        {grade.strength != null && (
+                          <div
+                            className="product-strength"
+                            title={t({ az: 'Möhkəmlik', en: 'Strength', ru: 'Прочность' })}
+                          >
+                            <Gauge size={18} aria-hidden="true" />
+                            {grade.strength} {t(MPA)}
+                          </div>
+                        )}
                       </div>
 
                       <h3 className="product-name">{t(grade.name)}</h3>
@@ -171,20 +175,30 @@ const Products = () => {
                         <ArrowRight size={14} aria-hidden="true" />
                       </LocaleLink>
 
-                      <button type="button" className="flip-btn" onClick={() => toggleFlip(grade.id)}>
-                        <Layers size={15} aria-hidden="true" />
-                        {t(TECH_LABEL)}
-                        <RotateCcw size={14} aria-hidden="true" className="flip-btn-hint" />
-                      </button>
+                      {m && (
+                        <button type="button" className="flip-btn" onClick={() => toggleFlip(grade.id)}>
+                          <Layers size={15} aria-hidden="true" />
+                          {t(TECH_LABEL)}
+                          <RotateCcw size={14} aria-hidden="true" className="flip-btn-hint" />
+                        </button>
+                      )}
 
-                      <LocaleLink to={`/calculator?grade=${grade.id}`} className="product-cta">
-                        <Calculator size={16} aria-hidden="true" />
-                        {t(CALC_WITH_GRADE)}
-                        <ArrowRight size={16} aria-hidden="true" />
-                      </LocaleLink>
+                      {m ? (
+                        <LocaleLink to={`/calculator?grade=${grade.id}`} className="product-cta">
+                          <Calculator size={16} aria-hidden="true" />
+                          {t(CALC_WITH_GRADE)}
+                          <ArrowRight size={16} aria-hidden="true" />
+                        </LocaleLink>
+                      ) : (
+                        <LocaleLink to="/contact" className="product-cta">
+                          {t({ az: 'Fərdi təklif alın', en: 'Request a quote', ru: 'Получить предложение' })}
+                          <ArrowRight size={16} aria-hidden="true" />
+                        </LocaleLink>
+                      )}
                     </div>
 
                     {/* ── Back face (technical data) ── */}
+                    {m && (
                     <div className="card-face card-back" inert={flipped.has(grade.id) ? undefined : ''}>
                       <div className="product-card-head">
                         <div className="product-grade">
@@ -235,6 +249,7 @@ const Products = () => {
                         {t({ az: 'Geri qayıt', en: 'Go back', ru: 'Назад' })}
                       </button>
                     </div>
+                    )}
                   </div>
                 </article>
               );

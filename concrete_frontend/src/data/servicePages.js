@@ -4,7 +4,7 @@
    hero, intro, benefits, FAQ (+FAQPage JSON-LD) and per-page metadata.
 
    Content rules: only claims confirmed by the business are stated
-   (GOST 26633, 28-day testing, M100–M450, 7/24, Novxanı plant,
+   (GOST 26633, 28-day testing, M100–M600, 7/24, Novxanı plant,
    Bakı & Abşeron delivery). No invented specs or prices.
 
    i18n: every user-visible string is a { az, en, ru } object;
@@ -24,14 +24,14 @@ export const SERVICE_PAGES = [
     slug: '/hazir-beton-satisi',
     seo: {
       title: {
-        az: 'Hazır Beton Satışı — M100–M450 Markaları | NOVXANI BETON',
-        en: 'Ready-Mix Concrete Sales — Grades M100–M450 | NOVXANI BETON',
-        ru: 'Продажа товарного бетона — марки M100–M450 | NOVXANI BETON',
+        az: 'Hazır Beton Satışı — M100–M600 Markaları | NOVXANI BETON',
+        en: 'Ready-Mix Concrete Sales — Grades M100–M600 | NOVXANI BETON',
+        ru: 'Продажа товарного бетона — марки M100–M600 | NOVXANI BETON',
       },
       description: {
-        az: 'Bakı və Abşeronda laboratoriya nəzarətli hazır beton satışı. M100–M450 markaları GOST 26633 üzrə istehsal olunur, mikserlərlə ünvana çatdırılır. Fərdi qiymət təklifi alın.',
-        en: 'Laboratory-controlled ready-mix concrete sales in Baku and Absheron. Grades M100–M450 are produced to GOST 26633 and delivered to your site by mixer trucks. Request a personalized quote.',
-        ru: 'Продажа товарного бетона с лабораторным контролем в Баку и на Абшероне. Марки M100–M450 производятся по ГОСТ 26633 и доставляются миксерами на объект. Получите индивидуальное предложение.',
+        az: 'Bakı və Abşeronda laboratoriya nəzarətli hazır beton satışı. M100–M600 markaları GOST 26633 üzrə istehsal olunur, mikserlərlə ünvana çatdırılır. Fərdi qiymət təklifi alın.',
+        en: 'Laboratory-controlled ready-mix concrete sales in Baku and Absheron. Grades M100–M600 are produced to GOST 26633 and delivered to your site by mixer trucks. Request a personalized quote.',
+        ru: 'Продажа товарного бетона с лабораторным контролем в Баку и на Абшероне. Марки M100–M600 производятся по ГОСТ 26633 и доставляются миксерами на объект. Получите индивидуальное предложение.',
       },
     },
     crumb: {
@@ -45,9 +45,9 @@ export const SERVICE_PAGES = [
       ru: 'Продажа товарного бетона',
     },
     tagline: {
-      az: 'M100–M450 markalı, laboratoriya nəzarətli hazır beton — Bakı və Abşeron üzrə çatdırılma ilə',
-      en: 'Laboratory-controlled ready-mix concrete in grades M100–M450 — with delivery across Baku and Absheron',
-      ru: 'Товарный бетон марок M100–M450 с лабораторным контролем — с доставкой по Баку и Абшерону',
+      az: 'M100–M600 markalı, laboratoriya nəzarətli hazır beton — Bakı və Abşeron üzrə çatdırılma ilə',
+      en: 'Laboratory-controlled ready-mix concrete in grades M100–M600 — with delivery across Baku and Absheron',
+      ru: 'Товарный бетон марок M100–M600 с лабораторным контролем — с доставкой по Баку и Абшерону',
     },
     hero: {
       image: imgHazirBeton,
@@ -64,9 +64,9 @@ export const SERVICE_PAGES = [
         ru: 'С 2018 года Novxani Beton производит товарный бетон для строительных компаний и частных заказчиков в Баку и на Абшероне. Все марки выпускаются на современном заводе под лабораторным контролем и проходят 28-суточные испытания на прочность по ГОСТ 26633.',
       },
       {
-        az: 'Təməldən çoxmərtəbəli binaya qədər hər növ layihə üçün doğru markanı seçməyinizə kömək edirik: hamarlama qatı üçün M100, monolit təməl və plitələr üçün M300, xüsusi mühəndis konstruksiyaları üçün M450. Hansı markanın lazım olduğuna əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
-        en: 'We help you choose the right grade for any project, from foundations to multi-storey buildings: M100 for levelling layers, M300 for monolithic foundations and slabs, M450 for specialized engineering structures. Not sure which grade you need? Our specialists provide free advice.',
-        ru: 'Мы поможем подобрать подходящую марку для любого проекта — от фундамента до многоэтажного здания: M100 для выравнивающих слоёв, M300 для монолитных фундаментов и плит, M450 для специальных инженерных конструкций. Не уверены, какая марка нужна? Наши специалисты бесплатно проконсультируют вас.',
+        az: 'NOVXANI BETON olaraq M100-dən M600-ə qədər müxtəlif markalarda hazır beton istehsalı, çatdırılması və beton nasoslanması xidmətləri təqdim edirik. Hər növ layihə üçün doğru markanı seçməyinizə kömək edirik: hamarlama qatı üçün M100, monolit təməl və plitələr üçün M300, xüsusi mühəndis konstruksiyaları üçün M450, yüksək yükdaşıma qabiliyyəti tələb olunan sənaye və infrastruktur layihələri üçün isə M500–M600 yüksək möhkəmlikli betonlar. Hansı markanın lazım olduğuna əmin deyilsinizsə, mütəxəssislərimiz pulsuz məsləhət verir.',
+        en: 'At NOVXANI BETON we provide ready-mix concrete production, delivery and concrete pumping services in grades from M100 to M600. We help you choose the right grade for any project: M100 for levelling layers, M300 for monolithic foundations and slabs, M450 for specialized engineering structures, and the high-strength grades M500–M600 for industrial and infrastructure projects requiring high load-bearing capacity. Not sure which grade you need? Our specialists provide free advice.',
+        ru: 'NOVXANI BETON предоставляет услуги производства, доставки и перекачки товарного бетона в марках от M100 до M600. Мы поможем подобрать подходящую марку для любого проекта: M100 для выравнивающих слоёв, M300 для монолитных фундаментов и плит, M450 для специальных инженерных конструкций, а высокопрочные марки M500–M600 — для промышленных и инфраструктурных проектов с высокими требованиями к несущей способности. Не уверены, какая марка нужна? Наши специалисты бесплатно проконсультируют вас.',
       },
     ],
     showGrades: true,
@@ -404,9 +404,9 @@ export const SERVICE_PAGES = [
           ru: 'Какие марки можно подавать насосом?',
         },
         a: {
-          az: 'İstehsal etdiyimiz bütün markalar (M100–M450) nasosla tökülə bilər — qarışıq nasoslamaya uyğun hazırlanır.',
-          en: 'All the grades we produce (M100–M450) can be pump-poured — the mix is prepared to be pumpable.',
-          ru: 'Все производимые нами марки (M100–M450) можно заливать насосом — смесь готовится с учётом перекачивания.',
+          az: 'İstehsal etdiyimiz bütün markalar (M100–M600) nasosla tökülə bilər — qarışıq nasoslamaya uyğun hazırlanır.',
+          en: 'All the grades we produce (M100–M600) can be pump-poured — the mix is prepared to be pumpable.',
+          ru: 'Все производимые нами марки (M100–M600) можно заливать насосом — смесь готовится с учётом перекачивания.',
         },
       },
     ],
@@ -601,9 +601,9 @@ export const SERVICE_PAGES = [
     },
     intro: [
       {
-        az: 'Beton qiyməti sabit rəqəm deyil — marka (M100–M450), sifariş həcmi, çatdırılma məsafəsi, nasos ehtiyacı və tökmə qrafiki qiymətə birbaşa təsir edir. Xammal bazarı da mütəmadi dəyişir.',
-        en: 'The price of concrete is not a fixed number — the grade (M100–M450), order volume, delivery distance, pumping needs and pouring schedule all directly affect it. The raw materials market also changes regularly.',
-        ru: 'Цена бетона — не фиксированная цифра: марка (M100–M450), объём заказа, расстояние доставки, необходимость насоса и график заливки напрямую влияют на неё. Рынок сырья также регулярно меняется.',
+        az: 'Beton qiyməti sabit rəqəm deyil — marka (M100–M600), sifariş həcmi, çatdırılma məsafəsi, nasos ehtiyacı və tökmə qrafiki qiymətə birbaşa təsir edir. Xammal bazarı da mütəmadi dəyişir.',
+        en: 'The price of concrete is not a fixed number — the grade (M100–M600), order volume, delivery distance, pumping needs and pouring schedule all directly affect it. The raw materials market also changes regularly.',
+        ru: 'Цена бетона — не фиксированная цифра: марка (M100–M600), объём заказа, расстояние доставки, необходимость насоса и график заливки напрямую влияют на неё. Рынок сырья также регулярно меняется.',
       },
       {
         az: 'Buna görə saytda “hamı üçün bir qiymət” yazmaq əvəzinə, hər layihə üçün fərdi təklif hazırlayırıq — beləcə artıq xərc ödəmirsiniz, yalnız öz layihənizə uyğun real qiyməti alırsınız. Təklif almaq pulsuzdur və heç bir öhdəlik yaratmır.',
@@ -861,9 +861,9 @@ export const SERVICE_PAGES = [
         ru: 'Области применения бетона — фундамент, полы, двор, дороги | NOVXANI BETON',
       },
       description: {
-        az: 'Hansı iş üçün hansı beton lazımdır: fundament, döşəmə, həyət betonlaması, yol, qaraj, hovuz və monolit işlər üzrə marka tövsiyələri (M100–M450). Pulsuz məsləhət və fərdi qiymət.',
-        en: 'Which concrete you need for which job: grade recommendations (M100–M450) for foundations, floors, yard concreting, roads, garages, pools and monolithic work. Free advice and a personalized price.',
-        ru: 'Какой бетон нужен для какой работы: рекомендации по маркам (M100–M450) для фундамента, полов, бетонирования двора, дорог, гаража, бассейна и монолитных работ. Бесплатная консультация и индивидуальная цена.',
+        az: 'Hansı iş üçün hansı beton lazımdır: fundament, döşəmə, həyət betonlaması, yol, qaraj, hovuz və monolit işlər üzrə marka tövsiyələri (M100–M600). Pulsuz məsləhət və fərdi qiymət.',
+        en: 'Which concrete you need for which job: grade recommendations (M100–M600) for foundations, floors, yard concreting, roads, garages, pools and monolithic work. Free advice and a personalized price.',
+        ru: 'Какой бетон нужен для какой работы: рекомендации по маркам (M100–M600) для фундамента, полов, бетонирования двора, дорог, гаража, бассейна и монолитных работ. Бесплатная консультация и индивидуальная цена.',
       },
     },
     crumb: {
@@ -964,11 +964,11 @@ export const SERVICE_PAGES = [
         },
       },
       {
-        title: { az: 'Körpü və xüsusi işlər — M400–M450', en: 'Bridges and special works — M400–M450', ru: 'Мосты и специальные работы — M400–M450' },
+        title: { az: 'Körpü və xüsusi işlər — M400–M600', en: 'Bridges and special works — M400–M600', ru: 'Мосты и специальные работы — M400–M600' },
         text: {
-          az: 'İnfrastruktur və xüsusi mühəndis konstruksiyaları.',
-          en: 'Infrastructure and specialized engineering structures.',
-          ru: 'Инфраструктура и специальные инженерные конструкции.',
+          az: 'İnfrastruktur və xüsusi mühəndis konstruksiyaları; ən yüksək yük tələbləri üçün M500–M600 yüksək möhkəmlikli betonlar.',
+          en: 'Infrastructure and specialized engineering structures; the high-strength grades M500–M600 for the highest load requirements.',
+          ru: 'Инфраструктура и специальные инженерные конструкции; для самых высоких нагрузок — высокопрочные марки M500–M600.',
         },
       },
     ],

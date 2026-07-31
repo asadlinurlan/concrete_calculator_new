@@ -132,9 +132,9 @@ export const FAQ_GROUPS = [
           ru: 'Какую марку бетона выбрать для строительства дома?',
         },
         a: {
-          az: 'Tipik bölgü belədir: hazırlıq qatları M100, döşəmə və həyət M150–M200, zolaq təməl M250, monolit təməl, sütun və örtüklər M300, çoxmərtəbəli karkas M350. Betonun istifadə sahələri səhifəmizdə ətraflı bölgü var.',
-          en: 'The typical breakdown: preparation layers M100, floors and yards M150–M200, strip foundations M250, monolithic foundations, columns and slabs M300, multi-storey frames M350. Our concrete applications page has a detailed breakdown.',
-          ru: 'Типичное распределение: подготовительные слои — М100, полы и двор — М150–М200, ленточный фундамент — М250, монолитный фундамент, колонны и перекрытия — М300, многоэтажный каркас — М350. Подробная разбивка — на нашей странице областей применения бетона.',
+          az: 'Tipik bölgü belədir: hazırlıq qatları M100, döşəmə və həyət M150–M200, zolaq təməl M250, monolit təməl, sütun və örtüklər M300, çoxmərtəbəli karkas M350, yüksək yüklü sənaye və xüsusi layihələr üçün isə M400–M600. Betonun istifadə sahələri səhifəmizdə ətraflı bölgü var.',
+          en: 'The typical breakdown: preparation layers M100, floors and yards M150–M200, strip foundations M250, monolithic foundations, columns and slabs M300, multi-storey frames M350, and M400–M600 for heavily loaded industrial and special projects. Our concrete applications page has a detailed breakdown.',
+          ru: 'Типичное распределение: подготовительные слои — М100, полы и двор — М150–М200, ленточный фундамент — М250, монолитный фундамент, колонны и перекрытия — М300, многоэтажный каркас — М350, тяжелонагруженные промышленные и специальные проекты — M400–M600. Подробная разбивка — на нашей странице областей применения бетона.',
         },
       },
     ],

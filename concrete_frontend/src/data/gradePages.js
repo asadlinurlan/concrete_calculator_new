@@ -6,9 +6,12 @@
 
    Content rules: only business-confirmed facts (GOST 26633, 28-day
    cube testing, lab control, Novxanı plant, Bakı & Abşeron delivery,
-   7/24, M100–M450 range). No prices — pricing is always an individual
+   7/24, M100–M600 range). No prices — pricing is always an individual
    quote. Every page has UNIQUE intro/benefits/FAQ copy — no
    boilerplate duplication across grades (keyword-stuffing yoxdur).
+   M500–M600: high-strength grades without published class/MPa/mix
+   figures — those are confirmed per project design docs; never invent
+   technical values for them here.
 
    i18n: every user-visible string is a { az, en, ru } object resolved
    by the shared t() helper at render time.
@@ -908,15 +911,15 @@ const GRADE_CONTENT = {
       ru: 'специальные инженерные конструкции',
     },
     tagline: {
-      az: 'Xüsusi mühəndis konstruksiyaları üçün xəttimizin ən yüksək möhkəmlikli markası',
-      en: 'The highest-strength grade in our range, for special engineering structures',
-      ru: 'Марка с самой высокой прочностью в нашей линейке — для специальных инженерных конструкций',
+      az: 'Xüsusi mühəndis konstruksiyaları üçün yüksək möhkəmlikli marka',
+      en: 'A high-strength grade for special engineering structures',
+      ru: 'Высокопрочная марка для специальных инженерных конструкций',
     },
     intro: [
       {
-        az: 'M450 (B35 sinfi) istehsal xəttimizin ən yüksək markasıdır — 35 MPa möhkəmlik. Xüsusi mühəndis konstruksiyaları, hərtərəfli yüksək yük daşıyan elementlər və layihədə açıq şəkildə B35 tələb olunan obyektlər üçün istehsal olunur.',
-        en: 'M450 (class B35) is the highest grade in our production range — 35 MPa strength. It is produced for special engineering structures, elements carrying exceptionally high loads and projects where B35 is explicitly required by the design.',
-        ru: 'M450 (класс B35) — самая высокая марка нашей производственной линейки: прочность 35 МПа. Производится для специальных инженерных конструкций, элементов с особо высокими нагрузками и объектов, где в проекте прямо указан класс B35.',
+        az: 'M450 (B35 sinfi) — 35 MPa möhkəmlikli yüksək markadır. Xüsusi mühəndis konstruksiyaları, hərtərəfli yüksək yük daşıyan elementlər və layihədə açıq şəkildə B35 tələb olunan obyektlər üçün istehsal olunur.',
+        en: 'M450 (class B35) is a high-strength grade — 35 MPa. It is produced for special engineering structures, elements carrying exceptionally high loads and projects where B35 is explicitly required by the design.',
+        ru: 'M450 (класс B35) — высокопрочная марка: прочность 35 МПа. Производится для специальных инженерных конструкций, элементов с особо высокими нагрузками и объектов, где в проекте прямо указан класс B35.',
       },
       {
         az: 'Bu səviyyəli beton dəqiq resept və ciddi istehsal nəzarəti tələb edir: qarışıq laboratoriyada layihə tələbinə uyğun hazırlanır, hər partiya sınaqdan keçirilir və sənədləşdirilir. M450 sifarişləri adətən layihə sənədləri əsasında, əvvəlcədən razılaşdırılmış qrafiklə yerinə yetirilir.',
@@ -939,14 +942,14 @@ const GRADE_CONTENT = {
       },
       {
         title: {
-          az: 'Maksimal möhkəmlik',
-          en: 'Maximum strength',
-          ru: 'Максимальная прочность',
+          az: 'Yüksək möhkəmlik',
+          en: 'High strength',
+          ru: 'Высокая прочность',
         },
         text: {
-          az: 'Xəttimizin ən yüksək göstəricisi — 35 MPa.',
-          en: 'The highest figure in our range — 35 MPa.',
-          ru: 'Самый высокий показатель нашей линейки — 35 МПа.',
+          az: '35 MPa möhkəmlik göstəricisi.',
+          en: 'A strength rating of 35 MPa.',
+          ru: 'Показатель прочности 35 МПа.',
         },
       },
       {
@@ -1006,9 +1009,9 @@ const GRADE_CONTENT = {
           ru: 'Производите ли вы марки выше M450?',
         },
         a: {
-          az: 'Standart xəttimiz M100–M450 aralığını əhatə edir. Layihənizdə daha yüksək sinif tələb olunursa, əlaqə saxlayın — imkanları birlikdə dəyərləndirək.',
-          en: 'Our standard range covers M100–M450. If your project requires a higher class, contact us — we will evaluate the possibilities together.',
-          ru: 'Наша стандартная линейка охватывает диапазон M100–M450. Если в вашем проекте требуется более высокий класс, свяжитесь с нами — вместе оценим возможности.',
+          az: 'Bəli. Xəttimiz M100–M600 aralığını əhatə edir — M500, M550 və M600 yüksək möhkəmlikli markaları da istehsal olunur. Layihə tələbinizi göndərin, uyğun markanı birlikdə müəyyən edək.',
+          en: 'Yes. Our range covers M100–M600 — the high-strength grades M500, M550 and M600 are also produced. Send us your project requirements and we will determine the right grade together.',
+          ru: 'Да. Наша линейка охватывает диапазон M100–M600 — также производятся высокопрочные марки M500, M550 и M600. Отправьте нам требования проекта, и мы вместе определим подходящую марку.',
         },
       },
       {
@@ -1025,22 +1028,406 @@ const GRADE_CONTENT = {
       },
     ],
   },
+  M500: {
+    hero: imgPour,
+    use: {
+      az: 'sənaye obyektləri, yüksək yüklü konstruksiyalar',
+      en: 'industrial facilities, heavily loaded structures',
+      ru: 'промышленные объекты, высоконагруженные конструкции',
+    },
+    tagline: {
+      az: 'Sənaye və yüksək yüklü layihələr üçün yüksək möhkəmlikli beton',
+      en: 'High-strength concrete for industrial and heavily loaded projects',
+      ru: 'Высокопрочный бетон для промышленных и высоконагруженных проектов',
+    },
+    intro: [
+      {
+        az: 'M500 beton — yüksək möhkəmlikli betonlar xəttimizin ilk pilləsidir. Yüksək yükdaşıma qabiliyyəti tələb olunan sənaye obyektləri, ağır yüklü daşıyıcı elementlər və layihə sənədlərində yüksək möhkəmlik tələbi göstərilən konstruksiyalar üçün nəzərdə tutulub.',
+        en: 'M500 concrete is the first step in our high-strength range. It is intended for industrial facilities requiring high load-bearing capacity, heavily loaded structural elements and structures whose design documents specify a high strength requirement.',
+        ru: 'Бетон M500 — первая ступень нашей линейки высокопрочных бетонов. Предназначен для промышленных объектов с высокими требованиями к несущей способности, тяжелонагруженных несущих элементов и конструкций, в проектной документации которых указано требование высокой прочности.',
+      },
+      {
+        az: 'M500–M600 markalı yüksək möhkəmlikli betonlar yüksək yükdaşıma qabiliyyəti tələb olunan sənaye, infrastruktur və xüsusi tikinti layihələri üçün laboratoriya nəzarəti altında hazırlanır. Qarışıq layihə tələbinə uyğun laboratoriyada hazırlanır, hər partiya sınaqdan keçirilir. M500 beton qiyməti həcm, çatdırılma məsafəsi və layihə tələblərinə əsasən fərdi təkliflə müəyyən olunur.',
+        en: 'The high-strength grades M500–M600 are produced under laboratory control for industrial, infrastructure and special construction projects requiring high load-bearing capacity. The mix is prepared in the laboratory to the design requirements and every batch is tested. The price of M500 concrete is determined by an individual quote based on volume, delivery distance and project requirements.',
+        ru: 'Высокопрочные марки M500–M600 производятся под лабораторным контролем для промышленных, инфраструктурных и специальных строительных проектов с высокими требованиями к несущей способности. Смесь готовится в лаборатории по требованиям проекта, каждая партия испытывается. Цена бетона M500 определяется индивидуальным предложением с учётом объёма, расстояния доставки и требований проекта.',
+      },
+    ],
+    benefits: [
+      {
+        title: {
+          az: 'Sənaye obyektləri',
+          en: 'Industrial facilities',
+          ru: 'Промышленные объекты',
+        },
+        text: {
+          az: 'Ağır yüklü sənaye tikintisi üçün yüksək möhkəmlikli beton.',
+          en: 'High-strength concrete for heavily loaded industrial construction.',
+          ru: 'Высокопрочный бетон для тяжелонагруженного промышленного строительства.',
+        },
+      },
+      {
+        title: {
+          az: 'Yüksək yükdaşıma qabiliyyəti',
+          en: 'High load-bearing capacity',
+          ru: 'Высокая несущая способность',
+        },
+        text: {
+          az: 'Yüksək yük tələbli daşıyıcı konstruksiyalar üçün nəzərdə tutulub.',
+          en: 'Intended for load-bearing structures with high load requirements.',
+          ru: 'Предназначен для несущих конструкций с высокими нагрузками.',
+        },
+      },
+      {
+        title: {
+          az: 'Layihə əsaslı istehsal',
+          en: 'Design-based production',
+          ru: 'Производство по проекту',
+        },
+        text: {
+          az: 'Qarışıq layihə tələbinə uyğun laboratoriyada hazırlanır.',
+          en: 'The mix is prepared in the laboratory to the design requirements.',
+          ru: 'Смесь готовится в лаборатории по требованиям проекта.',
+        },
+      },
+      {
+        title: {
+          az: 'Laboratoriya nəzarəti',
+          en: 'Laboratory control',
+          ru: 'Лабораторный контроль',
+        },
+        text: {
+          az: 'Hər partiya sınaqdan keçirilir və sənədləşdirilir.',
+          en: 'Every batch is tested and documented.',
+          ru: 'Каждая партия испытывается и документируется.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        q: {
+          az: 'M500 beton hansı layihələr üçün uyğundur?',
+          en: 'Which projects is M500 concrete suitable for?',
+          ru: 'Для каких проектов подходит бетон M500?',
+        },
+        a: {
+          az: 'Yüksək yükdaşıma qabiliyyəti tələb olunan sənaye obyektləri, ağır yüklü daşıyıcı elementlər və layihəsində yüksək möhkəmlik tələbi olan konstruksiyalar üçün. Adi fərdi tikintidə bu markaya ehtiyac yaranmır.',
+          en: 'For industrial facilities requiring high load-bearing capacity, heavily loaded structural elements and structures whose design specifies a high strength requirement. Ordinary residential construction does not call for this grade.',
+          ru: 'Для промышленных объектов с высокими требованиями к несущей способности, тяжелонагруженных несущих элементов и конструкций, проект которых предусматривает высокую прочность. В обычном частном строительстве потребность в этой марке не возникает.',
+        },
+      },
+      {
+        q: {
+          az: 'M500 betonun texniki göstəriciləri haradan öyrənilir?',
+          en: 'Where can I get the technical parameters of M500 concrete?',
+          ru: 'Где узнать технические параметры бетона M500?',
+        },
+        a: {
+          az: 'M500–M600 markaları üzrə möhkəmlik sinfi və qarışıq göstəriciləri layihə tələbinə əsasən laboratoriyada dəqiqləşdirilir. Layihə və tender sənədləri üçün texniki məlumat sorğu əsasında təqdim olunur.',
+          en: 'For the M500–M600 grades, the strength class and mix parameters are confirmed in the laboratory according to the project requirements. Technical information for design and tender documents is provided on request.',
+          ru: 'Для марок M500–M600 класс прочности и параметры смеси уточняются в лаборатории согласно требованиям проекта. Техническая информация для проектной и тендерной документации предоставляется по запросу.',
+        },
+      },
+      {
+        q: {
+          az: 'M500 beton qiyməti necə müəyyən olunur?',
+          en: 'How is the price of M500 concrete determined?',
+          ru: 'Как определяется цена бетона M500?',
+        },
+        a: {
+          az: 'Qiymət sabit deyil — sifariş həcmi, çatdırılma məsafəsi, nasos ehtiyacı və layihə tələbləri nəzərə alınmaqla fərdi təklif hazırlanır. Təklif pulsuz və öhdəliksizdir.',
+          en: 'The price is not fixed — an individual quote is prepared taking into account the order volume, delivery distance, pumping needs and project requirements. The quote is free and non-binding.',
+          ru: 'Цена не фиксированная — индивидуальное предложение готовится с учётом объёма заказа, расстояния доставки, необходимости насоса и требований проекта. Предложение бесплатное и ни к чему не обязывает.',
+        },
+      },
+      {
+        q: {
+          az: 'M500 sifarişi üçün nə lazımdır?',
+          en: 'What is needed to order M500?',
+          ru: 'Что нужно для заказа M500?',
+        },
+        a: {
+          az: 'Layihə tələblərini (möhkəmlik tələbi, həcm, tökmə qrafiki) bizə göndərin — qarışıq laboratoriyada layihəyə uyğun hazırlanır və istehsal qrafiki əvvəlcədən razılaşdırılır.',
+          en: 'Send us the project requirements (strength requirement, volume, pour schedule) — the mix is prepared in the laboratory to match the design and the production schedule is agreed in advance.',
+          ru: 'Отправьте нам требования проекта (требуемая прочность, объём, график заливки) — смесь готовится в лаборатории по проекту, а график производства согласуется заранее.',
+        },
+      },
+    ],
+  },
+  M550: {
+    hero: imgQiymet,
+    use: {
+      az: 'infrastruktur, yüksək yüklü mühəndis obyektləri',
+      en: 'infrastructure, heavily loaded engineering works',
+      ru: 'инфраструктура, высоконагруженные инженерные объекты',
+    },
+    tagline: {
+      az: 'İnfrastruktur və mühəndis layihələri üçün yüksək möhkəmlikli beton markası',
+      en: 'A high-strength concrete grade for infrastructure and engineering projects',
+      ru: 'Высокопрочная марка бетона для инфраструктурных и инженерных проектов',
+    },
+    intro: [
+      {
+        az: 'M550 beton — M500 ilə M600 arasında yerləşən yüksək möhkəmlikli markadır. İnfrastruktur layihələri, yüksək yüklü mühəndis obyektləri və layihəsində artırılmış möhkəmlik tələbi olan konstruksiyalar üçün istehsal olunur.',
+        en: 'M550 concrete is a high-strength grade positioned between M500 and M600. It is produced for infrastructure projects, heavily loaded engineering works and structures whose design specifies an increased strength requirement.',
+        ru: 'Бетон M550 — высокопрочная марка, занимающая положение между M500 и M600. Производится для инфраструктурных проектов, высоконагруженных инженерных объектов и конструкций, проект которых предусматривает повышенные требования к прочности.',
+      },
+      {
+        az: 'Bu səviyyəli yüksək möhkəmlikli beton dəqiq resept və ciddi istehsal nəzarəti tələb edir: qarışıq laboratoriyada layihə tələbinə uyğun hazırlanır, hər partiya sınaqdan keçirilir və sənədləşdirilir. M550 beton sifarişləri adətən layihə sənədləri əsasında, əvvəlcədən razılaşdırılmış qrafiklə yerinə yetirilir.',
+        en: 'High-strength concrete of this level requires a precise mix design and strict production control: the mix is prepared in the laboratory to the design requirements, and every batch is tested and documented. M550 concrete orders are usually fulfilled on the basis of design documents, on a pre-agreed schedule.',
+        ru: 'Высокопрочный бетон такого уровня требует точной рецептуры и строгого производственного контроля: смесь готовится в лаборатории по требованиям проекта, каждая партия испытывается и документируется. Заказы бетона M550 обычно выполняются на основании проектной документации, по заранее согласованному графику.',
+      },
+    ],
+    benefits: [
+      {
+        title: {
+          az: 'İnfrastruktur layihələri',
+          en: 'Infrastructure projects',
+          ru: 'Инфраструктурные проекты',
+        },
+        text: {
+          az: 'Yüksək yük tələbli infrastruktur obyektləri üçün.',
+          en: 'For infrastructure works with high load requirements.',
+          ru: 'Для инфраструктурных объектов с высокими нагрузками.',
+        },
+      },
+      {
+        title: {
+          az: 'Yüksək yüklü elementlər',
+          en: 'Heavily loaded elements',
+          ru: 'Высоконагруженные элементы',
+        },
+        text: {
+          az: 'Artırılmış möhkəmlik tələbi olan daşıyıcı konstruksiyalar.',
+          en: 'Load-bearing structures with increased strength requirements.',
+          ru: 'Несущие конструкции с повышенными требованиями к прочности.',
+        },
+      },
+      {
+        title: {
+          az: 'Dəqiq resept',
+          en: 'Precise mix design',
+          ru: 'Точная рецептура',
+        },
+        text: {
+          az: 'Qarışıq laboratoriyada layihə tələbinə uyğun hazırlanır.',
+          en: 'The mix is prepared in the laboratory to the design requirements.',
+          ru: 'Смесь готовится в лаборатории по требованиям проекта.',
+        },
+      },
+      {
+        title: {
+          az: 'Sənədli keyfiyyət',
+          en: 'Documented quality',
+          ru: 'Документированное качество',
+        },
+        text: {
+          az: 'Hər partiya sınaq nəticələri ilə sənədləşdirilir.',
+          en: 'Every batch is documented with test results.',
+          ru: 'Каждая партия документируется с результатами испытаний.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        q: {
+          az: 'M550 beton hansı işlərdə istifadə olunur?',
+          en: 'For which work is M550 concrete used?',
+          ru: 'В каких работах используется бетон M550?',
+        },
+        a: {
+          az: 'İnfrastruktur layihələri, yüksək yüklü mühəndis obyektləri və layihə sənədlərində artırılmış möhkəmlik tələbi göstərilən konstruksiyalar üçün istifadə olunur.',
+          en: 'It is used for infrastructure projects, heavily loaded engineering works and structures whose design documents specify an increased strength requirement.',
+          ru: 'Используется для инфраструктурных проектов, высоконагруженных инженерных объектов и конструкций, в проектной документации которых указаны повышенные требования к прочности.',
+        },
+      },
+      {
+        q: {
+          az: 'M550 ilə M500 arasında fərq nədir?',
+          en: 'What is the difference between M550 and M500?',
+          ru: 'В чём разница между M550 и M500?',
+        },
+        a: {
+          az: 'M550 yüksək möhkəmlikli xəttdə M500-dən bir pillə yuxarıdır. Konkret layihə üçün marka seçimi layihə sənədlərinə əsasən aparılır — mütəxəssislərimiz pulsuz texniki məsləhət verir.',
+          en: 'M550 is one step above M500 in the high-strength range. The grade for a specific project is chosen on the basis of the design documents — our specialists provide free technical advice.',
+          ru: 'M550 на одну ступень выше M500 в линейке высокопрочных бетонов. Марка для конкретного проекта выбирается на основании проектной документации — наши специалисты бесплатно консультируют.',
+        },
+      },
+      {
+        q: {
+          az: 'M550 beton necə sifariş olunur?',
+          en: 'How do I order M550 concrete?',
+          ru: 'Как заказать бетон M550?',
+        },
+        a: {
+          az: 'Layihə tələblərini, həcmi və tökmə qrafikini bizə göndərin — qarışıq laboratoriyada hazırlanır, istehsal qrafiki əvvəlcədən razılaşdırılır və fərdi qiymət təklifi təqdim olunur.',
+          en: 'Send us the project requirements, volume and pour schedule — the mix is prepared in the laboratory, the production schedule is agreed in advance and an individual quote is provided.',
+          ru: 'Отправьте нам требования проекта, объём и график заливки — смесь готовится в лаборатории, график производства согласуется заранее, предоставляется индивидуальное предложение.',
+        },
+      },
+      {
+        q: {
+          az: 'M550 betonun keyfiyyəti necə təsdiqlənir?',
+          en: 'How is the quality of M550 confirmed?',
+          ru: 'Как подтверждается качество бетона M550?',
+        },
+        a: {
+          az: 'İstehsal GOST 26633 üzrə aparılır, hər partiya laboratoriya nəzarətindən keçir, 28 günlük kub sınağı ilə yoxlanılır və nəticələr sənədlə təqdim olunur.',
+          en: 'Production follows GOST 26633, every batch passes laboratory control, is verified by the 28-day cube test, and the results are provided in writing.',
+          ru: 'Производство ведётся по ГОСТ 26633, каждая партия проходит лабораторный контроль, проверяется испытанием кубиков на 28-е сутки, а результаты предоставляются документально.',
+        },
+      },
+    ],
+  },
+  M600: {
+    hero: imgSite,
+    use: {
+      az: 'xüsusi tikinti layihələri, maksimal yükdaşıma tələbləri',
+      en: 'special construction projects, maximum load-bearing requirements',
+      ru: 'специальные строительные проекты, максимальные требования к несущей способности',
+    },
+    tagline: {
+      az: 'Xəttimizin ən yüksək markası — maksimal yük tələbli xüsusi layihələr üçün',
+      en: 'The highest grade in our range — for special projects with maximum load requirements',
+      ru: 'Самая высокая марка нашей линейки — для специальных проектов с максимальными нагрузками',
+    },
+    intro: [
+      {
+        az: 'M600 beton istehsal xəttimizin ən yüksək markasıdır. Maksimal yükdaşıma qabiliyyəti tələb olunan xüsusi tikinti layihələri, ağır sənaye obyektləri və infrastruktur konstruksiyaları üçün nəzərdə tutulmuş yüksək möhkəmlikli betondur.',
+        en: 'M600 concrete is the highest grade in our production range. It is a high-strength concrete intended for special construction projects requiring maximum load-bearing capacity, heavy industrial facilities and infrastructure structures.',
+        ru: 'Бетон M600 — самая высокая марка нашей производственной линейки. Это высокопрочный бетон, предназначенный для специальных строительных проектов с максимальными требованиями к несущей способности, тяжёлых промышленных объектов и инфраструктурных конструкций.',
+      },
+      {
+        az: 'M600 beton satışı layihə sənədləri əsasında həyata keçirilir: qarışıq laboratoriyada layihə tələbinə uyğun hazırlanır, istehsal qrafiki əvvəlcədən razılaşdırılır, hər partiya sınaqdan keçirilir və sənədləşdirilir. M600 beton qiyməti həcm, çatdırılma məsafəsi və layihə tələblərinə əsasən fərdi hesablanır.',
+        en: 'M600 concrete is sold on the basis of design documents: the mix is prepared in the laboratory to the design requirements, the production schedule is agreed in advance, and every batch is tested and documented. The price of M600 concrete is calculated individually based on volume, delivery distance and project requirements.',
+        ru: 'Продажа бетона M600 осуществляется на основании проектной документации: смесь готовится в лаборатории по требованиям проекта, график производства согласуется заранее, каждая партия испытывается и документируется. Цена бетона M600 рассчитывается индивидуально с учётом объёма, расстояния доставки и требований проекта.',
+      },
+    ],
+    benefits: [
+      {
+        title: {
+          az: 'Maksimal yük tələbləri',
+          en: 'Maximum load requirements',
+          ru: 'Максимальные нагрузки',
+        },
+        text: {
+          az: 'Ən yüksək yükdaşıma tələbi olan konstruksiyalar üçün.',
+          en: 'For structures with the highest load-bearing requirements.',
+          ru: 'Для конструкций с самыми высокими требованиями к несущей способности.',
+        },
+      },
+      {
+        title: {
+          az: 'Xüsusi layihələr',
+          en: 'Special projects',
+          ru: 'Специальные проекты',
+        },
+        text: {
+          az: 'Ağır sənaye obyektləri və infrastruktur konstruksiyaları.',
+          en: 'Heavy industrial facilities and infrastructure structures.',
+          ru: 'Тяжёлые промышленные объекты и инфраструктурные конструкции.',
+        },
+      },
+      {
+        title: {
+          az: 'Layihə əsaslı istehsal',
+          en: 'Design-based production',
+          ru: 'Производство по проекту',
+        },
+        text: {
+          az: 'Qarışıq layihə tələbinə uyğun laboratoriyada hazırlanır.',
+          en: 'The mix is prepared in the laboratory to the design requirements.',
+          ru: 'Смесь готовится в лаборатории по требованиям проекта.',
+        },
+      },
+      {
+        title: {
+          az: 'Hər partiya sənədlə',
+          en: 'Every batch documented',
+          ru: 'Каждая партия с документами',
+        },
+        text: {
+          az: 'Hər partiya sınaq nəticələri ilə sənədləşdirilir.',
+          en: 'Every batch is documented with test results.',
+          ru: 'Каждая партия документируется с результатами испытаний.',
+        },
+      },
+    ],
+    faqs: [
+      {
+        q: {
+          az: 'M600 beton hansı layihələrdə tələb olunur?',
+          en: 'For which projects is M600 concrete required?',
+          ru: 'В каких проектах требуется бетон M600?',
+        },
+        a: {
+          az: 'Maksimal yükdaşıma qabiliyyəti tələb olunan xüsusi tikinti layihələri, ağır sənaye obyektləri və infrastruktur konstruksiyaları üçün. Adi tikintidə bu markaya ehtiyac yaranmır.',
+          en: 'For special construction projects requiring maximum load-bearing capacity, heavy industrial facilities and infrastructure structures. Ordinary construction does not call for this grade.',
+          ru: 'Для специальных строительных проектов с максимальными требованиями к несущей способности, тяжёлых промышленных объектов и инфраструктурных конструкций. В обычном строительстве потребность в этой марке не возникает.',
+        },
+      },
+      {
+        q: {
+          az: 'M600-dən yuxarı marka istehsal edirsiniz?',
+          en: 'Do you produce grades above M600?',
+          ru: 'Производите ли вы марки выше M600?',
+        },
+        a: {
+          az: 'Standart xəttimiz M100–M600 aralığını əhatə edir. Layihənizdə daha yüksək tələb varsa, əlaqə saxlayın — imkanları birlikdə dəyərləndirək.',
+          en: 'Our standard range covers M100–M600. If your project has a higher requirement, contact us — we will evaluate the possibilities together.',
+          ru: 'Наша стандартная линейка охватывает диапазон M100–M600. Если в вашем проекте требования выше, свяжитесь с нами — вместе оценим возможности.',
+        },
+      },
+      {
+        q: {
+          az: 'M600 beton qiyməti necə müəyyən olunur?',
+          en: 'How is the price of M600 concrete determined?',
+          ru: 'Как определяется цена бетона M600?',
+        },
+        a: {
+          az: 'M600 beton qiyməti sabit deyil — həcm, çatdırılma məsafəsi, nasos ehtiyacı və layihə tələbləri əsasında fərdi təklif hazırlanır. Təklif pulsuz və öhdəliksizdir.',
+          en: 'The price of M600 concrete is not fixed — an individual quote is prepared based on volume, delivery distance, pumping needs and project requirements. The quote is free and non-binding.',
+          ru: 'Цена бетона M600 не фиксированная — индивидуальное предложение готовится с учётом объёма, расстояния доставки, необходимости насоса и требований проекта. Предложение бесплатное и ни к чему не обязывает.',
+        },
+      },
+      {
+        q: {
+          az: 'M600 betonun keyfiyyəti necə təsdiqlənir?',
+          en: 'How is the quality of M600 confirmed?',
+          ru: 'Как подтверждается качество бетона M600?',
+        },
+        a: {
+          az: 'İstehsal GOST 26633 üzrə aparılır, hər partiya laboratoriya nəzarətindən keçir, 28 günlük kub sınağı ilə yoxlanılır və nəticələr layihə və tikinti nəzarəti üçün sənədlə təqdim olunur.',
+          en: 'Production follows GOST 26633, every batch passes laboratory control, is verified by the 28-day cube test, and the results are provided in writing for design and construction supervision.',
+          ru: 'Производство ведётся по ГОСТ 26633, каждая партия проходит лабораторный контроль, проверяется испытанием кубиков на 28-е сутки, а результаты предоставляются документально для проекта и стройнадзора.',
+        },
+      },
+    ],
+  },
 };
 
 export const GRADE_PAGES = CONCRETE_GRADES.map((g) => {
   const c = GRADE_CONTENT[g.id];
+  // M500–M600: no published class/MPa — titles fall back to the id, the
+  // description leads with the "yüksək möhkəmlikli beton" keyword instead.
+  const cls = g.bClass ? ` (${g.bClass})` : '';
   return {
     slug: `/${g.id.toLowerCase()}-beton`,
     seo: {
       title: {
-        az: `${g.id} Beton (${g.bClass}) — Qiyməti, İstifadə Sahələri və Sifariş | NOVXANI BETON`,
-        en: `${g.id} Concrete (${g.bClass}) — Price, Applications and Ordering | NOVXANI BETON`,
-        ru: `Бетон ${g.id} (${g.bClass}) — цена, применение и заказ | NOVXANI BETON`,
+        az: `${g.id} Beton${cls} — Qiyməti, İstifadə Sahələri və Sifariş | NOVXANI BETON`,
+        en: `${g.id} Concrete${cls} — Price, Applications and Ordering | NOVXANI BETON`,
+        ru: `Бетон ${g.id}${cls} — цена, применение и заказ | NOVXANI BETON`,
       },
       description: {
-        az: `${g.id} beton (${g.bClass} sinfi, ${g.strength} MPa): ${c.use.az} üçün. GOST 26633 üzrə laboratoriya nəzarətli istehsal, Bakı və Abşeron üzrə çatdırılma. Fərdi qiymət təklifi alın.`,
-        en: `${g.id} concrete (class ${g.bClass}, ${g.strength} MPa): for ${c.use.en}. Lab-controlled production per GOST 26633, delivery across Baku and Absheron. Request a personalized quote.`,
-        ru: `Бетон ${g.id} (класс ${g.bClass}, ${g.strength} МПа): ${c.use.ru}. Производство по ГОСТ 26633 с лабораторным контролем, доставка по Баку и Абшерону. Получите индивидуальное предложение.`,
+        az: g.bClass
+          ? `${g.id} beton (${g.bClass} sinfi, ${g.strength} MPa): ${c.use.az} üçün. GOST 26633 üzrə laboratoriya nəzarətli istehsal, Bakı və Abşeron üzrə çatdırılma. Fərdi qiymət təklifi alın.`
+          : `${g.id} beton — yüksək möhkəmlikli beton: ${c.use.az} üçün. GOST 26633 üzrə laboratoriya nəzarətli istehsal, Bakı və Abşeron üzrə çatdırılma. Fərdi qiymət təklifi alın.`,
+        en: g.bClass
+          ? `${g.id} concrete (class ${g.bClass}, ${g.strength} MPa): for ${c.use.en}. Lab-controlled production per GOST 26633, delivery across Baku and Absheron. Request a personalized quote.`
+          : `${g.id} concrete — high-strength concrete: for ${c.use.en}. Lab-controlled production per GOST 26633, delivery across Baku and Absheron. Request a personalized quote.`,
+        ru: g.bClass
+          ? `Бетон ${g.id} (класс ${g.bClass}, ${g.strength} МПа): ${c.use.ru}. Производство по ГОСТ 26633 с лабораторным контролем, доставка по Баку и Абшерону. Получите индивидуальное предложение.`
+          : `Бетон ${g.id} — высокопрочный бетон: ${c.use.ru}. Производство по ГОСТ 26633 с лабораторным контролем, доставка по Баку и Абшерону. Получите индивидуальное предложение.`,
       },
     },
     crumb: {
@@ -1057,9 +1444,9 @@ export const GRADE_PAGES = CONCRETE_GRADES.map((g) => {
       },
     },
     h1: {
-      az: `${g.id} Beton (${g.bClass})`,
-      en: `${g.id} Concrete (${g.bClass})`,
-      ru: `Бетон ${g.id} (${g.bClass})`,
+      az: `${g.id} Beton${cls}`,
+      en: `${g.id} Concrete${cls}`,
+      ru: `Бетон ${g.id}${cls}`,
     },
     tagline: c.tagline,
     hero: {

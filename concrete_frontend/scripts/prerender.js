@@ -43,6 +43,9 @@ const BASE_ROUTES = [
   '/m350-beton',
   '/m400-beton',
   '/m450-beton',
+  '/m500-beton',
+  '/m550-beton',
+  '/m600-beton',
 ];
 
 // Every az route exists under /en and /ru too, plus the stable Google Ads
