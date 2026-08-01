@@ -17,7 +17,7 @@ const NAV_LINKS = [
 const TXT = {
   navAria: { az: 'Əsas naviqasiya', en: 'Main navigation', ru: 'Основная навигация' },
   logoAria: { az: 'Novxanı Beton ana səhifə', en: 'Novxani Beton home page', ru: 'Главная страница Novxani Beton' },
-  phoneAria: { az: 'Zəng et: +994 50 620 95 84', en: 'Call: +994 50 620 95 84', ru: 'Позвонить: +994 50 620 95 84' },
+  phoneAria: { az: 'Zəng et: +994 50 326 03 43', en: 'Call: +994 50 326 03 43', ru: 'Позвонить: +994 50 326 03 43' },
   closeMenu: { az: 'Menyunu bağla', en: 'Close menu', ru: 'Закрыть меню' },
   openMenu: { az: 'Menyunu aç', en: 'Open menu', ru: 'Открыть меню' },
   langAria: { az: 'Sayt dili', en: 'Site language', ru: 'Язык сайта' },
@@ -78,7 +78,7 @@ const Header = () => {
                 desktops; hidden in the mobile menu (sticky bar covers it) */}
             <a href="tel:+994506209584" className="nav-phone" aria-label={t(TXT.phoneAria)}>
               <Phone size={15} aria-hidden="true" />
-              <span className="nav-phone-num">+994 50 620 95 84</span>
+              <span className="nav-phone-num">+994 50 326 03 43</span>
             </a>
             <button
               className="menu-close-btn"

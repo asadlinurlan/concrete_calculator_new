@@ -324,7 +324,7 @@ const MaterialQuoteForm = () => {
                 en: 'Our team will prepare a quote based on the volume and address and contact you as soon as possible. For urgent orders you can call us directly:',
                 ru: 'Наша команда подготовит ценовое предложение с учётом объёма и адреса и свяжется с вами в ближайшее время. Для срочного заказа можно позвонить напрямую:',
               })}{' '}
-              <a href="tel:+994506209584">+994 50 620 95 84</a>
+              <a href="tel:+994506209584">+994 50 326 03 43</a>
             </span>
           </div>
         </div>
@@ -336,7 +336,7 @@ const MaterialQuoteForm = () => {
             en: 'The request could not be sent. Please try again or call us directly at',
             ru: 'Заявка не отправлена. Пожалуйста, попробуйте ещё раз или позвоните напрямую по номеру',
           })}{' '}
-          <a href="tel:+994506209584">+994 50 620 95 84</a>
+          <a href="tel:+994506209584">+994 50 326 03 43</a>
           {t({ az: ' nömrəsi ilə əlaqə saxlayın.', en: '.', ru: '.' })}
         </div>
       )}

@@ -74,9 +74,9 @@ const TXT = {
   },
   successCall: { az: 'Zəng et', en: 'Call', ru: 'Позвонить' },
   errorMsg: {
-    az: 'Mesaj göndərilmədi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa +994 50 620 95 84 ilə əlaqə saxlayın.',
-    en: 'The message could not be sent. Please try again or contact us directly at +994 50 620 95 84.',
-    ru: 'Не удалось отправить сообщение. Пожалуйста, попробуйте еще раз или свяжитесь с нами напрямую: +994 50 620 95 84.',
+    az: 'Mesaj göndərilmədi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa +994 50 326 03 43 ilə əlaqə saxlayın.',
+    en: 'The message could not be sent. Please try again or contact us directly at +994 50 326 03 43.',
+    ru: 'Не удалось отправить сообщение. Пожалуйста, попробуйте еще раз или свяжитесь с нами напрямую: +994 50 326 03 43.',
   },
   waText: {
     az: 'Salam! Qiymət təklifi almaq istəyirəm.',
@@ -171,7 +171,7 @@ const Contact = ({ fullPage }) => {
 
   const contactItems = [
     { Icon: MapPin, title: t(TXT.address), value: t(TXT.addressValue), href: 'https://maps.app.goo.gl/uKEuWDVuWqoAccEZA' },
-    { Icon: Phone, title: t(TXT.phone), value: '+994 50 620 95 84', href: 'tel:+994506209584' },
+    { Icon: Phone, title: t(TXT.phone), value: '+994 50 326 03 43', href: 'tel:+994506209584' },
     { Icon: Mail, title: t(TXT.email), value: 'info@novxanibeton.az', href: 'mailto:info@novxanibeton.az' },
     { Icon: Clock, title: t(TXT.hours), value: t(TXT.hoursValue) },
   ];

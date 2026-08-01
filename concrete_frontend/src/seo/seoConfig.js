@@ -121,9 +121,9 @@ export const PAGES = {
       ru: 'Контакты — телефон, адрес и заказ | NOVXANI BETON',
     },
     description: {
-      az: 'Novxanı Beton ilə əlaqə: +994 50 620 95 84, info@novxanibeton.az. Qiymət sorğusu və beton sifarişi üçün bizə yazın. Novxanı, Bakı.',
-      en: 'Contact Novxani Beton: +994 50 620 95 84, info@novxanibeton.az. Write to us for a quote or a concrete order. Novkhani, Baku.',
-      ru: 'Связаться с Novxani Beton: +994 50 620 95 84, info@novxanibeton.az. Напишите нам для расчета стоимости или заказа бетона. Новханы, Баку.',
+      az: 'Novxanı Beton ilə əlaqə: +994 50 326 03 43, info@novxanibeton.az. Qiymət sorğusu və beton sifarişi üçün bizə yazın. Novxanı, Bakı.',
+      en: 'Contact Novxani Beton: +994 50 326 03 43, info@novxanibeton.az. Write to us for a quote or a concrete order. Novkhani, Baku.',
+      ru: 'Связаться с Novxani Beton: +994 50 326 03 43, info@novxanibeton.az. Напишите нам для расчета стоимости или заказа бетона. Новханы, Баку.',
     },
     crumb: { az: 'Əlaqə', en: 'Contact', ru: 'Контакты' },
   },

@@ -70,7 +70,7 @@ const ServiceDetail = ({ page }) => {
             </a>
             <a href="tel:+994506209584" className="btn btn-ghost sd-ghost">
               <Phone size={18} aria-hidden="true" />
-              +994 50 620 95 84
+              +994 50 326 03 43
             </a>
           </div>
         </div>
@@ -156,7 +156,7 @@ const ServiceDetail = ({ page }) => {
               <div className="sd-card sd-contact-card reveal">
                 <h3>{t({ az: 'Sifariş və məsləhət', en: 'Orders and advice', ru: 'Заказ и консультация' })}</h3>
                 <ul>
-                  <li><Phone size={16} aria-hidden="true" /> <a href="tel:+994506209584">+994 50 620 95 84</a></li>
+                  <li><Phone size={16} aria-hidden="true" /> <a href="tel:+994506209584">+994 50 326 03 43</a></li>
                   <li><Mail size={16} aria-hidden="true" /> <a href="mailto:info@novxanibeton.az">info@novxanibeton.az</a></li>
                   <li><MapPin size={16} aria-hidden="true" /> {t({ az: 'Novxanı, Bakı, Azərbaycan', en: 'Novkhani, Baku, Azerbaijan', ru: 'Новханы, Баку, Азербайджан' })}</li>
                   <li><Clock size={16} aria-hidden="true" /> {t({ az: '7/24 fəaliyyətdəyik', en: 'Open 24/7', ru: 'Работаем 24/7' })}</li>

@@ -27,9 +27,9 @@ export const FAQ_GROUPS = [
           ru: 'Как заказать бетон?',
         },
         a: {
-          az: 'Üç sadə addım: həcmi beton kalkulyatoru ilə dəqiqləşdirin, zəng (+994 50 620 95 84) və ya WhatsApp ilə marka, həcm və ünvanı bildirin, fərdi qiymət təklifini təsdiqləyin. Beton razılaşdırılmış vaxtda mikserlə ünvana çatdırılır.',
-          en: 'Three simple steps: confirm the volume with the concrete calculator, tell us the grade, volume and address by phone (+994 50 620 95 84) or WhatsApp, and approve the individual quote. The concrete is delivered to your address by mixer truck at the agreed time.',
-          ru: 'Три простых шага: уточните объём с помощью бетонного калькулятора, сообщите марку, объём и адрес по телефону (+994 50 620 95 84) или в WhatsApp и подтвердите индивидуальное ценовое предложение. Бетон доставляется миксером по адресу в согласованное время.',
+          az: 'Üç sadə addım: həcmi beton kalkulyatoru ilə dəqiqləşdirin, zəng (+994 50 326 03 43) və ya WhatsApp ilə marka, həcm və ünvanı bildirin, fərdi qiymət təklifini təsdiqləyin. Beton razılaşdırılmış vaxtda mikserlə ünvana çatdırılır.',
+          en: 'Three simple steps: confirm the volume with the concrete calculator, tell us the grade, volume and address by phone (+994 50 326 03 43) or WhatsApp, and approve the individual quote. The concrete is delivered to your address by mixer truck at the agreed time.',
+          ru: 'Три простых шага: уточните объём с помощью бетонного калькулятора, сообщите марку, объём и адрес по телефону (+994 50 326 03 43) или в WhatsApp и подтвердите индивидуальное ценовое предложение. Бетон доставляется миксером по адресу в согласованное время.',
         },
       },
       {

@@ -103,7 +103,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <span className="contact-icon">{icons.phone}</span>
-                  <span>+994 50 620 95 84</span>
+                  <span>+994 50 326 03 43</span>
                 </li>
                 <li>
                   <span className="contact-icon">{icons.email}</span>

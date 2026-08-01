@@ -16,7 +16,7 @@ const HeaderTitle = () => {
                 />
               </svg>
               <p>Call Us On</p>
-              <a>+994 50 620 95 84</a>
+              <a>+994 50 326 03 43</a>
             </li>
           </ul>
         </nav>

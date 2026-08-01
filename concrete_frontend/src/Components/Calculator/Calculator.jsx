@@ -1163,7 +1163,7 @@ const Calculator = () => {
             <div className="info-card">
               <h4><span className="info-title-icon">{icons.phone}</span> {t(TXT.helpNeeded)}</h4>
               <p>{t(TXT.helpText)}</p>
-              <a href="tel:+994506209584" className="info-phone">+994 50 620 95 84</a>
+              <a href="tel:+994506209584" className="info-phone">+994 50 326 03 43</a>
             </div>
             <div className="info-card">
               <h4><span className="info-title-icon">{icons.truck}</span> {t(TXT.delivery)}</h4>
