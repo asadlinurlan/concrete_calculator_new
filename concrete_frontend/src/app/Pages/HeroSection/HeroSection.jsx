@@ -28,14 +28,14 @@ const HeroSection = () => {
         <div className="container">
           <h1 className="hero-title reveal">
             {t({
-              az: 'Beton və Tikinti Materiallarının',
-              en: 'Concrete and Building Materials',
-              ru: 'Бетон и строительные материалы',
+              az: 'Hazır Betonun',
+              en: 'Your Trusted',
+              ru: 'Надёжный поставщик',
             })}<br />
             <span className="hero-accent">{t({
               az: 'Etibarlı Ünvanı',
-              en: 'Your Trusted Source',
-              ru: 'Ваш надежный адрес',
+              en: 'Ready-Mix Supplier',
+              ru: 'товарного бетона',
             })}</span>
           </h1>
           <span className="hero-eyebrow reveal">{t({

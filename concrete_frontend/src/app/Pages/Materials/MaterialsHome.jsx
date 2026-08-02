@@ -29,13 +29,6 @@ const MaterialsHome = () => {
             en: 'Sand, Gravel Mix and Crushed Stone',
             ru: 'Продажа песка, ПГС и щебня',
           })}</h2>
-          <p className="mh-lead">
-            {t({
-              az: 'Artıq beton və tikinti materialları bir ünvandan: öz istehsalımızda istifadə etdiyimiz materialları topdan və pərakəndə qaydada, çatdırılma ilə təqdim edirik.',
-              en: 'Concrete and building materials from one address: we offer the same materials we use in our own production — wholesale and retail, with delivery.',
-              ru: 'Бетон и стройматериалы теперь из одних рук: предлагаем материалы, которые используем в собственном производстве, — оптом и в розницу, с доставкой.',
-            })}
-          </p>
         </div>
 
         <div className="mh-grid">
