@@ -361,9 +361,6 @@
 }
 
 @media (max-width: 560px) {
-  .logo-svg { height: 66px; }
-  .logo-wordmark { font-size: 20px; letter-spacing: 3px; }
-  .header.scrolled .logo-wordmark { height: 32px; }
   /* Small phones: everything fits on screen with no scrolling */
   .nav-menu { padding: 98px 18px 18px; }
   .nav-link,
@@ -371,18 +368,27 @@
   .menu-close-btn { min-height: 42px; margin-top: 8px; }
   .menu-phone { min-height: 46px; font-size: 15px; }
 
-  /* Phones: the digits can't fit beside logo + languages + hamburger —
-     the phone becomes an icon-only round button matching the hamburger;
-     the full number lives one tap away inside the menu. */
-  .navbar-container { gap: 10px; }
-  .nav-phone-num { display: none; }
-  .nav-phone {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    justify-content: center;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .lang-switch-link { padding: 7px 7px; font-size: 11px; }
+  /* Phones: the DIGITS stay visible in the top bar — everything around
+     them compacts (smaller logo, tighter language pills, no phone icon)
+     so the number pill fits down to 360px-wide screens. */
+  .navbar-container { gap: 8px; }
+  .logo-svg { height: 60px; }
+  .logo-wordmark { font-size: 16px; letter-spacing: 2px; }
+  .header.scrolled .logo-wordmark { height: 26px; }
+  .nav-phone { padding: 7px 10px; flex-shrink: 0; }
+  .nav-phone svg { display: none; }
+  .nav-phone-num { font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .lang-switch-link { padding: 6px 6px; font-size: 10.5px; }
+  .hamburger { width: 42px; height: 42px; }
+}
+
+/* Very narrow phones (older 320-374px devices) — one more notch down */
+@media (max-width: 374px) {
+  .logo-wordmark { font-size: 13px; letter-spacing: 1px; }
+  .logo-svg { height: 52px; }
+  .nav-phone { padding: 5px 7px; }
+  .nav-phone-num { font-size: 10.5px; }
+  .lang-switch-link { padding: 5px 4px; font-size: 9.5px; }
+  .hamburger { width: 36px; height: 36px; }
+  .navbar-container { gap: 4px; }
 }
