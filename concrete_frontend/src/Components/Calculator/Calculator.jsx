@@ -83,7 +83,7 @@ const TXT = {
   // Hero
   heroTitle: { az: 'Beton Kalkulyatoru', en: 'Concrete Calculator', ru: 'Калькулятор бетона' },
   heroSub: {
-    az: 'Layihəniz üçün beton həcmi, material, armatur və mikser hesablaması — pulsuz',
+    az: 'Layihəniz üçün beton həcmi, material, armatur və mikser hesablaması',
     en: 'Concrete volume, material, rebar and mixer truck calculation for your project — free',
     ru: 'Расчет объема бетона, материалов, арматуры и миксеров для вашего проекта — бесплатно',
   },
