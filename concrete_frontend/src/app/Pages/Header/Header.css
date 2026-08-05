@@ -126,7 +126,6 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-left: 6px;
   padding: 9px 16px;
   border: 1px solid rgba(240, 178, 82, 0.55);
   border-radius: var(--r-pill);
@@ -151,7 +150,7 @@
 /* Tighter desktops: icon-only (number would overflow the crowded row) */
 @media (min-width: 1025px) and (max-width: 1320px) {
   .nav-phone-num { display: none; }
-  .nav-phone { margin-left: 2px; padding: 9px 12px; }
+  .nav-phone { padding: 9px 12px; }
 }
 
 /* 8 links + CTA need tighter spacing on narrower desktops.
@@ -212,6 +211,7 @@
 }
 
 .menu-close-btn { display: none; }
+.menu-phone { display: none; } /* lives in the mobile menu only */
 
 .hamburger {
   display: none;
@@ -301,9 +301,28 @@
   }
   .nav-link::after { display: none; }
 
-  /* No phone inside the mobile menu — page links + close button only
-     (the site-wide sticky bottom bar already covers call/WhatsApp) */
-  .nav-phone { display: none; }
+  /* Top-bar phone stays visible on mobile — compact pill with the number
+     on tablets; collapses to an icon-only round button on phones below */
+  .nav-phone { padding: 8px 13px; }
+  .nav-phone-num { font-size: 13px; }
+
+  /* Full number as a tap-friendly amber row inside the opened menu */
+  .menu-phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 6px;
+    min-height: 50px;
+    border: 1px solid rgba(240, 178, 82, 0.55);
+    border-radius: var(--r-pill);
+    background: rgba(240, 178, 82, 0.12);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .menu-phone svg { color: var(--amber-500); flex-shrink: 0; }
 
   /* Explicit close button — for users who opened the menu but don't
      want to navigate anywhere */
@@ -350,4 +369,20 @@
   .nav-link,
   .header.scrolled .nav-link { min-height: 42px; padding: 9px 14px; font-size: 15px; }
   .menu-close-btn { min-height: 42px; margin-top: 8px; }
+  .menu-phone { min-height: 46px; font-size: 15px; }
+
+  /* Phones: the digits can't fit beside logo + languages + hamburger —
+     the phone becomes an icon-only round button matching the hamburger;
+     the full number lives one tap away inside the menu. */
+  .navbar-container { gap: 10px; }
+  .nav-phone-num { display: none; }
+  .nav-phone {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .lang-switch-link { padding: 7px 7px; font-size: 11px; }
 }

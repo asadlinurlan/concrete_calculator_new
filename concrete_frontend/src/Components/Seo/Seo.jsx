@@ -88,6 +88,10 @@ const Seo = ({ page, custom }) => {
           },
           geo: { '@type': 'GeoCoordinates', latitude: 40.4858529, longitude: 49.8294278 },
           areaServed: t(LB.areaServed),
+          sameAs: [
+            'https://www.instagram.com/novxanibeton/',
+            'https://www.tiktok.com/@novxanibeton',
+          ],
         }
       : null;
 

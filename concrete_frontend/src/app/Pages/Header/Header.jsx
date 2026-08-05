@@ -74,11 +74,11 @@ const Header = () => {
                 {t(link.label)}
               </LocaleLink>
             ))}
-            {/* Click-to-call: number on wide screens, icon-only on tighter
-                desktops; hidden in the mobile menu (sticky bar covers it) */}
-            <a href="tel:+994506209584" className="nav-phone" aria-label={t(TXT.phoneAria)}>
-              <Phone size={15} aria-hidden="true" />
-              <span className="nav-phone-num">+994 50 326 03 43</span>
+            {/* Full number inside the opened mobile menu — the top-bar
+                button is icon-only on phones, so the digits live here */}
+            <a href="tel:+994506209584" className="menu-phone" aria-label={t(TXT.phoneAria)}>
+              <Phone size={17} aria-hidden="true" />
+              +994 50 326 03 43
             </a>
             <button
               className="menu-close-btn"
@@ -89,6 +89,14 @@ const Header = () => {
               {t(TXT.closeMenu)}
             </button>
           </div>
+
+          {/* Click-to-call — anchored in the top bar on every screen size:
+              icon + number on desktop and tablets, icon-only round button
+              on phones (the digits don't fit beside logo + languages). */}
+          <a href="tel:+994506209584" className="nav-phone" aria-label={t(TXT.phoneAria)}>
+            <Phone size={15} aria-hidden="true" />
+            <span className="nav-phone-num">+994 50 326 03 43</span>
+          </a>
 
           {/* Language switcher — anchored OUTSIDE the nav flow so the varying
               link-text widths of each language can never push it around.
